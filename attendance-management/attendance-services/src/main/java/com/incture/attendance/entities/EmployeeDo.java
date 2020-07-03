@@ -18,15 +18,12 @@ public class EmployeeDo implements BaseDo {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-//fsfsf
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "ID", columnDefinition = "NVARCHAR(36)")
 	private String id;
 	
-	private String address;
-
 	@Column(name = "NAME", columnDefinition = "NVARCHAR(100)")
 	private String name;
 
