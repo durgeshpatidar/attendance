@@ -36,7 +36,7 @@ public class DataSourceConfiguration {
 	private String password;
 
 	public DataSourceConfiguration() {
-/*
+
 		try {
 			JSONObject jsonObj = new JSONObject(System.getenv("VCAP_SERVICES"));
 			System.err.println("ENV : " + jsonObj);
@@ -48,7 +48,7 @@ public class DataSourceConfiguration {
 		} catch (JSONException e) {
 			logger.error("[HibernateConfiguration] reading environmental variables failed:" + e.getMessage());
 		}
-*/
+
 	}
 
 	@Bean
