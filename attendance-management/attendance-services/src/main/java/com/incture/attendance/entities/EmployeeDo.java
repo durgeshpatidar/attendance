@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -19,38 +20,23 @@ public class EmployeeDo implements BaseDo {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "ID", columnDefinition = "NVARCHAR(36)")
 	private String id;
 	
-	@Column(name = "NAME", columnDefinition = "NVARCHAR(100)")
-	private String name;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	@Override
-	public String toString() {
-		return "EmployeeDo [id=" + id + ", name=" + name + "]";
-	}
+	@Column(name = "PHONE_NO", columnDefinition = "NVARCHAR(20)")
+	private String phone_no;
 	
+	@Column(name = "PASSWORD", columnDefinition = "NVARCHAR(200)")
+	private String password;
+	
+	@Column(name = "STATUS", columnDefinition = "NVARCHAR(20)")
+	private String status;
 
+	@OneToMany( mappedBy="employee")
+	private ManagerDo manager;
+	
+	@OneToMany( mappedBy="employee1")
+	private ManagerDo manager1;
+	
+	
 }

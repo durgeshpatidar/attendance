@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,11 +30,11 @@ public class ManagerDo {
 	@Column(name = "ID")
 	private String id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_ID")
 	private EmployeeDo employee;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="MANAGER_ID")
 	private EmployeeDo employee1;
 	
