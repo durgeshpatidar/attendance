@@ -48,6 +48,6 @@ public class ManagerDo {
 	private Date end_date;
 	
 	
-	/*mmmm*/
+	/*mmmmb*/
 	
 }
