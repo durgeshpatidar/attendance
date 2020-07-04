@@ -23,7 +23,7 @@ public class EmployeeController {
 		return "Done";
 	}
 
-	@PostMapping("/add")
+	@PostMapping
 	public ResponseDto saveEmployeeData(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.saveEmployeeData(employeeDto);
 

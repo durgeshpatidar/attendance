@@ -62,6 +62,12 @@
 			<version>3.108.15.1</version>
 			<scope>provided</scope>
 		</dependency>
+<!-- https://mvnrepository.com/artifact/com.sap.cloud.db.jdbc/ngdbc -->
+		<dependency>
+			<groupId>com.sap.cloud.db.jdbc</groupId>
+			<artifactId>ngdbc</artifactId>
+			<version>2.4.70</version>
+		</dependency>
 
 
 	</dependencies>

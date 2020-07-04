@@ -5,9 +5,6 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,31 +28,11 @@ public class DataSourceConfiguration {
 	@Autowired
 	private Environment environment;
 
-	private String url;
-	private String user;
-	private String password;
-
-	public DataSourceConfiguration() {
-
-		try {
-			JSONObject jsonObj = new JSONObject(System.getenv("VCAP_SERVICES"));
-			System.err.println("ENV : " + jsonObj);
-			JSONArray jsonArr = jsonObj.getJSONArray("hana");
-			JSONObject credentials = jsonArr.getJSONObject(0).getJSONObject("credentials");
-			url = credentials.getString("url");
-			user = credentials.getString("user");
-			password = credentials.getString("password");
-		} catch (JSONException e) {
-			logger.error("[HibernateConfiguration] reading environmental variables failed:" + e.getMessage());
-		}
-
-	}
-
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] { "com.incture.attendance.entities" });
+		sessionFactory.setPackagesToScan(new String[] { "com.incture.attendance.*" });
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
@@ -64,9 +41,19 @@ public class DataSourceConfiguration {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
-		dataSource.setUrl(environment.getRequiredProperty("url"));
-		dataSource.setUsername(environment.getRequiredProperty("user"));
-		dataSource.setPassword(environment.getRequiredProperty("password"));
+		System.out.println(environment.getRequiredProperty("jdbc.url"));
+		System.out.println(environment.getRequiredProperty("jdbc.user"));
+		System.out.println(environment.getRequiredProperty("jdbc.password"));
+		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+		dataSource.setUsername(environment.getRequiredProperty("jdbc.user"));
+		dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
+
+//		dataSource.setUrl(
+//				"jdbc:sap://zeus.hana.prod.us-east-1.whitney.dbaas.ondemand.com:21022?encrypt=true&validateCertificate=true&currentschema=USR_29JLSPF6URDE5Y1T8O0U3PZVJ");
+//
+//		dataSource.setUsername("USR_29JLSPF6URDE5Y1T8O0U3PZVJ");
+//		dataSource.setPassword(
+//				"Dd185lTyL4HdIchgUYpDVWpvRySlpS7KEokQa-U1i5jkfRbWUeW7jx7KVlGZCMLulutJIt2tg1VsrpVY_-fNsgsK_FELi5uYihNqhVUCxnUfOt-J5xCURAOaCurzWACe");
 		return dataSource;
 	}
 
