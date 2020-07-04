@@ -48,12 +48,6 @@ public class DataSourceConfiguration {
 		dataSource.setUsername(environment.getRequiredProperty("jdbc.user"));
 		dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
 
-//		dataSource.setUrl(
-//				"jdbc:sap://zeus.hana.prod.us-east-1.whitney.dbaas.ondemand.com:21022?encrypt=true&validateCertificate=true&currentschema=USR_29JLSPF6URDE5Y1T8O0U3PZVJ");
-//
-//		dataSource.setUsername("USR_29JLSPF6URDE5Y1T8O0U3PZVJ");
-//		dataSource.setPassword(
-//				"Dd185lTyL4HdIchgUYpDVWpvRySlpS7KEokQa-U1i5jkfRbWUeW7jx7KVlGZCMLulutJIt2tg1VsrpVY_-fNsgsK_FELi5uYihNqhVUCxnUfOt-J5xCURAOaCurzWACe");
 		return dataSource;
 	}
 

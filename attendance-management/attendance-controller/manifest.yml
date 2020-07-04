@@ -6,4 +6,4 @@ applications:
   path: /target/attendance-controller-0.0.1-SNAPSHOT.war
   buildpack: sap_java_buildpack
   services:
-  - hana_db
+  - hana-db

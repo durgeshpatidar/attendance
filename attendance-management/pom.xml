@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Time And Attendance management For Employee</name>
-	<description>Time And Attendance management For Employee</description>
+	<description>Time And Attendance management For Incture Employee</description>
 	<modules>
 		<module>attendance-services</module>
 		<module>attendance-controller</module>

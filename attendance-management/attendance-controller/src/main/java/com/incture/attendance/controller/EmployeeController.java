@@ -18,7 +18,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	@GetMapping("/test")
+	@GetMapping
 	public String TestApi() {
 		return "Done";
 	}

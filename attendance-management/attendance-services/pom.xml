@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>attendance-services</artifactId>
-	<name>Time &amp; Attendance Management Service  layer</name>
+	<name>Time And Attendance; Attendance Management Service  layer</name>
 	<description>Time &amp; Attendance Management Service  Layer</description>
 
 

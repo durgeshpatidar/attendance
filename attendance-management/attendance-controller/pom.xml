@@ -10,7 +10,7 @@
 	<artifactId>attendance-controller</artifactId>
 	<packaging>war</packaging>
 	<name>controller</name>
-	<description>controller</description>
+	<description>attendance-controller</description>
 	<dependencies>
 	
 		<dependency>
