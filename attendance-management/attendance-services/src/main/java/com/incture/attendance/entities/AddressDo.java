@@ -6,9 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
 
 import lombok.Data;
 
@@ -22,13 +25,16 @@ public class AddressDo implements BaseDo {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "EMPLOYEEID", columnDefinition = "NVARCHAR(36)")
-	private String employeeId;
+	
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "ID", columnDefinition = "NVARCHAR(36)")
 	private String id;
+	
+	@ManyToOne
+	@JoinColumn(name="	EMPLOYEE_ID") 
+	private EmployeeDo emp_id;
 	
 	@Column(name = "ADDRESS", columnDefinition = "VARCHAR(100)")
 	private String address;
@@ -47,4 +53,6 @@ public class AddressDo implements BaseDo {
 	
 	@Column(name = "VALID_FROM", columnDefinition = "DATE")
 	private Date validFrom;
+	
+	//Column for LOCATION_LAT and LOCATION_LON needs to be added
 }

@@ -1,5 +1,8 @@
 package com.incture.attendance.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
 
 import lombok.Data;
 
@@ -30,6 +34,9 @@ public class EmployeeDo implements BaseDo {
 	private String password;
 	
 	//Column for face data
+	
+	@OneToMany(mappedBy="emp_id")
+	private List<AddressDo> address=new ArrayList<AddressDo>();
 	
 	//Constructors
 	public EmployeeDo(String id, String phone_no, String password) {
