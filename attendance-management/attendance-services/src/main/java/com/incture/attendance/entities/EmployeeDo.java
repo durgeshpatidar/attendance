@@ -29,16 +29,45 @@ public class EmployeeDo implements BaseDo {
 	@Column(name = "PASSWORD", columnDefinition = "NVARCHAR(200)")
 	private String password;
 	
-	@Column(name = "STATUS", columnDefinition = "NVARCHAR(20)")
-	private String status;
+	//Column for face data
+	
+	//Constructors
+	public EmployeeDo(String id, String phone_no, String password) {
+		super();
+		this.id = id;
+		this.phone_no = phone_no;
+		this.password = password;
+	}
 
-	@OneToMany( mappedBy="employee")
-	private ManagerDo manager;
+	public EmployeeDo() {
+		super();
+		
+	}
 	
-	@OneToMany( mappedBy="employee1")
-	private ManagerDo manager1;
+	//Getters and Setters
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPhone_no() {
+		return phone_no;
+	}
+
+	public void setPhone_no(String phone_no) {
+		this.phone_no = phone_no;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
-	
-	/*employeedo*/
 	
 }
