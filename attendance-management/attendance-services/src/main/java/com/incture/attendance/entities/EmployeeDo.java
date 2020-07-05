@@ -38,6 +38,7 @@ public class EmployeeDo implements BaseDo {
 	@OneToMany( mappedBy="employee1")
 	private ManagerDo manager1;
 	
-	/*employee*/
+	
+	/*employeedo*/
 	
 }
