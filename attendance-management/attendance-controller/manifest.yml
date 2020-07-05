@@ -1,0 +1,9 @@
+---
+applications:
+- name: attendance
+  memory: 900M
+  host: attendance
+  path: /target/attendance-controller-0.0.1-SNAPSHOT.war
+  buildpack: sap_java_buildpack
+  services:
+  - hana-db
