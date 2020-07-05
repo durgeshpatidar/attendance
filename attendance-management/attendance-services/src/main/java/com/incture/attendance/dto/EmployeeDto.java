@@ -1,36 +1,41 @@
 package com.incture.attendance.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
 public class EmployeeDto extends BaseDto {
 	private String id;
-
-	private String name;
-
+	private String phone_no;
+	private String password;
+	
+	public EmployeeDto() {
+		super();
+	
+	}
+	public EmployeeDto(String id, String phone_no, String password) {
+		super();
+		this.id = id;
+		this.phone_no = phone_no;
+		this.password = password;
+	}
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
+	public String getPhone_no() {
+		return phone_no;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setPhone_no(String phone_no) {
+		this.phone_no = phone_no;
 	}
-
-	@Override
-	public String toString() {
-		return "EmployeeDto [id=" + id + ", name=" + name + "]";
+	public String getPassword() {
+		return password;
 	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 
+	
 }
