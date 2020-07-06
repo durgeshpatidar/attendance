@@ -5,7 +5,9 @@ public class EmployeeDto extends BaseDto {
 	private String id;
 	private String phone_no;
 	private String password;
+	//Face data needs to be added
 	
+	//Constructor
 	public EmployeeDto() {
 		super();
 	
@@ -16,6 +18,8 @@ public class EmployeeDto extends BaseDto {
 		this.phone_no = phone_no;
 		this.password = password;
 	}
+	
+	//Getters and Setters
 	public String getId() {
 		return id;
 	}
