@@ -22,5 +22,10 @@ class Tracking implements BaseDo
 	@Column(name = "DATE", columnDefinition = "DATE")
 	private Date date;
 	
+	@Column(name = "CHECKIN", columnDefinition = "TIMESTAMP")
+	private Time checkin;
+	
+	@Column(name = "CHECKOUT", columnDefinition = "TIMESTAMP")
+	private Time checkout;
 	
 }
