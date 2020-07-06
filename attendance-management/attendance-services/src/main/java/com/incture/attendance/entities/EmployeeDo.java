@@ -38,6 +38,10 @@ public class EmployeeDo implements BaseDo {
 	@OneToMany(mappedBy="emp_id")
 	private List<AddressDo> address=new ArrayList<AddressDo>();
 	
+	@OneToMany(mappedBy="emp_tracking")
+	private List<TrackingDo> emp_trackingss=new ArrayList<TrackingDo>();
+	
+	
 	//Constructors
 	public EmployeeDo(String id, String phone_no, String password) {
 		super();
