@@ -24,7 +24,7 @@ public class EmployeeController {
 	}
 
 	@PostMapping
-	public ResponseDto saveEmployeeData(@RequestBody EmployeeDto employeeDto) {
+	public ResponseDto verifyEmployeeData(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.verifyEmployeeData(employeeDto);
 
 	}
