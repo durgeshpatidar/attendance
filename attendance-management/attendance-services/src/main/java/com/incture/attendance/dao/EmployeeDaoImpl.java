@@ -1,5 +1,7 @@
 package com.incture.attendance.dao;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.EmployeeDto;
@@ -42,7 +44,8 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	@Override
 	public void verifyEmployeeData(EmployeeDto employeeDto) {
 		// TODO Auto-generated method stub
-		
+		Query q=getSession().createNativeQuery("select *from employee_master where id="+employeeDto.getId());
+		q.getFirstResult();
 	}
 
 }
