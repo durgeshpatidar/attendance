@@ -3,7 +3,7 @@ package com.incture.attendance.entities;
 
 @Entity
 @Table(name = "TRACKING")
-class Tracking implements BaseDo
+class TrackingDo implements BaseDo
 {
 	@Id
 	@GeneratedValue(generator = "uuid2")
