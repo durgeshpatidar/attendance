@@ -47,6 +47,7 @@ public class ManagerDo {
 	@UpdateTimestamp
 	private Date end_date;
 	
+	//haha
 	
 	/*managerdo*/
 	
