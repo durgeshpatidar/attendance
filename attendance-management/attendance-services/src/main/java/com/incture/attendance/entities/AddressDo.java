@@ -54,5 +54,11 @@ public class AddressDo implements BaseDo {
 	@Column(name = "VALID_FROM", columnDefinition = "DATE")
 	private Date validFrom;
 	
+	@Column(name = "LOCATION_LAT", columnDefinition = "DOUBLE")
+	private Double locationLat;
+	
+	@Column(name = "LOCATION_LON", columnDefinition = "DOUBLE")
+	private Double locationLon;
+	
 	//Column for LOCATION_LAT and LOCATION_LON needs to be added
 }
