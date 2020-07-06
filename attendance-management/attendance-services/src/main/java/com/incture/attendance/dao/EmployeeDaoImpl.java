@@ -39,4 +39,10 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		getSession().save(importDto(employeeDto));
 	}
 
+	@Override
+	public void verifyEmployeeData(EmployeeDto employeeDto) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -6,4 +6,6 @@ public interface EmployeeDao {
 
 	
 	void saveEmployeeData(EmployeeDto employeeDto);
+
+	void verifyEmployeeData(EmployeeDto employeeDto);
 }

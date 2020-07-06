@@ -46,5 +46,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return responseDto;
 	}
+	
+	public ResponseDto verifyEmployeeData(EmployeeDto employeeDto) 
+	{
+		logger.info("EmployeeServiceImpl | saveEmployeeData | Execution start input " + employeeDto);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+
+		try {
+			employeeDao.verifyEmployeeData(employeeDto);
+
+			responseDto.setMessage("Employee Details verified!");
+
+		} catch (Exception e) {
+
+			logger.error("EmployeeServiceImpl | saveEmployeeData | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+
+		}
+
+		logger.info("EmployeeServiceImpl | saveEmployeeData | Execution end ouput " + responseDto);
+
+		return responseDto;
+		
+	}
 
 }
