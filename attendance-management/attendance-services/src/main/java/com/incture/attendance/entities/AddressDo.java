@@ -18,7 +18,7 @@ import lombok.Data;
 public class AddressDo implements BaseDo {
 
 	/**
-	 * 
+	 * author
 	 */
 	private static final long serialVersionUID = 1L;
 	
