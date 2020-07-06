@@ -39,7 +39,7 @@ public class EmployeeDo implements BaseDo {
 	private List<AddressDo> address=new ArrayList<AddressDo>();
 	
 	@OneToMany(mappedBy="emp_tracking")
-	private List<TrackingDo> emp_trackingss=new ArrayList<TrackingDo>();
+	private List<TrackingDo> empTrackings=new ArrayList<TrackingDo>();
 	
 	
 	//Constructors
