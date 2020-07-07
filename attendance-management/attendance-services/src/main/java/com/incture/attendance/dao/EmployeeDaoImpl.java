@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.entities.EmployeeDo;
 
+import antlr.collections.List;
+
 @Repository("EmployeeDaoImpl")
 public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements EmployeeDao {
 
@@ -43,16 +45,14 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	@Override
 	public boolean verifyEmployeeData(EmployeeDto employeeDto) {
-		// TODO Auto-generated method stub
+		
 		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"';");
-		//for check empId
 		System.out.println("empid of employee:"+employeeDto.getId());
-		int status=q.getFirstResult();
-		System.out.println("staus : "+status);
-		if(status!=0)
-		{
+		List l=(List)q.getResultList();
+		int size=l.length();
+		System.out.println("size : "+size);
+		if(size!=0)
 			return true;
-		}
 		else
 			return false;
 	}
