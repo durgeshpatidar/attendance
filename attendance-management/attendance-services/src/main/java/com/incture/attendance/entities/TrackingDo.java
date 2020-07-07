@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "TRACKING")
-class TrackingDo implements BaseDo
+public class TrackingDo implements BaseDo
 {
 	/**
 	 * 
@@ -40,32 +40,31 @@ class TrackingDo implements BaseDo
 	private Date date;
 	
 	@Column(name = "CHECKIN", columnDefinition = "TIMESTAMP")
-	private Time checkin;
+	private Time checkIn;
 	
 	@Column(name = "CHECKOUT", columnDefinition = "TIMESTAMP")
-	private Time checkout;
+	private Time checkOut;
 	
 	@Column(name = "TOTAL_HOURS", columnDefinition = "TIME")
-	private Time total_hours;
+	private Time totalHours;
 	
 	//Constructor
 	public TrackingDo() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 
-	public TrackingDo(String id, EmployeeDo empTracking, AddressDo addressTracking, Date date, Time checkin,
-			Time checkout, Time total_hours) {
+	public TrackingDo(String id, EmployeeDo empTracking, AddressDo addressTracking, Date date, Time checkIn,
+			Time checkOut, Time totalHours) {
 		super();
 		this.id = id;
 		this.empTracking = empTracking;
 		this.addressTracking = addressTracking;
 		this.date = date;
-		this.checkin = checkin;
-		this.checkout = checkout;
-		this.total_hours = total_hours;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.totalHours = totalHours;
 	}
-	
 	//Getters and Setters
 	public String getId() {
 		return id;
@@ -75,19 +74,19 @@ class TrackingDo implements BaseDo
 		this.id = id;
 	}
 
-	public EmployeeDo getEmp_tracking() {
+	public EmployeeDo getEmpTracking() {
 		return empTracking;
 	}
 
-	public void setEmp_tracking(EmployeeDo empTracking) {
+	public void setEmpTracking(EmployeeDo empTracking) {
 		this.empTracking = empTracking;
 	}
 
-	public AddressDo getAddress_tracking() {
+	public AddressDo getAddressTracking() {
 		return addressTracking;
 	}
 
-	public void setAddress_tracking(AddressDo addressTracking) {
+	public void setAddressTracking(AddressDo addressTracking) {
 		this.addressTracking = addressTracking;
 	}
 
@@ -99,28 +98,32 @@ class TrackingDo implements BaseDo
 		this.date = date;
 	}
 
-	public Time getCheckin() {
-		return checkin;
+	public Time getCheckIn() {
+		return checkIn;
 	}
 
-	public void setCheckin(Time checkin) {
-		this.checkin = checkin;
+	public void setCheckIn(Time checkIn) {
+		this.checkIn = checkIn;
 	}
 
-	public Time getCheckout() {
-		return checkout;
+	public Time getCheckOut() {
+		return checkOut;
 	}
 
-	public void setCheckout(Time checkout) {
-		this.checkout = checkout;
+	public void setCheckOut(Time checkOut) {
+		this.checkOut = checkOut;
 	}
 
-	public Time getTotal_hours() {
-		return total_hours;
+	public Time getTotalHours() {
+		return totalHours;
 	}
 
-	public void setTotal_hours(Time total_hours) {
-		this.total_hours = total_hours;
+	public void setTotalHours(Time totalHours) {
+		this.totalHours = totalHours;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	
