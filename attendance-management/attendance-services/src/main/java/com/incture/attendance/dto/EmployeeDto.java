@@ -8,7 +8,6 @@ public class EmployeeDto extends BaseDto {
 	private String email;
 	//Face data needs to be added
 	
-	//Constructor
 	public EmployeeDto() {
 		super();
 	}
