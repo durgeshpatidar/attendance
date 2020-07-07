@@ -1,5 +1,7 @@
 package com.incture.attendance.dao;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -7,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.entities.EmployeeDo;
 
-import antlr.collections.List;
 
 @Repository("EmployeeDaoImpl")
 public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements EmployeeDao {
@@ -48,8 +49,9 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		
 		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"';");
 		System.out.println("empid of employee:"+employeeDto.getId());
-		List l=(List)q.getResultList();
-		int size=l.length();
+		@SuppressWarnings("unchecked")
+		List<Object> l=(List<Object>)q.getResultList();
+		int size=l.size();
 		System.out.println("size : "+size);
 		if(size!=0)
 			return true;
