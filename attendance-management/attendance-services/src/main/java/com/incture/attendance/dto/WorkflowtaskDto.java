@@ -27,7 +27,7 @@ public class WorkflowtaskDto {
 		this.status = status;
 	}
 	
-    //getters and setters
+  //getter and setters
 	public String getId() {
 		return id;
 	}
