@@ -12,6 +12,7 @@ public class WorkflowtaskDto {
 	private String status;
 	
 	//Constructors
+	
 	public WorkflowtaskDto() {
 		super();
 
