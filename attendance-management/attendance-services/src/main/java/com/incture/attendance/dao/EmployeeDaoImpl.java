@@ -42,10 +42,16 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	}
 
 	@Override
-	public void verifyEmployeeData(EmployeeDto employeeDto) {
+	public boolean verifyEmployeeData(EmployeeDto employeeDto) {
 		// TODO Auto-generated method stub
 		Query q=getSession().createNativeQuery("select *from employee_master where id="+employeeDto.getId());
-		q.getFirstResult();
+		int status=q.getFirstResult();
+		if(status>0)
+		{
+			return true;
+		}
+		else
+			return false;
 	}
 
 }
