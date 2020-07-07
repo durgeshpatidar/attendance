@@ -19,8 +19,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeDao employeeDao;
-	
-	//for checking employee id and password
+
+	// for checking employee id and password
 	@Override
 	public ResponseDto verifyIdPass(EmployeeDto employeeDto) {
 		logger.info("EmployeeServiceImpl | verifyIdPass | Execution start input " + employeeDto);
@@ -32,11 +32,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		try {
 			boolean status = employeeDao.verifyIdPass(employeeDto);
 			if (status == true) {
-				responseDto.setMessage("Employee Details Succesfully Verified!");
+				responseDto.setMessage("Id And Password Is Correct!");
 			} else {
 				responseDto.setStatus(Boolean.FALSE);
 				responseDto.setStatusCode(500);
-				responseDto.setMessage("Invalid credentials");
+				responseDto.setMessage("Invalid credentials!");
 			}
 
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
-	//for checking employee email is exist or not and employee is active or not
+	// for checking employee email is exist or not and employee is active or not
 	@Override
 	public ResponseDto isValidUser(EmployeeDto employeeDto) {
 
@@ -65,19 +65,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		responseDto.setStatusCode(200);
 		boolean status = employeeDao.isValidUser(employeeDto);
 		if (status == true) {
-			// then user logins
-			responseDto.setMessage("User is valid");
+			responseDto.setMessage("Employee Is Valid");
 
 		} else {
-			// else return invalid credentials
 			responseDto.setStatus(Boolean.FALSE);
 			responseDto.setStatusCode(500);
-			responseDto.setMessage("Employee does not exist in company");
+			responseDto.setMessage("Employee Does Not Exist In Company Or Entering Email Is Wrong");
 		}
 		logger.info("EmployeeServiceImpl | isValidUser | Execution end ouput " + responseDto);
 		return responseDto;
 	}
 
+	// for save employee data
 	@Override
 	public ResponseDto saveEmployeeData(EmployeeDto employeeDto) {
 
@@ -86,11 +85,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
-
+		employeeDao.isValidUser(employeeDto);
 		try {
-				employeeDao.saveEmployeeData(employeeDto);
-				responseDto.setMessage("Employee Details Saved Successfully!");
-			
+			employeeDao.saveEmployeeData(employeeDto);
+			responseDto.setMessage("Employee Details Saved Successfully!");
 
 		} catch (Exception e) {
 
