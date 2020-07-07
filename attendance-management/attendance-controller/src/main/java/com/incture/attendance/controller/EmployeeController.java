@@ -23,16 +23,19 @@ public class EmployeeController {
 		return "Done";
 	}
 
-	@PostMapping
-	public ResponseDto verifyEmployeeData(@RequestBody EmployeeDto employeeDto) {
-		return employeeService.verifyEmployeeData(employeeDto);
-
+	@PostMapping("/signup")
+	public ResponseDto saveEmployeeData(@RequestBody EmployeeDto employeeDto) {
+		return employeeService.saveEmployeeData(employeeDto);
 	}
-	
+
 	@PostMapping("/login")
+	public ResponseDto verifyIdPass(@RequestBody EmployeeDto employeeDto) {
+		return employeeService.verifyIdPass(employeeDto);
+	}
+
+	@PostMapping("/validate")
 	public ResponseDto isValidUser(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.isValidUser(employeeDto);
-
 	}
 
 }
