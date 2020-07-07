@@ -30,11 +30,11 @@ class TrackingDo implements BaseDo
 	
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_ID")
-	private EmployeeDo emp_tracking;
+	private EmployeeDo empTracking;
 	
 	@ManyToOne
 	@JoinColumn(name="ADDRESS_ID")
-	private AddressDo address_tracking;
+	private AddressDo addressTracking;
 	
 	@Column(name = "DATE", columnDefinition = "DATE")
 	private Date date;
@@ -54,12 +54,12 @@ class TrackingDo implements BaseDo
 		
 	}
 
-	public TrackingDo(String id, EmployeeDo emp_tracking, AddressDo address_tracking, Date date, Time checkin,
+	public TrackingDo(String id, EmployeeDo empTracking, AddressDo addressTracking, Date date, Time checkin,
 			Time checkout, Time total_hours) {
 		super();
 		this.id = id;
-		this.emp_tracking = emp_tracking;
-		this.address_tracking = address_tracking;
+		this.empTracking = empTracking;
+		this.addressTracking = addressTracking;
 		this.date = date;
 		this.checkin = checkin;
 		this.checkout = checkout;
@@ -76,19 +76,19 @@ class TrackingDo implements BaseDo
 	}
 
 	public EmployeeDo getEmp_tracking() {
-		return emp_tracking;
+		return empTracking;
 	}
 
-	public void setEmp_tracking(EmployeeDo emp_tracking) {
-		this.emp_tracking = emp_tracking;
+	public void setEmp_tracking(EmployeeDo empTracking) {
+		this.empTracking = empTracking;
 	}
 
 	public AddressDo getAddress_tracking() {
-		return address_tracking;
+		return addressTracking;
 	}
 
-	public void setAddress_tracking(AddressDo address_tracking) {
-		this.address_tracking = address_tracking;
+	public void setAddress_tracking(AddressDo addressTracking) {
+		this.addressTracking = addressTracking;
 	}
 
 	public Date getDate() {
