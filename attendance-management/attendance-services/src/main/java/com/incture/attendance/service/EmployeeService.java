@@ -10,4 +10,6 @@ public interface EmployeeService  {
 	ResponseDto isValidUser(EmployeeDto employeeDto);
 	
 	ResponseDto saveEmployeeData(EmployeeDto employeeDto);
+	
+	ResponseDto profileDetails(EmployeeDto employeeDto);
 }

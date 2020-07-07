@@ -1,6 +1,8 @@
 //Employee Master Table
 package com.incture.attendance.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,16 +26,16 @@ public class EmployeeMasterDo {
 	private String gender;
 	
 	@Column(name = "BIRTH_DATE", columnDefinition = "DATE")
-	private String birthDate;
+	private Date birthDate;
 	
 	@Column(name = "BLOOD_GROUP", columnDefinition = "NVARCHAR(5)")
 	private String bloodGroup;
 	
 	@Column(name = "JOINING_DATE", columnDefinition = "DATE")
-	private String joiningDate;
+	private Date joiningDate;
 	
 	@Column(name = "RESIGNING_DATE", columnDefinition = "DATE")
-	private String resigningDate;
+	private Date resigningDate;
 	
 	@Column(name = "EMAIL_ID", columnDefinition = "NVARCHAR(100)")
 	private String emailId;
@@ -53,8 +55,8 @@ public class EmployeeMasterDo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmployeeMasterDo(String id, String firstName, String lastName, String gender, String birthDate,
-			String bloodGroup, String joiningDate, String resigningDate, String emailId, String phoneNo,
+	public EmployeeMasterDo(String id, String firstName, String lastName, String gender, Date birthDate,
+			String bloodGroup, Date joiningDate,Date resigningDate, String emailId, String phoneNo,
 			String profileImg, String status) {
 		super();
 		this.id = id;
@@ -104,11 +106,11 @@ public class EmployeeMasterDo {
 		this.gender = gender;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -120,19 +122,19 @@ public class EmployeeMasterDo {
 		this.bloodGroup = bloodGroup;
 	}
 
-	public String getJoiningDate() {
+	public Date getJoiningDate() {
 		return joiningDate;
 	}
 
-	public void setJoiningDate(String joiningDate) {
+	public void setJoiningDate(Date joiningDate) {
 		this.joiningDate = joiningDate;
 	}
 
-	public String getResigningDate() {
+	public Date getResigningDate() {
 		return resigningDate;
 	}
 
-	public void setResigningDate(String resigningDate) {
+	public void setResigningDate(Date resigningDate) {
 		this.resigningDate = resigningDate;
 	}
 

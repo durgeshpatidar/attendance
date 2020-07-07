@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.incture.attendance.dao.EmployeeDao;
 import com.incture.attendance.dto.EmployeeDto;
+import com.incture.attendance.dto.ProfileDto;
 import com.incture.attendance.utils.ResponseDto;
 
 @Service
@@ -111,5 +112,35 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 
 	}
+//for displaying profile
+	@Override
+	public ResponseDto profileDetails(EmployeeDto employeeDto) {
+		logger.info("ProfileDetails| Execution start input " + employeeDto);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			ProfileDto profiledata = employeeDao.profileDetails(employeeDto);
+			responseDto.setData(profiledata);
+			responseDto.setMessage("Profile details displayed Successfully!");
+
+		} catch (Exception e) {
+
+			logger.error("ProfileDetails| Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+
+		}
+
+		logger.info("ProfileDetails | Execution end ouput " + responseDto);
+
+		return responseDto;
+
+	}
+	
+
+	
 
 }

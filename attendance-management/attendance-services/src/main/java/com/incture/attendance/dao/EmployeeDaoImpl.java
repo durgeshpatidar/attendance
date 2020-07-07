@@ -7,6 +7,8 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.EmployeeDto;
+import com.incture.attendance.dto.EmployeeMasterDto;
+import com.incture.attendance.dto.ProfileDto;
 import com.incture.attendance.entities.EmployeeDo;
 
 
@@ -75,4 +77,21 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			return false;	
 	}
 
+	@Override
+	public ProfileDto profileDetails(EmployeeDto employeeDto) {
+		String id = employeeDto.getId();
+		ProfileDto profileDto = null;
+		EmployeeMasterDto empMasterDto = getSession().get(EmployeeMasterDto.class, id);
+		profileDto.setId(empMasterDto.getId());
+		profileDto.setFirstName(empMasterDto.getFirstName());
+		profileDto.setLastName(empMasterDto.getLastName());
+		profileDto.setGender(empMasterDto.getGender());
+		profileDto.setBloodGroup(empMasterDto.getBloodGroup());
+		profileDto.setEmailId(empMasterDto.getEmailId());
+		profileDto.setProfileImg(empMasterDto.getProfileImg());
+		return profileDto;
+
+	}
+
+	
 }

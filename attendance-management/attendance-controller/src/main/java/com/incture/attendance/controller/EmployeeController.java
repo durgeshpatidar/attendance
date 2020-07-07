@@ -37,5 +37,9 @@ public class EmployeeController {
 	public ResponseDto isValidUser(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.isValidUser(employeeDto);
 	}
-
+	
+	@PostMapping("/manager-details")
+	public ResponseDto profileDetails(@RequestBody EmployeeDto employeeDto) {
+		return employeeService.profileDetails(employeeDto);
+	}
 }
