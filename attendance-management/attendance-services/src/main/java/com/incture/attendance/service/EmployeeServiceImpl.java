@@ -61,7 +61,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if(status==true)
 			{
 				//then save employee data
-				responseDto.setMessage("Employee Details verified!");
+				employeeDao.saveEmployeeData(employeeDto);
+				responseDto.setMessage("Employee Details Verified And Saved Successfully!");
 				
 			}
 			else
@@ -69,7 +70,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				//else return msg employee not exist
 				responseDto.setStatus(Boolean.FALSE);
 				responseDto.setStatusCode(500);
-				responseDto.setMessage("Employee not exist in company");
+				responseDto.setMessage("Employee Does Not Exist In Company");
 			}
 			
 
