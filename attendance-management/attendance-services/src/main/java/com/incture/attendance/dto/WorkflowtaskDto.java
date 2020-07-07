@@ -28,7 +28,6 @@ public class WorkflowtaskDto {
 	}
 	
     //getters and setters
-	//Getters and Setters
 	public String getId() {
 		return id;
 	}
