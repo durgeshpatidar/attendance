@@ -3,7 +3,7 @@ package com.incture.attendance.dto;
 
 public class EmployeeDto extends BaseDto {
 	private String id;
-	private String phone_no;
+	private String phoneNo;
 	private String password;
 	private String email;
 	//Face data needs to be added
@@ -20,12 +20,12 @@ public class EmployeeDto extends BaseDto {
 		this.id = id;
 	}
 
-	public String getPhone_no() {
-		return phone_no;
+	public String getPhoneNo() {
+		return phoneNo;
 	}
 
-	public void setPhone_no(String phone_no) {
-		this.phone_no = phone_no;
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 
 	public String getPassword() {
@@ -44,18 +44,17 @@ public class EmployeeDto extends BaseDto {
 		this.email = email;
 	}
 
-	public EmployeeDto(String id, String phone_no, String password, String email) {
+	public EmployeeDto(String id, String phoneNo, String password, String email) {
 		super();
 		this.id = id;
-		this.phone_no = phone_no;
+		this.phoneNo = phoneNo;
 		this.password = password;
 		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return "EmployeeDto [id=" + id + ", phone_no=" + phone_no + ", password=" + password + ", email=" + email + "]";
-	}	
-	
+		return "EmployeeDto [id=" + id + ", phoneNo=" + phoneNo + ", password=" + password + ", email=" + email + "]";
+	}
 	
 }
