@@ -62,16 +62,20 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	public boolean isValidUser(EmployeeDto employeeDto)
 	{
 		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"' AND STATUS='ACTIVE';");
-		//if id and status will be active in master data table then we will verify id and password in employee table
-		System.out.println("empid of employee:"+employeeDto.getId());
 		@SuppressWarnings("unchecked")
 		List<Object> l=(List<Object>)q.getResultList();
 		int size=l.size();
 		System.out.println("size : "+size);
 		if(size!=0)
+		{
+			Query q2=getSession().createNativeQuery("SELECT *FROM EMPLOYEE WHERE ID='"+employeeDto.getId()+"' AND PASSWORD='"+employeeDto.getPassword()+"';");
+			@SuppressWarnings("unchecked")
+			List<Object> l1=(List<Object>)q2.getResultList();
+			int sizeL1=l1.size();
+			if(sizeL1!=0)
 			return true;
-		else
-			return false;
+		}
+		return false;
 	}
 
 }
