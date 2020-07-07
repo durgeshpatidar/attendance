@@ -47,7 +47,22 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	@Override
 	public boolean verifyEmployeeData(EmployeeDto employeeDto) {
 		
-		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"';");
+		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"' AND STATUS='ACTIVE';");
+		System.out.println("empid of employee:"+employeeDto.getId());
+		@SuppressWarnings("unchecked")
+		List<Object> l=(List<Object>)q.getResultList();
+		int size=l.size();
+		System.out.println("size : "+size);
+		if(size!=0)
+			return true;
+		else
+			return false;
+	}
+	//for user login
+	public boolean isValidUser(EmployeeDto employeeDto)
+	{
+		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"' AND STATUS='ACTIVE';");
+		//if id and status will be active in master data table then we will verify id and password in employee table
 		System.out.println("empid of employee:"+employeeDto.getId());
 		@SuppressWarnings("unchecked")
 		List<Object> l=(List<Object>)q.getResultList();
