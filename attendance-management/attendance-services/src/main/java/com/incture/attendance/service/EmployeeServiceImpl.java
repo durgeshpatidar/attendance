@@ -50,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public ResponseDto verifyEmployeeData(EmployeeDto employeeDto) 
 	{
-		logger.info("EmployeeServiceImpl | saveEmployeeData | Execution start input " + employeeDto);
+		logger.info("EmployeeServiceImpl | verifyEmployeeData | Execution start input " + employeeDto);
 
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
