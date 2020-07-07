@@ -20,32 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 
-	@Override
-	public ResponseDto saveEmployeeData(EmployeeDto employeeDto) {
-		logger.info("EmployeeServiceImpl | saveEmployeeData | Execution start input " + employeeDto);
-
-		ResponseDto responseDto = new ResponseDto();
-		responseDto.setStatus(Boolean.TRUE);
-		responseDto.setStatusCode(200);
-
-		try {
-			employeeDao.saveEmployeeData(employeeDto);
-
-			responseDto.setMessage("Employee Details Saved Successfully");
-
-		} catch (Exception e) {
-
-			logger.error("EmployeeServiceImpl | saveEmployeeData | Exception " + e.getMessage());
-			responseDto.setStatus(Boolean.FALSE);
-			responseDto.setStatusCode(500);
-			responseDto.setMessage(e.getMessage());
-
-		}
-
-		logger.info("EmployeeServiceImpl | saveEmployeeData | Execution end ouput " + responseDto);
-
-		return responseDto;
-	}
+	
 	
 	@Override
 	public ResponseDto verifyEmployeeData(EmployeeDto employeeDto) 

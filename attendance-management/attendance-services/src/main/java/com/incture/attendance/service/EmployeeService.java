@@ -5,6 +5,5 @@ import com.incture.attendance.utils.ResponseDto;
 
 public interface EmployeeService  {
 
-	ResponseDto saveEmployeeData(EmployeeDto employeeDto);
 	ResponseDto verifyEmployeeData(EmployeeDto employeeDto);
 }
