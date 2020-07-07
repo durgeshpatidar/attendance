@@ -57,9 +57,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 		responseDto.setStatusCode(200);
 
 		try {
-			employeeDao.verifyEmployeeData(employeeDto);
-
-			responseDto.setMessage("Employee Details verified!");
+			boolean status =employeeDao.verifyEmployeeData(employeeDto);
+			if(status==true)
+			{
+				//then save employee data
+				responseDto.setMessage("Employee Details verified!");
+				
+			}
+			else
+			{
+				//else return msg employee not exist
+				responseDto.setStatus(Boolean.FALSE);
+				responseDto.setStatusCode(500);
+				responseDto.setMessage("Employee not exist in company");
+			}
+			
 
 		} catch (Exception e) {
 
