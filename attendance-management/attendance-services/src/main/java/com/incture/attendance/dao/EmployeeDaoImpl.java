@@ -48,10 +48,11 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	@Override
 	public boolean verifyEmployeeData(EmployeeDto employeeDto) {
 		
-		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"' AND STATUS='ACTIVE';");
-		System.out.println("empid of employee:"+employeeDto.getId());
+		Query q=getSession().createNativeQuery("SELECT ID FROM EMPLOYEE_MASTER WHERE EMAIL='"+employeeDto.getEmail()+"' AND STATUS='ACTIVE';");
+		System.out.println("email of employee:"+employeeDto.getEmail());
 		@SuppressWarnings("unchecked")
 		List<Object> l=(List<Object>)q.getResultList();
+		employeeDto.setId((String)l.get(0));
 		int size=l.size();
 		System.out.println("size : "+size);
 		if(size!=0)
@@ -63,21 +64,15 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	@Override
 	public boolean isValidUser(EmployeeDto employeeDto)
 	{
-		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"' AND STATUS='ACTIVE';");
-		@SuppressWarnings("unchecked")
-		List<Object> l=(List<Object>)q.getResultList();
-		int size=l.size();
-		System.out.println("size : "+size);
-		if(size!=0)
-		{
-			Query q2=getSession().createNativeQuery("SELECT *FROM EMPLOYEE WHERE ID='"+employeeDto.getId()+"' AND PASSWORD='"+employeeDto.getPassword()+"';");
+		
+			Query q=getSession().createNativeQuery("SELECT ID FROM EMPLOYEE WHERE EMAIL='"+employeeDto.getEmail()+"' AND PASSWORD='"+employeeDto.getPassword()+"';");
 			@SuppressWarnings("unchecked")
-			List<Object> l1=(List<Object>)q2.getResultList();
-			int sizeL1=l1.size();
-			if(sizeL1!=0)
-			return true;
-		}
-		return false;
+			List<Object> l=(List<Object>)q.getResultList();
+			int size=l.size();
+			if(size!=0)
+				return true;
+			else
+				return false;
 	}
 
 }
