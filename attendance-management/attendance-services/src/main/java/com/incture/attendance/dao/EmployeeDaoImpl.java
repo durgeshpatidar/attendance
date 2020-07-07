@@ -19,9 +19,9 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		if (employeeDto != null) {
 			entity = new EmployeeDo();
 			entity.setId(employeeDto.getId());
-			entity.setPhone_no(employeeDto.getPhone_no());
+			entity.setPhoneNo(employeeDto.getPhoneNo());
 			entity.setPassword(employeeDto.getPassword());
-
+			entity.setEmail(employeeDto.getEmail());
 		}
 		return entity;
 	}
@@ -32,8 +32,9 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		if (employeeDo != null) {
 			dto = new EmployeeDto();
 			dto.setId(employeeDo.getId());
-			dto.setPhone_no(employeeDo.getPhone_no());
+			dto.setPhoneNo(employeeDo.getPhoneNo());
 			dto.setPassword(employeeDo.getPassword());
+			dto.setEmail(employeeDo.getEmail());
 		}
 		return dto;
 	}
