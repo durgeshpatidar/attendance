@@ -17,6 +17,7 @@ public class TrackingServiceImpl implements TrackingService {
 	@Autowired
 	private TrackingDao trackingDao;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Override
 	public ResponseDto addTracking(TrackingDto trackingDto) {
 		logger.info("TrackingServiceImpl | addTracking | Execution start input " + trackingDto);
