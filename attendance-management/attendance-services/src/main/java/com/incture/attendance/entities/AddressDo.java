@@ -37,7 +37,7 @@ public class AddressDo implements BaseDo {
 	
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_ID") 
-	private EmployeeDo emp_id;
+	private EmployeeDo empId;
 	
 	@Column(name = "ADDRESS", columnDefinition = "VARCHAR(100)")
 	private String address;
@@ -63,8 +63,8 @@ public class AddressDo implements BaseDo {
 	@Column(name = "LOCATION_LON", columnDefinition = "DOUBLE")
 	private Double locationLon;
 	
-	@OneToMany(mappedBy="address_tracking")
-	private List<TrackingDo> add_trackings=new ArrayList<TrackingDo>();
+	@OneToMany(mappedBy="addressTracking")
+	private List<TrackingDo> addTrackings=new ArrayList<TrackingDo>();
 	
 	//Constructor
 	public AddressDo() {
@@ -76,7 +76,7 @@ public class AddressDo implements BaseDo {
 			Date validTo, Date validFrom, Double locationLat, Double locationLon) {
 		super();
 		this.id = id;
-		this.emp_id = emp_id;
+		this.empId = emp_id;
 		this.address = address;
 		this.city = city;
 		this.state = state;
@@ -96,12 +96,12 @@ public class AddressDo implements BaseDo {
 		this.id = id;
 	}
 
-	public EmployeeDo getEmp_id() {
-		return emp_id;
+	public EmployeeDo getEmpId() {
+		return empId;
 	}
 
-	public void setEmp_id(EmployeeDo emp_id) {
-		this.emp_id = emp_id;
+	public void setEmpId(EmployeeDo empId) {
+		this.empId = empId;
 	}
 
 	public String getAddress() {
