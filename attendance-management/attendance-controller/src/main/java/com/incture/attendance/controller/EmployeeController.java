@@ -28,5 +28,11 @@ public class EmployeeController {
 		return employeeService.verifyEmployeeData(employeeDto);
 
 	}
+	
+	@PostMapping("/login")
+	public ResponseDto isValidUser(@RequestBody EmployeeDto employeeDto) {
+		return employeeService.isValidUser(employeeDto);
+
+	}
 
 }

@@ -37,8 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			{
 				//then save employee data
 				employeeDao.saveEmployeeData(employeeDto);
-				responseDto.setMessage("Employee Details Verified And Saved Successfully!");
-				
+				responseDto.setMessage("Employee Details Verified And Saved Successfully!");	
 			}
 			else
 			{
@@ -63,5 +62,32 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 		
 	}
+    
+	@Override
+	 public ResponseDto isValidUser(EmployeeDto employeeDto) {
+
+
+	        logger.info("EmployeeServiceImpl | isValidUser | Execution start input " + employeeDto);
+
+	        ResponseDto responseDto = new ResponseDto();
+	        responseDto.setStatus(Boolean.TRUE);
+	        responseDto.setStatusCode(200);
+	        boolean status =employeeDao.isValidUser(employeeDto);
+	        if(status==true)
+	        {
+	                //then user logins
+	                responseDto.setMessage("User logged in Successfully!");
+	                
+	        }
+	        else
+	        {
+	                //else return invalid credentials
+	                responseDto.setStatus(Boolean.FALSE);
+	                responseDto.setStatusCode(500);
+	                responseDto.setMessage("Invalid credentials");
+	        }	        
+	        logger.info("EmployeeServiceImpl | isValidUser | Execution end ouput " + responseDto);
+	        return responseDto;	    
+	    }
 
 }

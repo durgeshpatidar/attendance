@@ -8,8 +8,8 @@ public class TrackingDto {
 	
 private String id;
 	
-	private int empId;
-	private int addressId;
+	private String empId;
+	private String addressId;
 	private Date date;
 	private Time checkin;
 	private Time checkout;
@@ -20,7 +20,71 @@ private String id;
 		super();
 
 	}
-	public TrackingDto(String id, int empId, int addressId, Date date, Time checkin, Time checkout, Time total_hours) {
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
+
+	public String getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(String addressId) {
+		this.addressId = addressId;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Time getCheckin() {
+		return checkin;
+	}
+
+	public void setCheckin(Time checkin) {
+		this.checkin = checkin;
+	}
+
+	public Time getCheckout() {
+		return checkout;
+	}
+
+	public void setCheckout(Time checkout) {
+		this.checkout = checkout;
+	}
+
+	public Time getTotal_hours() {
+		return total_hours;
+	}
+
+	public void setTotal_hours(Time total_hours) {
+		this.total_hours = total_hours;
+	}
+
+	@Override
+	public String toString() {
+		return "TrackingDto [id=" + id + ", empId=" + empId + ", addressId=" + addressId + ", date=" + date
+				+ ", checkin=" + checkin + ", checkout=" + checkout + ", total_hours=" + total_hours + "]";
+	}
+
+	public TrackingDto(String id, String empId, String addressId, Date date, Time checkin, Time checkout,
+			Time total_hours) {
 		super();
 		this.id = id;
 		this.empId = empId;
@@ -30,52 +94,6 @@ private String id;
 		this.checkout = checkout;
 		this.total_hours = total_hours;
 	}
-	
-	//Getters and Setters
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public int getEmpId() {
-		return empId;
-	}
-	public void setEmpId(int empId) {
-		this.empId = empId;
-	}
-	public int getAddressId() {
-		return addressId;
-	}
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public Time getCheckin() {
-		return checkin;
-	}
-	public void setCheckin(Time checkin) {
-		this.checkin = checkin;
-	}
-	public Time getCheckout() {
-		return checkout;
-	}
-	public void setCheckout(Time checkout) {
-		this.checkout = checkout;
-	}
-	public Time getTotal_hours() {
-		return total_hours;
-	}
-	public void setTotal_hours(Time total_hours) {
-		this.total_hours = total_hours;
-	}
-	
-	
-	
+		
 
 }

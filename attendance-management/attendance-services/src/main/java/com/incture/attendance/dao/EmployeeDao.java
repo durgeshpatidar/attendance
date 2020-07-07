@@ -8,4 +8,6 @@ public interface EmployeeDao {
 	void saveEmployeeData(EmployeeDto employeeDto);
 
 	boolean verifyEmployeeData(EmployeeDto employeeDto);
+	
+	public boolean isValidUser(EmployeeDto employeeDto);
 }
