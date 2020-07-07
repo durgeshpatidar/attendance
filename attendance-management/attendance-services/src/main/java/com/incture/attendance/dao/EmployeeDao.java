@@ -12,5 +12,6 @@ public interface EmployeeDao {
 	boolean isValidUser(EmployeeDto employeeDto);
 	
 	ProfileDto profileDetails(EmployeeDto employeeDto);
+	
 	//
 }
