@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 import lombok.Data;
 
 @Entity
@@ -24,36 +22,27 @@ public class EmployeeDo implements BaseDo {
 	@Id
 	@Column(name = "ID", columnDefinition = "NVARCHAR(36)")
 	private String id;
-	
+
 	@Column(name = "PHONE_NO", columnDefinition = "NVARCHAR(20)")
-	private String phone_no;
-	
+	private String phoneNo;
+
 	@Column(name = "PASSWORD", columnDefinition = "NVARCHAR(200)")
 	private String password;
-	
-	//Column for face data
-	
-	@OneToMany(mappedBy="emp_id")
-	private List<AddressDo> address=new ArrayList<AddressDo>();
-	
-	@OneToMany(mappedBy="emp_tracking")
-	private List<TrackingDo> empTrackings=new ArrayList<TrackingDo>();
-	
-	
-	//Constructors
-	public EmployeeDo(String id, String phone_no, String password) {
-		super();
-		this.id = id;
-		this.phone_no = phone_no;
-		this.password = password;
-	}
+
+	@Column(name = "EMAIL", columnDefinition = "NVARCHAR(100)")
+	private String email;
+	// Column for face data
+
+	@OneToMany(mappedBy = "emp_id")
+	private List<AddressDo> address = new ArrayList<AddressDo>();
+
+	@OneToMany(mappedBy = "emp_tracking")
+	private List<TrackingDo> empTrackings = new ArrayList<TrackingDo>();
 
 	public EmployeeDo() {
 		super();
-		
 	}
-	
-	//Getters and Setters
+
 	public String getId() {
 		return id;
 	}
@@ -62,12 +51,12 @@ public class EmployeeDo implements BaseDo {
 		this.id = id;
 	}
 
-	public String getPhone_no() {
-		return phone_no;
+	public String getPhoneNo() {
+		return phoneNo;
 	}
 
-	public void setPhone_no(String phone_no) {
-		this.phone_no = phone_no;
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 
 	public String getPassword() {
@@ -77,6 +66,45 @@ public class EmployeeDo implements BaseDo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<AddressDo> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<AddressDo> address) {
+		this.address = address;
+	}
+
+	public List<TrackingDo> getEmpTrackings() {
+		return empTrackings;
+	}
+
+	public void setEmpTrackings(List<TrackingDo> empTrackings) {
+		this.empTrackings = empTrackings;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public EmployeeDo(String id, String phoneNo, String password, String email, List<AddressDo> address,
+			List<TrackingDo> empTrackings) {
+		super();
+		this.id = id;
+		this.phoneNo = phoneNo;
+		this.password = password;
+		this.email = email;
+		this.address = address;
+		this.empTrackings = empTrackings;
+	}
 	
-	
+
 }
