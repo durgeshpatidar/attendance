@@ -59,6 +59,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			return false;
 	}
 	//for user login
+	@Override
 	public boolean isValidUser(EmployeeDto employeeDto)
 	{
 		Query q=getSession().createNativeQuery("SELECT *FROM EMPLOYEE_MASTER WHERE ID='"+employeeDto.getId()+"' AND STATUS='ACTIVE';");
