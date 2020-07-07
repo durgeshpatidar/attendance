@@ -5,7 +5,9 @@ import com.incture.attendance.utils.ResponseDto;
 
 public interface EmployeeService  {
 
-	ResponseDto verifyEmployeeData(EmployeeDto employeeDto);
+	ResponseDto verifyIdPass(EmployeeDto employeeDto);
 
 	ResponseDto isValidUser(EmployeeDto employeeDto);
+	
+	ResponseDto saveEmployeeData(EmployeeDto employeeDto);
 }

@@ -38,16 +38,30 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		}
 		return dto;
 	}
-
+	//for save employee data
 	@Override
 	public void saveEmployeeData(EmployeeDto employeeDto) {
 
 		getSession().save(importDto(employeeDto));
 	}
 
+	//for verifying employee email and password
 	@Override
-	public boolean verifyEmployeeData(EmployeeDto employeeDto) {
+	public boolean verifyIdPass(EmployeeDto employeeDto) {
 		
+		Query q=getSession().createNativeQuery("SELECT ID FROM EMPLOYEE WHERE EMAIL='"+employeeDto.getEmail()+"' AND PASSWORD='"+employeeDto.getPassword()+"';");
+		@SuppressWarnings("unchecked")
+		List<Object> l=(List<Object>)q.getResultList();
+		int size=l.size();
+		if(size!=0)
+			return true;
+		else
+			return false;
+	}
+	//for checking employee email is exist or not and employee is active or not
+	@Override
+	public boolean isValidUser(EmployeeDto employeeDto)
+	{
 		Query q=getSession().createNativeQuery("SELECT ID FROM EMPLOYEE_MASTER WHERE EMAIL='"+employeeDto.getEmail()+"' AND STATUS='ACTIVE';");
 		System.out.println("email of employee:"+employeeDto.getEmail());
 		@SuppressWarnings("unchecked")
@@ -58,21 +72,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		if(size!=0)
 			return true;
 		else
-			return false;
-	}
-	//for user login
-	@Override
-	public boolean isValidUser(EmployeeDto employeeDto)
-	{
-		
-			Query q=getSession().createNativeQuery("SELECT ID FROM EMPLOYEE WHERE EMAIL='"+employeeDto.getEmail()+"' AND PASSWORD='"+employeeDto.getPassword()+"';");
-			@SuppressWarnings("unchecked")
-			List<Object> l=(List<Object>)q.getResultList();
-			int size=l.size();
-			if(size!=0)
-				return true;
-			else
-				return false;
+			return false;	
 	}
 
 }
