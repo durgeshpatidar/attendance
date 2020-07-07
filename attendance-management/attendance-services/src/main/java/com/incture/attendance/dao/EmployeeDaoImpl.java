@@ -90,7 +90,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		profileDto.setEmailId(empMasterDto.getEmailId());
 		profileDto.setProfileImg(empMasterDto.getProfileImg());
 		return profileDto;
-
+//
 	}
 
 	
