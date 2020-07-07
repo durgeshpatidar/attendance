@@ -76,7 +76,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		else
 			return false;	
 	}
-
+//for displaying profile details
 	@Override
 	public ProfileDto profileDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
