@@ -39,6 +39,9 @@ public class WorkflowTaskDto extends BaseDto {
 	public String getEmpId() {
 		return empId;
 	}
+	public void setEmpId(String id) {
+		this.id = id;
+	}
 	public String getDescription() {
 		return description;
 	}
