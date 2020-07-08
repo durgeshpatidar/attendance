@@ -1,6 +1,7 @@
 package com.incture.attendance.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -103,9 +104,10 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	@Override
 	public List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
+		Date d = new Date(9999,12,12);
 		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
         crit.add(Restrictions.eq("employeeId",id));
-        crit.add(Restrictions.eq("endDate", "9999-12-12"));
+        crit.add(Restrictions.eq("endDate", d));
         List<ManagerMasterDo> results = crit.list();
         List<ManagerDetailsDto> managerList = new ArrayList<>();
         for(ManagerMasterDo b: results) {
