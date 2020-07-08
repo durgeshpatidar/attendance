@@ -112,6 +112,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 
 	}
+
 //for displaying profile
 	@Override
 	public ResponseDto profileDetails(EmployeeDto employeeDto) {
@@ -121,8 +122,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
 		try {
-			ProfileDto profiledata = employeeDao.profileDetails(employeeDto);
-			responseDto.setData(profiledata);
+			ProfileDto profileData = employeeDao.profileDetails(employeeDto);
+			responseDto.setData(profileData);
 			responseDto.setMessage("Profile details displayed Successfully!");
 
 		} catch (Exception e) {
@@ -139,9 +140,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 
 	}
-
-	//
-
-	
 
 }
