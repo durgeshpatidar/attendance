@@ -12,48 +12,29 @@ import com.incture.attendance.entities.TrackingDo;
 @Repository("TrackingDaoImpl")
 public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements TrackingDao {
 
-	Session session = getSession();
 	@Override
 	public void addTracking(TrackingDto trackingdto) {
-		getSession().save(importDto(trackingdto));
-		
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void updateTracking(TrackingDto trackingdto) {
-		
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected TrackingDo importDto(TrackingDto trackingDto) {
-		TrackingDo entity= null;
-		entity.setId(trackingDto.getId());
-		entity.setAddressTracking(session.get(AddressDo.class, trackingDto.getAddressId()));
-		entity.setEmpTracking(session.get(EmployeeDo.class, trackingDto.getEmpId()));
-		entity.setCheckIn(null);
-		entity.setCheckOut(null);
-		entity.setDate(null);
-		entity.setTotalHours(null);
-		return entity;
-		
-		}
-	
+	protected TrackingDo importDto(TrackingDto fromDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	protected TrackingDto exportDto(TrackingDo entity) {
-		TrackingDto dto = null;
-		dto.setId(entity.getId());
-		dto.setAddressId(entity.getAddressTracking().getId());
-		dto.setEmpId(entity.getEmpTracking().getId());
-		dto.setCheckIn(null);
-		dto.setCheckOut(null);
-		dto.setTotalHours(null);
-		dto.setDate(null);
-		return dto;
+		// TODO Auto-generated method stub
+		return null;
 	}
-	//p
 
-
+	
 }
