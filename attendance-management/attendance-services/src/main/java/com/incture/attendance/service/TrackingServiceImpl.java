@@ -1,6 +1,7 @@
 package com.incture.attendance.service;
 
 import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import com.incture.attendance.utils.ResponseDto;
 public class TrackingServiceImpl implements TrackingService {
 	@Autowired
 	private TrackingDao trackingDao;
-
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
 	public ResponseDto addTracking(TrackingDto trackingDto) {
 		logger.info("TrackingServiceImpl | addTracking | Execution start input " + trackingDto);
