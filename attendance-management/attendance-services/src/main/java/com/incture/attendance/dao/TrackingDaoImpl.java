@@ -17,10 +17,9 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 	@Override
 	protected TrackingDo importDto(TrackingDto trackingDto) {
-		TrackingDo entity= null;
-		entity.setId(trackingDto.getId());
-		entity.setAddressTracking(getSession().get(AddressDo.class, trackingDto.getAddressId()));
-		entity.setEmpTracking(getSession().get(EmployeeDo.class, trackingDto.getEmpId()));
+		TrackingDo entity= new TrackingDo();
+		entity.setAddress(getSession().get(AddressDo.class, trackingDto.getAddressId()));
+		entity.setEmployee(getSession().get(EmployeeDo.class, trackingDto.getEmpId()));
 		entity.setCheckIn(trackingDto.getCheckIn());
 		entity.setCheckOut(trackingDto.getCheckIn());
 		entity.setDate(trackingDto.getDate());
@@ -31,10 +30,9 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 	@Override
 	protected TrackingDto exportDto(TrackingDo entity) {
-		TrackingDto dto = null;
-		dto.setId(entity.getId());
-		dto.setAddressId(entity.getAddressTracking().getId());
-		dto.setEmpId(entity.getEmpTracking().getId());
+		TrackingDto dto = new TrackingDto();
+		dto.setAddressId(entity.getAddress().getId());
+		dto.setEmpId(entity.getEmployee().getId());
 		dto.setCheckIn(entity.getCheckIn());
 		dto.setCheckOut(entity.getCheckOut());
 		dto.setTotalHours(entity.getTotalHours());

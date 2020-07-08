@@ -18,6 +18,7 @@ public class EmployeeMasterDto {
 	private String phoneNo;
 	private String profileImg;
 	private String status;
+	//Constructor
 	public EmployeeMasterDto() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -39,6 +40,8 @@ public class EmployeeMasterDto {
 		this.profileImg = profileImg;
 		this.status = status;
 	}
+	
+	//Getter and Setters
 	public String getId() {
 		return id;
 	}

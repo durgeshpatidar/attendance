@@ -38,6 +38,9 @@ public class EmployeeDo implements BaseDo {
 
 	@OneToMany(mappedBy = "employee")
 	private List<TrackingDo> empTrackings = new ArrayList<TrackingDo>();
+	
+	@OneToMany(mappedBy = "employee")
+	private List<WorkflowTaskDo> workflowTrackings = new ArrayList<WorkflowTaskDo>();
 
 	public EmployeeDo() {
 		super();

@@ -13,6 +13,8 @@ public class ProfileDto {
 	private String emailId;
 	private String phoneNo;
 	private String profileImg;
+	
+	//Constructor
 	public ProfileDto() {
 		super();
 	}
@@ -29,6 +31,8 @@ public class ProfileDto {
 		this.phoneNo = phoneNo;
 		this.profileImg = profileImg;
 	}
+	
+	//Getter and Setters
 	public String getId() {
 		return id;
 	}

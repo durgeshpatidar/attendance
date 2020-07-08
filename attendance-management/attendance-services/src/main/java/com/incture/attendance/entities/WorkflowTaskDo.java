@@ -32,11 +32,11 @@ public class WorkflowTaskDo implements BaseDo
 	
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_ID")
-	private EmployeeDo emp_tracking;
+	private EmployeeDo employee;
 	
 	@ManyToOne
 	@JoinColumn(name="MANAGER_ID")
-	private ManagerMasterDo manager_tracking;
+	private ManagerMasterDo manager;
 	
 	@Column(name = "REQUEST_DATE", columnDefinition = "DATE")
 	private Date requestdate;
@@ -49,29 +49,24 @@ public class WorkflowTaskDo implements BaseDo
 	
 	@Column(name = "COMMENT", columnDefinition = "NVARCHAR(200)")
 	private String comment;
-	
-	//Constructor
-	//
+
 	public WorkflowTaskDo() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
 
-	public WorkflowTaskDo(String id, EmployeeDo emp_tracking, ManagerMasterDo manager_tracking, Date requestdate, String description,
+	public WorkflowTaskDo(String id, EmployeeDo employee, ManagerMasterDo manager, Date requestdate, String description,
 			String status, String comment) {
 		super();
 		this.id = id;
-		this.emp_tracking = emp_tracking;
-		this.manager_tracking = manager_tracking;
+		this.employee = employee;
+		this.manager = manager;
 		this.requestdate = requestdate;
 		this.description = description;
 		this.status = status;
 		this.comment = comment;
-	
 	}
-	
 
-	//Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -80,20 +75,20 @@ public class WorkflowTaskDo implements BaseDo
 		this.id = id;
 	}
 
-	public EmployeeDo getEmp_tracking() {
-		return emp_tracking;
+	public EmployeeDo getEmployee() {
+		return employee;
 	}
 
-	public void setEmp_tracking(EmployeeDo emp_tracking) {
-		this.emp_tracking = emp_tracking;
+	public void setEmployee(EmployeeDo employee) {
+		this.employee = employee;
 	}
 
-	public ManagerMasterDo getManger_tracking() {
-		return manager_tracking;
+	public ManagerMasterDo getManager() {
+		return manager;
 	}
 
-	public void setManager_tracking(ManagerMasterDo manager_tracking) {
-		this.manager_tracking = manager_tracking;    
+	public void setManager(ManagerMasterDo manager) {
+		this.manager = manager;
 	}
 
 	public Date getRequestdate() {
@@ -128,6 +123,9 @@ public class WorkflowTaskDo implements BaseDo
 		this.comment = comment;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	
 }

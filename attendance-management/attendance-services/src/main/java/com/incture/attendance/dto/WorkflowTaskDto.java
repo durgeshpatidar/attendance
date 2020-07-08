@@ -3,11 +3,11 @@ package com.incture.attendance.dto;
 import java.util.Date;
 
 public class WorkflowTaskDto extends BaseDto {
-	private String id;
+
 	private String description;
 	private String empId;
 	private String managerId;
-	private Date requestdate;
+	private Date requestDate;
 	private String comment;
 	private String status;
 	
@@ -17,30 +17,24 @@ public class WorkflowTaskDto extends BaseDto {
 		super();
 
 	}
-	public WorkflowTaskDto(String id, String description, String empId, String mangerId, Date requestdate, String  comment, String status, String managerId) {
+	public WorkflowTaskDto(String description, String empId, String mangerId, Date requestdate, String  comment, String status, String managerId) {
 		super();
-		this.id = id;
+		
 		this.description = description;
 		this.empId = empId;
 		this.managerId = managerId;
-		this.requestdate = requestdate;
+		this.requestDate = requestdate;
 		this.comment = comment;
 		this.status = status;
 	}
 	
   //getters and setters
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	public String getEmpId() {
 		return empId;
 	}
 	public void setEmpId(String id) {
-		this.id = id;
+		this.empId = id;
 	}
 	public String getDescription() {
 		return description;
@@ -55,10 +49,10 @@ public class WorkflowTaskDto extends BaseDto {
 		this.managerId = managerId;
 	}
 	public Date getRequestdate() {
-		return requestdate;
+		return requestDate;
 	}
-	public void setRequestdate(Date requestdate) {
-		this.requestdate = requestdate;
+	public void setRequestdate(Date requestDate) {
+		this.requestDate = requestDate;
 	}
 	public String getComment() {
 		return comment;

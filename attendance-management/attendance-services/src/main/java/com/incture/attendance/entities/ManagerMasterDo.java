@@ -1,9 +1,13 @@
 //Manager Master Class
 package com.incture.attendance.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +31,10 @@ public class ManagerMasterDo {
 	
 	@Column(name = "MANAGER_TYPE", columnDefinition = "NVARCHAR(20)")
 	private String managerType;
+	
+	@OneToMany(mappedBy = "manager")
+	private List<WorkflowTaskDo> workflowTrackings = new ArrayList<WorkflowTaskDo>();
+
 	
 	//Constructor
 	public ManagerMasterDo() {

@@ -6,24 +6,21 @@ import java.util.Date;
 
 
 public class TrackingDto extends BaseDto {
-	
-private String id;
+
 	
 	private String empId;
 	private String addressId;
 	private Date date;
-	private Timestamp checkIn;
-	private Timestamp checkOut;
-	private Time totalHours;
-	//Constructor ha
+	private Date checkIn;
+	private Date checkOut;
+	private double totalHours;
+	//Constructor
 	public TrackingDto() {
 		super();
-		
+		// TODO Auto-generated constructor stub
 	}
-	public TrackingDto(String id, String empId, String addressId, Date date, Timestamp checkIn, Timestamp checkOut,
-			Time totalHours) {
+	public TrackingDto(String empId, String addressId, Date date, Date checkIn, Date checkOut, double totalHours) {
 		super();
-		this.id = id;
 		this.empId = empId;
 		this.addressId = addressId;
 		this.date = date;
@@ -32,12 +29,6 @@ private String id;
 		this.totalHours = totalHours;
 	}
 	//Getters and Setters
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getEmpId() {
 		return empId;
 	}
@@ -56,24 +47,24 @@ private String id;
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Timestamp getCheckIn() {
+	public Date getCheckIn() {
 		return checkIn;
 	}
-	public void setCheckIn(Timestamp checkIn) {
+	public void setCheckIn(Date checkIn) {
 		this.checkIn = checkIn;
 	}
-	public Timestamp getCheckOut() {
+	public Date getCheckOut() {
 		return checkOut;
 	}
-	public void setCheckOut(Timestamp checkOut) {
+	public void setCheckOut(Date checkOut) {
 		this.checkOut = checkOut;
 	}
-	public Time getTotalHours() {
+	public double getTotalHours() {
 		return totalHours;
 	}
-	public void setTotalHours(Time totalHours) {
+	public void setTotalHours(double totalHours) {
 		this.totalHours = totalHours;
 	}
 	
-
+	
 }
