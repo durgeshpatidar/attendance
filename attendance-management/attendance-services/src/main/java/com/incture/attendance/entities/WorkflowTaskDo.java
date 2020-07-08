@@ -36,7 +36,7 @@ public class WorkflowTaskDo implements BaseDo
 	
 	@ManyToOne
 	@JoinColumn(name="MANAGER_ID")
-	private AddressDo address_tracking;
+	private ManagerMasterDo manager_tracking;
 	
 	@Column(name = "REQUESTDATE", columnDefinition = "DATE")
 	private Date requestdate;
@@ -57,12 +57,12 @@ public class WorkflowTaskDo implements BaseDo
 		
 	}
 
-	public WorkflowTaskDo(String id, EmployeeDo emp_tracking, AddressDo address_tracking, Date requestdate, String descrption,
-			String status, String comment, String description) {
+	public WorkflowTaskDo(String id, EmployeeDo emp_tracking, ManagerMasterDo manager_tracking, Date requestdate, String description,
+			String status, String comment) {
 		super();
 		this.id = id;
 		this.emp_tracking = emp_tracking;
-		this.address_tracking = address_tracking;
+		this.manager_tracking = manager_tracking;
 		this.requestdate = requestdate;
 		this.description = description;
 		this.status = status;
@@ -88,12 +88,12 @@ public class WorkflowTaskDo implements BaseDo
 		this.emp_tracking = emp_tracking;
 	}
 
-	public AddressDo getAddress_tracking() {
-		return address_tracking;
+	public ManagerMasterDo getManger_tracking() {
+		return manager_tracking;
 	}
 
-	public void setAddress_tracking(AddressDo address_tracking) {
-		this.address_tracking = address_tracking;
+	public void setManager_tracking(ManagerMasterDo manager_tracking) {
+		this.manager_tracking = manager_tracking;    
 	}
 
 	public Date getRequestdate() {

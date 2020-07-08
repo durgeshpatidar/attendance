@@ -2,7 +2,7 @@ package com.incture.attendance.dto;
 
 import java.util.Date;
 
-public class WorkflowTaskDto {
+public class WorkflowTaskDto extends BaseDto {
 	private String id;
 	private String description;
 	private String empId;
