@@ -1,5 +1,7 @@
 package com.incture.attendance.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.incture.attendance.dao.EmployeeDao;
 import com.incture.attendance.dto.EmployeeDto;
+import com.incture.attendance.dto.ManagerDetailsDto;
 import com.incture.attendance.dto.ProfileDto;
 import com.incture.attendance.utils.ResponseDto;
 
@@ -138,6 +141,35 @@ public class EmployeeServiceImpl implements EmployeeService {
 		logger.info("ProfileDetails | Execution end ouput " + responseDto);
 
 		return responseDto;
+
+	}
+
+//for displaying manager details	
+	@Override
+	public ResponseDto managerDetails(EmployeeDto employeeDto) {
+		logger.info("ManagerDetails| Execution start input " + employeeDto);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			List<ManagerDetailsDto> manager = employeeDao.managerDetails(employeeDto);
+			responseDto.setData(manager);
+			responseDto.setMessage("Manager details displayed Successfully!");
+
+		} catch (Exception e) {
+
+			logger.error("ManagerDetails | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+
+		}
+
+		logger.info("ManagerDetails | Execution end ouput " + responseDto);
+
+		return responseDto;
+
 
 	}
 
