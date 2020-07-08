@@ -37,7 +37,7 @@ public class AddressDo implements BaseDo {
 	
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_ID") 
-	private EmployeeDo empId;
+	private EmployeeDo employee;
 	
 	@Column(name = "ADDRESS", columnDefinition = "VARCHAR(100)")
 	private String address;
@@ -63,7 +63,7 @@ public class AddressDo implements BaseDo {
 	@Column(name = "LOCATION_LON", columnDefinition = "DOUBLE")
 	private Double locationLon;
 	
-	@OneToMany(mappedBy="addressTracking")
+	@OneToMany(mappedBy="address")
 	private List<TrackingDo> addTrackings=new ArrayList<TrackingDo>();
 	
 	//Constructor
@@ -72,11 +72,11 @@ public class AddressDo implements BaseDo {
 		
 	}
 
-	public AddressDo(String id, EmployeeDo emp_id, String address, String city, String state, String pincode,
-			Date validTo, Date validFrom, Double locationLat, Double locationLon) {
+	public AddressDo(String id, EmployeeDo employee, String address, String city, String state, String pincode,
+			Date validTo, Date validFrom, Double locationLat, Double locationLon, List<TrackingDo> addTrackings) {
 		super();
 		this.id = id;
-		this.empId = emp_id;
+		this.employee = employee;
 		this.address = address;
 		this.city = city;
 		this.state = state;
@@ -85,9 +85,9 @@ public class AddressDo implements BaseDo {
 		this.validFrom = validFrom;
 		this.locationLat = locationLat;
 		this.locationLon = locationLon;
+		this.addTrackings = addTrackings;
 	}
-	
-	//Getters and Setters
+
 	public String getId() {
 		return id;
 	}
@@ -96,12 +96,12 @@ public class AddressDo implements BaseDo {
 		this.id = id;
 	}
 
-	public EmployeeDo getEmpId() {
-		return empId;
+	public EmployeeDo getEmployee() {
+		return employee;
 	}
 
-	public void setEmpId(EmployeeDo empId) {
-		this.empId = empId;
+	public void setEmployee(EmployeeDo employee) {
+		this.employee = employee;
 	}
 
 	public String getAddress() {
@@ -168,9 +168,17 @@ public class AddressDo implements BaseDo {
 		this.locationLon = locationLon;
 	}
 
+	public List<TrackingDo> getAddTrackings() {
+		return addTrackings;
+	}
+
+	public void setAddTrackings(List<TrackingDo> addTrackings) {
+		this.addTrackings = addTrackings;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	
 }

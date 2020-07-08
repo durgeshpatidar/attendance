@@ -81,7 +81,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	@Override
 	public ProfileDto profileDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
-		ProfileDto profileDto = null;
+		ProfileDto profileDto = new ProfileDto();
 		EmployeeMasterDo empMasterDto = getSession().get(EmployeeMasterDo.class, id);
 		profileDto.setId(empMasterDto.getId());
 		profileDto.setFirstName(empMasterDto.getFirstName());

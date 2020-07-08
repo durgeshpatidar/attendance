@@ -33,10 +33,10 @@ public class EmployeeDo implements BaseDo {
 	private String email;
 	// Column for face data
 
-	@OneToMany(mappedBy = "empId")
+	@OneToMany(mappedBy = "employee")
 	private List<AddressDo> address = new ArrayList<AddressDo>();
 
-	@OneToMany(mappedBy = "empTracking")
+	@OneToMany(mappedBy = "employee")
 	private List<TrackingDo> empTrackings = new ArrayList<TrackingDo>();
 
 	public EmployeeDo() {

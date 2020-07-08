@@ -1,7 +1,5 @@
 package com.incture.attendance.entities;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -34,23 +32,23 @@ public class TrackingDo implements BaseDo
 	
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_ID")
-	private EmployeeDo empTracking;
+	private EmployeeDo employee;
 	
 	@ManyToOne
 	@JoinColumn(name="ADDRESS_ID")
-	private AddressDo addressTracking;
+	private AddressDo address;
 	
 	@Column(name = "DATE", columnDefinition = "DATE")
 	private Date date;
 	
 	@Column(name = "CHECKIN", columnDefinition = "TIMESTAMP")
-	private Timestamp checkIn;
+	private Date checkIn;
 	
 	@Column(name = "CHECKOUT", columnDefinition = "TIMESTAMP")
-	private Timestamp checkOut;
+	private Date checkOut;
 	
 	@Column(name = "TOTAL_HOURS", columnDefinition = "TIME")
-	private Time totalHours;
+	private double totalHours;
 	
 	//Constructor
 	public TrackingDo() {
@@ -58,18 +56,6 @@ public class TrackingDo implements BaseDo
 		// TODO Auto-generated constructor stub
 	}
 
-	public TrackingDo(String id, EmployeeDo empTracking, AddressDo addressTracking, Date date, Timestamp checkIn,
-			Timestamp checkOut, Time totalHours) {
-		super();
-		this.id = id;
-		this.empTracking = empTracking;
-		this.addressTracking = addressTracking;
-		this.date = date;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-		this.totalHours = totalHours;
-	}
-	//Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -78,20 +64,20 @@ public class TrackingDo implements BaseDo
 		this.id = id;
 	}
 
-	public EmployeeDo getEmpTracking() {
-		return empTracking;
+	public EmployeeDo getEmployee() {
+		return employee;
 	}
 
-	public void setEmpTracking(EmployeeDo empTracking) {
-		this.empTracking = empTracking;
+	public void setEmployee(EmployeeDo employee) {
+		this.employee = employee;
 	}
 
-	public AddressDo getAddressTracking() {
-		return addressTracking;
+	public AddressDo getAddress() {
+		return address;
 	}
 
-	public void setAddressTracking(AddressDo addressTracking) {
-		this.addressTracking = addressTracking;
+	public void setAddress(AddressDo address) {
+		this.address = address;
 	}
 
 	public Date getDate() {
@@ -102,34 +88,44 @@ public class TrackingDo implements BaseDo
 		this.date = date;
 	}
 
-	public Timestamp getCheckIn() {
+	public Date getCheckIn() {
 		return checkIn;
 	}
 
-	public void setCheckIn(Timestamp checkIn) {
+	public void setCheckIn(Date checkIn) {
 		this.checkIn = checkIn;
 	}
 
-	public Timestamp getCheckOut() {
+	public Date getCheckOut() {
 		return checkOut;
 	}
 
-	public void setCheckOut(Timestamp checkOut) {
+	public void setCheckOut(Date checkOut) {
 		this.checkOut = checkOut;
 	}
 
-	public Time getTotalHours() {
+	public double getTotalHours() {
 		return totalHours;
 	}
 
-	public void setTotalHours(Time totalHours) {
+	public void setTotalHours(double totalHours) {
 		this.totalHours = totalHours;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-	
+
+	public TrackingDo(String id, EmployeeDo employee, AddressDo address, Date date, Date checkIn, Date checkOut,
+			double totalHours) {
+		super();
+		this.id = id;
+		this.employee = employee;
+		this.address = address;
+		this.date = date;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.totalHours = totalHours;
+	}
+
 }

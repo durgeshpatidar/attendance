@@ -38,7 +38,7 @@ public class WorkflowTaskDo implements BaseDo
 	@JoinColumn(name="MANAGER_ID")
 	private AddressDo address_tracking;
 	
-	@Column(name = "REQUESTDATE", columnDefinition = "DATE")
+	@Column(name = "REQUEST_DATE", columnDefinition = "DATE")
 	private Date requestdate;
 	
 	@Column(name = "DESCRIPTION", columnDefinition = "NVARCHAR(200)")
