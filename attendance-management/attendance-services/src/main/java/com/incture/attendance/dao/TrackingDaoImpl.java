@@ -13,27 +13,25 @@ import com.incture.attendance.entities.TrackingDo;
 @Repository("TrackingDaoImpl")
 public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements TrackingDao {
 
-	//Session session = getSession();
+	
 
 	@Override
 	protected TrackingDo importDto(TrackingDto trackingDto) {
-		/*TrackingDo entity= null;
+		TrackingDo entity= null;
 		entity.setId(trackingDto.getId());
-		entity.setAddressTracking(session.get(AddressDo.class, trackingDto.getAddressId()));
-		entity.setEmpTracking(session.get(EmployeeDo.class, trackingDto.getEmpId()));
+		entity.setAddressTracking(getSession().get(AddressDo.class, trackingDto.getAddressId()));
+		entity.setEmpTracking(getSession().get(EmployeeDo.class, trackingDto.getEmpId()));
 		entity.setCheckIn(trackingDto.getCheckIn());
 		entity.setCheckOut(trackingDto.getCheckIn());
 		entity.setDate(trackingDto.getDate());
 		entity.setTotalHours(trackingDto.getTotalHours());
 		return entity;
-		*/
-		return null;
 		}
 	
 
 	@Override
 	protected TrackingDto exportDto(TrackingDo entity) {
-		/*TrackingDto dto = null;
+		TrackingDto dto = null;
 		dto.setId(entity.getId());
 		dto.setAddressId(entity.getAddressTracking().getId());
 		dto.setEmpId(entity.getEmpTracking().getId());
@@ -42,13 +40,11 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		dto.setTotalHours(entity.getTotalHours());
 		dto.setDate(entity.getDate());
 		return dto;
-		*/
-		return null;
 	}
 	//For adding tracking
 	@Override
 	public void addTracking(TrackingDto trackingdto) {
-	//	getSession().save(importDto(trackingdto));
+	  getSession().save(importDto(trackingdto));
 		
 		
 	}
