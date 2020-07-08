@@ -54,7 +54,6 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	public void updateworklfowtask(WorkflowTaskDto workflowtaskdto) {
 		// TODO Auto-generated method stub
 		
-		//
 		
 	}
 }
