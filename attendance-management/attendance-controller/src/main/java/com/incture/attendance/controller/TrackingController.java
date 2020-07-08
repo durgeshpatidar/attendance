@@ -23,7 +23,7 @@ public class TrackingController {
 		return "Done";
 	}
 
-	@PostMapping("/add")
+	@PostMapping
 	public ResponseDto addTracking(@RequestBody TrackingDto trackingDto) {
 		return trackingService.addTracking(trackingDto);
 	}
