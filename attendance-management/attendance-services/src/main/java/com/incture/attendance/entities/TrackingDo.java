@@ -1,6 +1,7 @@
 package com.incture.attendance.entities;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -40,10 +41,10 @@ public class TrackingDo implements BaseDo
 	private Date date;
 	
 	@Column(name = "CHECKIN", columnDefinition = "TIMESTAMP")
-	private Time checkIn;
+	private Timestamp checkIn;
 	
 	@Column(name = "CHECKOUT", columnDefinition = "TIMESTAMP")
-	private Time checkOut;
+	private Timestamp checkOut;
 	
 	@Column(name = "TOTAL_HOURS", columnDefinition = "TIME")
 	private Time totalHours;
@@ -54,8 +55,8 @@ public class TrackingDo implements BaseDo
 		// TODO Auto-generated constructor stub
 	}
 
-	public TrackingDo(String id, EmployeeDo empTracking, AddressDo addressTracking, Date date, Time checkIn,
-			Time checkOut, Time totalHours) {
+	public TrackingDo(String id, EmployeeDo empTracking, AddressDo addressTracking, Date date, Timestamp checkIn,
+			Timestamp checkOut, Time totalHours) {
 		super();
 		this.id = id;
 		this.empTracking = empTracking;
@@ -98,19 +99,19 @@ public class TrackingDo implements BaseDo
 		this.date = date;
 	}
 
-	public Time getCheckIn() {
+	public Timestamp getCheckIn() {
 		return checkIn;
 	}
 
-	public void setCheckIn(Time checkIn) {
+	public void setCheckIn(Timestamp checkIn) {
 		this.checkIn = checkIn;
 	}
 
-	public Time getCheckOut() {
+	public Timestamp getCheckOut() {
 		return checkOut;
 	}
 
-	public void setCheckOut(Time checkOut) {
+	public void setCheckOut(Timestamp checkOut) {
 		this.checkOut = checkOut;
 	}
 
@@ -125,7 +126,7 @@ public class TrackingDo implements BaseDo
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	//pp
+	
 	
 	
 }

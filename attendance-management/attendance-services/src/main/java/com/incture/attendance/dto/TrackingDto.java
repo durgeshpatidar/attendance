@@ -1,6 +1,7 @@
 package com.incture.attendance.dto;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -11,15 +12,15 @@ private String id;
 	private String empId;
 	private String addressId;
 	private Date date;
-	private Time checkIn;
-	private Time checkOut;
+	private Timestamp checkIn;
+	private Timestamp checkOut;
 	private Time totalHours;
 	//Constructor
 	public TrackingDto() {
 		super();
 		
 	}
-	public TrackingDto(String id, String empId, String addressId, Date date, Time checkIn, Time checkOut,
+	public TrackingDto(String id, String empId, String addressId, Date date, Timestamp checkIn, Timestamp checkOut,
 			Time totalHours) {
 		super();
 		this.id = id;
@@ -55,16 +56,16 @@ private String id;
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Time getCheckIn() {
+	public Timestamp getCheckIn() {
 		return checkIn;
 	}
-	public void setCheckIn(Time checkIn) {
+	public void setCheckIn(Timestamp checkIn) {
 		this.checkIn = checkIn;
 	}
-	public Time getCheckOut() {
+	public Timestamp getCheckOut() {
 		return checkOut;
 	}
-	public void setCheckOut(Time checkOut) {
+	public void setCheckOut(Timestamp checkOut) {
 		this.checkOut = checkOut;
 	}
 	public Time getTotalHours() {
@@ -74,5 +75,5 @@ private String id;
 		this.totalHours = totalHours;
 	}
 	
-	//p
+
 }
