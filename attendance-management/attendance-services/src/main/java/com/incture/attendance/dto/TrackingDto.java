@@ -15,7 +15,7 @@ private String id;
 	private Timestamp checkIn;
 	private Timestamp checkOut;
 	private Time totalHours;
-	//Constructor h
+	//Constructor ha
 	public TrackingDto() {
 		super();
 		
