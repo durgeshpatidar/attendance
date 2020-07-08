@@ -101,11 +101,25 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	}
 //For displaying manager details
 	@Override
-	public ManagerDetailsDto managerDetails(EmployeeDto employeeDto) {
+	public List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
-		
+		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
+        crit.add(Restrictions.eq("employeeId",id));
+        crit.add(Restrictions.neOrIsNotNull("endDate", "9999-12-12"));
+        List<ManagerMasterDo> results = crit.list();
+        List<ManagerDetailsDto> managerList = new ArrayList<>();
+        for(ManagerMasterDo b: results) {
+        	ManagerDetailsDto manager = new ManagerDetailsDto();
+        	EmployeeMasterDo empMasterDto = getSession().get(EmployeeMasterDo.class, b.getManagerId());
+        	manager.setFirstName(empMasterDto.getFirstName());
+        	manager.setLastName(empMasterDto.getLastName());
+        	manager.setManagerType(b.getManagerType());
+        	managerList.add(manager);
+        	
+        	
+        }
         
-		
+		return managerList;
 	}
 
 	
