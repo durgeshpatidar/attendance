@@ -12,48 +12,43 @@ import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
 import javax.persistence.Query;
 
-
-@Repository("WorkflowTaskDaoImpl")   
+@Repository("WorkflowTaskDaoImpl")
 public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto> implements WorkflowTaskDao {
-	Session session = getSession();
-
 
 	@Override
 	protected WorkflowTaskDo importDto(WorkflowTaskDto workflowtaskDto) {
 		WorkflowTaskDo entity = null;
-		entity.setId(workflowtaskDto.getId());
-		entity.setManager_tracking(session.get(ManagerMasterDo.class,workflowtaskDto.getManagerId()));
-		entity.setEmp_tracking(session.get(EmployeeDo.class, workflowtaskDto.getEmpId()));
+		entity.setManager(getSession().get(ManagerMasterDo.class, workflowtaskDto.getManagerId()));
+		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
 		entity.setComment(workflowtaskDto.getComment());
 		entity.setDescription(workflowtaskDto.getDescription());
 		entity.setRequestdate(workflowtaskDto.getRequestdate());
-		entity.setStatus(workflowtaskDto.getStatus());	
+		entity.setStatus(workflowtaskDto.getStatus());
 		return entity;
-		
-		}
-	
+
+	}
+
 	@Override
 	protected WorkflowTaskDto exportDto(WorkflowTaskDo entity) {
 		WorkflowTaskDto dto = null;
-		dto.setId(entity.getId());
-		dto.setEmpId(entity.getEmp_tracking().getId());
-		dto.setManagerId(entity.getManger_tracking().getId());
+		dto.setEmpId(entity.getEmployee().getId());
+		dto.setManagerId(entity.getManager().getId());
 		dto.setDescription(entity.getDescription());
 		dto.setStatus(entity.getStatus());
 		dto.setRequestdate(entity.getRequestdate());
 		dto.setComment(entity.getComment());
 		return dto;
 	}
+
 	@Override
-	public void addworkflowtask(WorkflowTaskDto workflowtaskdto) {
+	public void addWorkflowTask(WorkflowTaskDto workflowtaskdto) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateworklfowtask(WorkflowTaskDto workflowtaskdto) {
+	public void updateWorkflowTask(WorkflowTaskDto workflowtaskdto) {
 		// TODO Auto-generated method stub
 		
 	}
 }
-

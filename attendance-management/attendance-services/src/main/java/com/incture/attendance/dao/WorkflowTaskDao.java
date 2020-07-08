@@ -4,8 +4,8 @@ import com.incture.attendance.dto.WorkflowTaskDto;
 
 public interface WorkflowTaskDao {
 	
-	void addworkflowtask(WorkflowTaskDto workflowtaskdto);
+	void addWorkflowTask(WorkflowTaskDto workflowtaskdto);
 
-	void updateworklfowtask(WorkflowTaskDto workflowtaskdto);
+	void updateWorkflowTask(WorkflowTaskDto workflowtaskdto);
 
 }
