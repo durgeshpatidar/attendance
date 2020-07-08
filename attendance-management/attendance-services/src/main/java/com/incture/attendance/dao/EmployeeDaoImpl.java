@@ -1,17 +1,23 @@
 package com.incture.attendance.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
 
 import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.EmployeeMasterDto;
+import com.incture.attendance.dto.ManagerDetailsDto;
 import com.incture.attendance.dto.ProfileDto;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
-
+import com.incture.attendance.entities.ManagerMasterDo;
+import com.incture.attendance.dto.ManagerMasterDto;
 
 @Repository("EmployeeDaoImpl")
 public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements EmployeeDao {
@@ -91,7 +97,15 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		profileDto.setEmailId(empMasterDto.getEmailId());
 		profileDto.setProfileImg(empMasterDto.getProfileImg());
 		return profileDto;
-//
+
+	}
+//For displaying manager details
+	@Override
+	public ManagerDetailsDto managerDetails(EmployeeDto employeeDto) {
+		String id = employeeDto.getId();
+		
+        
+		
 	}
 
 	

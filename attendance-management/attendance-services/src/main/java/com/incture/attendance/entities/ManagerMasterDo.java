@@ -2,6 +2,7 @@
 package com.incture.attendance.entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,10 +25,10 @@ public class ManagerMasterDo {
 	private String managerId;
 	
 	@Column(name = "START_DATE", columnDefinition = "DATE")
-	private String startDate;
+	private Date startDate;
 	
 	@Column(name = "END_DATE", columnDefinition = "DATE")
-	private String endDate;
+	private Date endDate;
 	
 	@Column(name = "MANAGER_TYPE", columnDefinition = "NVARCHAR(20)")
 	private String managerType;
@@ -35,15 +36,13 @@ public class ManagerMasterDo {
 	@OneToMany(mappedBy = "manager")
 	private List<WorkflowTaskDo> workflowTrackings = new ArrayList<WorkflowTaskDo>();
 
-	
 	//Constructor
 	public ManagerMasterDo() {
 		super();
-		
 	}
-	
-	public ManagerMasterDo(String id, String employeeId, String managerId, String startDate, String endDate,
-			String managerType) {
+
+	public ManagerMasterDo(String id, String employeeId, String managerId, Date startDate, Date endDate,
+			String managerType, List<WorkflowTaskDo> workflowTrackings) {
 		super();
 		this.id = id;
 		this.employeeId = employeeId;
@@ -51,9 +50,9 @@ public class ManagerMasterDo {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.managerType = managerType;
+		this.workflowTrackings = workflowTrackings;
 	}
-	
-	//Getters and Setters
+//Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -78,19 +77,19 @@ public class ManagerMasterDo {
 		this.managerId = managerId;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -101,6 +100,16 @@ public class ManagerMasterDo {
 	public void setManagerType(String managerType) {
 		this.managerType = managerType;
 	}
+
+	public List<WorkflowTaskDo> getWorkflowTrackings() {
+		return workflowTrackings;
+	}
+
+	public void setWorkflowTrackings(List<WorkflowTaskDo> workflowTrackings) {
+		this.workflowTrackings = workflowTrackings;
+	}
+
+	
 	
 	
 	
