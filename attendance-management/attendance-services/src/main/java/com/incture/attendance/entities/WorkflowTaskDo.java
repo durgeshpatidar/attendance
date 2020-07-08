@@ -50,9 +50,8 @@ public class WorkflowTaskDo implements BaseDo
 	@Column(name = "COMMENT", columnDefinition = "NVARCHAR(200)")
 	private String comment;
 	
-	
-	
 	//Constructor
+	//
 	public WorkflowTaskDo() {
 		super();
 		
