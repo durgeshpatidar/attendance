@@ -109,10 +109,12 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
         crit.add(Restrictions.eq("employeeId",id));
         crit.add(Restrictions.eq("endDate", d));
         List<ManagerMasterDo> results = crit.list();
+        System.out.println(results);
         List<ManagerDetailsDto> managerList = new ArrayList<>();
         for(ManagerMasterDo b: results) {
         	ManagerDetailsDto manager = new ManagerDetailsDto();
         	EmployeeMasterDo empMasterDto = getSession().get(EmployeeMasterDo.class, b.getManagerId());
+        	System.out.println(empMasterDto);
         	manager.setFirstName(empMasterDto.getFirstName());
         	manager.setLastName(empMasterDto.getLastName());
         	manager.setManagerType(b.getManagerType());
