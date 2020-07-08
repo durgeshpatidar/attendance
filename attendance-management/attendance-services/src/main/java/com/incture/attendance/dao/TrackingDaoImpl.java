@@ -13,7 +13,7 @@ import com.incture.attendance.entities.TrackingDo;
 @Repository("TrackingDaoImpl")
 public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements TrackingDao {
 
-	Session session = getSession();
+	//Session session = getSession();
 
 	@Override
 	protected TrackingDo importDto(TrackingDto trackingDto) {
