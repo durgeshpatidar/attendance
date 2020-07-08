@@ -37,8 +37,8 @@ public class EmployeeMasterDo {
 	@Column(name = "RESIGNING_DATE", columnDefinition = "DATE")
 	private Date resigningDate;
 	
-	@Column(name = "EMAIL_ID", columnDefinition = "NVARCHAR(100)")
-	private String emailId;
+	@Column(name = "EMAIL", columnDefinition = "NVARCHAR(100)")
+	private String email;
 	
 	@Column(name = "PHONE_NO", columnDefinition = "NVARCHAR(20)")
 	private String phoneNo;
@@ -67,7 +67,7 @@ public class EmployeeMasterDo {
 		this.bloodGroup = bloodGroup;
 		this.joiningDate = joiningDate;
 		this.resigningDate = resigningDate;
-		this.emailId = emailId;
+		this.email = emailId;
 		this.phoneNo = phoneNo;
 		this.profileImg = profileImg;
 		this.status = status;
@@ -139,11 +139,11 @@ public class EmployeeMasterDo {
 	}
 
 	public String getEmailId() {
-		return emailId;
+		return email;
 	}
 
 	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+		this.email = emailId;
 	}
 
 	public String getPhoneNo() {
