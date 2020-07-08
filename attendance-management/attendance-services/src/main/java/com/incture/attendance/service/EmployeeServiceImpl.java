@@ -63,11 +63,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
-		boolean status = employeeDao.isValidUser(employeeDto);
-		if (status == true) {
-			responseDto.setMessage("Employee Is Valid");
+		try {
+			boolean status = employeeDao.isValidUser(employeeDto);
+			if (status == true) {
+				responseDto.setMessage("Employee Is Valid");
 
-		} else {
+			} else {
+				responseDto.setStatus(Boolean.FALSE);
+				responseDto.setStatusCode(500);
+				responseDto.setMessage("Employee Does Not Exist In Company Or Entering Email Is Wrong");
+			}
+		} catch (Exception e) {
+			logger.error("EmployeeServiceImpl | isValidUser | Exception " + e.getMessage());
 			responseDto.setStatus(Boolean.FALSE);
 			responseDto.setStatusCode(500);
 			responseDto.setMessage("Employee Does Not Exist In Company Or Entering Email Is Wrong");
@@ -85,8 +92,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
-		employeeDao.isValidUser(employeeDto);
 		try {
+			employeeDao.isValidUser(employeeDto);
 			employeeDao.saveEmployeeData(employeeDto);
 			responseDto.setMessage("Employee Details Saved Successfully!");
 
