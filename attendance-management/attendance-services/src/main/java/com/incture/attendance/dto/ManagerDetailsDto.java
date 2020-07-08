@@ -1,41 +1,34 @@
 package com.incture.attendance.dto;
 
 public class ManagerDetailsDto {
-	private String managerName;
-	private String startDate;
-	private String endDate;
+	
+	private String firstName;
+	private String lastName;
 	private String managerType;
 	
 	//Constructor
 	public ManagerDetailsDto() {
 		super();
 	}
-	public ManagerDetailsDto(String managerName, String startDate, String endDate, String managerType) {
+	public ManagerDetailsDto(String firstName, String lastName, String managerType) {
 		super();
-		this.managerName = managerName;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.managerType = managerType;
 	}
 	
 	//Getters and Setters
-	public String getManagerName() {
-		return managerName;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setManagerName(String managerName) {
-		this.managerName = managerName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getStartDate() {
-		return startDate;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-	public String getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getManagerType() {
 		return managerType;
@@ -43,6 +36,8 @@ public class ManagerDetailsDto {
 	public void setManagerType(String managerType) {
 		this.managerType = managerType;
 	}
+	
+	
 	
 	
 
