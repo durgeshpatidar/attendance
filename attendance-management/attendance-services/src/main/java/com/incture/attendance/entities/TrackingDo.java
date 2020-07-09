@@ -47,7 +47,7 @@ public class TrackingDo implements BaseDo
 	@Column(name = "CHECKOUT", columnDefinition = "TIMESTAMP")
 	private Date checkOut;
 	
-	@Column(name = "TOTAL_HOURS", columnDefinition = "TIME")
+	@Column(name = "TOTAL_HOURS", columnDefinition = "DOUBLE")
 	private double totalHours;
 	
 	//Constructor
