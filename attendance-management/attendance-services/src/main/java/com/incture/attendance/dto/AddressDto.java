@@ -98,5 +98,5 @@ public class AddressDto extends BaseDto{
 		this.locationLon = locationLon;
 	}
 	
-	
+	//
 }
