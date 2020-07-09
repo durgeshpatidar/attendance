@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.TrackingDetailsDto;
 import com.incture.attendance.dto.TrackingDto;
+import com.incture.attendance.dto.TrackingInputDto;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.TrackingDo;
@@ -60,8 +61,8 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 
 	@Override
-	public List<TrackingDetailsDto> getTrackingDetails(EmployeeDto employeeDto) {
-		String empId = employeeDto.getId();
+	public List<TrackingDetailsDto> getTrackingDetails(TrackingInputDto tdto) {
+		//String empId = employeeDto.getId();
 		//List<TrackingDto> trackings = getSession().get(entityType, id);
 		return null;
 	}
