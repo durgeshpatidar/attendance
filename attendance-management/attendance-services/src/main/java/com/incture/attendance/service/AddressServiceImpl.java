@@ -19,10 +19,31 @@ public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressDao addressDao;
+
 	@Override
 	public ResponseDto addAddress(AddressDto addressDto) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.info("AddressServiceImpl | addAddress | Execution start input " + addressDto);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			addressDao.addAddress(addressDto);
+			responseDto.setMessage("Address Send For Approval");
+
+		} catch (Exception e) {
+
+			logger.error("AddressServiceImpl | addAddress | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+
+		}
+
+		logger.info("AddressServiceImpl | addAddress  | Execution end ouput " + responseDto);
+
+		return responseDto;
+
 	}
 
 }

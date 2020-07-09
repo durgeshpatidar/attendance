@@ -18,7 +18,8 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 			entity.setLocationLat(addressDto.getLocationLat());
 			entity.setPincode(addressDto.getPincode());
 			entity.setState(addressDto.getState());
-			
+			entity.setValidFrom(addressDto.getValidFrom());
+			entity.setValidTo(addressDto.getValidTo());
 		}
 		return entity;
 	}
@@ -28,15 +29,21 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		AddressDto dto = null;
 		if (addressDo != null) {
 			dto = new AddressDto();
-			
+			dto.setAddress(addressDo.getAddress());
+			dto.setCity(addressDo.getCity());
+			dto.setState(addressDo.getState());
+			dto.setLocationLat(addressDo.getLocationLat());
+			dto.setLocationLon(addressDo.getLocationLon());
+			dto.setPincode(addressDo.getPincode());
+			dto.setValidFrom(addressDo.getValidFrom());
+			dto.setValidTo(addressDo.getValidTo());
 		}
 		return dto;
 	}
 
 	@Override
-	public void addTracking(AddressDto addressdto) {
-		// TODO Auto-generated method stub
-		
+	public void addAddress(AddressDto addressdto) {
+		getSession().save(importDto(addressdto));
 	}
 
 }
