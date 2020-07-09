@@ -17,7 +17,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 
 	@Override
 	protected WorkflowTaskDo importDto(WorkflowTaskDto workflowtaskDto) {
-		WorkflowTaskDo entity = null;
+		WorkflowTaskDo entity = new WorkflowTaskDo();
 		entity.setManager(getSession().get(ManagerMasterDo.class, workflowtaskDto.getManagerId()));
 		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
 		entity.setComment(workflowtaskDto.getComment());
@@ -30,7 +30,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 
 	@Override
 	protected WorkflowTaskDto exportDto(WorkflowTaskDo entity) {
-		WorkflowTaskDto dto = null;
+		WorkflowTaskDto dto = new WorkflowTaskDto();
 		dto.setEmpId(entity.getEmployee().getId());
 		dto.setManagerId(entity.getManager().getId());
 		dto.setDescription(entity.getDescription());
