@@ -1,5 +1,7 @@
 package com.incture.attendance.dao;
 
-public interface AddressDao {
+import com.incture.attendance.dto.AddressDto;
 
+public interface AddressDao {
+	void addTracking(AddressDto addressdto);
 }

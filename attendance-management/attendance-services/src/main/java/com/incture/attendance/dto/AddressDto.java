@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 
-public class AddressDto {
+public class AddressDto extends BaseDto{
 
 	private String empId;
 	private String address;
