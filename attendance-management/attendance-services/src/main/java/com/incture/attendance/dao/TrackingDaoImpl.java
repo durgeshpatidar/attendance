@@ -62,7 +62,8 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	@Override
 	public List<TrackingDetailsDto> getTrackingDetails(EmployeeDto employeeDto) {
 		String empId = employeeDto.getId();
-		List<TrackingDto> trackings = getSession().get(entityType, id)
+		//List<TrackingDto> trackings = getSession().get(entityType, id);
+		return null;
 	}
 
 }
