@@ -2,8 +2,13 @@ package com.incture.attendance.dao;
 
 
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
 import org.hibernate.Session;
 
+import com.incture.attendance.dto.EmployeeDto;
+import com.incture.attendance.dto.TrackingDetailsDto;
 import com.incture.attendance.dto.TrackingDto;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
@@ -51,6 +56,13 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	public void updateTracking(TrackingDto trackingdto) {
 		
 		
+	}
+
+
+	@Override
+	public List<TrackingDetailsDto> getTrackingDetails(EmployeeDto employeeDto) {
+		String empId = employeeDto.getId();
+		List<TrackingDto> trackings = getSession().get(entityType, id)
 	}
 
 }
