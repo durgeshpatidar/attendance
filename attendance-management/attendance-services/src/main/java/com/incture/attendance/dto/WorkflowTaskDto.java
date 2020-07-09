@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class WorkflowTaskDto extends BaseDto {
 
+	private String id;
 	private String description;
 	private String empId;
 	private String managerId;
@@ -17,9 +18,9 @@ public class WorkflowTaskDto extends BaseDto {
 		super();
 
 	}
-	public WorkflowTaskDto(String description, String empId, String mangerId, Date requestdate, String  comment, String status, String managerId) {
+	public WorkflowTaskDto(String id, String description, String empId, String mangerId, Date requestdate, String  comment, String status, String managerId) {
 		super();
-		
+		this.id = id;
 		this.description = description;
 		this.empId = empId;
 		this.managerId = managerId;
@@ -30,8 +31,21 @@ public class WorkflowTaskDto extends BaseDto {
 	
   //getters and setters
 
+	
 	public String getEmpId() {
 		return empId;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Date getRequestDate() {
+		return requestDate;
+	}
+	public void setRequestDate(Date requestDate) {
+		this.requestDate = requestDate;
 	}
 	public void setEmpId(String id) {
 		this.empId = id;
