@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.AddressDto;
 import com.incture.attendance.entities.AddressDo;
+import com.incture.attendance.entities.EmployeeDo;
 
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
@@ -12,6 +13,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		AddressDo entity = null;
 		if (addressDto != null) {
 			entity = new AddressDo();
+			entity.setId(addressDto.getId());
 			entity.setAddress(addressDto.getAddress());
 			entity.setCity(addressDto.getCity());
 			entity.setLocationLon(addressDto.getLocationLon());
@@ -20,6 +22,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 			entity.setState(addressDto.getState());
 			entity.setValidFrom(addressDto.getValidFrom());
 			entity.setValidTo(addressDto.getValidTo());
+			entity.setEmployee(getSession().get(EmployeeDo.class, addressDto.getEmpId()));
 		}
 		return entity;
 	}
@@ -29,6 +32,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		AddressDto dto = null;
 		if (addressDo != null) {
 			dto = new AddressDto();
+			dto.setId(addressDo.getId());
 			dto.setAddress(addressDo.getAddress());
 			dto.setCity(addressDo.getCity());
 			dto.setState(addressDo.getState());
@@ -37,6 +41,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 			dto.setPincode(addressDo.getPincode());
 			dto.setValidFrom(addressDo.getValidFrom());
 			dto.setValidTo(addressDo.getValidTo());
+			dto.setEmpId(addressDo.getEmployee().getId());
 		}
 		return dto;
 	}

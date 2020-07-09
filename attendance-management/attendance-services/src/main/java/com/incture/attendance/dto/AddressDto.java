@@ -6,6 +6,7 @@ import javax.persistence.Column;
 
 public class AddressDto extends BaseDto{
 
+	private String id;
 	private String empId;
 	private String address;
 	private String city;
@@ -20,9 +21,10 @@ public class AddressDto extends BaseDto{
 	public AddressDto() {
 		super();
 	}
-	public AddressDto(String empId, String address, String city, String state, String pincode, Date validTo,
+	public AddressDto(String id,String empId, String address, String city, String state, String pincode, Date validTo,
 			Date validFrom, Double locationLat, Double locationLon) {
 		super();
+		this.id = id;
 		this.empId = empId;
 		this.address = address;
 		this.city = city;
@@ -34,8 +36,15 @@ public class AddressDto extends BaseDto{
 		this.locationLon = locationLon;
 	}
 	//Getters and Setters
+	
 	public String getEmpId() {
 		return empId;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public void setEmpId(String empId) {
 		this.empId = empId;
