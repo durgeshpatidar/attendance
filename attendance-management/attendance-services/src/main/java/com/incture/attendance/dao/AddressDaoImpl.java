@@ -3,9 +3,7 @@ package com.incture.attendance.dao;
 import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.AddressDto;
-import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.entities.AddressDo;
-import com.incture.attendance.entities.EmployeeDo;
 
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
