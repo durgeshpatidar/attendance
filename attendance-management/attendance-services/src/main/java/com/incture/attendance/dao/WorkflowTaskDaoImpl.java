@@ -42,7 +42,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 
 	@Override
 	public void addWorkflowTask(WorkflowTaskDto workflowtaskdto) {
-		// TODO Auto-generated method stub
+		 getSession().save(importDto(workflowtaskdto));
 		
 	}
 
