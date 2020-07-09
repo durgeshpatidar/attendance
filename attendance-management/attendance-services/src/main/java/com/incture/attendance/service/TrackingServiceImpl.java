@@ -13,6 +13,7 @@ import com.incture.attendance.dao.TrackingDao;
 import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.TrackingDetailsDto;
 import com.incture.attendance.dto.TrackingDto;
+import com.incture.attendance.dto.TrackingInputDto;
 import com.incture.attendance.utils.ResponseDto;
 
 @Service
@@ -48,15 +49,15 @@ public class TrackingServiceImpl implements TrackingService {
 	}
 
 	@Override
-	public ResponseDto getTrackingDetails(EmployeeDto employeeDto) {
+	public ResponseDto getTrackingDetails(TrackingInputDto trackingInputDto) {
 
-		logger.info("TrackingServiceImpl | getTrackingDetails | Execution start input " + employeeDto);
+		logger.info("TrackingServiceImpl | getTrackingDetails | Execution start input " + trackingInputDto);
 
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
 		try {
-			List<TrackingDetailsDto> trackings = trackingDao.getTrackingDetails(employeeDto);
+			List<TrackingDetailsDto> trackings = trackingDao.getTrackingDetails(trackingInputDto);
 			responseDto.setData(trackings);
 			responseDto.setMessage("Tracking details");
 

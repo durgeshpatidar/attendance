@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.incture.attendance.dto.TrackingDto;
+import com.incture.attendance.dto.TrackingInputDto;
 import com.incture.attendance.service.TrackingService;
 import com.incture.attendance.utils.ResponseDto;
 
@@ -18,15 +19,16 @@ public class TrackingController {
 	@Autowired
 	private TrackingService trackingService;
 
-	@GetMapping
-	public String TestApi() {
-		return "Done";
-	}
 
 	@PostMapping
 	public ResponseDto addTracking(@RequestBody TrackingDto trackingDto) {
 		return trackingService.addTracking(trackingDto);
 		
+	}
+
+	@GetMapping
+	public ResponseDto getTrackingDetails(TrackingInputDto trackingInputDto) {
+		return trackingService.getTrackingDetails(trackingInputDto);
 	}
 
 }
