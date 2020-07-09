@@ -119,7 +119,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	// for displaying profile
 	@Override
 	public ResponseDto profileDetails(EmployeeDto employeeDto) {
-		logger.info("ProfileDetails| Execution start input " + employeeDto);
+		logger.info("EmployeeServiceImpl | profileDetails| Execution start input " + employeeDto);
 
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
@@ -131,14 +131,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		} catch (Exception e) {
 
-			logger.error("ProfileDetails| Exception " + e.getMessage());
+			logger.error("EmployeeServiceImpl | profileDetails| Exception " + e.getMessage());
 			responseDto.setStatus(Boolean.FALSE);
 			responseDto.setStatusCode(500);
 			responseDto.setMessage(e.getMessage());
 
 		}
 
-		logger.info("ProfileDetails | Execution end ouput " + responseDto);
+		logger.info("EmployeeServiceImpl | profileDetails | Execution end ouput " + responseDto);
 
 		return responseDto;
 
@@ -147,7 +147,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 //for displaying manager details	
 	@Override
 	public ResponseDto managerDetails(EmployeeDto employeeDto) {
-		logger.info("ManagerDetails| Execution start input " + employeeDto);
+		logger.info("EmployeeServiceImpl |  managerDetails| Execution start input " + employeeDto);
 
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
@@ -159,14 +159,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		} catch (Exception e) {
 
-			logger.error("ManagerDetails | Exception " + e.getMessage());
+			logger.error("EmployeeServiceImpl | managerDetails | Exception " + e.getMessage());
 			responseDto.setStatus(Boolean.FALSE);
 			responseDto.setStatusCode(500);
 			responseDto.setMessage(e.getMessage());
 
 		}
 
-		logger.info("ManagerDetails | Execution end ouput " + responseDto);
+		logger.info("EmployeeServiceImpl | managerDetails | Execution end ouput " + responseDto);
 
 		return responseDto;
 
