@@ -24,7 +24,7 @@ public class AddressController {
 	}
 
 	@PostMapping
-	public ResponseDto addTracking(@RequestBody AddressDto addressDto) {
+	public ResponseDto addAddress(@RequestBody AddressDto addressDto) {
 		return addressService.addAddress(addressDto);
 		
 	}
