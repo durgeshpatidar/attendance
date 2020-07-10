@@ -1,14 +1,16 @@
 package com.incture.attendance.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.incture.attendance.dto.TrackingDto;
-import com.incture.attendance.dto.TrackingInputDto;
 import com.incture.attendance.service.TrackingService;
 import com.incture.attendance.utils.ResponseDto;
 
@@ -26,9 +28,11 @@ public class TrackingController {
 		
 	}
 
-	@GetMapping
-	public ResponseDto getTrackingDetails(TrackingInputDto trackingInputDto) {
-		return trackingService.getTrackingDetails(trackingInputDto);
+	@GetMapping("/getTrackingdetails")
+	public ResponseDto getTrackingDetails(@RequestParam String id,
+			@RequestParam Date start,
+			@RequestParam Date end) {
+		return trackingService.getTrackingDetails(id,start,end);
 	}
 
 }
