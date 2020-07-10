@@ -67,14 +67,30 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		//Getting tracking details in between start and end date
 		@SuppressWarnings("deprecation")
 		Criteria criteria=getSession().createCriteria(TrackingDo.class);
-		criteria.add(Restrictions.eq("employeeId",id));
-		criteria.add(Restrictions.between("date", start, end));
+		if(start!= null && end!= null) {
+			
+			criteria.add(Restrictions.eq("employeeId",id));
+			criteria.add(Restrictions.between("date", start, end));	
+		}
+		else if(start== null && end!= null) {
+			
+			criteria.add(Restrictions.eq("employeeId",id));
+			criteria.add(Restrictions.ge("date", start));	
+		}
+		else if(start!=null && end==null) {
+
+			criteria.add(Restrictions.eq("employeeId",id));
+			criteria.add(Restrictions.le("date", end));	
+		}
+		else {
+			criteria.add(Restrictions.eq("employeeId",id));
+		}
 		@SuppressWarnings("unchecked")
 		List<TrackingDo> trackings = criteria.list();
 		//Getting employee name
 		@SuppressWarnings("deprecation")
 		Criteria crit=getSession().createCriteria(EmployeeMasterDo.class);
-		criteria.add(Restrictions.eq("employeeId",id));
+		crit.add(Restrictions.eq("employeeId",id));
 		EmployeeMasterDo emp =(EmployeeMasterDo)crit.uniqueResult();
 		List<TrackingDetailsDto> history = new ArrayList<>();
 		
