@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.incture.attendance.dto.TrackingDto;
@@ -29,6 +30,7 @@ public class TrackingController {
 	}
 
 	@GetMapping("/getTrackingdetails")
+	 @ResponseBody
 	public ResponseDto getTrackingDetails(@RequestParam String id,
 			@RequestParam Date start,
 			@RequestParam Date end) {
