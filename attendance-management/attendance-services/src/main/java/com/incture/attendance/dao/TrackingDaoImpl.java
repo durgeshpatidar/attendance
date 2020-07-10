@@ -85,7 +85,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		//Getting employee name
 		@SuppressWarnings("deprecation")
 		Criteria crit=getSession().createCriteria(EmployeeMasterDo.class);
-		crit.add(Restrictions.eq("employeeId",id));
+		crit.add(Restrictions.eq("id",id));
 		EmployeeMasterDo emp =(EmployeeMasterDo)crit.uniqueResult();
 		List<TrackingDetailsDto> history = new ArrayList<>();
 		
