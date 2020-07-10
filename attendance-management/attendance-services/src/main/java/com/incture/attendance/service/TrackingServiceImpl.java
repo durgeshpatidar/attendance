@@ -59,9 +59,16 @@ public class TrackingServiceImpl implements TrackingService {
 		responseDto.setStatusCode(200);
 		try {
 			List<TrackingDetailsDto> trackings = trackingDao.getTrackingDetails(id,start,end);
-			responseDto.setData(trackings);
-			responseDto.setMessage("Tracking details");
-
+			int size=trackings.size();
+			if(size!=0) {
+				responseDto.setData(trackings);
+				responseDto.setMessage("Tracking details");
+			}
+			
+			else {
+				responseDto.setMessage("No details...");
+			}
+				
 		} catch (Exception e) {
 
 			logger.error("TrackingServiceImpl | getTrackingDetails | Exception " + e.getMessage());
