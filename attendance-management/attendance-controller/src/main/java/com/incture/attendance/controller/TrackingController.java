@@ -31,8 +31,8 @@ public class TrackingController {
 	@GetMapping("/tracking-details")
 	@ResponseBody
 	public ResponseDto getTrackingDetails(@RequestParam String id,
-			@RequestParam(required= false) Date start, 
-			@RequestParam(required= false) Date end) {
+			@RequestParam(defaultValue= "null") Date start, 
+			@RequestParam(defaultValue= "null") Date end) {
 		System.out.println(id + " " + start + " " + end);
 		return trackingService.getTrackingDetails(id, start, end);
 	}
