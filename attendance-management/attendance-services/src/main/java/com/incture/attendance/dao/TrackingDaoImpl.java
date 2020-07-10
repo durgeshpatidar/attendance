@@ -79,9 +79,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		else if(start!=null && end==null) {
 			criteria.add(Restrictions.ge("date", start));	
 		}
-		else {
-			criteria.add(Restrictions.eq("employeeId",id));
-		}
+		
 		@SuppressWarnings("unchecked")
 		List<TrackingDo> trackings = criteria.list();
 		//Getting employee name
