@@ -3,16 +3,18 @@ package com.incture.attendance.dao;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Session;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
-import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.TrackingDetailsDto;
 import com.incture.attendance.dto.TrackingDto;
-import com.incture.attendance.dto.TrackingInputDto;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
+import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.TrackingDo;
 
 
@@ -61,10 +63,34 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 
 	@Override
-	public List<TrackingDetailsDto> getTrackingDetails(TrackingInputDto tdto) {
-		//String empId = employeeDto.getId();
-		//List<TrackingDto> trackings = getSession().get(entityType, id);
-		return null;
+	public List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end) {
+		//Getting tracking details in between start and end date
+		@SuppressWarnings("deprecation")
+		Criteria criteria=getSession().createCriteria(TrackingDo.class);
+		criteria.add(Restrictions.eq("employeeId",id));
+		criteria.add(Restrictions.between("date", start, end));
+		@SuppressWarnings("unchecked")
+		List<TrackingDo> trackings = criteria.list();
+		//Getting employee name
+		@SuppressWarnings("deprecation")
+		Criteria crit=getSession().createCriteria(EmployeeMasterDo.class);
+		criteria.add(Restrictions.eq("employeeId",id));
+		EmployeeMasterDo emp =(EmployeeMasterDo)crit.uniqueResult();
+		List<TrackingDetailsDto> history = new ArrayList<>();
+		
+		for(TrackingDo t: trackings) {
+			
+			TrackingDetailsDto newTracking = new TrackingDetailsDto();
+			newTracking.setEmpId(id);
+			newTracking.setEmpName(emp.getFirstName()+" "+emp.getLastName());
+			newTracking.setDate(t.getDate());
+			newTracking.setCheckIn(t.getCheckIn());
+			newTracking.setCheckOut(t.getCheckOut());
+			newTracking.setTotalHours(t.getTotalHours());
+			history.add(newTracking);
+			
+		}
+		return history;
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.incture.attendance.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.incture.attendance.dto.EmployeeDto;
@@ -12,7 +13,7 @@ public interface TrackingDao {
 
 	void updateTracking(TrackingDto trackingdto);
 	
-	List<TrackingDetailsDto> getTrackingDetails(TrackingInputDto trackingInputDto);
+	List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end);
 	
 
 }
