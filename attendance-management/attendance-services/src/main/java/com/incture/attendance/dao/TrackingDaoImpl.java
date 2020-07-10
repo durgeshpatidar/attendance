@@ -67,20 +67,17 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		//Getting tracking details in between start and end date
 		@SuppressWarnings("deprecation")
 		Criteria criteria=getSession().createCriteria(TrackingDo.class);
+		criteria.add(Restrictions.eq("employee",getSession().get(EmployeeDo.class, id)));
 		if(start!= null && end!= null) {
 			
-			criteria.add(Restrictions.eq("employeeId",id));
 			criteria.add(Restrictions.between("date", start, end));	
 		}
 		else if(start== null && end!= null) {
 			
-			criteria.add(Restrictions.eq("employeeId",id));
-			criteria.add(Restrictions.ge("date", start));	
+			criteria.add(Restrictions.le("date", end));	
 		}
 		else if(start!=null && end==null) {
-
-			criteria.add(Restrictions.eq("employeeId",id));
-			criteria.add(Restrictions.le("date", end));	
+			criteria.add(Restrictions.ge("date", start));	
 		}
 		else {
 			criteria.add(Restrictions.eq("employeeId",id));
