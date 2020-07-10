@@ -1,7 +1,9 @@
 package com.incture.attendance.dao;
 
 import org.springframework.stereotype.Repository;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import com.incture.attendance.dto.TrackingDto;
 import com.incture.attendance.dto.WorkflowTaskDto;
@@ -19,7 +21,13 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	protected WorkflowTaskDo importDto(WorkflowTaskDto workflowtaskDto) {
 		WorkflowTaskDo entity = new WorkflowTaskDo();
 		entity.setId(workflowtaskDto.getId());
-		entity.setManager(getSession().get(ManagerMasterDo.class, workflowtaskDto.getManagerId()));
+		Criteria criteria=getSession().createCriteria(ManagerMasterDo.class);
+		criteria.add(Restrictions.eq("EMPLOYEE_ID",workflowtaskDto.getEmpId()));
+		criteria.add(Restrictions.eq("MANAGER_TYPE","PROJECT"));
+//we have to restrictions on enddate
+		ManagerMasterDo mdo=(ManagerMasterDo)criteria.uniqueResult();
+		
+		entity.setManager(getSession().get(ManagerMasterDo.class, mdo.getManagerId()));
 		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
 		entity.setComment(workflowtaskDto.getComment());
 		entity.setDescription(workflowtaskDto.getDescription());
