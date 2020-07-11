@@ -1,13 +1,12 @@
 package com.incture.attendance.dto;
 
-import java.sql.Time;
-import java.sql.Timestamp;
+
 import java.util.Date;
 
 
 public class TrackingDto extends BaseDto {
 
-	
+	private String id;
 	private String empId;
 	private String addressId;
 	private Date date;
@@ -19,8 +18,9 @@ public class TrackingDto extends BaseDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TrackingDto(String empId, String addressId, Date date, Date checkIn, Date checkOut, double totalHours) {
+	public TrackingDto(String id,String empId, String addressId, Date date, Date checkIn, Date checkOut, double totalHours) {
 		super();
+		this.id = id;
 		this.empId = empId;
 		this.addressId = addressId;
 		this.date = date;
@@ -29,8 +29,15 @@ public class TrackingDto extends BaseDto {
 		this.totalHours = totalHours;
 	}
 	//Getters and Setters
+	
 	public String getEmpId() {
 		return empId;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public void setEmpId(String empId) {
 		this.empId = empId;

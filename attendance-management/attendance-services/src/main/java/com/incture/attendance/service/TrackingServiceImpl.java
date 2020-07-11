@@ -33,6 +33,7 @@ public class TrackingServiceImpl implements TrackingService {
 		try {
 			trackingDao.addTracking(trackingDto);
 			responseDto.setMessage("Tracking Details added Successfully!");
+			responseDto.setData(new String(trackingDto.getId()));
 
 		} catch (Exception e) {
 
@@ -83,5 +84,30 @@ public class TrackingServiceImpl implements TrackingService {
 		return responseDto;
 
 	}
+//for checkout or update tracking
+		@Override
+		public ResponseDto updateTracking( String id,Date checkOut,double totalHours) {
+			logger.info("Update Tracking | Checkout | Execution start input " + id+" "+checkOut+" "+totalHours);
 
+			ResponseDto responseDto = new ResponseDto();
+			responseDto.setStatus(Boolean.TRUE);
+			responseDto.setStatusCode(200);
+			try {
+				trackingDao.updateTracking(id, checkOut, totalHours);
+				responseDto.setMessage("Checkout details added Successfully!");
+				
+
+			} catch (Exception e) {
+
+				logger.error("Update Tracking | Checkout | Exception " + e.getMessage());
+				responseDto.setStatus(Boolean.FALSE);
+				responseDto.setStatusCode(500);
+				responseDto.setMessage(e.getMessage());
+
+			}
+
+			logger.info("Update Tracking | Checkout   | Execution end ouput " + responseDto);
+
+			return responseDto;
+		}
 }

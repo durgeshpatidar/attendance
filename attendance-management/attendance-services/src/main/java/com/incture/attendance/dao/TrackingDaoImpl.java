@@ -26,6 +26,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	@Override
 	protected TrackingDo importDto(TrackingDto trackingDto) {
 		TrackingDo entity= new TrackingDo();
+		entity.setId(trackingDto.getId());
 		entity.setAddress(getSession().get(AddressDo.class, trackingDto.getAddressId()));
 		entity.setEmployee(getSession().get(EmployeeDo.class, trackingDto.getEmpId()));
 		entity.setCheckIn(trackingDto.getCheckIn());
@@ -39,6 +40,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	@Override
 	protected TrackingDto exportDto(TrackingDo entity) {
 		TrackingDto dto = new TrackingDto();
+		dto.setId(entity.getId());
 		dto.setAddressId(entity.getAddress().getId());
 		dto.setEmpId(entity.getEmployee().getId());
 		dto.setCheckIn(entity.getCheckIn());
@@ -101,10 +103,18 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 	
 
-
+//for updating tracking or checkout
 	@Override
 	public void updateTracking(String id, Date checkOut, double totalHours) {
-		// TODO Auto-generated method stub
+		
+		@SuppressWarnings("deprecation")
+		Criteria criteria=getSession().createCriteria(TrackingDo.class);
+		criteria.add(Restrictions.eq("id",id));
+		TrackingDo current =(TrackingDo)criteria.uniqueResult();
+		current.setCheckOut(checkOut);
+		current.setTotalHours(totalHours);
+		
+		
 		
 	}
 
