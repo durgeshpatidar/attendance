@@ -80,8 +80,35 @@ public class AddressServiceImpl implements AddressService {
 
 	@Override
 	public ResponseDto validateAddress(AddressDto addressDto) {
+		logger.info("AddressServiceImpl | validateAddress | Execution start input " + addressDto);
 
-		return null;
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			String address = addressDao.validateAddress(addressDto);
+			if(address!=null) {
+				responseDto.setData(address);
+				responseDto.setMessage("Address Verified!");
+			}
+			else {
+				responseDto.setMessage("Address Invalid!");
+			}
+			
+		} catch (Exception e) {
+
+			logger.error("AddressServiceImpl | validateAddress | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+
+		}
+
+		logger.info("AddressServiceImpl | validateAddress | Execution end ouput " + responseDto);
+
+		return responseDto;
+
+
 	}
 
 }

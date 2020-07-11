@@ -95,13 +95,6 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		criteria.add(Restrictions.eq("locationLat",addressDto.getLocationLat()));
 		criteria.add(Restrictions.eq("locationLon",addressDto.getLocationLon()));
 		AddressDo address = (AddressDo)criteria.uniqueResult();
-		if(address!= null) {
-			return address.getId();
-		}
-		else {
-			return "Address not valid";
-		}
-		
-		
+		return address.getId();
 	}
 }
