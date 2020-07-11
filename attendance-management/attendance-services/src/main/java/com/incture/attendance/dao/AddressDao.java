@@ -9,5 +9,5 @@ import com.incture.attendance.utils.ResponseDto;
 public interface AddressDao {
 	void addAddress(AddressDto addressdto);
 	List<AddressDto> getAddressDetails(String empId);
-	void validateAddress(AddressDto addressDto);
+	String validateAddress(AddressDto addressDto);
 }

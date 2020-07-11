@@ -87,7 +87,21 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	}
 
 	@Override
-	public void validateAddress(AddressDto addressDto) {
-		getSession().get(AddressDo.class, addressDto.getEmpId());
+	public String validateAddress(AddressDto addressDto) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(AddressDo.class);
+		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, addressDto.getEmpId())));
+		criteria.add(Restrictions.eq("status","APPROVED"));
+		criteria.add(Restrictions.eq("locationLat",addressDto.getLocationLat()));
+		criteria.add(Restrictions.eq("locationLon",addressDto.getLocationLon()));
+		AddressDo address = (AddressDo)criteria.uniqueResult();
+		if(address!= null) {
+			return address.getId();
+		}
+		else {
+			return "Address not valid";
+		}
+		
+		
 	}
 }
