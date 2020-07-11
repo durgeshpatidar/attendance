@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.incture.attendance.dao.WorkflowTaskDao;
-import com.incture.attendance.dto.ManagerDetailsDto;
-import com.incture.attendance.dto.ProfileDto;
 import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.utils.ResponseDto;
 
