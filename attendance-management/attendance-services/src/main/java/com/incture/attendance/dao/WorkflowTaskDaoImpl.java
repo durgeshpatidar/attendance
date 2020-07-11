@@ -30,7 +30,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
 		criteria.add(Restrictions.eq("employeeId", workflowtaskDto.getEmpId()));
 		criteria.add(Restrictions.eq("managerType", "PROJECT"));
-//we have to restrictions on enddate
+		//we have to add restrictions on enddate
 		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
 
 		entity.setManager(getSession().get(ManagerMasterDo.class, mdo.getManagerId()));
