@@ -9,6 +9,7 @@ public class WorkflowTaskDto extends BaseDto {
 	private String description;
 	private String empId;
 	private String managerId;
+	private String managerName;
 	private Date requestDate;
 	private String comment;
 	private String status;
@@ -19,9 +20,10 @@ public class WorkflowTaskDto extends BaseDto {
 		super();
 
 	}
-	public WorkflowTaskDto(String id,String empName, String description, String empId, String mangerId, Date requestdate, String  comment, String status, String managerId) {
+	public WorkflowTaskDto(String id,String empName,String managerName, String description, String empId, String mangerId, Date requestdate, String  comment, String status, String managerId) {
 		super();
 		this.id = id;
+		this.managerName=managerName;
 		this.empName=empName;
 		this.description = description;
 		this.empId = empId;
@@ -87,6 +89,12 @@ public class WorkflowTaskDto extends BaseDto {
 	}
 	public void setEmpName(String empName) {
 		this.empName = empName;
+	}
+	public String getManagerName() {
+		return managerName;
+	}
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
 	}
 
 }

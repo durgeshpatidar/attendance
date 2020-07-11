@@ -5,14 +5,17 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
+import com.incture.attendance.dto.TrackingDetailsDto;
 import com.incture.attendance.dto.TrackingDto;
 import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.ManagerMasterDo;
 import com.incture.attendance.entities.TrackingDo;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
+import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -67,8 +70,33 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 
 	@Override
 	public List<WorkflowTaskDto> getRequestDetails(String empId) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
+		criteria.add(Restrictions.eq("employeeId", empId));
+		@SuppressWarnings("unchecked")
+		List<WorkflowTaskDo> workflow = criteria.list();
+		// Getting employee name
+		@SuppressWarnings("deprecation")
+		Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
+		criteria.add(Restrictions.eq("employeeId", empId));
+		EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
+		List<WorkflowTaskDto> request = new ArrayList<>();
 
-		return null;
+		for (WorkflowTaskDo t : workflow) {
+
+			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
+			newWorkflow.setEmpId(empId);
+			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
+			newWorkflow.setComment(t.getComment());
+			newWorkflow.setDescription(t.getDescription());
+			newWorkflow.setId(t.getId());
+			newWorkflow.setRequestdate(t.getRequestdate());
+			newWorkflow.setStatus(t.getStatus());
+			request.add(newWorkflow);
+
+		}
+		return request;
+
 	}
 
 }
