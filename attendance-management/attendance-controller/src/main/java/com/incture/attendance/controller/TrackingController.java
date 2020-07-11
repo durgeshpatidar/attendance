@@ -40,7 +40,7 @@ public class TrackingController {
 		Date startDate=null,endDate=null;
 		try {
 		startDate=formatter.parse(start);
-		endDate=formatter.parse(start);
+		endDate=formatter.parse(end);
 		}catch(Exception e)
 		{
 			System.out.println(e);
