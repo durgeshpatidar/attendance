@@ -2,15 +2,10 @@ package com.incture.attendance.dao;
 
 import org.springframework.stereotype.Repository;
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import com.incture.attendance.dto.TrackingDetailsDto;
-import com.incture.attendance.dto.TrackingDto;
 import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.ManagerMasterDo;
-import com.incture.attendance.entities.TrackingDo;
-import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
@@ -18,7 +13,6 @@ import com.incture.attendance.entities.WorkflowTaskDo;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
 
 @Repository("WorkflowTaskDaoImpl")
 public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto> implements WorkflowTaskDao {
@@ -27,10 +21,11 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	protected WorkflowTaskDo importDto(WorkflowTaskDto workflowtaskDto) {
 		WorkflowTaskDo entity = new WorkflowTaskDo();
 		entity.setId(workflowtaskDto.getId());
+		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
 		criteria.add(Restrictions.eq("employeeId", workflowtaskDto.getEmpId()));
 		criteria.add(Restrictions.eq("managerType", "PROJECT"));
-		//we have to add restrictions on enddate
+		// we have to add restrictions on enddate
 		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
 
 		entity.setManager(getSession().get(ManagerMasterDo.class, mdo.getManagerId()));
@@ -72,18 +67,16 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	public List<WorkflowTaskDto> getRequestDetails(String empId) {
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		criteria.add(Restrictions.eq("employeeId", empId));
+		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, empId)));
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
 		// Getting employee name
 		@SuppressWarnings("deprecation")
 		Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-		criteria.add(Restrictions.eq("employeeId", empId));
+		crit.add(Restrictions.eq("id", empId));
 		EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
 		List<WorkflowTaskDto> request = new ArrayList<>();
-
 		for (WorkflowTaskDo t : workflow) {
-
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
 			newWorkflow.setEmpId(empId);
 			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
@@ -93,10 +86,8 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setRequestdate(t.getRequestdate());
 			newWorkflow.setStatus(t.getStatus());
 			request.add(newWorkflow);
-
 		}
 		return request;
-
 	}
 
 }
