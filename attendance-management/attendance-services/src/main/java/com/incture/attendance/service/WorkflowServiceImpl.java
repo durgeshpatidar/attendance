@@ -55,7 +55,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
 		try {
-			List<WorkflowTaskDto> workflow = WorkflowTaskDao.getRequestDetails(empId);
+			List<WorkflowTaskDto> workflow = workflowtaskDao.getRequestDetails(empId);
 			responseDto.setData(workflow);
 			if (workflow.isEmpty())
 				responseDto.setMessage("Workflow Request Not Found!");
@@ -75,7 +75,6 @@ public class WorkflowServiceImpl implements WorkflowService {
 
 		return responseDto;
 
-		return null;
 	}
 
 }
