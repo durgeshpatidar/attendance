@@ -1,5 +1,6 @@
 package com.incture.attendance.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +32,19 @@ public class TrackingController {
 	@GetMapping("/tracking-details")
 	@ResponseBody
 	public ResponseDto getTrackingDetails(@RequestParam String id,
-			@RequestParam(defaultValue= "null") Date start, 
-			@RequestParam(defaultValue= "null") Date end) {
+			@RequestParam(defaultValue= "") String start, 
+			@RequestParam(defaultValue= "") String end) {
+		SimpleDateFormat formatter=new SimpleDateFormat("yyyy/MM/dd");
+		
 		System.out.println(id + " " + start + " " + end);
-		return trackingService.getTrackingDetails(id, start, end);
+		Date startDate=null,endDate=null;
+		try {
+		startDate=formatter.parse(start);
+		endDate=formatter.parse(start);
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		return trackingService.getTrackingDetails(id, startDate, endDate);
 	}
-//
 }
