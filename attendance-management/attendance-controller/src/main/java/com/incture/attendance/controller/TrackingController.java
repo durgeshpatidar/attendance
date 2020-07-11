@@ -32,6 +32,7 @@ public class TrackingController {
 	public ResponseDto getTrackingDetails(@RequestParam String id,
 			@RequestParam Date start,
 			@RequestParam Date end) {
+		System.out.println(id+" "+start+" "+end);
 		return trackingService.getTrackingDetails(id,start,end);
 	}
 //
