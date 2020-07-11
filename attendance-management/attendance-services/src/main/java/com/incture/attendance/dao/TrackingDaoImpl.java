@@ -47,7 +47,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		dto.setDate(entity.getDate());
 		return dto;
 	}
-	//For adding tracking
+//For adding tracking
 	@Override
 	public void addTracking(TrackingDto trackingdto) {
 	  getSession().save(importDto(trackingdto));
@@ -55,13 +55,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		
 	}
 
-	@Override
-	public void updateTracking(TrackingDto trackingdto) {
-		
-		
-	}
-
-
+//For getting tracking details
 	@Override
 	public List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end) {
 		//Getting tracking details in between start and end date
@@ -104,4 +98,16 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		return history;
 	}
 
+
+	
+
+
+	@Override
+	public void updateTracking(String id, Date checkOut, double totalHours) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 }

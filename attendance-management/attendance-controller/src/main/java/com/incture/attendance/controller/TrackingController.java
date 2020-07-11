@@ -22,13 +22,13 @@ public class TrackingController {
 
 	@Autowired
 	private TrackingService trackingService;
-
+//Add tracking or CheckIn
 	@PostMapping
 	public ResponseDto addTracking(@RequestBody TrackingDto trackingDto) {
 		return trackingService.addTracking(trackingDto);
 
 	}
-
+//Getting tracking details for an employee
 	@GetMapping("/tracking-details")
 	@ResponseBody
 	public ResponseDto getTrackingDetails(@RequestParam String id,
@@ -47,4 +47,14 @@ public class TrackingController {
 		}
 		return trackingService.getTrackingDetails(id, startDate, endDate);
 	}
+
+//Updating tracking details or checkout
+	@PostMapping
+	public ResponseDto updateTracking(@RequestParam String id,
+			@RequestParam Date checkOut,
+			@RequestParam double totalHours) {
+		return trackingService.updateTracking(id,checkOut,totalHours);
+
+	}
+	
 }
