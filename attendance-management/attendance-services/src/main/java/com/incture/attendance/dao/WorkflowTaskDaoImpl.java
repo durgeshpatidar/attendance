@@ -10,9 +10,11 @@ import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 
 @Repository("WorkflowTaskDaoImpl")
 public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto> implements WorkflowTaskDao {
@@ -76,6 +78,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		crit.add(Restrictions.eq("id", empId));
 		EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
 		List<WorkflowTaskDto> request = new ArrayList<>();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
 			newWorkflow.setEmpId(empId);
@@ -83,7 +86,12 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setComment(t.getComment());
 			newWorkflow.setDescription(t.getDescription());
 			newWorkflow.setId(t.getId());
-			newWorkflow.setRequestdate(t.getRequestdate());
+			try {
+				newWorkflow.setRequestdate(formatter.parse(t.getRequestdate().toString()));
+			} catch (ParseException e) {
+				newWorkflow.setRequestdate(t.getRequestdate());
+				e.printStackTrace();
+			}
 			newWorkflow.setStatus(t.getStatus());
 			request.add(newWorkflow);
 		}
