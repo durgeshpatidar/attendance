@@ -5,6 +5,7 @@ import java.util.Date;
 public class WorkflowTaskDto extends BaseDto {
 
 	private String id;
+	private String empName;
 	private String description;
 	private String empId;
 	private String managerId;
@@ -18,9 +19,10 @@ public class WorkflowTaskDto extends BaseDto {
 		super();
 
 	}
-	public WorkflowTaskDto(String id, String description, String empId, String mangerId, Date requestdate, String  comment, String status, String managerId) {
+	public WorkflowTaskDto(String id,String empName, String description, String empId, String mangerId, Date requestdate, String  comment, String status, String managerId) {
 		super();
 		this.id = id;
+		this.empName=empName;
 		this.description = description;
 		this.empId = empId;
 		this.managerId = managerId;
@@ -79,6 +81,12 @@ public class WorkflowTaskDto extends BaseDto {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
 
 }

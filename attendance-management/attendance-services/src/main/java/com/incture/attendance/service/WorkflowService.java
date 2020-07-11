@@ -7,4 +7,6 @@ import com.incture.attendance.utils.ResponseDto;
 public interface WorkflowService {
 	ResponseDto addWorkflow(WorkflowTaskDto workflowtaskdto);
 
+	ResponseDto getRequestDetails(String empId);
+
 }

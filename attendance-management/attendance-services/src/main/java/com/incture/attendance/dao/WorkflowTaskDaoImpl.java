@@ -12,6 +12,9 @@ import com.incture.attendance.entities.TrackingDo;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
+
+import java.util.List;
+
 import javax.persistence.Query;
 
 @Repository("WorkflowTaskDaoImpl")
@@ -61,4 +64,13 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<WorkflowTaskDto> getRequestDetails(String empId) {
+		
+		return null;
+	}
+
+	
+	
 }
