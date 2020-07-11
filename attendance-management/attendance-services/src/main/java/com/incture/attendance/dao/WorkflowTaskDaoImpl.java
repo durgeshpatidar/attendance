@@ -24,12 +24,12 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	protected WorkflowTaskDo importDto(WorkflowTaskDto workflowtaskDto) {
 		WorkflowTaskDo entity = new WorkflowTaskDo();
 		entity.setId(workflowtaskDto.getId());
-		Criteria criteria=getSession().createCriteria(ManagerMasterDo.class);
-		criteria.add(Restrictions.eq("employeeId",workflowtaskDto.getEmpId()));
-		criteria.add(Restrictions.eq("managerType","PROJECT"));
+		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
+		criteria.add(Restrictions.eq("employeeId", workflowtaskDto.getEmpId()));
+		criteria.add(Restrictions.eq("managerType", "PROJECT"));
 //we have to restrictions on enddate
-		ManagerMasterDo mdo=(ManagerMasterDo)criteria.uniqueResult();
-		
+		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
+
 		entity.setManager(getSession().get(ManagerMasterDo.class, mdo.getManagerId()));
 		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
 		entity.setComment(workflowtaskDto.getComment());
@@ -55,22 +55,20 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 
 	@Override
 	public void addWorkflowTask(WorkflowTaskDto workflowtaskdto) {
-		 getSession().save(importDto(workflowtaskdto));
-		
+		getSession().save(importDto(workflowtaskdto));
+
 	}
 
 	@Override
 	public void updateWorkflowTask(WorkflowTaskDto workflowtaskdto) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public List<WorkflowTaskDto> getRequestDetails(String empId) {
-		
+
 		return null;
 	}
 
-	
-	
 }
