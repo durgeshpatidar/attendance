@@ -20,17 +20,13 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 
-	@GetMapping
-	public String TestApi() {
-		return "Done";
-	}
 
 	@PostMapping
 	public ResponseDto addAddress(@RequestBody AddressDto addressDto) {
 		return addressService.addAddress(addressDto);
 		
 	}
-	@GetMapping("/details")
+	@GetMapping()
 	public ResponseDto getDetails(@RequestParam String empId) {
 		return addressService.getAddressDetails(empId);
 	}
