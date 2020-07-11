@@ -24,7 +24,7 @@ public class TrackingController {
 	@Autowired
 	private TrackingService trackingService;
 //Add tracking or CheckIn
-	@PostMapping("/checkIn")
+	@PostMapping("/checkin")
 	public ResponseDto addTracking(@RequestBody TrackingDto trackingDto) {
 		return trackingService.addTracking(trackingDto);
 
@@ -50,7 +50,7 @@ public class TrackingController {
 	}
 
 //Updating tracking details or checkout
-	@PatchMapping("/checkOut")
+	@PatchMapping("/checkout")
 	public ResponseDto updateTracking(@RequestParam String id,
 			@RequestParam Date checkOut,
 			@RequestParam double totalHours) {
