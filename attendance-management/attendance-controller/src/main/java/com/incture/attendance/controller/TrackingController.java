@@ -22,20 +22,17 @@ public class TrackingController {
 	@Autowired
 	private TrackingService trackingService;
 
-
 	@PostMapping
 	public ResponseDto addTracking(@RequestBody TrackingDto trackingDto) {
 		return trackingService.addTracking(trackingDto);
-		
+
 	}
 
-	@GetMapping("/getTrackingdetails")
-	 @ResponseBody
-	public ResponseDto getTrackingDetails(@RequestParam String id,
-			@RequestParam Date start,
-			@RequestParam Date end) {
-		System.out.println(id+" "+start+" "+end);
-		return trackingService.getTrackingDetails(id,start,end);
+	@GetMapping("/tracking-details")
+	@ResponseBody
+	public ResponseDto getTrackingDetails(@RequestParam String id, @RequestParam Date start, @RequestParam Date end) {
+		System.out.println(id + " " + start + " " + end);
+		return trackingService.getTrackingDetails(id, start, end);
 	}
 //
 }
