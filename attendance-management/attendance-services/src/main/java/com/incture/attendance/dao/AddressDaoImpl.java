@@ -1,10 +1,18 @@
 package com.incture.attendance.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.AddressDto;
+import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
+import com.incture.attendance.entities.EmployeeMasterDo;
+import com.incture.attendance.entities.WorkflowTaskDo;
 
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
@@ -52,5 +60,28 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	public void addAddress(AddressDto addressdto) {
 		getSession().save(importDto(addressdto));
 	}
-
+	
+	@Override
+	public List<AddressDto> getAddressDetails(String empId) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(AddressDo.class);
+		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, empId)));
+		@SuppressWarnings("unchecked")
+		List<AddressDo> address = criteria.list();
+		List<AddressDto> request = new ArrayList<>();
+		for (AddressDo t : address) {
+			AddressDto newAddress = new AddressDto();
+			newAddress.setEmpId(empId);
+			newAddress.setAddress(t.getAddress());
+			newAddress.setCity(t.getCity());
+			newAddress.setState(t.getState());
+			newAddress.setPincode(t.getPincode());
+			newAddress.setValidTo(t.getValidTo());
+			newAddress.setValidFrom(t.getValidFrom());
+			newAddress.setLocationLat(t.getLocationLat());
+			newAddress.setLocationLon(t.getLocationLon());
+			request.add(newAddress);
+		}
+		return request;
+	}
 }
