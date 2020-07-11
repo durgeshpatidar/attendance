@@ -30,7 +30,7 @@ public class AddressController {
 		return addressService.addAddress(addressDto);
 		
 	}
-	@GetMapping("/address/details")
+	@GetMapping("/details")
 	public ResponseDto getDetails(@RequestParam String empId) {
 		return addressService.getAddressDetails(empId);
 	}
