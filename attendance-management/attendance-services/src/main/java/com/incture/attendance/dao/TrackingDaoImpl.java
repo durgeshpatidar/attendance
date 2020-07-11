@@ -30,7 +30,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		entity.setAddress(getSession().get(AddressDo.class, trackingDto.getAddressId()));
 		entity.setEmployee(getSession().get(EmployeeDo.class, trackingDto.getEmpId()));
 		entity.setCheckIn(trackingDto.getCheckIn());
-		entity.setCheckOut(trackingDto.getCheckIn());
+		entity.setCheckOut(trackingDto.getCheckOut());
 		entity.setDate(trackingDto.getDate());
 		entity.setTotalHours(trackingDto.getTotalHours());
 		return entity;
@@ -51,9 +51,10 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	}
 //For adding tracking
 	@Override
-	public TrackingDto addTracking(TrackingDto trackingdto) {
-	  getSession().save(importDto(trackingdto));
-	  return exportDto(importDto(trackingdto));
+	public String addTracking(TrackingDto trackingdto) {
+		TrackingDo tdo = importDto(trackingdto);
+	  getSession().save(tdo);
+	  return tdo.getId();
 		
 		
 	}

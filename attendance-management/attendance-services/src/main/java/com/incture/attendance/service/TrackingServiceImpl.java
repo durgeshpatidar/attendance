@@ -31,9 +31,9 @@ public class TrackingServiceImpl implements TrackingService {
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
 		try {
-			TrackingDto tdto = trackingDao.addTracking(trackingDto);
+			String trackingId = trackingDao.addTracking(trackingDto);
 			responseDto.setMessage("Tracking Details added Successfully!");
-			responseDto.setData(tdto);
+			responseDto.setData(trackingId);
 
 		} catch (Exception e) {
 
