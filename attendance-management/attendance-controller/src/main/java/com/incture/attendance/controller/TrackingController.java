@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,7 @@ public class TrackingController {
 	}
 
 //Updating tracking details or checkout
-	@PostMapping("/CheckOut")
+	@PatchMapping("/CheckOut")
 	public ResponseDto updateTracking(@RequestParam String id,
 			@RequestParam Date checkOut,
 			@RequestParam double totalHours) {
