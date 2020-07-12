@@ -24,6 +24,9 @@ private static final long serialVersionUID = 1L;
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "ID", columnDefinition = "NVARCHAR(36)")
 	private String id;
+
+	@Column(name = "EMPLOYEE_ID", columnDefinition = "NVARCHAR(36)")
+	private String empId;
 	
 	@Column(name = "ADDRESS", columnDefinition = "VARCHAR(100)")
 	private String address;
@@ -48,9 +51,10 @@ private static final long serialVersionUID = 1L;
 		super();
 	}
 
-	public AddressMasterDo(String id, String address, String city, String state, String pincode, Double locationLat,
+	public AddressMasterDo(String id, String empId,String address, String city, String state, String pincode, Double locationLat,
 			Double locationLon) {
 		super();
+		this.empId=empId;
 		this.id = id;
 		this.address = address;
 		this.city = city;
@@ -63,6 +67,14 @@ private static final long serialVersionUID = 1L;
 	//Getters and Setters
 	public String getId() {
 		return id;
+	}
+
+	public String getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(String empId) {
+		this.empId = empId;
 	}
 
 	public void setId(String id) {
