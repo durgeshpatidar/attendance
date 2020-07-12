@@ -70,6 +70,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		List<AddressDto> request = new ArrayList<>();
 		for (AddressDo t : address) {
 			AddressDto newAddress = new AddressDto();
+			newAddress.setId(t.getId());
 			newAddress.setEmpId(empId);
 			newAddress.setAddress(t.getAddress());
 			newAddress.setCity(t.getCity());
