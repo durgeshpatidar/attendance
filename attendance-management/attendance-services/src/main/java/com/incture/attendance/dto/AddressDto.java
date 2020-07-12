@@ -2,8 +2,6 @@ package com.incture.attendance.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
 public class AddressDto extends BaseDto{
 
 	private String id;
@@ -11,6 +9,7 @@ public class AddressDto extends BaseDto{
 	private String address;
 	private String city;
 	private String state;
+	private String status;
 	private String pincode;
 	private Date validTo;
 	private Date validFrom;
@@ -21,10 +20,11 @@ public class AddressDto extends BaseDto{
 	public AddressDto() {
 		super();
 	}
-	public AddressDto(String id,String empId, String address, String city, String state, String pincode, Date validTo,
+	public AddressDto(String id,String status,String empId, String address, String city, String state, String pincode, Date validTo,
 			Date validFrom, Double locationLat, Double locationLon) {
 		super();
 		this.id = id;
+		this.status=status;
 		this.empId = empId;
 		this.address = address;
 		this.city = city;
@@ -97,7 +97,11 @@ public class AddressDto extends BaseDto{
 	public void setLocationLon(Double locationLon) {
 		this.locationLon = locationLon;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
-	
-	//
 }

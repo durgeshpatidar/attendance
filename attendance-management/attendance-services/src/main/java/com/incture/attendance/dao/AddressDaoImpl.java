@@ -8,11 +8,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.AddressDto;
-import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
-import com.incture.attendance.entities.EmployeeMasterDo;
-import com.incture.attendance.entities.WorkflowTaskDo;
 
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
@@ -30,6 +27,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 			entity.setState(addressDto.getState());
 			entity.setValidFrom(addressDto.getValidFrom());
 			entity.setValidTo(addressDto.getValidTo());
+			entity.setStatus(addressDto.getStatus());
 			entity.setEmployee(getSession().get(EmployeeDo.class, addressDto.getEmpId()));
 		}
 		return entity;
@@ -49,6 +47,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 			dto.setPincode(addressDo.getPincode());
 			dto.setValidFrom(addressDo.getValidFrom());
 			dto.setValidTo(addressDo.getValidTo());
+			dto.setStatus(addressDo.getStatus());
 			dto.setEmpId(addressDo.getEmployee().getId());
 		}
 		return dto;
@@ -79,6 +78,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 			newAddress.setValidTo(t.getValidTo());
 			newAddress.setValidFrom(t.getValidFrom());
 			newAddress.setLocationLat(t.getLocationLat());
+			newAddress.setStatus(t.getStatus());
 			newAddress.setLocationLon(t.getLocationLon());
 			request.add(newAddress);
 		}

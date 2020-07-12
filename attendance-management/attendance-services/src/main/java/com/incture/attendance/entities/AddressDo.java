@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
 import lombok.Data;
 
 @Entity
@@ -23,63 +22,63 @@ import lombok.Data;
 @Data
 public class AddressDo implements BaseDo {
 
-	/**
-	 * author
-	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "ID", columnDefinition = "NVARCHAR(36)")
 	private String id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="EMPLOYEE_ID") 
+	@JoinColumn(name = "EMPLOYEE_ID")
 	private EmployeeDo employee;
-	
+
 	@Column(name = "ADDRESS", columnDefinition = "VARCHAR(100)")
 	private String address;
-	
+
 	@Column(name = "CITY", columnDefinition = "VARCHAR(100)")
 	private String city;
-	
+
 	@Column(name = "STATE", columnDefinition = "VARCHAR(100)")
 	private String state;
-	
+
 	@Column(name = "PIN_CODE", columnDefinition = "NVARCHAR(10)")
 	private String pincode;
-	
+
+	@Column(name = "STATUS", columnDefinition = "NVARCHAR(20)")
+	private String status;
+
 	@Column(name = "VALID_TO", columnDefinition = "DATE")
 	private Date validTo;
-	
+
 	@Column(name = "VALID_FROM", columnDefinition = "DATE")
 	private Date validFrom;
-	
+
 	@Column(name = "LOCATION_LAT", columnDefinition = "DOUBLE")
 	private Double locationLat;
-	
+
 	@Column(name = "LOCATION_LON", columnDefinition = "DOUBLE")
 	private Double locationLon;
-	
-	@OneToMany(mappedBy="address")
-	private List<TrackingDo> addTrackings=new ArrayList<TrackingDo>();
-	
-	//Constructor
+
+	@OneToMany(mappedBy = "address")
+	private List<TrackingDo> addTrackings = new ArrayList<TrackingDo>();
+
+	// Constructor
 	public AddressDo() {
 		super();
-		
+
 	}
 
 	public AddressDo(String id, EmployeeDo employee, String address, String city, String state, String pincode,
-			Date validTo, Date validFrom, Double locationLat, Double locationLon, List<TrackingDo> addTrackings) {
+			Date validTo, Date validFrom, Double locationLat, Double locationLon, List<TrackingDo> addTrackings, String status) {
 		super();
 		this.id = id;
 		this.employee = employee;
 		this.address = address;
 		this.city = city;
 		this.state = state;
+		this.status = status;
 		this.pincode = pincode;
 		this.validTo = validTo;
 		this.validFrom = validFrom;
@@ -172,6 +171,14 @@ public class AddressDo implements BaseDo {
 		return addTrackings;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public void setAddTrackings(List<TrackingDo> addTrackings) {
 		this.addTrackings = addTrackings;
 	}
@@ -180,5 +187,4 @@ public class AddressDo implements BaseDo {
 		return serialVersionUID;
 	}
 
-	
 }
