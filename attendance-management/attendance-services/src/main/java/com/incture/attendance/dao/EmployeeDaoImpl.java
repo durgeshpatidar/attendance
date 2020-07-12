@@ -149,11 +149,9 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	public List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
 		@SuppressWarnings("deprecation")
-		Date d = new Date(9999,12,12);
-		@SuppressWarnings("deprecation")
 		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
         crit.add(Restrictions.eq("employeeId",id));
-        crit.add(Restrictions.eq("endDate", d));
+        crit.add(Restrictions.eq("status", "ACTIVE"));
         @SuppressWarnings("unchecked")
 		List<ManagerMasterDo> results = crit.list();
         System.out.println(results);
@@ -165,6 +163,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
         	manager.setFirstName(empMasterDo.getFirstName());
         	manager.setLastName(empMasterDo.getLastName());
         	manager.setManagerType(b.getManagerType());
+        	manager.setEmailId(empMasterDo.getEmailId());
         	managerList.add(manager);
         	
         	

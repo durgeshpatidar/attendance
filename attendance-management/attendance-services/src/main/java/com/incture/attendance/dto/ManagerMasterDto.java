@@ -1,6 +1,5 @@
 package com.incture.attendance.dto;
 
-import javax.persistence.Column;
 
 public class ManagerMasterDto {
 	
