@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -53,6 +54,9 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	public void saveEmployeeData(EmployeeDto employeeDto) {
 
 		getSession().save(importDto(employeeDto));
+		String empId=employeeDto.getId();
+		
+
 	}
 
 	//for verifying employee email and password
