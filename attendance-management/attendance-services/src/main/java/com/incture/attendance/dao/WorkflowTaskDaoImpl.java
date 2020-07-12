@@ -53,18 +53,19 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		return dto;
 	}
 
+	//Adding workflow
 	@Override
 	public void addWorkflowTask(WorkflowTaskDto workflowtaskdto) {
 		getSession().save(importDto(workflowtaskdto));
 
 	}
-
+	//Updating workflow
 	@Override
 	public void updateWorkflowTask(WorkflowTaskDto workflowtaskdto) {
 		// TODO Auto-generated method stub
 
 	}
-
+	//Getting workflow details for employee
 	@Override
 	public List<WorkflowTaskDto> getRequestDetails(String empId) {
 		@SuppressWarnings("deprecation")
@@ -98,27 +99,26 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		return request;
 	}
 
+	//Getting workflow details for manager
 	@Override
 	public List<WorkflowTaskDto> getTaskDetails(String managerId) {
+		//Getting all rows from workflowmasterdo with given manager id
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, managerId)));
+		criteria.add(Restrictions.eq("manager", managerId));
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
-		// Getting employee name
-		@SuppressWarnings("deprecation")
-		Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-		crit.add(Restrictions.eq("id", managerId));
-		EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
-			newWorkflow.setManagerId(managerId);
+			//Getting employee for each workflow
+			@SuppressWarnings("deprecation")
+			Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
+			crit.add(Restrictions.eq("employee", t.getEmployee().getId()));
+			EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
 			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
-			newWorkflow.setComment(t.getComment());
 			newWorkflow.setDescription(t.getDescription());
 			newWorkflow.setId(t.getId());
-			newWorkflow.setStatus(t.getStatus());
 			request.add(newWorkflow);
 		}
 		return request;
