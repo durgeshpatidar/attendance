@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 import lombok.Data;
 
 @Entity
-@Table(name = "ADDRESS")
+@Table(name = "ADDRESS_MASTER")
 @Data
 public class AddressMasterDo {
 private static final long serialVersionUID = 1L;
