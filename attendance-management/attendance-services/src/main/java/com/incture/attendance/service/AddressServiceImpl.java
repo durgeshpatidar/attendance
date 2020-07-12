@@ -78,4 +78,10 @@ public class AddressServiceImpl implements AddressService {
 
 	}
 
+	@Override
+	public ResponseDto validateAddress(AddressDto addressDto) {
+
+		return null;
+	}
+
 }

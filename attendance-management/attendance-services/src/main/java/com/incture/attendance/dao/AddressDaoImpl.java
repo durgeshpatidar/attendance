@@ -85,4 +85,9 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		}
 		return request;
 	}
+
+	@Override
+	public void validateAddress(AddressDto addressDto) {
+		getSession().get(AddressDo.class, addressDto.getEmpId());
+	}
 }

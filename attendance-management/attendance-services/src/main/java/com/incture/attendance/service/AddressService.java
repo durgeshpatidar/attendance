@@ -7,4 +7,5 @@ import com.incture.attendance.utils.ResponseDto;
 public interface AddressService {
 	ResponseDto addAddress(AddressDto addressDto);
 	ResponseDto getAddressDetails(String empId);
+	ResponseDto validateAddress(AddressDto addressDto);
 }

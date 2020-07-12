@@ -32,8 +32,7 @@ public class AddressController {
 	}
 	@PostMapping("/validate")
 	public ResponseDto validateAddress(@RequestBody AddressDto addressDto) {
-		//return addressService.validateAddress(addressDto);
-		return null;
+		return addressService.validateAddress(addressDto);
 	}
 
 }
