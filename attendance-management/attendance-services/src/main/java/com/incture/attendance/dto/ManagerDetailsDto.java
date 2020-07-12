@@ -5,16 +5,18 @@ public class ManagerDetailsDto {
 	private String firstName;
 	private String lastName;
 	private String managerType;
+	private String emailId;
 	
 	//Constructor
 	public ManagerDetailsDto() {
 		super();
 	}
-	public ManagerDetailsDto(String firstName, String lastName, String managerType) {
+	public ManagerDetailsDto(String firstName, String lastName, String managerType,String emailId) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.managerType = managerType;
+		this.emailId = emailId;
 	}
 	
 	//Getters and Setters
@@ -35,6 +37,12 @@ public class ManagerDetailsDto {
 	}
 	public void setManagerType(String managerType) {
 		this.managerType = managerType;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 	
 	

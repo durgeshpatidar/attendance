@@ -33,6 +33,9 @@ public class ManagerMasterDo {
 	@Column(name = "MANAGER_TYPE", columnDefinition = "NVARCHAR(20)")
 	private String managerType;
 	
+	@Column(name = "STATUS", columnDefinition = "VARCHAR(20)")
+	private String status;
+	
 	@OneToMany(mappedBy = "manager")
 	private List<WorkflowTaskDo> workflowTrackings = new ArrayList<WorkflowTaskDo>();
 
@@ -42,7 +45,7 @@ public class ManagerMasterDo {
 	}
 
 	public ManagerMasterDo(String id, String employeeId, String managerId, Date startDate, Date endDate,
-			String managerType, List<WorkflowTaskDo> workflowTrackings) {
+			String managerType,String status, List<WorkflowTaskDo> workflowTrackings) {
 		super();
 		this.id = id;
 		this.employeeId = employeeId;
@@ -50,6 +53,7 @@ public class ManagerMasterDo {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.managerType = managerType;
+		this.status = status;
 		this.workflowTrackings = workflowTrackings;
 	}
 //Getters and Setters
@@ -99,6 +103,15 @@ public class ManagerMasterDo {
 
 	public void setManagerType(String managerType) {
 		this.managerType = managerType;
+	}
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public List<WorkflowTaskDo> getWorkflowTrackings() {
