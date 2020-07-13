@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		try {
 			boolean status = employeeDao.verifyIdPass(employeeDto);
 			if (status == true) {
-				responseDto.setMessage("Id And Password Is Correct!");
+				responseDto.setMessage("Login successful");
 			} else {
 				responseDto.setStatus(Boolean.FALSE);
 				responseDto.setStatusCode(500);
@@ -99,7 +99,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		try {
 			employeeDao.isValidUser(employeeDto);
 			employeeDao.saveEmployeeData(employeeDto);
-			responseDto.setMessage("Employee Details Saved Successfully!");
+			responseDto.setMessage("Profile Created Successfully!");
 
 		} catch (Exception e) {
 
