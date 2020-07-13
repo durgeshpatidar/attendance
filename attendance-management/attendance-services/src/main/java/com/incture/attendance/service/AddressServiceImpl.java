@@ -21,7 +21,6 @@ public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressDao addressDao;
-	
 
 	@Override
 	public ResponseDto addAddress(AddressDto addressDto) {
@@ -48,7 +47,7 @@ public class AddressServiceImpl implements AddressService {
 		return responseDto;
 
 	}
-	
+
 	public ResponseDto getAddressDetails(String empId) {
 		logger.info("AddressServiceImpl | getAddressDetails | Execution start input " + empId);
 
@@ -87,14 +86,13 @@ public class AddressServiceImpl implements AddressService {
 		responseDto.setStatusCode(200);
 		try {
 			String address = addressDao.validateAddress(addressDto);
-			if(address!=null) {
+			if (address != null) {
 				responseDto.setData(address);
 				responseDto.setMessage("Address Verified!");
-			}
-			else {
+			} else {
 				responseDto.setMessage("Address Invalid!");
 			}
-			
+
 		} catch (Exception e) {
 
 			logger.error("AddressServiceImpl | validateAddress | Exception " + e.getMessage());
@@ -107,7 +105,6 @@ public class AddressServiceImpl implements AddressService {
 		logger.info("AddressServiceImpl | validateAddress | Execution end ouput " + responseDto);
 
 		return responseDto;
-
 
 	}
 
