@@ -1,4 +1,4 @@
- package com.incture.attendance.dto;
+package com.incture.attendance.dto;
 
 public abstract class BaseDto {
 

@@ -1,8 +1,6 @@
 package com.incture.attendance.dto;
 
-
 import java.util.Date;
-
 
 public class TrackingDto extends BaseDto {
 
@@ -13,12 +11,14 @@ public class TrackingDto extends BaseDto {
 	private Date checkIn;
 	private Date checkOut;
 	private double totalHours;
-	//Constructor
+
+	// Constructor
 	public TrackingDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public TrackingDto(String id,String empId, String addressId, Date date, Date checkIn, Date checkOut, double totalHours) {
+
+	public TrackingDto(String id, String empId, String addressId, Date date, Date checkIn, Date checkOut,
+			double totalHours) {
 		super();
 		this.id = id;
 		this.empId = empId;
@@ -28,50 +28,62 @@ public class TrackingDto extends BaseDto {
 		this.checkOut = checkOut;
 		this.totalHours = totalHours;
 	}
-	//Getters and Setters
-	
+	// Getters and Setters
+
 	public String getEmpId() {
 		return empId;
 	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
+
 	public String getAddressId() {
 		return addressId;
 	}
+
 	public void setAddressId(String addressId) {
 		this.addressId = addressId;
 	}
+
 	public Date getDate() {
 		return date;
 	}
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
 	public Date getCheckIn() {
 		return checkIn;
 	}
+
 	public void setCheckIn(Date checkIn) {
 		this.checkIn = checkIn;
 	}
+
 	public Date getCheckOut() {
 		return checkOut;
 	}
+
 	public void setCheckOut(Date checkOut) {
 		this.checkOut = checkOut;
 	}
+
 	public double getTotalHours() {
 		return totalHours;
 	}
+
 	public void setTotalHours(double totalHours) {
 		this.totalHours = totalHours;
 	}
-	
-	
+
 }
