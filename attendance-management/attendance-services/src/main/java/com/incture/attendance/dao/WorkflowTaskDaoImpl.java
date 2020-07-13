@@ -120,7 +120,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			// Getting employee for each workflow
 			@SuppressWarnings("deprecation")
 			Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-			crit.add(Restrictions.eq("employee", t.getEmployee().getId()));
+			crit.add(Restrictions.eq("id", t.getEmployee().getId()));
 			EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
 			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
 			newWorkflow.setDescription(t.getDescription());
