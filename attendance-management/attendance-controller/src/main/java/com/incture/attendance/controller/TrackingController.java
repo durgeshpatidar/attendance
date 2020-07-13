@@ -23,27 +23,27 @@ public class TrackingController {
 
 	@Autowired
 	private TrackingService trackingService;
+
 //Add tracking or CheckIn
 	@PostMapping("/checkin")
 	public ResponseDto addTracking(@RequestBody TrackingDto trackingDto) {
 		return trackingService.addTracking(trackingDto);
 
 	}
+
 //Getting tracking details for an employee
 	@GetMapping("/tracking-details")
 	@ResponseBody
-	public ResponseDto getTrackingDetails(@RequestParam String id,
-			@RequestParam(defaultValue= "") String start, 
-			@RequestParam(defaultValue= "") String end) {
-		SimpleDateFormat formatter=new SimpleDateFormat("yyyy/MM/dd");
-		
+	public ResponseDto getTrackingDetails(@RequestParam String id, @RequestParam(defaultValue = "") String start,
+			@RequestParam(defaultValue = "") String end) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+
 		System.out.println(id + " " + start + " " + end);
-		Date startDate=null,endDate=null;
+		Date startDate = null, endDate = null;
 		try {
-		startDate=formatter.parse(start);
-		endDate=formatter.parse(end);
-		}catch(Exception e)
-		{
+			startDate = formatter.parse(start);
+			endDate = formatter.parse(end);
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return trackingService.getTrackingDetails(id, startDate, endDate);
@@ -51,10 +51,9 @@ public class TrackingController {
 
 //Updating tracking details or checkout
 	@PatchMapping("/checkout")
-	public ResponseDto updateTracking(@RequestParam String id,
-			@RequestParam Date checkOut,
+	public ResponseDto updateTracking(@RequestParam String id, @RequestParam Date checkOut,
 			@RequestParam double totalHours) {
-		return trackingService.updateTracking(id,checkOut,totalHours);
+		return trackingService.updateTracking(id, checkOut, totalHours);
 
 	}
 	//

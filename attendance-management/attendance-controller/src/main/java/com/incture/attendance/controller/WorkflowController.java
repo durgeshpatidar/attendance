@@ -24,25 +24,27 @@ public class WorkflowController {
 	public String TestApi() {
 		return "Done";
 	}
-	
+
 	@PostMapping("/add")
 	public ResponseDto addWorkflow(@RequestBody WorkflowTaskDto workflowtaskDto) {
 		return workflowService.addWorkflow(workflowtaskDto);
-		
+
 	}
+
 	@GetMapping("/request")
 	public ResponseDto getRequestDetails(@RequestParam String empId) {
 		return workflowService.getRequestDetails(empId);
-		
+
 	}
+
 	@GetMapping("/task")
 	public ResponseDto getTaskDetails(@RequestParam String managerId) {
 		return workflowService.getTaskDetails(managerId);
 	}
+
 	@PatchMapping("/task/update")
-	public ResponseDto updateStatus(@RequestParam String status,String comment,String workflowId)
-	{
-		return workflowService.updateStatus(status,comment,workflowId);
+	public ResponseDto updateStatus(@RequestParam String status, String comment, String workflowId) {
+		return workflowService.updateStatus(status, comment, workflowId);
 	}
 
 }

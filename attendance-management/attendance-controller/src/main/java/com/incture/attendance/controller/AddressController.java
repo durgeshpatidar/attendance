@@ -20,16 +20,17 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 
-
 	@PostMapping
 	public ResponseDto addAddress(@RequestBody AddressDto addressDto) {
 		return addressService.addAddress(addressDto);
-		
+
 	}
+
 	@GetMapping()
 	public ResponseDto getDetails(@RequestParam String empId) {
 		return addressService.getAddressDetails(empId);
 	}
+
 	@PostMapping("/validate")
 	public ResponseDto validateAddress(@RequestBody AddressDto addressDto) {
 		return addressService.validateAddress(addressDto);
