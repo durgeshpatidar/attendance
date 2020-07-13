@@ -1,4 +1,3 @@
-//Manager Master Class
 package com.incture.attendance.entities;
 
 import java.util.ArrayList;
@@ -17,35 +16,35 @@ public class ManagerMasterDo {
 	@Id
 	@Column(name = "ID", columnDefinition = "NVARCHAR(36)")
 	private String id;
-	
+
 	@Column(name = "EMPLOYEE_ID", columnDefinition = "NVARCHAR(36)")
 	private String employeeId;
-	
+
 	@Column(name = "MANAGER_ID", columnDefinition = "NVARCHAR(36)")
 	private String managerId;
-	
+
 	@Column(name = "START_DATE", columnDefinition = "DATE")
 	private Date startDate;
-	
+
 	@Column(name = "END_DATE", columnDefinition = "DATE")
 	private Date endDate;
-	
+
 	@Column(name = "MANAGER_TYPE", columnDefinition = "NVARCHAR(20)")
 	private String managerType;
-	
+
 	@Column(name = "STATUS", columnDefinition = "VARCHAR(20)")
 	private String status;
-	
+
 	@OneToMany(mappedBy = "manager")
 	private List<WorkflowTaskDo> workflowTrackings = new ArrayList<WorkflowTaskDo>();
 
-	//Constructor
+	// Constructor
 	public ManagerMasterDo() {
 		super();
 	}
 
 	public ManagerMasterDo(String id, String employeeId, String managerId, Date startDate, Date endDate,
-			String managerType,String status, List<WorkflowTaskDo> workflowTrackings) {
+			String managerType, String status, List<WorkflowTaskDo> workflowTrackings) {
 		super();
 		this.id = id;
 		this.employeeId = employeeId;
@@ -56,6 +55,7 @@ public class ManagerMasterDo {
 		this.status = status;
 		this.workflowTrackings = workflowTrackings;
 	}
+
 //Getters and Setters
 	public String getId() {
 		return id;
@@ -104,7 +104,6 @@ public class ManagerMasterDo {
 	public void setManagerType(String managerType) {
 		this.managerType = managerType;
 	}
-	
 
 	public String getStatus() {
 		return status;
@@ -121,14 +120,5 @@ public class ManagerMasterDo {
 	public void setWorkflowTrackings(List<WorkflowTaskDo> workflowTrackings) {
 		this.workflowTrackings = workflowTrackings;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -17,8 +17,7 @@ import lombok.Data;
 @Entity
 @Table(name = "TRACKING")
 @Data
-public class TrackingDo implements BaseDo
-{
+public class TrackingDo implements BaseDo {
 	/**
 	 * 
 	 */
@@ -29,31 +28,30 @@ public class TrackingDo implements BaseDo
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "ID")
 	private String id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="EMPLOYEE_ID")
+	@JoinColumn(name = "EMPLOYEE_ID")
 	private EmployeeDo employee;
-	
+
 	@ManyToOne
-	@JoinColumn(name="ADDRESS_ID")
+	@JoinColumn(name = "ADDRESS_ID")
 	private AddressDo address;
-	
+
 	@Column(name = "DATE", columnDefinition = "DATE")
 	private Date date;
-	
+
 	@Column(name = "CHECKIN", columnDefinition = "TIMESTAMP")
 	private Date checkIn;
-	
+
 	@Column(name = "CHECKOUT", columnDefinition = "TIMESTAMP")
 	private Date checkOut;
-	
+
 	@Column(name = "TOTAL_HOURS", columnDefinition = "DOUBLE")
 	private double totalHours;
-	
-	//Constructor
+
+	// Constructor
 	public TrackingDo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {

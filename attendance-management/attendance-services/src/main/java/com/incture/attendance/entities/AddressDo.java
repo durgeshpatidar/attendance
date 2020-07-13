@@ -71,7 +71,8 @@ public class AddressDo implements BaseDo {
 	}
 
 	public AddressDo(String id, EmployeeDo employee, String address, String city, String state, String pincode,
-			Date validTo, Date validFrom, Double locationLat, Double locationLon, List<TrackingDo> addTrackings, String status) {
+			Date validTo, Date validFrom, Double locationLat, Double locationLon, List<TrackingDo> addTrackings,
+			String status) {
 		super();
 		this.id = id;
 		this.employee = employee;

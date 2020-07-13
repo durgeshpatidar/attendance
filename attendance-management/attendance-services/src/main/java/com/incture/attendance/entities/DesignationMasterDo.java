@@ -1,4 +1,3 @@
-//Designation Master Class
 package com.incture.attendance.entities;
 
 import javax.persistence.Column;
@@ -12,23 +11,23 @@ public class DesignationMasterDo {
 	@Id
 	@Column(name = "ID", columnDefinition = "NVARCHAR(36)")
 	private String id;
-	
+
 	@Column(name = "EMPLOYEE_ID", columnDefinition = "NVARCHAR(36)")
 	private String employeeId;
-	
+
 	@Column(name = "START_DATE", columnDefinition = "DATE")
 	private String startDate;
-	
+
 	@Column(name = "END_DATE", columnDefinition = "DATE")
 	private String endDate;
-	
+
 	@Column(name = "COMPETENCY", columnDefinition = "NVARCHAR(50)")
 	private String competency;
-	
+
 	@Column(name = "DESIGNATION", columnDefinition = "NVARCHAR(50)")
 	private String designation;
-	
-	//Constructor
+
+	// Constructor
 	public DesignationMasterDo() {
 		super();
 	}
@@ -43,8 +42,8 @@ public class DesignationMasterDo {
 		this.competency = competency;
 		this.designation = designation;
 	}
-	
-	//Getters and Setters
+
+	// Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -92,9 +91,5 @@ public class DesignationMasterDo {
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
-	
-	
-	
-	
 
 }

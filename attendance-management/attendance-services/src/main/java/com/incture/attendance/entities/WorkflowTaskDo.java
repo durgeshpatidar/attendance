@@ -17,8 +17,7 @@ import lombok.Data;
 @Entity
 @Table(name = "WorkflowTask")
 @Data
-public class WorkflowTaskDo implements BaseDo
-{
+public class WorkflowTaskDo implements BaseDo {
 	/**
 	 * 
 	 */
@@ -29,30 +28,29 @@ public class WorkflowTaskDo implements BaseDo
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "ID")
 	private String id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="EMPLOYEE_ID")
+	@JoinColumn(name = "EMPLOYEE_ID")
 	private EmployeeDo employee;
-	
+
 	@ManyToOne
-	@JoinColumn(name="MANAGER_ID")
+	@JoinColumn(name = "MANAGER_ID")
 	private ManagerMasterDo manager;
-	
+
 	@Column(name = "REQUEST_DATE", columnDefinition = "DATE")
 	private Date requestdate;
-	
+
 	@Column(name = "DESCRIPTION", columnDefinition = "NVARCHAR(200)")
 	private String description;
-	
+
 	@Column(name = "STATUS", columnDefinition = "VARCHAR(20)")
 	private String status;
-	
+
 	@Column(name = "COMMENT", columnDefinition = "NVARCHAR(200)")
 	private String comment;
 
 	public WorkflowTaskDo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public WorkflowTaskDo(String id, EmployeeDo employee, ManagerMasterDo manager, Date requestdate, String description,
@@ -126,6 +124,5 @@ public class WorkflowTaskDo implements BaseDo
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
 }

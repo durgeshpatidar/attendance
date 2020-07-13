@@ -1,6 +1,4 @@
-//Address Master Class
 package com.incture.attendance.entities;
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +14,8 @@ import lombok.Data;
 @Table(name = "ADDRESS_MASTER")
 @Data
 public class AddressMasterDo {
-private static final long serialVersionUID = 1L;
-	
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
 	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
@@ -27,34 +24,34 @@ private static final long serialVersionUID = 1L;
 
 	@Column(name = "EMPLOYEE_ID", columnDefinition = "NVARCHAR(36)")
 	private String empId;
-	
+
 	@Column(name = "ADDRESS", columnDefinition = "VARCHAR(100)")
 	private String address;
-	
+
 	@Column(name = "CITY", columnDefinition = "VARCHAR(100)")
 	private String city;
-	
+
 	@Column(name = "STATE", columnDefinition = "VARCHAR(100)")
 	private String state;
-	
+
 	@Column(name = "PIN_CODE", columnDefinition = "NVARCHAR(10)")
 	private String pincode;
-	
+
 	@Column(name = "LOCATION_LAT", columnDefinition = "DOUBLE")
 	private Double locationLat;
-	
+
 	@Column(name = "LOCATION_LON", columnDefinition = "DOUBLE")
 	private Double locationLon;
-	
-	//Constructor
+
+	// Constructor
 	public AddressMasterDo() {
 		super();
 	}
 
-	public AddressMasterDo(String id, String empId,String address, String city, String state, String pincode, Double locationLat,
-			Double locationLon) {
+	public AddressMasterDo(String id, String empId, String address, String city, String state, String pincode,
+			Double locationLat, Double locationLon) {
 		super();
-		this.empId=empId;
+		this.empId = empId;
 		this.id = id;
 		this.address = address;
 		this.city = city;
@@ -63,8 +60,8 @@ private static final long serialVersionUID = 1L;
 		this.locationLat = locationLat;
 		this.locationLon = locationLon;
 	}
-	
-	//Getters and Setters
+
+	// Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -132,6 +129,5 @@ private static final long serialVersionUID = 1L;
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 
 }

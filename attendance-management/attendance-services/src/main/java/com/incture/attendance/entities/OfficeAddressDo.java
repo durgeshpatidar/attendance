@@ -54,11 +54,9 @@ public class OfficeAddressDo implements BaseDo {
 	@Column(name = "LOCATION_LON", columnDefinition = "DOUBLE")
 	private Double locationLon;
 
-	
 	public OfficeAddressDo() {
 		super();
 	}
-	
 
 	public OfficeAddressDo(String id, String address, String city, String state, String pincode, String status,
 			Date validTo, Date validFrom, Double locationLat, Double locationLon) {
@@ -74,7 +72,6 @@ public class OfficeAddressDo implements BaseDo {
 		this.locationLat = locationLat;
 		this.locationLon = locationLon;
 	}
-
 
 	public String getId() {
 		return id;
@@ -160,5 +157,4 @@ public class OfficeAddressDo implements BaseDo {
 		return serialVersionUID;
 	}
 
-	
 }
