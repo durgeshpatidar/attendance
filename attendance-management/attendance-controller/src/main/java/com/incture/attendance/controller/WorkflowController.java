@@ -36,8 +36,7 @@ public class WorkflowController {
 	}
 	@GetMapping("/task")
 	public ResponseDto getTaskDetails(@RequestParam String managerId) {
-		//return workflowService.getRequestDetails(managerId);
-		return null;
+		return workflowService.getTaskDetails(managerId);
 	}
 
 }

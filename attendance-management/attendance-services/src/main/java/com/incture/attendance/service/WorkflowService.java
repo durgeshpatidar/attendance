@@ -9,4 +9,6 @@ public interface WorkflowService {
 
 	ResponseDto getRequestDetails(String empId);
 	
+	ResponseDto getTaskDetails(String managerId);
+	
 }

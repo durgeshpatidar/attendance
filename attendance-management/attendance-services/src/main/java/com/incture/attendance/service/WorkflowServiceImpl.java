@@ -74,5 +74,35 @@ public class WorkflowServiceImpl implements WorkflowService {
 		return responseDto;
 
 	}
+	
+	@Override
+	public ResponseDto getTaskDetails(String managerId) {
+		logger.info("WorklfowServiceImpl | getStatusDetails | Execution start input " + managerId);
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			List<WorkflowTaskDto> workflow = workflowtaskDao.getTaskDetails(managerId);
+			responseDto.setData(workflow);
+			if (workflow.isEmpty())
+				responseDto.setMessage("Workflow Request Not Found!");
+			else
+				responseDto.setMessage("All Workflow Request Displayed Successfully!");
+
+		} catch (Exception e) {
+
+			logger.error("WorklfowServiceImpl | getStatusDetails | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+
+		}
+
+		logger.info("WorklfowServiceImpl | getStatusDetails | Execution end ouput " + responseDto);
+
+		return responseDto;
+		
+		
+	}
 
 }
