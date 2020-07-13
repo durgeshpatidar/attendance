@@ -62,7 +62,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	}
 	//Updating workflow
 	@Override
-	public void updateWorkflowTask(String status, String comment, String workflowId) {
+	public void updateWorkflowTask(WorkflowTaskDto workflowtaskdto)  {
 		// TODO Auto-generated method stub
 		
 
