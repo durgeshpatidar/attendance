@@ -98,4 +98,29 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		return request;
 	}
 
+	@Override
+	public List<WorkflowTaskDto> getTaskDetails(String managerId) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
+		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, managerId)));
+		@SuppressWarnings("unchecked")
+		List<WorkflowTaskDo> workflow = criteria.list();
+		// Getting employee name
+		@SuppressWarnings("deprecation")
+		Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
+		crit.add(Restrictions.eq("id", managerId));
+		EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
+		List<WorkflowTaskDto> request = new ArrayList<>();
+		for (WorkflowTaskDo t : workflow) {
+			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
+			newWorkflow.setManagerId(managerId);
+			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
+			newWorkflow.setComment(t.getComment());
+			newWorkflow.setDescription(t.getDescription());
+			newWorkflow.setId(t.getId());
+			newWorkflow.setStatus(t.getStatus());
+			request.add(newWorkflow);
+		}
+		return request;
+	}
 }

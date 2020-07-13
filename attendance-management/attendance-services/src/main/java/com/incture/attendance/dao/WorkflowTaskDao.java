@@ -11,5 +11,6 @@ public interface WorkflowTaskDao {
 	void updateWorkflowTask(WorkflowTaskDto workflowtaskdto);
 
 	List<WorkflowTaskDto> getRequestDetails(String empId);
+	List<WorkflowTaskDto> getTaskDetails(String managerId);
 
 }
