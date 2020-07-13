@@ -108,7 +108,28 @@ public class WorkflowServiceImpl implements WorkflowService {
 	@Override
 	public ResponseDto updateStatus(String status, String comment, String workflowId) {
 
-		return null;
+		logger.info("Update Status | comment | Execution start input " + workflowId+" "+ status+" "+comment);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			workflowtaskDao.updateWorkflowTask(status, comment, workflowId);
+			responseDto.setMessage("Status and comment added Successfully!");
+			
+
+		} catch (Exception e) {
+
+			logger.error("Update Status | comment | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+
+		}
+
+		logger.info("Update Status | comment | Execution end ouput " + responseDto);
+
+		return responseDto;
 	}
 
 }

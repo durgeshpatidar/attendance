@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.ManagerMasterDo;
+import com.incture.attendance.entities.TrackingDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
@@ -61,8 +62,9 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	}
 	//Updating workflow
 	@Override
-	public void updateWorkflowTask(WorkflowTaskDto workflowtaskdto) {
+	public void updateWorkflowTask(String status, String comment, String workflowId) {
 		// TODO Auto-generated method stub
+		
 
 	}
 	//Getting workflow details for employee
@@ -105,7 +107,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		//Getting all rows from workflowmasterdo with given manager id
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		criteria.add(Restrictions.eq("manager", managerId));
+		criteria.add(Restrictions.eq("manager", getSession().get(ManagerMasterDo.class, managerId)));
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
 		List<WorkflowTaskDto> request = new ArrayList<>();
