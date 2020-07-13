@@ -122,16 +122,18 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 
 	//Updating status for address request by manager
 	@Override
-	public void updateStatus(String workflowId, String status) {
+	public void updateAddressStatus(String workflowId, String status, String comment) {
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
 		criteria.add(Restrictions.eq("id",workflowId));
 		WorkflowTaskDo workflow = (WorkflowTaskDo)criteria.uniqueResult();
+		workflow.setComment(comment);
 		@SuppressWarnings("deprecation")
 		Criteria criteria1 = getSession().createCriteria(AddressDo.class);
 		criteria1.add(Restrictions.eq("employee",workflow.getEmployee()));
 		AddressDo address = (AddressDo)criteria1.uniqueResult();
 		address.setStatus(status);
+		
 		
 		
 	}

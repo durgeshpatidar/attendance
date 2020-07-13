@@ -11,5 +11,5 @@ public interface AddressDao {
 
 	String validateAddress(AddressDto addressDto);
 	
-	void updateStatus(String workflowId,String status);
+	void updateAddressStatus(String workflowId,String status,String comment);
 }
