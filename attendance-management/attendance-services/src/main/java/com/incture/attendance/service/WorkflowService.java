@@ -10,5 +10,7 @@ public interface WorkflowService {
 	ResponseDto getRequestDetails(String empId);
 	
 	ResponseDto getTaskDetails(String managerId);
+
+	ResponseDto updateStatus(String status, String comment, String workflowId);
 	
 }

@@ -105,4 +105,10 @@ public class WorkflowServiceImpl implements WorkflowService {
 		
 	}
 
+	@Override
+	public ResponseDto updateStatus(String status, String comment, String workflowId) {
+
+		return null;
+	}
+
 }
