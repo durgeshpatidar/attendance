@@ -1,6 +1,8 @@
 package com.incture.attendance.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -10,6 +12,9 @@ import org.springframework.stereotype.Repository;
 import com.incture.attendance.dto.AddressDto;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
+import com.incture.attendance.entities.ManagerMasterDo;
+import com.incture.attendance.entities.WorkflowTaskDo;
+import com.incture.attendance.utils.ServicesUtil;
 
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
@@ -53,11 +58,29 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		return dto;
 	}
 
-	@Override
+	//Adding address and adding address request to workflow transaction table.
+    @Override
 	public void addAddress(AddressDto addressdto) {
+		WorkflowTaskDo wdo=new WorkflowTaskDo();
+		String description=""+addressdto.getAddress()+addressdto.getCity()+addressdto.getState()+addressdto.getPincode();
+		wdo.setDescription(description);
+		wdo.setEmployee(getSession().get(EmployeeDo.class, addressdto.getEmpId()));
+		SimpleDateFormat sdf=new SimpleDateFormat("yy/MM/dd");
+		Date dt=new Date();
+		wdo.setRequestdate(ServicesUtil.convertStringToDate(sdf.format(dt)));
+		wdo.setEmployee( getSession().get(EmployeeDo.class,addressdto.getEmpId()));
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
+		criteria.add(Restrictions.eq("employeeId", getSession().get(EmployeeDo.class, addressdto.getEmpId())));
+		criteria.add(Restrictions.eq("managerType", "PROJECT"));
+		criteria.add(Restrictions.eq("status", "ACTIVE"));
+		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
+		wdo.setManagerId(mdo.getManagerId());
+		getSession().save(wdo);
 		getSession().save(importDto(addressdto));
 	}
 
+    //Getting all address details.
 	@Override
 	public List<AddressDto> getAddressDetails(String empId) {
 		@SuppressWarnings("deprecation")
@@ -84,6 +107,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		return request;
 	}
 
+	//Verifying address.
 	@Override
 	public String validateAddress(AddressDto addressDto) {
 		@SuppressWarnings("deprecation")
@@ -95,4 +119,21 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		AddressDo address = (AddressDo) criteria.uniqueResult();
 		return address.getId();
 	}
+
+	//Updating status for address request by manager
+	@Override
+	public void updateStatus(String workflowId, String status) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
+		criteria.add(Restrictions.eq("id",workflowId));
+		WorkflowTaskDo workflow = (WorkflowTaskDo)criteria.uniqueResult();
+		@SuppressWarnings("deprecation")
+		Criteria criteria1 = getSession().createCriteria(AddressDo.class);
+		criteria1.add(Restrictions.eq("employee",workflow.getEmployee()));
+		AddressDo address = (AddressDo)criteria1.uniqueResult();
+		address.setStatus(status);
+		
+		
+	}
+	
 }

@@ -10,4 +10,6 @@ public interface AddressDao {
 	List<AddressDto> getAddressDetails(String empId);
 
 	String validateAddress(AddressDto addressDto);
+	
+	void updateStatus(String workflowId,String status);
 }
