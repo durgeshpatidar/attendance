@@ -1,7 +1,6 @@
 package com.incture.attendance.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -21,11 +20,11 @@ import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.ManagerMasterDo;
 import com.incture.attendance.entities.OfficeAddressDo;
 
-
 @Repository("EmployeeDaoImpl")
 public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements EmployeeDao {
 	@Autowired
 	AddressDaoImpl addressDao;
+
 	@Override
 	protected EmployeeDo importDto(EmployeeDto employeeDto) {
 		EmployeeDo entity = null;
@@ -51,20 +50,21 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		}
 		return dto;
 	}
-	//for save employee data and adding address from master after signup
+
+	// for save employee data and adding address from master after signup
 	@Override
 	public void saveEmployeeData(EmployeeDto employeeDto) {
 
 		getSession().save(importDto(employeeDto));
-		String empId=employeeDto.getId();
+		String empId = employeeDto.getId();
 		List<AddressDto> address = new ArrayList<>();
-		//Taking homeaddress from address master
+		// Taking homeaddress from address master
 		@SuppressWarnings("deprecation")
 		Criteria crit1 = getSession().createCriteria(AddressMasterDo.class);
-		crit1.add(Restrictions.eq("empId",empId));
-		AddressMasterDo addMasterDo = (AddressMasterDo)crit1.uniqueResult();
+		crit1.add(Restrictions.eq("empId", empId));
+		AddressMasterDo addMasterDo = (AddressMasterDo) crit1.uniqueResult();
 		AddressDto homeAddress = new AddressDto();
-		//adding home address to an addressDto.
+		// adding home address to an addressDto.
 		homeAddress.setEmpId(empId);
 		homeAddress.setAddress(addMasterDo.getAddress());
 		homeAddress.setCity(addMasterDo.getCity());
@@ -73,12 +73,12 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		homeAddress.setLocationLat(addMasterDo.getLocationLat());
 		homeAddress.setLocationLon(addMasterDo.getLocationLat());
 		address.add(homeAddress);
-		//Taking static company address from master
+		// Taking static company address from master
 		@SuppressWarnings("deprecation")
 		Criteria crit2 = getSession().createCriteria(OfficeAddressDo.class);
 		@SuppressWarnings("unchecked")
 		List<OfficeAddressDo> officeAddresses = crit2.list();
-		for(OfficeAddressDo value:officeAddresses) {
+		for (OfficeAddressDo value : officeAddresses) {
 			AddressDto officeAddress = new AddressDto();
 			officeAddress.setEmpId(empId);
 			officeAddress.setAddress(value.getAddress());
@@ -88,46 +88,47 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			officeAddress.setLocationLat(value.getLocationLat());
 			officeAddress.setLocationLon(value.getLocationLon());
 			address.add(officeAddress);
-			
+
 		}
-		//Adding master addresses to address transaction table.
-		for(AddressDto add: address) {
+		// Adding master addresses to address transaction table.
+		for (AddressDto add : address) {
 			addressDao.addAddress(add);
 		}
-	
-		
 
 	}
 
-	//for verifying employee email and password
+	// for verifying employee email and password
 	@Override
 	public boolean verifyIdPass(EmployeeDto employeeDto) {
-		
-		Query q=getSession().createNativeQuery("SELECT ID FROM EMPLOYEE WHERE EMAIL='"+employeeDto.getEmail()+"' AND PASSWORD='"+employeeDto.getPassword()+"';");
+
+		Query q = getSession().createNativeQuery("SELECT ID FROM EMPLOYEE WHERE EMAIL='" + employeeDto.getEmail()
+				+ "' AND PASSWORD='" + employeeDto.getPassword() + "';");
 		@SuppressWarnings("unchecked")
-		List<Object> l=(List<Object>)q.getResultList();
-		int size=l.size();
-		if(size!=0)
+		List<Object> l = (List<Object>) q.getResultList();
+		int size = l.size();
+		if (size != 0)
 			return true;
 		else
 			return false;
 	}
-	//for checking employee email is exist or not and employee is active or not
+
+	// for checking employee email is exist or not and employee is active or not
 	@Override
-	public boolean isValidUser(EmployeeDto employeeDto)
-	{
-		Query q=getSession().createNativeQuery("SELECT ID FROM EMPLOYEE_MASTER WHERE EMAIL='"+employeeDto.getEmail()+"' AND STATUS='ACTIVE';");
-		System.out.println("email of employee:"+employeeDto.getEmail());
+	public boolean isValidUser(EmployeeDto employeeDto) {
+		Query q = getSession().createNativeQuery(
+				"SELECT ID FROM EMPLOYEE_MASTER WHERE EMAIL='" + employeeDto.getEmail() + "' AND STATUS='ACTIVE';");
+		System.out.println("email of employee:" + employeeDto.getEmail());
 		@SuppressWarnings("unchecked")
-		List<Object> l=(List<Object>)q.getResultList();
-		employeeDto.setId((String)l.get(0));
-		int size=l.size();
-		System.out.println("size : "+size);
-		if(size!=0)
+		List<Object> l = (List<Object>) q.getResultList();
+		employeeDto.setId((String) l.get(0));
+		int size = l.size();
+		System.out.println("size : " + size);
+		if (size != 0)
 			return true;
 		else
-			return false;	
+			return false;
 	}
+
 //for displaying profile details
 	@Override
 	public ProfileDto profileDetails(EmployeeDto employeeDto) {
@@ -144,33 +145,32 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return profileDto;
 
 	}
+
 //For displaying manager details
 	@Override
 	public List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
 		@SuppressWarnings("deprecation")
 		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
-        crit.add(Restrictions.eq("employeeId",id));
-        crit.add(Restrictions.eq("status", "ACTIVE"));
-        @SuppressWarnings("unchecked")
+		crit.add(Restrictions.eq("employeeId", id));
+		crit.add(Restrictions.eq("status", "ACTIVE"));
+		@SuppressWarnings("unchecked")
 		List<ManagerMasterDo> results = crit.list();
-        System.out.println(results);
-        List<ManagerDetailsDto> managerList = new ArrayList<>();
-        for(ManagerMasterDo b: results) {
-        	ManagerDetailsDto manager = new ManagerDetailsDto();
-        	EmployeeMasterDo empMasterDo = getSession().get(EmployeeMasterDo.class, b.getManagerId());
-        	System.out.println(empMasterDo);
-        	manager.setFirstName(empMasterDo.getFirstName());
-        	manager.setLastName(empMasterDo.getLastName());
-        	manager.setManagerType(b.getManagerType());
-        	manager.setEmailId(empMasterDo.getEmailId());
-        	managerList.add(manager);
-        	
-        	
-        }
-        
+		System.out.println(results);
+		List<ManagerDetailsDto> managerList = new ArrayList<>();
+		for (ManagerMasterDo b : results) {
+			ManagerDetailsDto manager = new ManagerDetailsDto();
+			EmployeeMasterDo empMasterDo = getSession().get(EmployeeMasterDo.class, b.getManagerId());
+			System.out.println(empMasterDo);
+			manager.setFirstName(empMasterDo.getFirstName());
+			manager.setLastName(empMasterDo.getLastName());
+			manager.setManagerType(b.getManagerType());
+			manager.setEmailId(empMasterDo.getEmailId());
+			managerList.add(manager);
+
+		}
+
 		return managerList;
 	}
 
-	
 }

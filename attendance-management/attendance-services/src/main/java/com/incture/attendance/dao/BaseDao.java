@@ -11,11 +11,8 @@ import com.incture.attendance.entities.BaseDo;
 
 public abstract class BaseDao<E extends BaseDo, D extends BaseDto> {
 
-	
 	@Autowired
 	private SessionFactory sessionFactory;
-
-
 
 	// Connection
 	public Session getSession() {
@@ -29,10 +26,9 @@ public abstract class BaseDao<E extends BaseDo, D extends BaseDto> {
 	public StatelessSession getStatelessSession() {
 		return sessionFactory.openStatelessSession();
 	}
-	
+
 	protected abstract E importDto(D fromDto);
 
 	protected abstract D exportDto(E entity);
-
 
 }

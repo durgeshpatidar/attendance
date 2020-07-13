@@ -52,14 +52,12 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		}
 		return dto;
 	}
-	
-	//
 
 	@Override
 	public void addAddress(AddressDto addressdto) {
 		getSession().save(importDto(addressdto));
 	}
-	
+
 	@Override
 	public List<AddressDto> getAddressDetails(String empId) {
 		@SuppressWarnings("deprecation")
@@ -91,10 +89,10 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(AddressDo.class);
 		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, addressDto.getEmpId())));
-		criteria.add(Restrictions.eq("status","APPROVED"));
-		criteria.add(Restrictions.eq("locationLat",addressDto.getLocationLat()));
-		criteria.add(Restrictions.eq("locationLon",addressDto.getLocationLon()));
-		AddressDo address = (AddressDo)criteria.uniqueResult();
+		criteria.add(Restrictions.eq("status", "APPROVED"));
+		criteria.add(Restrictions.eq("locationLat", addressDto.getLocationLat()));
+		criteria.add(Restrictions.eq("locationLon", addressDto.getLocationLon()));
+		AddressDo address = (AddressDo) criteria.uniqueResult();
 		return address.getId();
 	}
 }

@@ -13,8 +13,8 @@ public interface EmployeeDao {
 	boolean verifyIdPass(EmployeeDto employeeDto);
 
 	boolean isValidUser(EmployeeDto employeeDto);
-	
+
 	ProfileDto profileDetails(EmployeeDto employeeDto);
-	
+
 	List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto);
 }
