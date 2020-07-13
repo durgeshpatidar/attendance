@@ -26,10 +26,10 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
 		criteria.add(Restrictions.eq("employeeId", workflowtaskDto.getEmpId()));
 		criteria.add(Restrictions.eq("managerType", "PROJECT"));
-		// we have to add restrictions on enddate
+		criteria.add(Restrictions.eq("status", "	ACTIVE"));
 		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
 
-		entity.setManager(getSession().get(ManagerMasterDo.class, mdo.getManagerId()));
+		entity.setManagerId(mdo.getManagerId());
 		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
 		entity.setComment(workflowtaskDto.getComment());
 		entity.setDescription(workflowtaskDto.getDescription());
@@ -44,7 +44,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		WorkflowTaskDto dto = new WorkflowTaskDto();
 		dto.setId(entity.getId());
 		dto.setEmpId(entity.getEmployee().getId());
-		dto.setManagerId(entity.getManager().getId());
+		dto.setManagerId(entity.getManagerId());
 		dto.setDescription(entity.getDescription());
 		dto.setStatus(entity.getStatus());
 		dto.setRequestdate(entity.getRequestdate());
@@ -111,7 +111,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		// Getting all rows from workflowmasterdo with given manager id
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		criteria.add(Restrictions.eq("manager", getSession().get(ManagerMasterDo.class, managerId)));
+		criteria.add(Restrictions.eq("managerId",managerId));
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
 		List<WorkflowTaskDto> request = new ArrayList<>();
