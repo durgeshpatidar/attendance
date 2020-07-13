@@ -6,7 +6,6 @@ import org.hibernate.criterion.Restrictions;
 
 import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.ManagerMasterDo;
-import com.incture.attendance.entities.TrackingDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
@@ -14,7 +13,6 @@ import com.incture.attendance.entities.WorkflowTaskDo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository("WorkflowTaskDaoImpl")
@@ -54,20 +52,26 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		return dto;
 	}
 
-	//Adding workflow
+	// Adding workflow
 	@Override
 	public void addWorkflowTask(WorkflowTaskDto workflowtaskdto) {
 		getSession().save(importDto(workflowtaskdto));
 
 	}
-	//Updating workflow
+
+	// Updating workflow
 	@Override
-	public void updateWorkflowTask(WorkflowTaskDto workflowtaskdto)  {
-		// TODO Auto-generated method stub
-		
+	public void updateStatus(String status, String comment, String workflowId) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
+		criteria.add(Restrictions.eq("id", workflowId));
+		WorkflowTaskDo current = (WorkflowTaskDo) criteria.uniqueResult();
+		current.setComment(comment);
+		current.setStatus(status);
 
 	}
-	//Getting workflow details for employee
+
+	// Getting workflow details for employee
 	@Override
 	public List<WorkflowTaskDto> getRequestDetails(String empId) {
 		@SuppressWarnings("deprecation")
@@ -101,10 +105,10 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		return request;
 	}
 
-	//Getting workflow details for manager
+	// Getting workflow details for manager
 	@Override
 	public List<WorkflowTaskDto> getTaskDetails(String managerId) {
-		//Getting all rows from workflowmasterdo with given manager id
+		// Getting all rows from workflowmasterdo with given manager id
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
 		criteria.add(Restrictions.eq("manager", getSession().get(ManagerMasterDo.class, managerId)));
@@ -113,7 +117,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
-			//Getting employee for each workflow
+			// Getting employee for each workflow
 			@SuppressWarnings("deprecation")
 			Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
 			crit.add(Restrictions.eq("employee", t.getEmployee().getId()));

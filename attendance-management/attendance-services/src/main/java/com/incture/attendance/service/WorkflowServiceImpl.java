@@ -29,7 +29,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 		responseDto.setStatusCode(200);
 		try {
 			workflowtaskDao.addWorkflowTask(worklfowtaskDto);
-			responseDto.setMessage("Task Created Successfully For "+worklfowtaskDto.getDescription()+"!");
+			responseDto.setMessage("Task Created Successfully For " + worklfowtaskDto.getDescription() + "!");
 
 		} catch (Exception e) {
 
@@ -74,7 +74,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 		return responseDto;
 
 	}
-	
+
 	@Override
 	public ResponseDto getTaskDetails(String managerId) {
 		logger.info("WorklfowServiceImpl | getTaskDetails | Execution start input " + managerId);
@@ -101,13 +101,33 @@ public class WorkflowServiceImpl implements WorkflowService {
 		logger.info("WorklfowServiceImpl | getTaskDetails | Execution end ouput " + responseDto);
 
 		return responseDto;
-		
-		
+
 	}
 
 	@Override
 	public ResponseDto updateStatus(String status, String comment, String workflowId) {
+		logger.info("WorkflowServiceImpl | updateStatus | Execution start input " + status + " " + comment + " "
+				+ workflowId);
 
-		return null;
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			workflowtaskDao.updateStatus(status, comment, workflowId);
+			responseDto.setMessage("Workflow task updated");
+
+		} catch (Exception e) {
+
+			logger.error("WorkflowServiceImpl | updateStatus | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+
+		}
+
+		logger.info("WorkflowServiceImpl | updateStatus   | Execution end ouput " + responseDto);
+
+		return responseDto;
+
 	}
 }
