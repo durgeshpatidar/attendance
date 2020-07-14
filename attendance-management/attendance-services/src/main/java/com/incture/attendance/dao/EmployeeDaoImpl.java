@@ -9,17 +9,13 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.incture.attendance.dto.AddressDto;
 import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.ManagerDetailsDto;
 import com.incture.attendance.dto.ProfileDto;
-import com.incture.attendance.entities.AddressMasterDo;
 import com.incture.attendance.entities.DesignationMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.ManagerMasterDo;
-import com.incture.attendance.entities.OfficeAddressDo;
 
 @Repository("EmployeeDaoImpl")
 public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements EmployeeDao {
@@ -57,47 +53,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	public void saveEmployeeData(EmployeeDto employeeDto) {
 
 		getSession().save(importDto(employeeDto));
-		String empId = employeeDto.getId();
-		List<AddressDto> address = new ArrayList<>();
-		// Taking homeaddress from address master
-		@SuppressWarnings("deprecation")
-		Criteria crit1 = getSession().createCriteria(AddressMasterDo.class);
-		crit1.add(Restrictions.eq("empId", empId));
-		AddressMasterDo addMasterDo = (AddressMasterDo) crit1.uniqueResult();
-		AddressDto homeAddress = new AddressDto();
-		// adding home address to an addressDto.
-		homeAddress.setEmpId(empId);
-		homeAddress.setAddress(addMasterDo.getAddress());
-		homeAddress.setCity(addMasterDo.getCity());
-		homeAddress.setState(addMasterDo.getState());
-		homeAddress.setPincode(addMasterDo.getPincode());
-		homeAddress.setLocationLat(addMasterDo.getLocationLat());
-		homeAddress.setLocationLon(addMasterDo.getLocationLat());
-		address.add(homeAddress);
-		// Taking static company address from master
-		@SuppressWarnings("deprecation")
-		Criteria crit2 = getSession().createCriteria(OfficeAddressDo.class);
-		@SuppressWarnings("unchecked")
-		List<OfficeAddressDo> officeAddresses = crit2.list();
-		for (OfficeAddressDo value : officeAddresses) {
-			AddressDto officeAddress = new AddressDto();
-			officeAddress.setEmpId(empId);
-			officeAddress.setAddress(value.getAddress());
-			officeAddress.setState(value.getState());
-			officeAddress.setCity(value.getCity());
-			officeAddress.setPincode(value.getPincode());
-			officeAddress.setLocationLat(value.getLocationLat());
-			officeAddress.setLocationLon(value.getLocationLon());
-			address.add(officeAddress);
-
-		}
-		AddressDaoImpl ad = new AddressDaoImpl();
-		// Adding master addresses to address transaction table.
-		for (AddressDto add : address) {
-			getSession().save(ad.importDto(add));
-
-		}
-
+		addressDao.addMasterAddress(employeeDto);
 	}
 
 	// for verifying employee email and password

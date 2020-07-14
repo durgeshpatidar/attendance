@@ -10,9 +10,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.AddressDto;
+import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.entities.AddressDo;
+import com.incture.attendance.entities.AddressMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.ManagerMasterDo;
+import com.incture.attendance.entities.OfficeAddressDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
 import com.incture.attendance.utils.ServicesUtil;
 
@@ -72,7 +75,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		wdo.setEmployee(getSession().get(EmployeeDo.class, addressdto.getEmpId()));
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
-		criteria.add(Restrictions.eq("employeeId", getSession().get(EmployeeDo.class, addressdto.getEmpId()).getId()));
+		criteria.add(Restrictions.eq("employeeId", addressdto.getEmpId()));
 		criteria.add(Restrictions.eq("managerType", "PROJECT"));
 		criteria.add(Restrictions.eq("status", "ACTIVE"));
 		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
@@ -119,6 +122,51 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		criteria.add(Restrictions.eq("locationLon", addressDto.getLocationLon()));
 		AddressDo address = (AddressDo) criteria.uniqueResult();
 		return address.getId();
+	}
+
+	@Override
+	public void addMasterAddress(EmployeeDto employeeDto) {
+		String empId = employeeDto.getId();
+		List<AddressDto> address = new ArrayList<>();
+		// Taking homeaddress from address master
+		@SuppressWarnings("deprecation")
+		Criteria crit1 = getSession().createCriteria(AddressMasterDo.class);
+		crit1.add(Restrictions.eq("empId", empId));
+		AddressMasterDo addMasterDo = (AddressMasterDo) crit1.uniqueResult();
+		AddressDto homeAddress = new AddressDto();
+		// adding home address to an addressDto.
+		homeAddress.setEmpId(empId);
+		homeAddress.setAddress(addMasterDo.getAddress());
+		homeAddress.setCity(addMasterDo.getCity());
+		homeAddress.setState(addMasterDo.getState());
+		homeAddress.setPincode(addMasterDo.getPincode());
+		homeAddress.setLocationLat(addMasterDo.getLocationLat());
+		homeAddress.setLocationLon(addMasterDo.getLocationLat());
+		address.add(homeAddress);
+		// Taking static company address from master
+		@SuppressWarnings("deprecation")
+		Criteria crit2 = getSession().createCriteria(OfficeAddressDo.class);
+		@SuppressWarnings("unchecked")
+		List<OfficeAddressDo> officeAddresses = crit2.list();
+		for (OfficeAddressDo value : officeAddresses) {
+			AddressDto officeAddress = new AddressDto();
+			officeAddress.setEmpId(empId);
+			officeAddress.setAddress(value.getAddress());
+			officeAddress.setState(value.getState());
+			officeAddress.setCity(value.getCity());
+			officeAddress.setPincode(value.getPincode());
+			officeAddress.setLocationLat(value.getLocationLat());
+			officeAddress.setLocationLon(value.getLocationLon());
+			address.add(officeAddress);
+
+		}
+		
+		// Adding master addresses to address transaction table.
+		for (AddressDto add : address) {
+			getSession().save(importDto(add));
+
+		}
+
 	}
 
 }
