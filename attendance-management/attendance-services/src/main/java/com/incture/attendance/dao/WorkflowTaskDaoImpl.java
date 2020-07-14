@@ -34,7 +34,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
 		entity.setComment(workflowtaskDto.getComment());
 		entity.setDescription(workflowtaskDto.getDescription());
-		entity.setRequestdate(workflowtaskDto.getRequestdate());
+		entity.setRequestdate(workflowtaskDto.getRequestDate());
 		entity.setStatus(workflowtaskDto.getStatus());
 		return entity;
 
@@ -48,7 +48,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		dto.setManagerId(entity.getManagerId());
 		dto.setDescription(entity.getDescription());
 		dto.setStatus(entity.getStatus());
-		dto.setRequestdate(entity.getRequestdate());
+		dto.setRequestDate(entity.getRequestdate());
 		dto.setComment(entity.getComment());
 		return dto;
 	}
@@ -95,9 +95,9 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setDescription(t.getDescription());
 			newWorkflow.setId(t.getId());
 			try {
-				newWorkflow.setRequestdate(formatter.parse(t.getRequestdate().toString()));
+				newWorkflow.setRequestDate(formatter.parse(t.getRequestdate().toString()));
 			} catch (ParseException e) {
-				newWorkflow.setRequestdate(t.getRequestdate());
+				newWorkflow.setRequestDate(t.getRequestdate());
 				e.printStackTrace();
 			}
 			newWorkflow.setStatus(t.getStatus());
@@ -126,7 +126,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
 			newWorkflow.setEmpId(emp.getId());
 			newWorkflow.setManagerId(managerId);
-			newWorkflow.setRequestdate(t.getRequestdate());
+			newWorkflow.setRequestDate(t.getRequestdate());
 			newWorkflow.setComment(t.getComment());
 			newWorkflow.setDescription(t.getDescription());
 			newWorkflow.setStatus(t.getStatus());
