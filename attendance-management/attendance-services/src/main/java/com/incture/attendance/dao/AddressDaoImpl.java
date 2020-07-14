@@ -136,6 +136,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		homeAddress.setPincode(addMasterDo.getPincode());
 		homeAddress.setLocationLat(addMasterDo.getLocationLat());
 		homeAddress.setLocationLon(addMasterDo.getLocationLat());
+		homeAddress.setStatus("ACTIVE");
 		address.add(homeAddress);
 		// Taking static company address from master
 		@SuppressWarnings("deprecation")
@@ -151,6 +152,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 			officeAddress.setPincode(value.getPincode());
 			officeAddress.setLocationLat(value.getLocationLat());
 			officeAddress.setLocationLon(value.getLocationLon());
+			officeAddress.setStatus("ACTIVE");
 			address.add(officeAddress);
 
 		}
