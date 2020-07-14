@@ -33,9 +33,8 @@ public class WorkflowTaskDo implements BaseDo {
 	@JoinColumn(name = "EMPLOYEE_ID")
 	private EmployeeDo employee;
 
-	@ManyToOne
-	@JoinColumn(name = "MANAGER_ID")
-	private ManagerMasterDo manager;
+	@Column(name="MANAGER_ID",columnDefinition="NVARCHAR(20)")
+	private String managerId;
 
 	@Column(name = "REQUEST_DATE", columnDefinition = "DATE")
 	private Date requestdate;
@@ -51,18 +50,6 @@ public class WorkflowTaskDo implements BaseDo {
 
 	public WorkflowTaskDo() {
 		super();
-	}
-
-	public WorkflowTaskDo(String id, EmployeeDo employee, ManagerMasterDo manager, Date requestdate, String description,
-			String status, String comment) {
-		super();
-		this.id = id;
-		this.employee = employee;
-		this.manager = manager;
-		this.requestdate = requestdate;
-		this.description = description;
-		this.status = status;
-		this.comment = comment;
 	}
 
 	public String getId() {
@@ -81,12 +68,12 @@ public class WorkflowTaskDo implements BaseDo {
 		this.employee = employee;
 	}
 
-	public ManagerMasterDo getManager() {
-		return manager;
+	public String getManagerId() {
+		return managerId;
 	}
 
-	public void setManager(ManagerMasterDo manager) {
-		this.manager = manager;
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
 	}
 
 	public Date getRequestdate() {
@@ -124,5 +111,18 @@ public class WorkflowTaskDo implements BaseDo {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public WorkflowTaskDo(String id, EmployeeDo employee, String managerId, Date requestdate, String description,
+			String status, String comment) {
+		super();
+		this.id = id;
+		this.employee = employee;
+		this.managerId = managerId;
+		this.requestdate = requestdate;
+		this.description = description;
+		this.status = status;
+		this.comment = comment;
+	}
+
 
 }

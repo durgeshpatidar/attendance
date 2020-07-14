@@ -1,13 +1,10 @@
 package com.incture.attendance.entities;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,28 +32,11 @@ public class ManagerMasterDo {
 	@Column(name = "STATUS", columnDefinition = "VARCHAR(20)")
 	private String status;
 
-	@OneToMany(mappedBy = "manager")
-	private List<WorkflowTaskDo> workflowTrackings = new ArrayList<WorkflowTaskDo>();
-
 	// Constructor
 	public ManagerMasterDo() {
 		super();
 	}
 
-	public ManagerMasterDo(String id, String employeeId, String managerId, Date startDate, Date endDate,
-			String managerType, String status, List<WorkflowTaskDo> workflowTrackings) {
-		super();
-		this.id = id;
-		this.employeeId = employeeId;
-		this.managerId = managerId;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.managerType = managerType;
-		this.status = status;
-		this.workflowTrackings = workflowTrackings;
-	}
-
-//Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -113,12 +93,18 @@ public class ManagerMasterDo {
 		this.status = status;
 	}
 
-	public List<WorkflowTaskDo> getWorkflowTrackings() {
-		return workflowTrackings;
+	public ManagerMasterDo(String id, String employeeId, String managerId, Date startDate, Date endDate,
+			String managerType, String status) {
+		super();
+		this.id = id;
+		this.employeeId = employeeId;
+		this.managerId = managerId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.managerType = managerType;
+		this.status = status;
 	}
-
-	public void setWorkflowTrackings(List<WorkflowTaskDo> workflowTrackings) {
-		this.workflowTrackings = workflowTrackings;
-	}
+	
+	
 
 }
