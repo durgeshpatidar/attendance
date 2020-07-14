@@ -46,5 +46,9 @@ public class WorkflowController {
 	public ResponseDto updateStatus(@RequestParam String status, String comment, String workflowId) {
 		return workflowService.updateStatus(status, comment, workflowId);
 	}
-
+	
+	@PatchMapping("/task/update-address-status")
+	public ResponseDto updateAddressStatus(@RequestParam String status, String comment, String workflowId) {
+		return workflowService.updateAddressStatus(status, comment, workflowId);
+	}
 }
