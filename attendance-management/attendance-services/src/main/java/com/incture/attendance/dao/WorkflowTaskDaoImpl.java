@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 
 import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.ManagerMasterDo;
+import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
@@ -111,7 +112,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		// Getting all rows from workflowmasterdo with given manager id
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		criteria.add(Restrictions.eq("managerId",managerId));
+		criteria.add(Restrictions.eq("managerId", managerId));
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
 		List<WorkflowTaskDto> request = new ArrayList<>();
@@ -129,5 +130,21 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			request.add(newWorkflow);
 		}
 		return request;
+	}
+
+	// Updating status for address request by manager
+	@Override
+	public void updateAddressStatus(String workflowId, String status, String comment) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
+		criteria.add(Restrictions.eq("id", workflowId));
+		WorkflowTaskDo workflow = (WorkflowTaskDo) criteria.uniqueResult();
+		workflow.setComment(comment);
+		@SuppressWarnings("deprecation")
+		Criteria criteria1 = getSession().createCriteria(AddressDo.class);
+		criteria1.add(Restrictions.eq("employee", workflow.getEmployee()));
+		AddressDo address = (AddressDo) criteria1.uniqueResult();
+		address.setStatus(status);
+
 	}
 }

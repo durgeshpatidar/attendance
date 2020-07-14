@@ -14,4 +14,6 @@ public interface WorkflowTaskDao {
 
 	List<WorkflowTaskDto> getTaskDetails(String managerId);
 
+	void updateAddressStatus(String workflowId, String status, String comment);
+
 }
