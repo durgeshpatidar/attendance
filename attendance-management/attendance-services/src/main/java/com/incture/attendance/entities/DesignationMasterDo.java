@@ -26,14 +26,17 @@ public class DesignationMasterDo {
 
 	@Column(name = "DESIGNATION", columnDefinition = "NVARCHAR(50)")
 	private String designation;
+	
+	@Column(name = "STATUS", columnDefinition = "NVARCHAR(20)")
+	private String status;
 
-	// Constructor
+	//Constructor
 	public DesignationMasterDo() {
 		super();
 	}
 
 	public DesignationMasterDo(String id, String employeeId, String startDate, String endDate, String competency,
-			String designation) {
+			String designation, String status) {
 		super();
 		this.id = id;
 		this.employeeId = employeeId;
@@ -41,9 +44,10 @@ public class DesignationMasterDo {
 		this.endDate = endDate;
 		this.competency = competency;
 		this.designation = designation;
+		this.status = status;
 	}
 
-	// Getters and Setters
+	//Getters and setters
 	public String getId() {
 		return id;
 	}
@@ -91,5 +95,16 @@ public class DesignationMasterDo {
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
+	
 
 }

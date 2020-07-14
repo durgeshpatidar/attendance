@@ -21,26 +21,20 @@ public class WorkflowTaskDto extends BaseDto {
 
 	}
 
-	public WorkflowTaskDto(String id, String empName, String managerName, String description, String empId,
-			String mangerId, Date requestdate, String comment, String status, String managerId) {
+	public WorkflowTaskDto(String id, String empName, String description, String empId, String managerId,
+			String managerName, Date requestDate, String comment, String status) {
 		super();
 		this.id = id;
-		this.managerName = managerName;
 		this.empName = empName;
 		this.description = description;
 		this.empId = empId;
 		this.managerId = managerId;
-		this.requestDate = requestdate;
+		this.managerName = managerName;
+		this.requestDate = requestDate;
 		this.comment = comment;
 		this.status = status;
 	}
-
-	// getters and setters
-
-	public String getEmpId() {
-		return empId;
-	}
-
+	//Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -49,16 +43,12 @@ public class WorkflowTaskDto extends BaseDto {
 		this.id = id;
 	}
 
-	public Date getRequestDate() {
-		return requestDate;
+	public String getEmpName() {
+		return empName;
 	}
 
-	public void setRequestDate(Date requestDate) {
-		this.requestDate = requestDate;
-	}
-
-	public void setEmpId(String id) {
-		this.empId = id;
+	public void setEmpName(String empName) {
+		this.empName = empName;
 	}
 
 	public String getDescription() {
@@ -69,6 +59,14 @@ public class WorkflowTaskDto extends BaseDto {
 		this.description = description;
 	}
 
+	public String getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
+
 	public String getManagerId() {
 		return managerId;
 	}
@@ -77,11 +75,19 @@ public class WorkflowTaskDto extends BaseDto {
 		this.managerId = managerId;
 	}
 
-	public Date getRequestdate() {
+	public String getManagerName() {
+		return managerName;
+	}
+
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+
+	public Date getRequestDate() {
 		return requestDate;
 	}
 
-	public void setRequestdate(Date requestDate) {
+	public void setRequestDate(Date requestDate) {
 		this.requestDate = requestDate;
 	}
 
@@ -100,21 +106,5 @@ public class WorkflowTaskDto extends BaseDto {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public String getEmpName() {
-		return empName;
-	}
-
-	public void setEmpName(String empName) {
-		this.empName = empName;
-	}
-
-	public String getManagerName() {
-		return managerName;
-	}
-
-	public void setManagerName(String managerName) {
-		this.managerName = managerName;
-	}
-
+	
 }
