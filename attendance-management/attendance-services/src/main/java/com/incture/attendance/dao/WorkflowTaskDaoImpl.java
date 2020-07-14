@@ -140,6 +140,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		criteria.add(Restrictions.eq("id", workflowId));
 		WorkflowTaskDo workflow = (WorkflowTaskDo) criteria.uniqueResult();
 		workflow.setComment(comment);
+		workflow.setStatus(status);
 		@SuppressWarnings("deprecation")
 		Criteria criteria1 = getSession().createCriteria(AddressDo.class);
 		criteria1.add(Restrictions.eq("employee", workflow.getEmployee()));
