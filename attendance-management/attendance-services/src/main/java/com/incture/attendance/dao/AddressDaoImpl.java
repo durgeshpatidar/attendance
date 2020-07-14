@@ -72,7 +72,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		wdo.setEmployee(getSession().get(EmployeeDo.class, addressdto.getEmpId()));
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
-		criteria.add(Restrictions.eq("employeeId", getSession().get(EmployeeDo.class, addressdto.getEmpId())));
+		criteria.add(Restrictions.eq("employeeId", getSession().get(EmployeeDo.class, addressdto.getEmpId()).getId()));
 		criteria.add(Restrictions.eq("managerType", "PROJECT"));
 		criteria.add(Restrictions.eq("status", "ACTIVE"));
 		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
