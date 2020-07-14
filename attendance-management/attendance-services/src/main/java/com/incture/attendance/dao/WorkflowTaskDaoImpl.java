@@ -124,6 +124,10 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			crit.add(Restrictions.eq("id", t.getEmployee().getId()));
 			EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
 			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
+			newWorkflow.setEmpId(emp.getId());
+			newWorkflow.setManagerId(managerId);
+			newWorkflow.setRequestdate(t.getRequestdate());
+			newWorkflow.setComment(t.getComment());
 			newWorkflow.setDescription(t.getDescription());
 			newWorkflow.setStatus(t.getStatus());
 			newWorkflow.setId(t.getId());
