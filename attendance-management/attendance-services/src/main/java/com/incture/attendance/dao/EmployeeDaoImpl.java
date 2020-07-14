@@ -15,6 +15,7 @@ import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.ManagerDetailsDto;
 import com.incture.attendance.dto.ProfileDto;
 import com.incture.attendance.entities.AddressMasterDo;
+import com.incture.attendance.entities.DesignationMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.ManagerMasterDo;
@@ -142,6 +143,12 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		profileDto.setBloodGroup(empMasterDto.getBloodGroup());
 		profileDto.setEmailId(empMasterDto.getEmailId());
 		profileDto.setProfileImg(empMasterDto.getProfileImg());
+		@SuppressWarnings("deprecation")
+		Criteria crit = getSession().createCriteria(DesignationMasterDo.class);
+		crit.add(Restrictions.eq("employeeId", id));
+		crit.add(Restrictions.eq("status", "ACTIVE"));
+		DesignationMasterDo designation = (DesignationMasterDo)crit.uniqueResult();
+;		profileDto.setDesignation(designation.getDesignation());
 		return profileDto;
 
 	}
