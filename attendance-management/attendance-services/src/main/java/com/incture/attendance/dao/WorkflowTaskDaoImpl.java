@@ -22,7 +22,6 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	@Override
 	protected WorkflowTaskDo importDto(WorkflowTaskDto workflowtaskDto) {
 		WorkflowTaskDo entity = new WorkflowTaskDo();
-		entity.setId(workflowtaskDto.getId());
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
 		criteria.add(Restrictions.eq("employeeId", workflowtaskDto.getEmpId()));
