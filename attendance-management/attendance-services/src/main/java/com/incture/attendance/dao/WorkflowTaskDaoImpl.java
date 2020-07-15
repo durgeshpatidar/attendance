@@ -27,6 +27,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
 		criteria.add(Restrictions.eq("employeeId", workflowtaskDto.getEmpId()));
 		criteria.add(Restrictions.eq("status", "ACTIVE"));
+		criteria.add(Restrictions.eq("managerType", "PROJECT"));
 		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
 		System.out.println("manager id : "+mdo.getManagerId());
 		entity.setManagerId(mdo.getManagerId());
