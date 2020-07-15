@@ -64,6 +64,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 				+ "' AND PASSWORD='" + employeeDto.getPassword() + "';");
 		@SuppressWarnings("unchecked")
 		List<Object> l = (List<Object>) q.getResultList();
+		employeeDto.setId((String)l.get(0));
 		int size = l.size();
 		if (size != 0)
 			return true;
