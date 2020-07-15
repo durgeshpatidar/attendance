@@ -37,6 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			boolean status = employeeDao.verifyIdPass(employeeDto);
 			if (status == true) {
 				responseDto.setMessage("Login successful");
+				responseDto.setData(new String(employeeDto.getId()));
 			} else {
 				responseDto.setStatus(Boolean.FALSE);
 				responseDto.setStatusCode(500);
