@@ -15,9 +15,7 @@ import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.AddressMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
-import com.incture.attendance.entities.ManagerMasterDo;
 import com.incture.attendance.entities.OfficeAddressDo;
-import com.incture.attendance.entities.WorkflowTaskDo;
 import com.incture.attendance.utils.ServicesUtil;
 
 @Repository("AddressDaoImpl")
@@ -73,7 +71,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
 		wtdo.setRequestDate(ServicesUtil.convertStringToDate(sdf.format(dt)));
-		WorkflowTaskDao wtd=new WorkflowTaskDaoImpl();
+		WorkflowTaskDao wtd = new WorkflowTaskDaoImpl();
 		wtd.addWorkflowTask(wtdo);
 		getSession().save(importDto(addressdto));
 	}
@@ -154,7 +152,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 			address.add(officeAddress);
 
 		}
-		
+
 		// Adding master addresses to address transaction table.
 		for (AddressDto add : address) {
 			getSession().save(importDto(add));
