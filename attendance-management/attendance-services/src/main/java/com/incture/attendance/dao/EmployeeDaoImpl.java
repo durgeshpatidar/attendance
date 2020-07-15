@@ -91,9 +91,11 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			address.add(officeAddress);
 
 		}
+		AddressDaoImpl ad = new AddressDaoImpl();
 		// Adding master addresses to address transaction table.
 		for (AddressDto add : address) {
-			addressDao.addAddress(add);
+			getSession().save(ad.importDto(add));
+			
 		}
 
 	}
