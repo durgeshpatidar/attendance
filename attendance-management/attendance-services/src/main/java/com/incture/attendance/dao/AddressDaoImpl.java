@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.AddressDto;
 import com.incture.attendance.dto.EmployeeDto;
+import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.AddressMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
@@ -64,23 +65,16 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	// Adding address and adding address request to workflow transaction table.
 	@Override
 	public void addAddress(AddressDto addressdto) {
-		WorkflowTaskDo wdo = new WorkflowTaskDo();
+		WorkflowTaskDto wtdo = new WorkflowTaskDto();
 		String description = "" + addressdto.getAddress() + addressdto.getCity() + addressdto.getState()
 				+ addressdto.getPincode();
-		wdo.setDescription(description);
-		wdo.setEmployee(getSession().get(EmployeeDo.class, addressdto.getEmpId()));
+		wtdo.setDescription(description);
+		wtdo.setEmpId(addressdto.getEmpId());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
-		wdo.setRequestdate(ServicesUtil.convertStringToDate(sdf.format(dt)));
-		wdo.setEmployee(getSession().get(EmployeeDo.class, addressdto.getEmpId()));
-		@SuppressWarnings("deprecation")
-		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
-		criteria.add(Restrictions.eq("employeeId", addressdto.getEmpId()));
-		criteria.add(Restrictions.eq("managerType", "PROJECT"));
-		criteria.add(Restrictions.eq("status", "ACTIVE"));
-		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
-		wdo.setManagerId(mdo.getManagerId());
-		getSession().save(wdo);
+		wtdo.setRequestDate(ServicesUtil.convertStringToDate(sdf.format(dt)));
+		WorkflowTaskDao wtd=new WorkflowTaskDaoImpl();
+		wtd.addWorkflowTask(wtdo);
 		getSession().save(importDto(addressdto));
 	}
 
