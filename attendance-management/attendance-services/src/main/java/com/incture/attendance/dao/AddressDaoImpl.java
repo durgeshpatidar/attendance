@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.incture.attendance.dto.AddressDto;
@@ -20,6 +21,8 @@ import com.incture.attendance.utils.ServicesUtil;
 
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
+	@Autowired
+	private WorkflowTaskDaoImpl wtd;
 	@Override
 	protected AddressDo importDto(AddressDto addressDto) {
 		AddressDo entity = null;
@@ -71,7 +74,6 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
 		wtdo.setRequestDate(ServicesUtil.convertStringToDate(sdf.format(dt)));
-		WorkflowTaskDao wtd = new WorkflowTaskDaoImpl();
 		wtd.addWorkflowTask(wtdo);
 		getSession().save(importDto(addressdto));
 	}
