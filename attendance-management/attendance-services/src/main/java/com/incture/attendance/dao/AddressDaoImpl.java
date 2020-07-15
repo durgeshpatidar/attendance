@@ -66,7 +66,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 				+ addressdto.getPincode();
 		wdo.setDescription(description);
 		wdo.setEmployee(getSession().get(EmployeeDo.class, addressdto.getEmpId()));
-		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
 		wdo.setRequestdate(ServicesUtil.convertStringToDate(sdf.format(dt)));
 		wdo.setEmployee(getSession().get(EmployeeDo.class, addressdto.getEmpId()));
