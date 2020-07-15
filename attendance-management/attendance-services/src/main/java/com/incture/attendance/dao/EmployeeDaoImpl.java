@@ -95,7 +95,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		// Adding master addresses to address transaction table.
 		for (AddressDto add : address) {
 			getSession().save(ad.importDto(add));
-			
+
 		}
 
 	}
@@ -149,8 +149,9 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		Criteria crit = getSession().createCriteria(DesignationMasterDo.class);
 		crit.add(Restrictions.eq("employeeId", id));
 		crit.add(Restrictions.eq("status", "ACTIVE"));
-		DesignationMasterDo designation = (DesignationMasterDo)crit.uniqueResult();
-;		profileDto.setDesignation(designation.getDesignation());
+		DesignationMasterDo designation = (DesignationMasterDo) crit.uniqueResult();
+		;
+		profileDto.setDesignation(designation.getDesignation());
 		return profileDto;
 
 	}
