@@ -99,8 +99,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 		responseDto.setStatusCode(200);
 		try {
 			employeeDao.isValidUser(employeeDto);
-			employeeDao.saveEmployeeData(employeeDto);
+			boolean status=employeeDao.saveEmployeeData(employeeDto);
+			if(status==true)
 			responseDto.setMessage("Profile Created Successfully!");
+			else
+			{
+				responseDto.setStatus(Boolean.FALSE);
+				responseDto.setStatusCode(500);
+				responseDto.setMessage("Email Id Already Registered !");
+			}
 
 		} catch (Exception e) {
 

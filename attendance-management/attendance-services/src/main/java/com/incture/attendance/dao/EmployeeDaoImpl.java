@@ -50,10 +50,22 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	// for save employee data and adding address from master after signup
 	@Override
-	public void saveEmployeeData(EmployeeDto employeeDto) {
-
+	public boolean saveEmployeeData(EmployeeDto employeeDto) {
+		@SuppressWarnings("deprecation")
+		Criteria crit = getSession().createCriteria(EmployeeDo.class);
+		crit.add(Restrictions.eq("id", employeeDto.getId()));
+		EmployeeDo ed=(EmployeeDo)crit.uniqueResult();
+		if(ed!=null)
+		{
+			return false;
+		}
 		getSession().save(importDto(employeeDto));
+		try {
 		addressDao.addMasterAddress(employeeDto);
+		}
+		catch(Exception e)
+		{}
+		return true;
 	}
 
 	// for verifying employee email and password

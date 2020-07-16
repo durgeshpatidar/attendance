@@ -8,7 +8,7 @@ import com.incture.attendance.dto.ManagerDetailsDto;
 
 public interface EmployeeDao {
 
-	void saveEmployeeData(EmployeeDto employeeDto);
+	boolean saveEmployeeData(EmployeeDto employeeDto);
 
 	boolean verifyIdPass(EmployeeDto employeeDto);
 
