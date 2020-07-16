@@ -94,9 +94,8 @@ public class TrackingServiceImpl implements TrackingService {
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
 		Date checkOut=new Date();
-		Double totalHours=0.0;
 		try {
-			trackingDao.updateTracking(id, checkOut, totalHours);
+			trackingDao.updateTracking(id, checkOut);
 			responseDto.setMessage("Checkout details added Successfully!");
 
 		} catch (Exception e) {

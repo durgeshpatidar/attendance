@@ -97,13 +97,14 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 //for updating tracking or checkout
 	@Override
-	public void updateTracking(String id, Date checkOut, double totalHours) {
+	public void updateTracking(String id, Date checkOut) {
 
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(TrackingDo.class);
 		criteria.add(Restrictions.eq("id", id));
 		TrackingDo current = (TrackingDo) criteria.uniqueResult();
 		current.setCheckOut(checkOut);
+		Double totalHours=0.0;
 		current.setTotalHours(totalHours);
 
 	}
