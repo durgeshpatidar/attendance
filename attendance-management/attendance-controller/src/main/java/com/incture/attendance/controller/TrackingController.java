@@ -51,8 +51,9 @@ public class TrackingController {
 
 //Updating tracking details or checkout
 	@PatchMapping("/checkout")
-	public ResponseDto updateTracking(@RequestParam String id) {
-		return trackingService.updateTracking(id);
+	public ResponseDto updateTracking(@RequestParam String id, @RequestParam Date checkOut,
+			@RequestParam double totalHours) {
+		return trackingService.updateTracking(id, checkOut, totalHours);
 
 	}
 	//

@@ -9,5 +9,5 @@ public interface TrackingService {
 
 	ResponseDto getTrackingDetails(String id, Date start, Date end);
 
-	ResponseDto updateTracking(String id);
+	ResponseDto updateTracking(String id, Date checkOut, double totalHours);
 }
