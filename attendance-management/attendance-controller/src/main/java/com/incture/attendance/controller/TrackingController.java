@@ -36,7 +36,7 @@ public class TrackingController {
 	@ResponseBody
 	public ResponseDto getTrackingDetails(@RequestParam String id, @RequestParam(defaultValue = "") String start,
 			@RequestParam(defaultValue = "") String end) {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		System.out.println(id + " " + start + " " + end);
 		Date startDate = null, endDate = null;
@@ -51,9 +51,8 @@ public class TrackingController {
 
 //Updating tracking details or checkout
 	@PatchMapping("/checkout")
-	public ResponseDto updateTracking(@RequestParam String id, @RequestParam Date checkOut,
-			@RequestParam double totalHours) {
-		return trackingService.updateTracking(id, checkOut, totalHours);
+	public ResponseDto updateTracking(@RequestParam String id) {
+		return trackingService.updateTracking(id);
 
 	}
 	//

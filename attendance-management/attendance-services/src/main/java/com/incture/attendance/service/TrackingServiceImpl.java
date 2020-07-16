@@ -87,13 +87,14 @@ public class TrackingServiceImpl implements TrackingService {
 
 //for checkout or update tracking
 	@Override
-	public ResponseDto updateTracking(String id, Date checkOut, double totalHours) {
-		logger.info("TrackingServiceImpl | updateTracking | Execution start input " + id + " " + checkOut + " "
-				+ totalHours);
+	public ResponseDto updateTracking(String id) {
+		logger.info("TrackingServiceImpl | updateTracking | Execution start input " + id );
 
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
+		Date checkOut=new Date();
+		Double totalHours=0.0;
 		try {
 			trackingDao.updateTracking(id, checkOut, totalHours);
 			responseDto.setMessage("Checkout details added Successfully!");
