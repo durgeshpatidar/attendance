@@ -2,6 +2,8 @@ package com.incture.attendance.dao;
 
 import org.springframework.stereotype.Repository;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,7 @@ import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.TrackingDo;
+import com.incture.attendance.utils.ServicesUtil;
 
 @Repository("TrackingDaoImpl")
 public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements TrackingDao {
@@ -48,6 +51,13 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 //For adding tracking
 	@Override
 	public String addTracking(TrackingDto trackingdto) {
+		
+		DateFormat df=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Date checkIn=new Date();
+		DateFormat df1=new SimpleDateFormat("dd-MM-yyyy");
+		Date today =new Date();
+		trackingdto.setCheckOut(ServicesUtil.convertStringToDate(df.format(checkIn)));
+		trackingdto.setDate(ServicesUtil.convertStringToDate(df1.format(today)));
 		TrackingDo tdo = importDto(trackingdto);
 		getSession().save(tdo);
 		return tdo.getId();
