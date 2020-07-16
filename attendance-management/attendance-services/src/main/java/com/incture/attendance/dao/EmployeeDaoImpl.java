@@ -54,17 +54,15 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		@SuppressWarnings("deprecation")
 		Criteria crit = getSession().createCriteria(EmployeeDo.class);
 		crit.add(Restrictions.eq("id", employeeDto.getId()));
-		EmployeeDo ed=(EmployeeDo)crit.uniqueResult();
-		if(ed!=null)
-		{
+		EmployeeDo ed = (EmployeeDo) crit.uniqueResult();
+		if (ed != null) {
 			return false;
 		}
 		getSession().save(importDto(employeeDto));
 		try {
-		addressDao.addMasterAddress(employeeDto);
+			addressDao.addMasterAddress(employeeDto);
+		} catch (Exception e) {
 		}
-		catch(Exception e)
-		{}
 		return true;
 	}
 
@@ -76,7 +74,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 				+ "' AND PASSWORD='" + employeeDto.getPassword() + "';");
 		@SuppressWarnings("unchecked")
 		List<Object> l = (List<Object>) q.getResultList();
-		employeeDto.setId((String)l.get(0));
+		employeeDto.setId((String) l.get(0));
 		int size = l.size();
 		if (size != 0)
 			return true;
@@ -114,13 +112,16 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		profileDto.setBloodGroup(empMasterDto.getBloodGroup());
 		profileDto.setEmailId(empMasterDto.getEmailId());
 		profileDto.setProfileImg(empMasterDto.getProfileImg());
-		@SuppressWarnings("deprecation")
-		Criteria crit = getSession().createCriteria(DesignationMasterDo.class);
-		crit.add(Restrictions.eq("employeeId", id));
-		crit.add(Restrictions.eq("status", "ACTIVE"));
-		DesignationMasterDo designation = (DesignationMasterDo) crit.uniqueResult();
-		;
-		profileDto.setDesignation(designation.getDesignation());
+		try {
+			@SuppressWarnings("deprecation")
+			Criteria crit = getSession().createCriteria(DesignationMasterDo.class);
+			crit.add(Restrictions.eq("employeeId", id));
+			crit.add(Restrictions.eq("status", "ACTIVE"));
+			DesignationMasterDo designation = (DesignationMasterDo) crit.uniqueResult();
+			profileDto.setDesignation(designation.getDesignation());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return profileDto;
 
 	}
