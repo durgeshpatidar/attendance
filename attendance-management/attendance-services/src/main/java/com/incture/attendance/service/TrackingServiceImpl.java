@@ -1,5 +1,7 @@
 package com.incture.attendance.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import com.incture.attendance.dao.TrackingDao;
 import com.incture.attendance.dto.TrackingDetailsDto;
 import com.incture.attendance.dto.TrackingDto;
 import com.incture.attendance.utils.ResponseDto;
+import com.incture.attendance.utils.ServicesUtil;
 
 @Service
 @Transactional
@@ -93,9 +96,12 @@ public class TrackingServiceImpl implements TrackingService {
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
+		DateFormat df=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date checkOut=new Date();
 		try {
-			trackingDao.updateTracking(id, checkOut);
+			trackingDao.updateTracking(id, ServicesUtil.convertStringToDate(df.format(checkOut)));
+			System.out.print("checkout date time :"+checkOut);
+			System.out.println("date after format :"+ServicesUtil.convertStringToDate(df.format(checkOut)).toString());
 			responseDto.setMessage("Checkout details added Successfully!");
 
 		} catch (Exception e) {
