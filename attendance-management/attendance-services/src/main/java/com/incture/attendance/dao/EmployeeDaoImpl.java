@@ -72,15 +72,15 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 		Query q = getSession().createNativeQuery("SELECT ID FROM EMPLOYEE WHERE EMAIL='" + employeeDto.getEmail()
 				+ "' AND PASSWORD='" + employeeDto.getPassword() + "';");
+		@SuppressWarnings("unchecked")
+		List<Object> l = (List<Object>) q.getResultList();
 		try {
-			@SuppressWarnings("unchecked")
-			List<Object> l = (List<Object>) q.getResultList();
-			employeeDto.setId((String) l.get(0));
-			if (l.isEmpty())
-				return false;
+		employeeDto.setId((String) l.get(0));			
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		if (l.isEmpty())
+			return false;
 		return true;
 	}
 
