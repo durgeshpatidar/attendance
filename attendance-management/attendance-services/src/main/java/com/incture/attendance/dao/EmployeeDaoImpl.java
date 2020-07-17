@@ -243,6 +243,13 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	@Override
 	public void updatePassword(EmployeeDto employeeDto) {
+		String password = employeeDto.getPassword();
+		@SuppressWarnings("deprecation")
+		Criteria crit = getSession().createCriteria(EmployeeDo.class);
+		crit.add(Restrictions.eq("id", employeeDto.getId()));
+		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
+		edo.setPassword(password);
+		
 
 	}
 
