@@ -35,7 +35,7 @@ public class TrackingController {
 	@ResponseBody
 	public ResponseDto getTrackingDetails(@RequestParam String id, @RequestParam(defaultValue = "") String start,
 			@RequestParam(defaultValue = "") String end) {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		System.out.println(id + " " + start + " " + end);
 		Date startDate = null, endDate = null;
