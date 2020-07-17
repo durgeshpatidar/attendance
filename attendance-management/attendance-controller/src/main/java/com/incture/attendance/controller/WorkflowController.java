@@ -2,7 +2,6 @@ package com.incture.attendance.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,12 +41,12 @@ public class WorkflowController {
 		return workflowService.getTaskDetails(managerId);
 	}
 
-	@PatchMapping("/task/update")
+	@PostMapping("/task/update")
 	public ResponseDto updateStatus(@RequestParam String status, String comment, String workflowId) {
 		return workflowService.updateStatus(status, comment, workflowId);
 	}
-	
-	@PatchMapping("/task/update-address-status")
+
+	@PostMapping("/task/update-address-status")
 	public ResponseDto updateAddressStatus(@RequestParam String status, String comment, String workflowId) {
 		return workflowService.updateAddressStatus(status, comment, workflowId);
 	}

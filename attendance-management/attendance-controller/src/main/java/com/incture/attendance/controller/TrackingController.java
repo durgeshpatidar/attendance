@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +35,7 @@ public class TrackingController {
 	@ResponseBody
 	public ResponseDto getTrackingDetails(@RequestParam String id, @RequestParam(defaultValue = "") String start,
 			@RequestParam(defaultValue = "") String end) {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
 		System.out.println(id + " " + start + " " + end);
 		Date startDate = null, endDate = null;
@@ -50,7 +49,7 @@ public class TrackingController {
 	}
 
 //Updating tracking details or checkout
-	@PatchMapping("/checkout")
+	@PostMapping("/checkout")
 	public ResponseDto updateTracking(@RequestParam String id, @RequestParam Date checkOut,
 			@RequestParam double totalHours) {
 		return trackingService.updateTracking(id, checkOut, totalHours);
