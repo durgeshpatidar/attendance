@@ -42,7 +42,10 @@ public class WorkflowController {
 	}
 
 	@PostMapping("/task/update")
-	public ResponseDto updateStatus(@RequestParam String status, String comment, String workflowId) {
+	public ResponseDto updateStatus(@RequestBody WorkflowTaskDto wdto) {
+		String status=wdto.getStatus();
+		String comment=wdto.getComment(); 
+		String workflowId=wdto.getId();
 		return workflowService.updateStatus(status, comment, workflowId);
 	}
 
