@@ -178,9 +178,18 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	@Override
 	public boolean forgotPassword(EmployeeDto employeeDto) {
-
-		String newPassword=new String(getPassword());
-		return false;
+		@SuppressWarnings("deprecation")
+		Criteria crit = getSession().createCriteria(EmployeeDo.class);
+		crit.add(Restrictions.eq("email", employeeDto.getEmail()));
+		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
+		if (edo != null) {
+			String newPassword=new String(getPassword());
+			return true;
+		}
+		else {
+			return false;
+		}
+		
 	}
 
 }
