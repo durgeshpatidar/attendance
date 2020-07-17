@@ -50,8 +50,10 @@ public class TrackingController {
 
 //Updating tracking details or checkout
 	@PostMapping("/checkout")
-	public ResponseDto updateTracking(@RequestParam String id, @RequestParam Date checkOut,
-			@RequestParam double totalHours) {
+	public ResponseDto updateTracking(@RequestBody TrackingDto trackingdto) {
+		String id=trackingdto.getId();
+		Date checkOut=trackingdto.getCheckOut();
+		double totalHours=trackingdto.getTotalHours();
 		return trackingService.updateTracking(id, checkOut, totalHours);
 
 	}
