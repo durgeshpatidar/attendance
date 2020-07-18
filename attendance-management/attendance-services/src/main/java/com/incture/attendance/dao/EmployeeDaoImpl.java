@@ -215,7 +215,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 				}
 			};
 			// Get the default Session object.
-			Session session = Session.getDefaultInstance(properties, auth);
+			javax.mail.Session session = javax.mail.Session.getDefaultInstance(properties, auth);
 
 			// Create a default MimeMessage object.
 			MimeMessage message = new MimeMessage(session);
