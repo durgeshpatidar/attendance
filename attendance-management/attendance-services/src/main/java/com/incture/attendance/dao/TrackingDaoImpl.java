@@ -29,6 +29,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		entity.setCheckOut(trackingDto.getCheckOut());
 		entity.setDate(trackingDto.getDate());
 		entity.setTotalHours(trackingDto.getTotalHours());
+		entity.setStatus(trackingDto.getStatus());
 		return entity;
 	}
 
@@ -42,12 +43,15 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		dto.setCheckOut(entity.getCheckOut());
 		dto.setTotalHours(entity.getTotalHours());
 		dto.setDate(entity.getDate());
+		dto.setStatus(entity.getStatus());
 		return dto;
 	}
 //For CheckIn
 	@Override
 	public String addTracking(TrackingDto trackingdto) {
+		trackingdto.setStatus("PENDING");
 		TrackingDo tdo = importDto(trackingdto);
+		
 		getSession().save(tdo);
 		return tdo.getId();
 
@@ -103,6 +107,9 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			TrackingDo current = (TrackingDo) criteria.uniqueResult();
 			current.setCheckOut(checkOut);
 			current.setTotalHours(totalHours);
+			if(totalHours>= 7.5 && totalHours<= 8.5) {
+				current.setStatus("APPROVED");
+			}
 
 		}
 
