@@ -195,7 +195,8 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		String newPassword = new String(getPassword());
 		employeeDto.setId(edo.getId());
 		employeeDto.setPassword(newPassword);
-		updatePassword(employeeDto);
+		EmployeeDaoImpl edao=new EmployeeDaoImpl();
+		edao.updatePassword(employeeDto);
 		String to = "durgeshpatidar80@gmail.com";
 		String from = "durgeshpatidar40@gmail.com";
 		String password = "durgesh123*";
