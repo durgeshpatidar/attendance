@@ -66,6 +66,11 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	// Adding address and adding address request to workflow transaction table.
 	@Override
 	public void addAddress(AddressDto addressdto) {
+		AddressDo newAdd = importDto(addressdto);
+		addressdto.setStatus("PENDING");
+		getSession().save(newAdd);
+		
+		//Adding workflow for the newly added address
 		WorkflowTaskDto wtdo = new WorkflowTaskDto();
 		String description = "" + addressdto.getAddress() + addressdto.getCity() + addressdto.getState()
 				+ addressdto.getPincode();
@@ -74,8 +79,10 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
 		wtdo.setRequestDate(ServicesUtil.convertStringToDate(sdf.format(dt)));
+		wtdo.setId(newAdd.getId());
+		wtdo.setStatus("PENDING");
+		wtdo.setQuerytype("CHANGE IN LOCATION");
 		wtd.addWorkflowTask(wtdo);
-		getSession().save(importDto(addressdto));
 	}
 
 	// Getting all address details.
