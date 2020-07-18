@@ -2,8 +2,17 @@ package com.incture.attendance.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.Query;
 
 import org.hibernate.Criteria;
@@ -185,9 +194,56 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		if (edo == null)
 			return false;
 		String newPassword = new String(getPassword());
-		//code for send email and update new pasword in database 
-		//for update password we will create another method updatePassword()
+		employeeDto.setId(edo.getId());
+		employeeDto.setPassword(newPassword);
+		updatePassword(employeeDto);
+		String to = "durgeshpatidar80@gmail.com";
+		String from = "durgeshpatidar40@gmail.com";
+		String password = "durgesh123*";
+		Properties properties = new Properties();
+
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "587");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+
+		try {
+
+			Authenticator auth = new Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(from, password);
+				}
+			};
+			// Get the default Session object.
+			Session session = Session.getDefaultInstance(properties, auth);
+
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
+
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(from));
+
+			// Set To: header field of the header.
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+			// Set Subject: header field
+			message.setSubject("Password Reset Request :Time & Attendance");
+
+			// Now set the actual message
+			message.setText(newPassword+" This is your new password... Thank you");
+
+			// Send message
+			Transport.send(message);
+			System.out.println("Sent message successfully....");
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+		}
 		return true;
+	}
+
+	@Override
+	public void updatePassword(EmployeeDto employeeDto) {
+
 	}
 
 }
