@@ -222,16 +222,16 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			message.addHeader("Content-Transfer-Encoding", "8bit");
 
 			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from,"NoReply-JD"));
-			message.setReplyTo(InternetAddress.parse(from,false));
+			message.setFrom(new InternetAddress(from, "NoReply-JD"));
+			message.setReplyTo(InternetAddress.parse(from, false));
 			// Set To: header field of the header.
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 			// Set Subject: header field
-			message.setSubject("Password Reset Request :Time & Attendance","UTF-8");
+			message.setSubject("Password Reset Request :Time & Attendance", "UTF-8");
 
 			// Now set the actual message
-			message.setText(newPassword + " This is your new password... Thank you","UTF-8");
+			message.setText(newPassword + " This is your new password... Thank you", "UTF-8");
 			message.setSentDate(new Date());
 			// Send message
 			Transport.send(message);
