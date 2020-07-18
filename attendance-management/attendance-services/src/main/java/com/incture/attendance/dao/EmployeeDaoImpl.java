@@ -193,8 +193,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		if (edo == null)
 			return false;
 		String newPassword = new String(getPassword());
-		edo.setPassword(newPassword);
-		String to = "durgeshpatidar80@gmail.com";
+		String to = "durgeshpatidar40@gmail.com";
 		String from = "inkathon2020@gmail.com";
 		String password = "dhoni777";
 		Properties properties = new Properties();
@@ -218,7 +217,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			MimeMessage message = new MimeMessage(session);
 
 			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from, "NoReply-JD"));
+			message.setFrom(new InternetAddress(from, "NoReply-Time & Attendance"));
 
 			// Set To: header field of the header.
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
@@ -227,10 +226,11 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			message.setSubject("Password Reset Request :Time & Attendance");
 
 			// Now set the actual message
-			message.setText(newPassword + " This is your new password... Thank you");
+			message.setText("Your new password: "+newPassword+" \n Please login with this password and update it.");
 			message.setSentDate(new Date());
 			// Send message
 			Transport.send(message);
+			edo.setPassword(newPassword);
 			System.out.println("Sent message successfully....");
 		} catch (Exception e) {
 			e.printStackTrace();
