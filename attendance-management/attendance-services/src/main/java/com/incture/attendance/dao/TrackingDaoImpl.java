@@ -107,7 +107,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			TrackingDo current = (TrackingDo) criteria.uniqueResult();
 			current.setCheckOut(checkOut);
 			current.setTotalHours(totalHours);
-			if(totalHours>= 7.5 && totalHours<= 8.5) {
+			if(totalHours>= 7.0 && totalHours<= 9.0) {
 				current.setStatus("APPROVED");
 			}
 
