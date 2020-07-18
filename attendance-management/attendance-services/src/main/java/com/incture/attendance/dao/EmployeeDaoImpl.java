@@ -1,6 +1,7 @@
 package com.incture.attendance.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -211,23 +212,27 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 				}
 			};
 			// Get the default Session object.
-			javax.mail.Session session = javax.mail.Session.getDefaultInstance(properties, auth);
+			javax.mail.Session session = javax.mail.Session.getInstance(properties, auth);
 
 			// Create a default MimeMessage object.
 			MimeMessage message = new MimeMessage(session);
 
-			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from));
+			message.addHeader("Content-type", "text/HTML; charset=UTF-8");
+			message.addHeader("format", "flowed");
+			message.addHeader("Content-Transfer-Encoding", "8bit");
 
+			// Set From: header field of the header.
+			message.setFrom(new InternetAddress(from,"NoReply-JD"));
+			message.setReplyTo(InternetAddress.parse(from,false));
 			// Set To: header field of the header.
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 			// Set Subject: header field
-			message.setSubject("Password Reset Request :Time & Attendance");
+			message.setSubject("Password Reset Request :Time & Attendance","UTF-8");
 
 			// Now set the actual message
-			message.setText(newPassword + " This is your new password... Thank you");
-
+			message.setText(newPassword + " This is your new password... Thank you","UTF-8");
+			message.setSentDate(new Date());
 			// Send message
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
