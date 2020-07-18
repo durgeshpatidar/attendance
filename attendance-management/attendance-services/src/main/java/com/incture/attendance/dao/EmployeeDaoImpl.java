@@ -192,9 +192,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		if (edo == null)
 			return false;
 		String newPassword = new String(getPassword());
-		employeeDto.setId(edo.getId());
-		employeeDto.setPassword(newPassword);
-		updatePassword(employeeDto);
+		edo.setPassword(newPassword);
 		String to = "durgeshpatidar80@gmail.com";
 		String from = "durgeshpatidar40@gmail.com";
 		String password = "durgesh123*";
@@ -248,7 +246,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		crit.add(Restrictions.eq("id", employeeDto.getId()));
 		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
 		edo.setPassword(password);
-
 	}
 
 }
