@@ -182,14 +182,12 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		Criteria crit = getSession().createCriteria(EmployeeDo.class);
 		crit.add(Restrictions.eq("email", employeeDto.getEmail()));
 		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
-		if (edo != null) {
-			String newPassword=new String(getPassword());
-			return true;
-		}
-		else {
+		if (edo == null)
 			return false;
-		}
-		
+		String newPassword = new String(getPassword());
+		//code for send email and update new pasword in database 
+		//for update password we will create another method updatePassword()
+		return true;
 	}
 
 }
