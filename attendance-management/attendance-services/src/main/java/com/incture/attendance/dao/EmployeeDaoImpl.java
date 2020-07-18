@@ -235,6 +235,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e.toString());
+			return false;
 		}
 		return true;
 	}
