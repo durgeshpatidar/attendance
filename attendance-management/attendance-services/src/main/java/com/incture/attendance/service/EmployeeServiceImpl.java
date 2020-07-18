@@ -181,4 +181,31 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
+	@Override
+	public ResponseDto forgotPassword(EmployeeDto employeeDto) {
+		logger.info("EmployeeServiceImpl | forgotPassword | Execution start input " + employeeDto);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			boolean status = employeeDao.forgotPassword(employeeDto);
+			if (status == true) {
+				responseDto.setMessage("New Password is sent in your mail!");
+
+			} else {
+				responseDto.setStatus(Boolean.FALSE);
+				responseDto.setStatusCode(500);
+				responseDto.setMessage("Employee Does Not Exist In Company Or Entering Email Is Wrong");
+			}
+		} catch (Exception e) {
+			logger.error("EmployeeServiceImpl | forgotPassword | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+		}
+		logger.info("EmployeeServiceImpl | forgotPassword | Execution end ouput " + responseDto);
+		return responseDto;
+	}
+
 }

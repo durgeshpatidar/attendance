@@ -14,4 +14,6 @@ public interface EmployeeService {
 	ResponseDto profileDetails(EmployeeDto employeeDto);
 
 	ResponseDto managerDetails(EmployeeDto employeeDto);
+
+	ResponseDto forgotPassword(EmployeeDto employeeDto);
 }

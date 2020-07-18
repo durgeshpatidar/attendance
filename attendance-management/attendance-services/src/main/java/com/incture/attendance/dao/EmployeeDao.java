@@ -17,4 +17,6 @@ public interface EmployeeDao {
 	ProfileDto profileDetails(EmployeeDto employeeDto);
 
 	List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto);
+
+	boolean forgotPassword(EmployeeDto employeeDto);
 }

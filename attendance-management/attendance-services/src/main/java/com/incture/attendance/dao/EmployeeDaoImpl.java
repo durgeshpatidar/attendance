@@ -155,4 +155,10 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return managerList;
 	}
 
+	@Override
+	public boolean forgotPassword(EmployeeDto employeeDto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
