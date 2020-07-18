@@ -8,7 +8,6 @@ import java.util.Random;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -195,8 +194,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		String newPassword = new String(getPassword());
 		employeeDto.setId(edo.getId());
 		employeeDto.setPassword(newPassword);
-		EmployeeDaoImpl edao=new EmployeeDaoImpl();
-		edao.updatePassword(employeeDto);
+		updatePassword(employeeDto);
 		String to = "durgeshpatidar80@gmail.com";
 		String from = "durgeshpatidar40@gmail.com";
 		String password = "durgesh123*";
