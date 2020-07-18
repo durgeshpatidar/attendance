@@ -99,11 +99,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		responseDto.setStatusCode(200);
 		try {
 			employeeDao.isValidUser(employeeDto);
-			boolean status=employeeDao.saveEmployeeData(employeeDto);
-			if(status==true)
-			responseDto.setMessage("Profile Created Successfully!");
-			else
-			{
+			boolean status = employeeDao.saveEmployeeData(employeeDto);
+			if (status == true)
+				responseDto.setMessage("Profile Created Successfully!");
+			else {
 				responseDto.setStatus(Boolean.FALSE);
 				responseDto.setStatusCode(500);
 				responseDto.setMessage("Email Id Already Registered !");
@@ -205,6 +204,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 			responseDto.setMessage(e.getMessage());
 		}
 		logger.info("EmployeeServiceImpl | forgotPassword | Execution end ouput " + responseDto);
+		return responseDto;
+	}
+
+	@Override
+	public ResponseDto updatePassword(EmployeeDto employeeDto) {
+		logger.info("EmployeeServiceImpl | updatePassword | Execution start input " + employeeDto);
+
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			employeeDao.updatePassword(employeeDto);
+			responseDto.setMessage("Your Password Has Been Reset!");
+
+		} catch (Exception e) {
+			logger.error("EmployeeServiceImpl | updatePassword | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+		}
+		logger.info("EmployeeServiceImpl | updatePassword | Execution end ouput " + responseDto);
 		return responseDto;
 	}
 

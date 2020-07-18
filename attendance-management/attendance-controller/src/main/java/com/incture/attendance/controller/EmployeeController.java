@@ -52,4 +52,9 @@ public class EmployeeController {
 	public ResponseDto forgotPassword(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.forgotPassword(employeeDto);
 	}
+	
+	@PostMapping("/profile/update")
+	public ResponseDto updatePassword(@RequestBody EmployeeDto employeeDto) {
+		return employeeService.updatePassword(employeeDto);
+	}
 }
