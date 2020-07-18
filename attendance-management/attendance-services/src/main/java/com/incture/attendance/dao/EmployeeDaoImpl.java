@@ -193,7 +193,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		if (edo == null)
 			return false;
 		String newPassword = new String(getPassword());
-		String to = "durgeshpatidar40@gmail.com";
+		String to = employeeDto.getEmail();
 		String from = "inkathon2020@gmail.com";
 		String password = "dhoni777";
 		Properties properties = new Properties();
@@ -223,10 +223,10 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 			// Set Subject: header field
-			message.setSubject("Password Reset Request :Time & Attendance");
+			message.setSubject("Password Reset Request:Time & Attendance");
 
 			// Now set the actual message
-			message.setText("Your new password: "+newPassword+" \n Please login with this password and update it.");
+			message.setText("Your new password: "+newPassword+" \nPlease login with this password and update it.\n\nThank You!\n<b>Time & Attendance Team</b>");
 			message.setSentDate(new Date());
 			// Send message
 			Transport.send(message);

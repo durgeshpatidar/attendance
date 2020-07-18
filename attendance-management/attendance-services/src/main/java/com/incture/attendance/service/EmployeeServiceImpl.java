@@ -196,7 +196,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			} else {
 				responseDto.setStatus(Boolean.FALSE);
 				responseDto.setStatusCode(500);
-				responseDto.setMessage("Employee Does Not Exist In Company Or Entering Email Is Wrong");
+				responseDto.setMessage("Entered Email Is Wrong");
 			}
 		} catch (Exception e) {
 			logger.error("EmployeeServiceImpl | forgotPassword | Exception " + e.getMessage());
