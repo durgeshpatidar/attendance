@@ -195,8 +195,8 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		String newPassword = new String(getPassword());
 		edo.setPassword(newPassword);
 		String to = "durgeshpatidar80@gmail.com";
-		String from = "durgeshpatidar40@gmail.com";
-		String password = "durgesh123*";
+		String from = "inkathon2020@gmail.com";
+		String password = "dhoni777";
 		Properties properties = new Properties();
 
 		properties.put("mail.smtp.host", "smtp.gmail.com");
@@ -207,7 +207,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		try {
 
 			Authenticator auth = new Authenticator() {
-				protected PasswordAuthentication getPasswordAuthentication() {
+				public PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(from, password);
 				}
 			};
@@ -217,21 +217,17 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			// Create a default MimeMessage object.
 			MimeMessage message = new MimeMessage(session);
 
-			message.addHeader("Content-type", "text/HTML; charset=UTF-8");
-			message.addHeader("format", "flowed");
-			message.addHeader("Content-Transfer-Encoding", "8bit");
-
 			// Set From: header field of the header.
 			message.setFrom(new InternetAddress(from, "NoReply-JD"));
-			message.setReplyTo(InternetAddress.parse(from, false));
+
 			// Set To: header field of the header.
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
 			// Set Subject: header field
-			message.setSubject("Password Reset Request :Time & Attendance", "UTF-8");
+			message.setSubject("Password Reset Request :Time & Attendance");
 
 			// Now set the actual message
-			message.setText(newPassword + " This is your new password... Thank you", "UTF-8");
+			message.setText(newPassword + " This is your new password... Thank you");
 			message.setSentDate(new Date());
 			// Send message
 			Transport.send(message);
