@@ -226,7 +226,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			message.setSubject("Password Reset Request:Time & Attendance");
 
 			// Now set the actual message
-			message.setText("Your new password: "+newPassword+" \nPlease login with this password and update it.\n\nThank You!\n<b>Time & Attendance Team</b>");
+			message.setText("Your new password: "+newPassword+" \nPlease login with this password and update it.\n\nThank You!\nTime & Attendance Team");
 			message.setSentDate(new Date());
 			// Send message
 			Transport.send(message);
