@@ -191,7 +191,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		try {
 			boolean status = employeeDao.forgotPassword(employeeDto);
 			if (status == true) {
-				responseDto.setMessage("New Password is sent in your mail!");
+				responseDto.setMessage("Your Password Has Been Reset, For New Password Check Your E-mail!");
 
 			} else {
 				responseDto.setStatus(Boolean.FALSE);

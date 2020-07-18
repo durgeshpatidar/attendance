@@ -230,13 +230,14 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			message.setSubject("Password Reset Request :Time & Attendance");
 
 			// Now set the actual message
-			message.setText(newPassword+" This is your new password... Thank you");
+			message.setText(newPassword + " This is your new password... Thank you");
 
 			// Send message
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
-		} catch (MessagingException mex) {
-			mex.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.toString());
 		}
 		return true;
 	}
@@ -249,7 +250,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		crit.add(Restrictions.eq("id", employeeDto.getId()));
 		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
 		edo.setPassword(password);
-		
 
 	}
 
