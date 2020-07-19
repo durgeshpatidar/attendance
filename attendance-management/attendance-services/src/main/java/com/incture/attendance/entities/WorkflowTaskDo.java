@@ -4,13 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
@@ -23,9 +20,6 @@ public class WorkflowTaskDo implements BaseDo {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(generator = "uuid2")
-	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name = "ID")
 	private String id;
 
@@ -33,7 +27,7 @@ public class WorkflowTaskDo implements BaseDo {
 	@JoinColumn(name = "EMPLOYEE_ID")
 	private EmployeeDo employee;
 
-	@Column(name="MANAGER_ID",columnDefinition="NVARCHAR(20)")
+	@Column(name = "MANAGER_ID", columnDefinition = "NVARCHAR(20)")
 	private String managerId;
 
 	@Column(name = "REQUEST_DATE", columnDefinition = "DATE")
@@ -47,8 +41,8 @@ public class WorkflowTaskDo implements BaseDo {
 
 	@Column(name = "COMMENT", columnDefinition = "NVARCHAR(200)")
 	private String comment;
-	
-	@Column(name = "QUERYTYPE", columnDefinition = "NVARCHAR(200)")
+
+	@Column(name = "QUERYTYPE", columnDefinition = "NVARCHAR(30)")
 	private String querytype;
 
 	public WorkflowTaskDo() {
@@ -61,14 +55,6 @@ public class WorkflowTaskDo implements BaseDo {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getQuerytype() {
-		return querytype;
-	}
-
-	public void setQuerytype(String querytype) {
-		this.querytype = querytype;
 	}
 
 	public EmployeeDo getEmployee() {
@@ -119,12 +105,20 @@ public class WorkflowTaskDo implements BaseDo {
 		this.comment = comment;
 	}
 
+	public String getQuerytype() {
+		return querytype;
+	}
+
+	public void setQuerytype(String querytype) {
+		this.querytype = querytype;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	public WorkflowTaskDo(String id, EmployeeDo employee, String managerId, Date requestdate, String description,
-			String status, String comment) {
+			String status, String comment, String querytype) {
 		super();
 		this.id = id;
 		this.employee = employee;
@@ -133,7 +127,7 @@ public class WorkflowTaskDo implements BaseDo {
 		this.description = description;
 		this.status = status;
 		this.comment = comment;
+		this.querytype = querytype;
 	}
-
 
 }

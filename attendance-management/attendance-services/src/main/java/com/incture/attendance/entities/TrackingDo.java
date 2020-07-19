@@ -49,9 +49,25 @@ public class TrackingDo implements BaseDo {
 	@Column(name = "TOTAL_HOURS", columnDefinition = "DOUBLE")
 	private double totalHours;
 
+	@Column(name = "STATUS", columnDefinition = "NVARCHAR(20)")
+	private String status;
+
 	// Constructor
 	public TrackingDo() {
 		super();
+	}
+
+	public TrackingDo(String id, EmployeeDo employee, AddressDo address, Date date, Date checkIn, Date checkOut,
+			double totalHours, String status) {
+		super();
+		this.id = id;
+		this.employee = employee;
+		this.address = address;
+		this.date = date;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.totalHours = totalHours;
+		this.status = status;
 	}
 
 	public String getId() {
@@ -110,20 +126,16 @@ public class TrackingDo implements BaseDo {
 		this.totalHours = totalHours;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getStatus() {
+		return status;
 	}
 
-	public TrackingDo(String id, EmployeeDo employee, AddressDo address, Date date, Date checkIn, Date checkOut,
-			double totalHours) {
-		super();
-		this.id = id;
-		this.employee = employee;
-		this.address = address;
-		this.date = date;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-		this.totalHours = totalHours;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }
