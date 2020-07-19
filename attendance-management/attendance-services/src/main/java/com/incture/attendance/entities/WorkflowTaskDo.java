@@ -47,6 +47,9 @@ public class WorkflowTaskDo implements BaseDo {
 
 	@Column(name = "COMMENT", columnDefinition = "NVARCHAR(200)")
 	private String comment;
+	
+	@Column(name = "QUERYTYPE", columnDefinition = "NVARCHAR(200)")
+	private String querytype;
 
 	public WorkflowTaskDo() {
 		super();
@@ -58,6 +61,14 @@ public class WorkflowTaskDo implements BaseDo {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getQuerytype() {
+		return querytype;
+	}
+
+	public void setQuerytype(String querytype) {
+		this.querytype = querytype;
 	}
 
 	public EmployeeDo getEmployee() {
