@@ -11,6 +11,7 @@ public class TrackingDto extends BaseDto {
 	private Date checkIn;
 	private Date checkOut;
 	private double totalHours;
+	private String status;
 
 	// Constructor
 	public TrackingDto() {
@@ -18,7 +19,7 @@ public class TrackingDto extends BaseDto {
 	}
 
 	public TrackingDto(String id, String empId, String addressId, Date date, Date checkIn, Date checkOut,
-			double totalHours) {
+			double totalHours, String status) {
 		super();
 		this.id = id;
 		this.empId = empId;
@@ -27,11 +28,7 @@ public class TrackingDto extends BaseDto {
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.totalHours = totalHours;
-	}
-	// Getters and Setters
-
-	public String getEmpId() {
-		return empId;
+		this.status = status;
 	}
 
 	public String getId() {
@@ -40,6 +37,10 @@ public class TrackingDto extends BaseDto {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getEmpId() {
+		return empId;
 	}
 
 	public void setEmpId(String empId) {
@@ -84,6 +85,14 @@ public class TrackingDto extends BaseDto {
 
 	public void setTotalHours(double totalHours) {
 		this.totalHours = totalHours;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

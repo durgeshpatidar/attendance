@@ -9,6 +9,23 @@ public class TrackingDetailsDto extends BaseDto {
 	private Date checkIn;
 	private Date checkOut;
 	private double totalHours;
+	private String status;
+
+	public TrackingDetailsDto() {
+		super();
+	}
+
+	public TrackingDetailsDto(String empId, String empName, Date date, Date checkIn, Date checkOut, double totalHours,
+			String status) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.date = date;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.totalHours = totalHours;
+		this.status = status;
+	}
 
 	public String getEmpId() {
 		return empId;
@@ -58,19 +75,12 @@ public class TrackingDetailsDto extends BaseDto {
 		this.totalHours = totalHours;
 	}
 
-	public TrackingDetailsDto(String empId, String empName, Date date, Date checkIn, Date checkOut, double totalHours) {
-		super();
-		this.empId = empId;
-		this.empName = empName;
-		this.date = date;
-		this.checkIn = checkIn;
-		this.checkOut = checkOut;
-		this.totalHours = totalHours;
+	public String getStatus() {
+		return status;
 	}
 
-	public TrackingDetailsDto() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }
