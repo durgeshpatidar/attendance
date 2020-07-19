@@ -23,6 +23,7 @@ import com.incture.attendance.utils.ServicesUtil;
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
 	@Autowired
 	private WorkflowTaskDaoImpl wtd;
+
 	@Override
 	protected AddressDo importDto(AddressDto addressDto) {
 		AddressDo entity = null;
@@ -69,11 +70,11 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		addressdto.setStatus("PENDING");
 		AddressDo newAdd = importDto(addressdto);
 		getSession().save(newAdd);
-		
-		//Adding workflow for the newly added address
+
+		// Adding workflow for the newly added address
 		WorkflowTaskDto wtdo = new WorkflowTaskDto();
-		String description = "" + addressdto.getAddress() + addressdto.getCity() + addressdto.getState()
-				+ addressdto.getPincode();
+		String description = "Address : " + addressdto.getAddress() + " " + addressdto.getCity() + " " + addressdto.getState()
+				+ " " + addressdto.getPincode();
 		wtdo.setDescription(description);
 		wtdo.setEmpId(addressdto.getEmpId());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
