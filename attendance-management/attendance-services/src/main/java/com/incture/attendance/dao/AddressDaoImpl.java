@@ -66,8 +66,8 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	// Adding address and adding address request to workflow transaction table.
 	@Override
 	public void addAddress(AddressDto addressdto) {
-		AddressDo newAdd = importDto(addressdto);
 		addressdto.setStatus("PENDING");
+		AddressDo newAdd = importDto(addressdto);
 		getSession().save(newAdd);
 		
 		//Adding workflow for the newly added address
