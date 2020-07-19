@@ -2,6 +2,7 @@ package com.incture.attendance.dao;
 
 import org.springframework.stereotype.Repository;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.incture.attendance.dto.WorkflowTaskDto;
@@ -16,6 +17,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Query;
 
 @Repository("WorkflowTaskDaoImpl")
 public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto> implements WorkflowTaskDao {
@@ -99,6 +102,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
 		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, empId)));
+		criteria.addOrder(Order.desc("requestdate"));
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
 		// Getting employee name
@@ -134,6 +138,8 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
 		criteria.add(Restrictions.eq("managerId", managerId));
+		criteria.add(Restrictions.eq("status", "PENDING"));
+		criteria.addOrder(Order.desc("requestdate"));
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
 		List<WorkflowTaskDto> request = new ArrayList<>();
