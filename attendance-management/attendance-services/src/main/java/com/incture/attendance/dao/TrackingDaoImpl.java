@@ -46,16 +46,18 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		dto.setStatus(entity.getStatus());
 		return dto;
 	}
+
 //For CheckIn
 	@Override
 	public String addTracking(TrackingDto trackingdto) {
 		trackingdto.setStatus("PENDING");
 		TrackingDo tdo = importDto(trackingdto);
-		
+
 		getSession().save(tdo);
 		return tdo.getId();
 
 	}
+
 //For getting tracking details
 	@Override
 	public List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end) {
@@ -91,26 +93,27 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			newTracking.setCheckIn(t.getCheckIn());
 			newTracking.setCheckOut(t.getCheckOut());
 			newTracking.setTotalHours(t.getTotalHours());
+			newTracking.setStatus(t.getStatus());
 			history.add(newTracking);
 
 		}
 		return history;
 	}
 
-	//for updating tracking or checkout
-		@Override
-		public void updateTracking(String id, Date checkOut, double totalHours) {
+	// for updating tracking or checkout
+	@Override
+	public void updateTracking(String id, Date checkOut, double totalHours) {
 
-			@SuppressWarnings("deprecation")
-			Criteria criteria = getSession().createCriteria(TrackingDo.class);
-			criteria.add(Restrictions.eq("id", id));
-			TrackingDo current = (TrackingDo) criteria.uniqueResult();
-			current.setCheckOut(checkOut);
-			current.setTotalHours(totalHours);
-			if(totalHours>= 7.0 && totalHours<= 9.0) {
-				current.setStatus("APPROVED");
-			}
-
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(TrackingDo.class);
+		criteria.add(Restrictions.eq("id", id));
+		TrackingDo current = (TrackingDo) criteria.uniqueResult();
+		current.setCheckOut(checkOut);
+		current.setTotalHours(totalHours);
+		if (totalHours >= 7.0 && totalHours <= 9.0) {
+			current.setStatus("APPROVED");
 		}
+
+	}
 
 }
