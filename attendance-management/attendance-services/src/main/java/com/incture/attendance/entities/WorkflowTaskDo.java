@@ -4,10 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
@@ -19,6 +22,12 @@ public class WorkflowTaskDo implements BaseDo {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "WORKFLOW_ID")
+	private String workflowId;
 
 	@Column(name = "ID", columnDefinition = "NVARCHAR(40)")
 	private String id;
@@ -47,6 +56,28 @@ public class WorkflowTaskDo implements BaseDo {
 
 	public WorkflowTaskDo() {
 		super();
+	}
+
+	public WorkflowTaskDo(String workflowId, String id, EmployeeDo employee, String managerId, Date requestdate,
+			String description, String status, String comment, String querytype) {
+		super();
+		this.workflowId = workflowId;
+		this.id = id;
+		this.employee = employee;
+		this.managerId = managerId;
+		this.requestdate = requestdate;
+		this.description = description;
+		this.status = status;
+		this.comment = comment;
+		this.querytype = querytype;
+	}
+
+	public String getWorkflowId() {
+		return workflowId;
+	}
+
+	public void setWorkflowId(String workflowId) {
+		this.workflowId = workflowId;
 	}
 
 	public String getId() {
@@ -115,19 +146,6 @@ public class WorkflowTaskDo implements BaseDo {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public WorkflowTaskDo(String id, EmployeeDo employee, String managerId, Date requestdate, String description,
-			String status, String comment, String querytype) {
-		super();
-		this.id = id;
-		this.employee = employee;
-		this.managerId = managerId;
-		this.requestdate = requestdate;
-		this.description = description;
-		this.status = status;
-		this.comment = comment;
-		this.querytype = querytype;
 	}
 
 }
