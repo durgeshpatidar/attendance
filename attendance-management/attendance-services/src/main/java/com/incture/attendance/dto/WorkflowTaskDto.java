@@ -13,6 +13,7 @@ public class WorkflowTaskDto extends BaseDto {
 	private Date requestDate;
 	private String comment;
 	private String status;
+	private String querytype;
 
 	// Constructors
 
@@ -22,7 +23,7 @@ public class WorkflowTaskDto extends BaseDto {
 	}
 
 	public WorkflowTaskDto(String id, String empName, String description, String empId, String managerId,
-			String managerName, Date requestDate, String comment, String status) {
+			String managerName, Date requestDate, String comment, String status, String querytype) {
 		super();
 		this.id = id;
 		this.empName = empName;
@@ -33,7 +34,10 @@ public class WorkflowTaskDto extends BaseDto {
 		this.requestDate = requestDate;
 		this.comment = comment;
 		this.status = status;
+		this.querytype = querytype;
 	}
+	
+
 	//Getters and Setters
 	public String getId() {
 		return id;
@@ -42,7 +46,7 @@ public class WorkflowTaskDto extends BaseDto {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+    
 	public String getEmpName() {
 		return empName;
 	}
@@ -107,4 +111,11 @@ public class WorkflowTaskDto extends BaseDto {
 		this.status = status;
 	}
 	
+	public String getQuerytype() {
+		return querytype;
+	}
+
+	public void setQuerytype(String querytype) {
+		this.querytype = querytype;
+	}
 }
