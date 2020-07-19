@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.incture.attendance.dto.TrackingDetailsDto;
@@ -65,6 +66,8 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(TrackingDo.class);
 		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, id)));
+		criteria.addOrder(Order.desc("date"));
+		criteria.setMaxResults(7);
 		if (start != null && end != null) {
 
 			criteria.add(Restrictions.between("date", start, end));
@@ -74,7 +77,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		} else if (start != null && end == null) {
 			criteria.add(Restrictions.ge("date", start));
 		}
-
+		
 		@SuppressWarnings("unchecked")
 		List<TrackingDo> trackings = criteria.list();
 		// Getting employee name
