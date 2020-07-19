@@ -18,8 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
-
 @Repository("WorkflowTaskDaoImpl")
 public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto> implements WorkflowTaskDao {
 
@@ -27,14 +25,14 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 	protected WorkflowTaskDo importDto(WorkflowTaskDto workflowtaskDto) {
 		WorkflowTaskDo entity = new WorkflowTaskDo();
 		entity.setId(workflowtaskDto.getId());
-		System.out.println("employee id : "+workflowtaskDto.getEmpId());
+		System.out.println("employee id : " + workflowtaskDto.getEmpId());
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
 		criteria.add(Restrictions.eq("employeeId", workflowtaskDto.getEmpId()));
 		criteria.add(Restrictions.eq("status", "ACTIVE"));
 		criteria.add(Restrictions.eq("managerType", "PROJECT"));
 		ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
-		System.out.println("manager id : "+mdo.getManagerId());
+		System.out.println("manager id : " + mdo.getManagerId());
 		entity.setManagerId(mdo.getManagerId());
 		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
 		entity.setComment(workflowtaskDto.getComment());
@@ -76,22 +74,22 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		WorkflowTaskDo current = (WorkflowTaskDo) criteria.uniqueResult();
 		current.setComment(comment);
 		current.setStatus(status);
-		//Setting status returned by manager in tracking table and address table also.
-		//Checking in tracking table
+		// Setting status returned by manager in tracking table and address table also.
+		// Checking in tracking table
 		@SuppressWarnings("deprecation")
 		Criteria criteria1 = getSession().createCriteria(TrackingDo.class);
 		criteria.add(Restrictions.eq("id", workflowId));
-		TrackingDo track = (TrackingDo)criteria1.uniqueResult();
-		if(track!=null) {
+		TrackingDo track = (TrackingDo) criteria1.uniqueResult();
+		if (track != null) {
 			track.setStatus(status);
 		}
-		
-		//Checking in address table.
+
+		// Checking in address table.
 		@SuppressWarnings("deprecation")
 		Criteria criteria2 = getSession().createCriteria(AddressDo.class);
 		criteria.add(Restrictions.eq("id", workflowId));
-		AddressDo add = (AddressDo)criteria2.uniqueResult();
-		if(add!=null) {
+		AddressDo add = (AddressDo) criteria2.uniqueResult();
+		if (add != null) {
 			add.setStatus(status);
 		}
 	}
