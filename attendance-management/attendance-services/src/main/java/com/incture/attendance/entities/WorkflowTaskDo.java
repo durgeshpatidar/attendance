@@ -20,7 +20,7 @@ public class WorkflowTaskDo implements BaseDo {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "ID")
+	@Column(name = "ID", columnDefinition = "NVARCHAR(40)")
 	private String id;
 
 	@ManyToOne
@@ -36,7 +36,7 @@ public class WorkflowTaskDo implements BaseDo {
 	@Column(name = "DESCRIPTION", columnDefinition = "NVARCHAR(200)")
 	private String description;
 
-	@Column(name = "STATUS", columnDefinition = "VARCHAR(20)")
+	@Column(name = "STATUS", columnDefinition = "NVARCHAR(20)")
 	private String status;
 
 	@Column(name = "COMMENT", columnDefinition = "NVARCHAR(200)")
