@@ -67,7 +67,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		Criteria criteria = getSession().createCriteria(TrackingDo.class);
 		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, id)));
 		criteria.addOrder(Order.desc("date"));
-		criteria.setMaxResults(7);
+		criteria.setMaxResults(14);
 		if (start != null && end != null) {
 
 			criteria.add(Restrictions.between("date", start, end));
