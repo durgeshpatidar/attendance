@@ -119,6 +119,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setComment(t.getComment());
 			newWorkflow.setDescription(t.getDescription());
 			newWorkflow.setId(t.getId());
+			newWorkflow.setQuerytype(t.getQuerytype());
 			try {
 				newWorkflow.setRequestDate(formatter.parse(t.getRequestdate().toString()));
 			} catch (ParseException e) {
@@ -156,6 +157,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setRequestDate(t.getRequestdate());
 			newWorkflow.setComment(t.getComment());
 			newWorkflow.setDescription(t.getDescription());
+			newWorkflow.setQuerytype(t.getQuerytype());
 			newWorkflow.setStatus(t.getStatus());
 			newWorkflow.setId(t.getId());
 			request.add(newWorkflow);
