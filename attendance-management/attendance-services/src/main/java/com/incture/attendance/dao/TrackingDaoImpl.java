@@ -66,16 +66,20 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(TrackingDo.class);
 		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, id)));
-		criteria.addOrder(Order.desc("date"));
-		criteria.setMaxResults(14);
 		if (start != null && end != null) {
 
 			criteria.add(Restrictions.between("date", start, end));
+			criteria.addOrder(Order.desc("date"));
+			criteria.setMaxResults(14);
 		} else if (start == null && end != null) {
 
 			criteria.add(Restrictions.le("date", end));
+			criteria.addOrder(Order.desc("date"));
+			criteria.setMaxResults(14);
 		} else if (start != null && end == null) {
 			criteria.add(Restrictions.ge("date", start));
+			criteria.addOrder(Order.desc("date"));
+			criteria.setMaxResults(14);
 		}
 		
 		@SuppressWarnings("unchecked")
