@@ -48,7 +48,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		return dto;
 	}
 
-//For CheckIn
+	// For CheckIn
 	@Override
 	public String addTracking(TrackingDto trackingdto) {
 		trackingdto.setStatus("PENDING");
@@ -59,7 +59,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 	}
 
-//For getting tracking details
+	// For getting tracking details
 	@Override
 	public List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end) {
 		// Getting tracking details in between start and end date
@@ -69,17 +69,24 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		if (start != null && end != null) {
 
 			criteria.add(Restrictions.between("date", start, end));
-
-		} else if (start == null && end != null) {
-
-			criteria.add(Restrictions.le("date", end));
-
-		} else if (start != null && end == null) {
-			criteria.add(Restrictions.ge("date", start));
+			criteria.setMaxResults(30);
 
 		}
+		if (start == null && end != null) {
+
+			criteria.add(Restrictions.le("date", end));
+			criteria.setMaxResults(30);
+
+		}
+		if (start != null && end == null) {
+			criteria.add(Restrictions.ge("date", start));
+			criteria.setMaxResults(30);
+		}
+		if (start == null && end == null) {
+			criteria.setMaxResults(7);
+		}
 		criteria.addOrder(Order.desc("date"));
-		criteria.setMaxResults(14);
+
 		@SuppressWarnings("unchecked")
 		List<TrackingDo> trackings = criteria.list();
 		// Getting employee name
