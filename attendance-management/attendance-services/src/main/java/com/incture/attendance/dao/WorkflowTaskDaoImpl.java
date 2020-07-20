@@ -181,4 +181,40 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		address.setStatus(status);
 
 	}
+
+	@Override
+	public List<WorkflowTaskDto> getWorkflowDetails(String empId) {
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
+		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, empId)));
+		criteria.addOrder(Order.desc("requestdate"));
+		criteria.setMaxResults(4);
+		@SuppressWarnings("unchecked")
+		List<WorkflowTaskDo> workflow = criteria.list();
+		// Getting employee name
+		@SuppressWarnings("deprecation")
+		Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
+		crit.add(Restrictions.eq("id", empId));
+		EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
+		List<WorkflowTaskDto> request = new ArrayList<>();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		for (WorkflowTaskDo t : workflow) {
+			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
+			newWorkflow.setEmpId(empId);
+			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
+			newWorkflow.setComment(t.getComment());
+			newWorkflow.setDescription(t.getDescription());
+			newWorkflow.setId(t.getId());
+			newWorkflow.setQuerytype(t.getQuerytype());
+			try {
+				newWorkflow.setRequestDate(formatter.parse(t.getRequestdate().toString()));
+			} catch (ParseException e) {
+				newWorkflow.setRequestDate(t.getRequestdate());
+				e.printStackTrace();
+			}
+			newWorkflow.setStatus(t.getStatus());
+			request.add(newWorkflow);
+		}
+		return request;
+	}
 }

@@ -37,7 +37,7 @@ public class WorkflowController {
 	}
 	@GetMapping("/details-home")
 	public ResponseDto getWorkflowDetails(@RequestParam String empId) {
-		return workflowService.getRequestDetails(empId);
+		return workflowService.getWorkflowDetails(empId);
 
 	}
 
