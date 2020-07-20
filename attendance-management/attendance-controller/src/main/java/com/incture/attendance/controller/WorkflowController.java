@@ -35,6 +35,11 @@ public class WorkflowController {
 		return workflowService.getRequestDetails(empId);
 
 	}
+	@GetMapping("/details-home")
+	public ResponseDto getWorkflowDetails(@RequestParam String empId) {
+		return workflowService.getRequestDetails(empId);
+
+	}
 
 	@GetMapping("/task")
 	public ResponseDto getTaskDetails(@RequestParam String managerId) {

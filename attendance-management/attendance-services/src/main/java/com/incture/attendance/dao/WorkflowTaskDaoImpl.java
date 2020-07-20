@@ -101,6 +101,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
 		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, empId)));
 		criteria.addOrder(Order.desc("requestdate"));
+		criteria.setMaxResults(20);
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
 		// Getting employee name
@@ -139,6 +140,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		criteria.add(Restrictions.eq("managerId", managerId));
 		criteria.add(Restrictions.eq("status", "PENDING"));
 		criteria.addOrder(Order.desc("requestdate"));
+		criteria.setMaxResults(20);
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = criteria.list();
 		List<WorkflowTaskDto> request = new ArrayList<>();
