@@ -18,8 +18,6 @@ public interface EmployeeDao {
 
 	List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto);
 
-	boolean forgotPassword(EmployeeDto employeeDto);
-
 	void updatePassword(EmployeeDto employeeDto);
 
 	boolean verifyEmail(EmployeeDto employeeDto);

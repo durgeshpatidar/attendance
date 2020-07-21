@@ -1,17 +1,8 @@
 package com.incture.attendance.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.persistence.Query;
 
 import org.hibernate.Criteria;
@@ -110,7 +101,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			return false;
 	}
 
-//for displaying profile details
+	// for displaying profile details
 	@Override
 	public ProfileDto profileDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
@@ -137,7 +128,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	}
 
-//For displaying manager details
+	// For displaying manager details
 	@Override
 	public List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
@@ -196,68 +187,11 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	}
 
 	@Override
-	public boolean forgotPassword(EmployeeDto employeeDto) {
-		@SuppressWarnings("deprecation")
-		Criteria crit = getSession().createCriteria(EmployeeDo.class);
-		crit.add(Restrictions.eq("email", employeeDto.getEmail()));
-		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
-		if (edo == null)
-			return false;
-		String newPassword = new String(getPassword());
-		String to = employeeDto.getEmail();
-		String from = "inkathon2020@gmail.com";
-		String password = "dhoni777";
-		Properties properties = new Properties();
-
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-		properties.put("mail.smtp.port", "587");
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.starttls.enable", "true");
-
-		try {
-
-			Authenticator auth = new Authenticator() {
-				public PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(from, password);
-				}
-			};
-			// Get the default Session object.
-			javax.mail.Session session = javax.mail.Session.getInstance(properties, auth);
-
-			// Create a default MimeMessage object.
-			MimeMessage message = new MimeMessage(session);
-
-			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(from, "NoReply-Time & Attendance"));
-
-			// Set To: header field of the header.
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-			// Set Subject: header field
-			message.setSubject("Password Reset Request:Time & Attendance");
-
-			// Now set the actual message
-			message.setText("Your new password: " + newPassword
-					+ " \nPlease login with this password and update it.\n\nThank You!\nTime & Attendance Team");
-			message.setSentDate(new Date());
-			// Send message
-			Transport.send(message);
-			edo.setPassword(newPassword);
-			System.out.println("Sent message successfully....");
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.toString());
-			return false;
-		}
-		return true;
-	}
-
-	@Override
 	public void updatePassword(EmployeeDto employeeDto) {
 		String password = employeeDto.getPassword();
 		@SuppressWarnings("deprecation")
 		Criteria crit = getSession().createCriteria(EmployeeDo.class);
-		crit.add(Restrictions.eq("id", employeeDto.getId()));
+		crit.add(Restrictions.eq("email", employeeDto.getEmail()));
 		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
 		edo.setPassword(password);
 	}

@@ -15,7 +15,5 @@ public interface EmployeeService {
 
 	ResponseDto managerDetails(EmployeeDto employeeDto);
 
-	ResponseDto forgotPassword(EmployeeDto employeeDto);
-
 	ResponseDto updatePassword(EmployeeDto employeeDto);
 }

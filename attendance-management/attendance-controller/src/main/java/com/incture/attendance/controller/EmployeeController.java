@@ -47,13 +47,8 @@ public class EmployeeController {
 	public ResponseDto managerDetails(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.managerDetails(employeeDto);
 	}
-	
-	@PostMapping("/forgot")
-	public ResponseDto forgotPassword(@RequestBody EmployeeDto employeeDto) {
-		return employeeService.forgotPassword(employeeDto);
-	}
-	
-	@PostMapping("/profile/update")
+
+	@PostMapping("/employee/update-password")
 	public ResponseDto updatePassword(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.updatePassword(employeeDto);
 	}

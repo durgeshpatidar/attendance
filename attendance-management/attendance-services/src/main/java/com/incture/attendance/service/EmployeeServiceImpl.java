@@ -152,7 +152,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
-//for displaying manager details	
+	// for displaying manager details
 	@Override
 	public ResponseDto managerDetails(EmployeeDto employeeDto) {
 		logger.info("EmployeeServiceImpl |  managerDetails| Execution start input " + employeeDto);
@@ -178,33 +178,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		return responseDto;
 
-	}
-
-	@Override
-	public ResponseDto forgotPassword(EmployeeDto employeeDto) {
-		logger.info("EmployeeServiceImpl | forgotPassword | Execution start input " + employeeDto);
-
-		ResponseDto responseDto = new ResponseDto();
-		responseDto.setStatus(Boolean.TRUE);
-		responseDto.setStatusCode(200);
-		try {
-			boolean status = employeeDao.forgotPassword(employeeDto);
-			if (status == true) {
-				responseDto.setMessage("Your Password Has Been Reset, For New Password Check Your E-mail!");
-
-			} else {
-				responseDto.setStatus(Boolean.FALSE);
-				responseDto.setStatusCode(500);
-				responseDto.setMessage("Entered Email Is Wrong");
-			}
-		} catch (Exception e) {
-			logger.error("EmployeeServiceImpl | forgotPassword | Exception " + e.getMessage());
-			responseDto.setStatus(Boolean.FALSE);
-			responseDto.setStatusCode(500);
-			responseDto.setMessage(e.getMessage());
-		}
-		logger.info("EmployeeServiceImpl | forgotPassword | Execution end ouput " + responseDto);
-		return responseDto;
 	}
 
 	@Override
