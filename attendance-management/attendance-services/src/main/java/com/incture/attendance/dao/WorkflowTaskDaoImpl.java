@@ -78,7 +78,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		// Checking in tracking table
 		@SuppressWarnings("deprecation")
 		Criteria criteria1 = getSession().createCriteria(TrackingDo.class);
-		criteria.add(Restrictions.eq("id", workflowId));
+		criteria1.add(Restrictions.eq("id", workflowId));
 		TrackingDo track = (TrackingDo) criteria1.uniqueResult();
 		if (track != null) {
 			track.setStatus(status);
@@ -87,7 +87,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		// Checking in address table.
 		@SuppressWarnings("deprecation")
 		Criteria criteria2 = getSession().createCriteria(AddressDo.class);
-		criteria.add(Restrictions.eq("id", workflowId));
+		criteria2.add(Restrictions.eq("id", workflowId));
 		AddressDo add = (AddressDo) criteria2.uniqueResult();
 		if (add != null) {
 			add.setStatus(status);
