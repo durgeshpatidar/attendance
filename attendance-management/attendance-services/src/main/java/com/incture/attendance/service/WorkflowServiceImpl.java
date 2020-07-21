@@ -132,32 +132,6 @@ public class WorkflowServiceImpl implements WorkflowService {
 	}
 
 	@Override
-	public ResponseDto updateAddressStatus(String status, String comment, String workflowId) {
-		logger.info("WorkflowServiceImpl | updateAddressStatus | Execution start input " + status + " " + comment + " "
-				+ workflowId);
-
-		ResponseDto responseDto = new ResponseDto();
-		responseDto.setStatus(Boolean.TRUE);
-		responseDto.setStatusCode(200);
-		try {
-			workflowtaskDao.updateAddressStatus(status, comment, workflowId);
-			responseDto.setMessage("Workflow task updated");
-
-		} catch (Exception e) {
-
-			logger.error("WorkflowServiceImpl | updateAddressStatus | Exception " + e.getMessage());
-			responseDto.setStatus(Boolean.FALSE);
-			responseDto.setStatusCode(500);
-			responseDto.setMessage(e.getMessage());
-
-		}
-
-		logger.info("WorkflowServiceImpl | updateAddressStatus   | Execution end ouput " + responseDto);
-
-		return responseDto;
-	}
-
-	@Override
 	public ResponseDto getWorkflowDetails(String empId) {
 		logger.info("EmployeeServiceImpl | getWorkflowDetails | Execution start input " + empId);
 
@@ -185,6 +159,5 @@ public class WorkflowServiceImpl implements WorkflowService {
 
 		return responseDto;
 
-	
 	}
 }

@@ -35,6 +35,7 @@ public class WorkflowController {
 		return workflowService.getRequestDetails(empId);
 
 	}
+
 	@GetMapping("/details-home")
 	public ResponseDto getWorkflowDetails(@RequestParam String empId) {
 		return workflowService.getWorkflowDetails(empId);
@@ -48,17 +49,10 @@ public class WorkflowController {
 
 	@PostMapping("/task/update")
 	public ResponseDto updateStatus(@RequestBody WorkflowTaskDto wdto) {
-		String status=wdto.getStatus();
-		String comment=wdto.getComment(); 
-		String workflowId=wdto.getId();
+		String status = wdto.getStatus();
+		String comment = wdto.getComment();
+		String workflowId = wdto.getId();
 		return workflowService.updateStatus(status, comment, workflowId);
 	}
 
-	@PostMapping("/task/update-address-status")
-	public ResponseDto updateAddressStatus(@RequestBody WorkflowTaskDto wdto) {
-		String status=wdto.getStatus();
-		String comment=wdto.getComment(); 
-		String workflowId=wdto.getId();
-		return workflowService.updateAddressStatus(status, comment, workflowId);
-	}
 }

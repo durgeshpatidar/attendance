@@ -165,23 +165,6 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		return request;
 	}
 
-	// Updating status for address request by manager
-	@Override
-	public void updateAddressStatus(String workflowId, String status, String comment) {
-		@SuppressWarnings("deprecation")
-		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		criteria.add(Restrictions.eq("id", workflowId));
-		WorkflowTaskDo workflow = (WorkflowTaskDo) criteria.uniqueResult();
-		workflow.setComment(comment);
-		workflow.setStatus(status);
-		@SuppressWarnings("deprecation")
-		Criteria criteria1 = getSession().createCriteria(AddressDo.class);
-		criteria1.add(Restrictions.eq("employee", workflow.getEmployee()));
-		AddressDo address = (AddressDo) criteria1.uniqueResult();
-		address.setStatus(status);
-
-	}
-
 	@Override
 	public List<WorkflowTaskDto> getWorkflowDetails(String empId) {
 		@SuppressWarnings("deprecation")

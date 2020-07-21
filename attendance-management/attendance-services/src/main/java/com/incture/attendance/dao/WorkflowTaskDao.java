@@ -11,12 +11,9 @@ public interface WorkflowTaskDao {
 	void updateStatus(String status, String comment, String workflowId);
 
 	List<WorkflowTaskDto> getRequestDetails(String empId);
-	
+
 	List<WorkflowTaskDto> getWorkflowDetails(String empId);
 
-
 	List<WorkflowTaskDto> getTaskDetails(String managerId);
-
-	void updateAddressStatus(String workflowId, String status, String comment);
 
 }
