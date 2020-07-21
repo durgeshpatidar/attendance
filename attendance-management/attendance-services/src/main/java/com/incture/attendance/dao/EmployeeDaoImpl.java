@@ -185,6 +185,17 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	}
 
 	@Override
+	public boolean verifyEmail(EmployeeDto employeeDto) {
+		@SuppressWarnings("deprecation")
+		Criteria crit = getSession().createCriteria(EmployeeDo.class);
+		crit.add(Restrictions.eq("email", employeeDto.getEmail()));
+		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
+		if (edo == null)
+			return false;
+		return true;
+	}
+
+	@Override
 	public boolean forgotPassword(EmployeeDto employeeDto) {
 		@SuppressWarnings("deprecation")
 		Criteria crit = getSession().createCriteria(EmployeeDo.class);
@@ -226,7 +237,8 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			message.setSubject("Password Reset Request:Time & Attendance");
 
 			// Now set the actual message
-			message.setText("Your new password: "+newPassword+" \nPlease login with this password and update it.\n\nThank You!\nTime & Attendance Team");
+			message.setText("Your new password: " + newPassword
+					+ " \nPlease login with this password and update it.\n\nThank You!\nTime & Attendance Team");
 			message.setSentDate(new Date());
 			// Send message
 			Transport.send(message);

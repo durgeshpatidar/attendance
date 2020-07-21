@@ -21,4 +21,6 @@ public interface EmployeeDao {
 	boolean forgotPassword(EmployeeDto employeeDto);
 
 	void updatePassword(EmployeeDto employeeDto);
+
+	boolean verifyEmail(EmployeeDto employeeDto);
 }
