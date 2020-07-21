@@ -69,19 +69,17 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		if (start != null && end != null) {
 
 			criteria.add(Restrictions.between("date", start, end));
-			criteria.addOrder(Order.desc("date"));
-			criteria.setMaxResults(14);
+
 		} else if (start == null && end != null) {
 
 			criteria.add(Restrictions.le("date", end));
-			criteria.addOrder(Order.desc("date"));
-			criteria.setMaxResults(14);
+
 		} else if (start != null && end == null) {
 			criteria.add(Restrictions.ge("date", start));
-			criteria.addOrder(Order.desc("date"));
-			criteria.setMaxResults(14);
+
 		}
-		
+		criteria.addOrder(Order.desc("date"));
+		criteria.setMaxResults(14);
 		@SuppressWarnings("unchecked")
 		List<TrackingDo> trackings = criteria.list();
 		// Getting employee name
