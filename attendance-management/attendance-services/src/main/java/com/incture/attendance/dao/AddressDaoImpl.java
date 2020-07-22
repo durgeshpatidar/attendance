@@ -67,7 +67,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	// Adding address and adding address request to workflow transaction table.
 	@Override
 	public void addAddress(AddressDto addressdto) {
-		addressdto.setStatus("PENDING");
+		addressdto.setStatus("Pending");
 		AddressDo newAdd = importDto(addressdto);
 		getSession().save(newAdd);
 
@@ -81,8 +81,8 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		Date dt = new Date();
 		wtdo.setRequestDate(ServicesUtil.convertStringToDate(sdf.format(dt)));
 		wtdo.setId(newAdd.getId());
-		wtdo.setStatus("PENDING");
-		wtdo.setQuerytype("CHANGE IN LOCATION");
+		wtdo.setStatus("Pending");
+		wtdo.setQuerytype("Change in location");
 		wtd.addWorkflowTask(wtdo);
 	}
 
@@ -119,7 +119,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(AddressDo.class);
 		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, addressDto.getEmpId())));
-		criteria.add(Restrictions.eq("status", "APPROVED"));
+		criteria.add(Restrictions.eq("status", "Approved"));
 		criteria.add(Restrictions.eq("locationLat", addressDto.getLocationLat()));
 		criteria.add(Restrictions.eq("locationLon", addressDto.getLocationLon()));
 		AddressDo address = (AddressDo) criteria.uniqueResult();

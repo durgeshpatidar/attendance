@@ -51,7 +51,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	// For CheckIn
 	@Override
 	public String addTracking(TrackingDto trackingdto) {
-		trackingdto.setStatus("PENDING");
+		trackingdto.setStatus("Pending");
 		TrackingDo tdo = importDto(trackingdto);
 
 		getSession().save(tdo);
@@ -123,7 +123,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		current.setCheckOut(checkOut);
 		current.setTotalHours(totalHours);
 		if (totalHours >= 7.0 && totalHours <= 9.0) {
-			current.setStatus("APPROVED");
+			current.setStatus("Approved");
 		}
 
 	}

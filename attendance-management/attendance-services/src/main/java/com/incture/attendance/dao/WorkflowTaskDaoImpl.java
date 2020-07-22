@@ -138,7 +138,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
 		criteria.add(Restrictions.eq("managerId", managerId));
-		criteria.add(Restrictions.eq("status", "PENDING"));
+		criteria.add(Restrictions.eq("status", "Pending"));
 		criteria.addOrder(Order.desc("requestdate"));
 		criteria.setMaxResults(20);
 		@SuppressWarnings("unchecked")
