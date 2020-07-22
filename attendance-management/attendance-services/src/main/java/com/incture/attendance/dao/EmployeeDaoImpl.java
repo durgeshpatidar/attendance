@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.incture.attendance.dto.EmployeeDto;
+import com.incture.attendance.dto.EmployeeListDto;
 import com.incture.attendance.dto.ManagerDetailsDto;
 import com.incture.attendance.dto.ProfileDto;
 import com.incture.attendance.entities.DesignationMasterDo;
@@ -174,5 +175,56 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		EmployeeDo edo = (EmployeeDo) crit.uniqueResult();
 		edo.setPassword(password);
 	}
+	//Checking whether employee is manager or not
+		@Override
+		public boolean verifyEmployeeType(String empId) {
+			@SuppressWarnings("deprecation")
+			Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
+			crit.add(Restrictions.eq("managerId", empId));
+			@SuppressWarnings("unchecked")
+			List<ManagerMasterDo> mdo = crit.list();
+			if(mdo.isEmpty()) {
+				return false;
+			}
+			return true;
+		}
+
+		//Getting list of employee under manager
+		@Override
+		public List<EmployeeListDto> getEmployeeList(String empId) {
+			List<EmployeeListDto> employees = new ArrayList<>();
+			//Adding details of manager also to the list
+			EmployeeListDto employee1 = new EmployeeListDto();
+			employee1.setId(empId);
+			@SuppressWarnings("deprecation")
+			Criteria crit2 = getSession().createCriteria(EmployeeMasterDo.class);
+			crit2.add(Restrictions.eq("id",empId ));
+			EmployeeMasterDo ed2 = (EmployeeMasterDo) crit2.uniqueResult();
+			employee1.setName(ed2.getFirstName()+" "+ed2.getLastName());
+			employees.add(employee1);
+			
+			//Getting the list of employees under the manager 
+			@SuppressWarnings("deprecation")
+			Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
+			crit.add(Restrictions.eq("managerId", empId));
+			@SuppressWarnings("unchecked")
+			List<ManagerMasterDo> mdo = crit.list();
+			
+			for(ManagerMasterDo m:mdo) {
+				EmployeeListDto employee = new EmployeeListDto();
+				employee.setId(m.getEmployeeId());
+				@SuppressWarnings("deprecation")
+				Criteria crit1 = getSession().createCriteria(EmployeeMasterDo.class);
+				crit1.add(Restrictions.eq("id", m.getEmployeeId()));
+				EmployeeMasterDo ed = (EmployeeMasterDo) crit1.uniqueResult();
+				employee.setName(ed.getFirstName()+" "+ ed.getLastName());
+				employees.add(employee);
+			}
+			
+			return employees;
+		}
+
+		
+		
 
 }

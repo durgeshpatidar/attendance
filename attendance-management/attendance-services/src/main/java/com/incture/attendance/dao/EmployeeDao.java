@@ -3,6 +3,7 @@ package com.incture.attendance.dao;
 import java.util.List;
 
 import com.incture.attendance.dto.EmployeeDto;
+import com.incture.attendance.dto.EmployeeListDto;
 import com.incture.attendance.dto.ProfileDto;
 import com.incture.attendance.dto.ManagerDetailsDto;
 
@@ -21,4 +22,8 @@ public interface EmployeeDao {
 	void updatePassword(EmployeeDto employeeDto);
 
 	boolean verifyEmail(EmployeeDto employeeDto);
+	
+	boolean verifyEmployeeType(String empId);
+	
+	List<EmployeeListDto> getEmployeeList(String empId);
 }
