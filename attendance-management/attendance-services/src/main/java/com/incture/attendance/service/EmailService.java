@@ -77,8 +77,8 @@ public class EmailService {
 			message.setSubject("Password Reset Request:Time & Attendance");
 
 			// Now set the actual message
-			message.setText("Your OTP : " + otp
-					+ " for forgot password\nDon't share with anyone\n\nThank You!\nTime & Attendance Team");
+			message.setText("Hi, \nGreetings! \nYour OTP : " + otp
+					+ " for forgot password\nYou are just a step away from accessing your TIME & ATTENDANCE APP account. \nThe code is valid for 3 minutes and usable only once. \nOnce you have verified the code,you'll prompted to set a new password immediately.This is to ensure that only you have access to your account. \nDon't share with anyone\n\nBest Regards,\nTime & Attendance Team");
 			message.setSentDate(new Date());
 			// Send message
 			Transport.send(message);
