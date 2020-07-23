@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.incture.attendance.dto.EmployeeDto;
@@ -51,5 +52,15 @@ public class EmployeeController {
 	@PostMapping("/update-password")
 	public ResponseDto updatePassword(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.updatePassword(employeeDto);
+	}
+	
+	@GetMapping("/employee-type")
+	public ResponseDto verifyEmployeeType(@RequestParam String empId) {
+		return employeeService.verifyEmployeeType(empId);
+	}
+	
+	@GetMapping("/employee-list")
+	public ResponseDto getEmployeeList(@RequestParam String empId) {
+		return employeeService.getEmployeeList(empId);
 	}
 }

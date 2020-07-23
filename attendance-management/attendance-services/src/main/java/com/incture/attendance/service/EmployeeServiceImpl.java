@@ -201,4 +201,41 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 	}
 
+	@Override
+	public ResponseDto verifyEmployeeType(String empId) {
+		logger.info("EmployeeServiceImpl | verifyEmployeeType | Execution start input " + empId);
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		boolean status = employeeDao.verifyEmployeeType(empId);
+		if (status == true)
+			responseDto.setMessage("EmpId is manager");
+		else {
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage("EmpId is not manager");
+		}
+		logger.info("EmployeeServiceImpl | verifyEmployeeType | Execution end ouput " + responseDto);
+		return responseDto;
+	}
+
+	@Override
+	public ResponseDto getEmployeeList(String empId) {
+		logger.info("EmployeeServiceImpl | verifyEmployeeType | Execution start input " + empId);
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try
+		{
+		responseDto.setData(employeeDao.getEmployeeList(empId));
+		}
+		catch(Exception e)
+		{
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.toString());
+		}
+		logger.info("EmployeeServiceImpl | verifyEmployeeType | Execution end ouput " + responseDto);
+		return responseDto;
+	}
 }

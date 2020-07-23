@@ -16,4 +16,8 @@ public interface EmployeeService {
 	ResponseDto managerDetails(EmployeeDto employeeDto);
 
 	ResponseDto updatePassword(EmployeeDto employeeDto);
+
+	ResponseDto verifyEmployeeType(String empId);
+
+	ResponseDto getEmployeeList(String empId);
 }
