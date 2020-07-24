@@ -54,7 +54,8 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		@SuppressWarnings("deprecation")
 		Criteria criteria = getSession().createCriteria(TrackingDo.class);
 		criteria.add(Restrictions.eq("date", trackingdto.getDate()));
-		criteria.add(Restrictions.eq("empId", trackingdto.getEmpId()));
+		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, trackingdto.getEmpId())));
+
 		TrackingDo track = (TrackingDo) criteria.uniqueResult();
 		if (track != null)
 			return null;
