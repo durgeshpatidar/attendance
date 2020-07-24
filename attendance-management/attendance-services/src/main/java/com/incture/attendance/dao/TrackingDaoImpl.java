@@ -50,12 +50,20 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 	// For CheckIn
 	@Override
-	public String addTracking(TrackingDto trackingdto) {
+	public boolean addTracking(TrackingDto trackingdto) {
+		Date current = trackingdto.getDate();
+		@SuppressWarnings("deprecation")
+		Criteria criteria = getSession().createCriteria(TrackingDo.class);
+		criteria.add(Restrictions.eq("date", current));
+		criteria.add(Restrictions.eq("empId", trackingdto.getEmpId()));
+		TrackingDo track = (TrackingDo) criteria.uniqueResult();
+		if (track != null) {
+			return false;
+		}
 		trackingdto.setStatus("Pending");
 		TrackingDo tdo = importDto(trackingdto);
-
 		getSession().save(tdo);
-		return tdo.getId();
+		return true;
 
 	}
 
