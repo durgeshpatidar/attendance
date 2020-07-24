@@ -7,7 +7,7 @@ import com.incture.attendance.dto.TrackingDetailsDto;
 import com.incture.attendance.dto.TrackingDto;
 
 public interface TrackingDao {
-	boolean addTracking(TrackingDto trackingdto);
+	String addTracking(TrackingDto trackingdto);
 
 	List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end);
 
