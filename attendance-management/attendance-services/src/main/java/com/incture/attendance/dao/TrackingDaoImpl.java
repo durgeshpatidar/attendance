@@ -49,11 +49,6 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	// For CheckIn
 	@Override
 	public String addTracking(TrackingDto trackingdto) {
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(TrackingDo.class);
-		// criteria.add(Restrictions.eq("date", trackingdto.getDate()));
-		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
-		// trackingdto.getEmpId())));
 
 		// checking whether employee already checked in
 		String hql = "from TrackingDo where date =:date1 and employee =:employee";
@@ -77,13 +72,9 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end) {
-		// Getting tracking details in between start and end date
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(TrackingDo.class);
-		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
-		// id)));
+
 		List<TrackingDo> tracks = new ArrayList<>();
-		;
+
 		if (start != null && end != null) {
 
 			String hql = "from TrackingDo where employee =:employee and date>=:start and date<=:end order by date desc";
@@ -93,8 +84,6 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			query.setParameter("end", end);
 			query.setMaxResults(30);
 			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
-			// criteria.add(Restrictions.between("date", start, end));
-			// criteria.setMaxResults(30);
 
 		}
 
@@ -104,15 +93,9 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			query.setParameter("employee", getSession().get(EmployeeDo.class, id));
 			query.setMaxResults(7);
 			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
-			// criteria.setMaxResults(7);
-		}
-		// criteria.addOrder(Order.desc("date"));
 
-		// Getting employee name
-		// @SuppressWarnings("deprecation")
-		// Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-		// crit.add(Restrictions.eq("id", id));
-		// EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
+		}
+
 		String hql2 = "from EmployeeMasterDo where id =:id";
 		Query query2 = getSession().createQuery(hql2);
 		query2.setParameter("id", id);
@@ -138,11 +121,6 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	// for updating tracking or checkout
 	@Override
 	public void updateTracking(String id, Date checkOut, double totalHours) {
-
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(TrackingDo.class);
-		// criteria.add(Restrictions.eq("id", id));
-		// TrackingDo current = (TrackingDo) criteria.uniqueResult();
 
 		String hql = "from TrackingDo where id =:id";
 		Query query = getSession().createQuery(hql);
