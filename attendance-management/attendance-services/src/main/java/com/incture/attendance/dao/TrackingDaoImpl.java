@@ -60,16 +60,14 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		Query query = getSession().createQuery(hql);
 		query.setParameter("date1", trackingdto.getDate());
 		query.setParameter("employee", getSession().get(EmployeeDo.class, trackingdto.getEmpId()));
-		TrackingDo track=null;
-		try
-		{
-		track = (TrackingDo) query.getSingleResult();
-		}catch(Exception e) 
-		{
+		try {
+			TrackingDo track = (TrackingDo) query.getSingleResult();
+			if (track != null)
+				return null;
+		} catch (Exception e) {
 			return null;
 		}
-		if (track != null)
-			return null;
+
 		// If not checkedin
 		trackingdto.setStatus("Pending");
 		TrackingDo tdo = importDto(trackingdto);
