@@ -65,15 +65,12 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			if (track != null)
 				return null;
 		} catch (Exception e) {
-			return null;
+			trackingdto.setStatus("Pending");
+			TrackingDo tdo = importDto(trackingdto);
+			getSession().save(tdo);
+			return tdo.getId();
 		}
-
-		// If not checkedin
-		trackingdto.setStatus("Pending");
-		TrackingDo tdo = importDto(trackingdto);
-		getSession().save(tdo);
-		return tdo.getId();
-
+		return null;
 	}
 
 	// For getting tracking details
