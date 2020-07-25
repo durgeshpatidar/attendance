@@ -1,15 +1,11 @@
 package com.incture.attendance.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import com.incture.attendance.dto.AddressDto;
 import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.WorkflowTaskDto;
@@ -17,7 +13,6 @@ import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.AddressMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.OfficeAddressDo;
-import com.incture.attendance.utils.ServicesUtil;
 
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
@@ -73,13 +68,12 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 
 		// Adding workflow for the newly added address
 		WorkflowTaskDto wtdo = new WorkflowTaskDto();
-		String description = "Address : " + addressdto.getAddress() + " " + addressdto.getCity() + " " + addressdto.getState()
-				+ " " + addressdto.getPincode();
+		String description = "Address : " + addressdto.getAddress() + " " + addressdto.getCity() + " "
+				+ addressdto.getState() + " " + addressdto.getPincode();
 		wtdo.setDescription(description);
 		wtdo.setEmpId(addressdto.getEmpId());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dt = new Date();
-		wtdo.setRequestDate(ServicesUtil.convertStringToDate(sdf.format(dt)));
+		wtdo.setRequestDate(dt);
 		wtdo.setId(newAdd.getId());
 		wtdo.setStatus("Pending");
 		wtdo.setQuerytype("Change in location");
@@ -89,14 +83,22 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	// Getting all address details.
 	@Override
 	public List<AddressDto> getAddressDetails(String empId) {
-		@SuppressWarnings("deprecation")
-		Criteria criteria = getSession().createCriteria(AddressDo.class);
-		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, empId)));
+		// @SuppressWarnings("deprecation")
+		// Criteria criteria = getSession().createCriteria(AddressDo.class);
+		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
+		// empId)));
+		// @SuppressWarnings("unchecked")
+		// List<AddressDo> address = criteria.list();
+
+		String hql = "from AddressDo where employee =:employee";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
 		@SuppressWarnings("unchecked")
-		List<AddressDo> address = criteria.list();
+		List<AddressDo> address = query.getResultList();
 		List<AddressDto> request = new ArrayList<>();
+		AddressDto newAddress = new AddressDto();
 		for (AddressDo t : address) {
-			AddressDto newAddress = new AddressDto();
+
 			newAddress.setId(t.getId());
 			newAddress.setEmpId(empId);
 			newAddress.setAddress(t.getAddress());
@@ -116,14 +118,27 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	// Verifying address.
 	@Override
 	public String validateAddress(AddressDto addressDto) {
-		@SuppressWarnings("deprecation")
-		Criteria criteria = getSession().createCriteria(AddressDo.class);
-		criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, addressDto.getEmpId())));
-		criteria.add(Restrictions.eq("status", "Approved"));
-		criteria.add(Restrictions.eq("locationLat", addressDto.getLocationLat()));
-		criteria.add(Restrictions.eq("locationLon", addressDto.getLocationLon()));
-		AddressDo address = (AddressDo) criteria.uniqueResult();
-		return address.getId();
+		// @SuppressWarnings("deprecation")
+		// Criteria criteria = getSession().createCriteria(AddressDo.class);
+		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
+		// addressDto.getEmpId())));
+		// criteria.add(Restrictions.eq("status", "Approved"));
+		// criteria.add(Restrictions.eq("locationLat", addressDto.getLocationLat()));
+		// criteria.add(Restrictions.eq("locationLon", addressDto.getLocationLon()));
+		String hql = "from AddressDo where employee =:employee and status =:status and locationLat =:locationLat and "
+				+ "locationLon =:locationLon";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("employee", getSession().get(EmployeeDo.class, addressDto.getEmpId()));
+		query.setParameter("status", "Approved");
+		query.setParameter("locationLat", addressDto.getLocationLat());
+		query.setParameter("locationLon", addressDto.getLocationLon());
+		try {
+			AddressDo address = (AddressDo) query.getSingleResult();
+			return address.getId();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 
 	@Override
@@ -131,10 +146,14 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		String empId = employeeDto.getId();
 		List<AddressDto> address = new ArrayList<>();
 		// Taking homeaddress from address master
-		@SuppressWarnings("deprecation")
-		Criteria crit1 = getSession().createCriteria(AddressMasterDo.class);
-		crit1.add(Restrictions.eq("empId", empId));
-		AddressMasterDo addMasterDo = (AddressMasterDo) crit1.uniqueResult();
+		// @SuppressWarnings("deprecation")
+		// Criteria crit1 = getSession().createCriteria(AddressMasterDo.class);
+		// crit1.add(Restrictions.eq("empId", empId));
+		// AddressMasterDo addMasterDo = (AddressMasterDo) crit1.uniqueResult();
+		String hql = "from AddressMasterDo where empId =:empId";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("empId", empId);
+		AddressMasterDo addMasterDo = (AddressMasterDo) query.getSingleResult();
 		AddressDto homeAddress = new AddressDto();
 		// adding home address to an addressDto.
 		homeAddress.setEmpId(empId);
@@ -147,12 +166,15 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		homeAddress.setStatus("ACTIVE");
 		address.add(homeAddress);
 		// Taking static company address from master
-		@SuppressWarnings("deprecation")
-		Criteria crit2 = getSession().createCriteria(OfficeAddressDo.class);
+		// @SuppressWarnings("deprecation")
+		// Criteria crit2 = getSession().createCriteria(OfficeAddressDo.class);
+		String hql2 = "from OfficeAddressDo";
+		Query query2 = getSession().createQuery(hql2);
 		@SuppressWarnings("unchecked")
-		List<OfficeAddressDo> officeAddresses = crit2.list();
+		List<OfficeAddressDo> officeAddresses = query2.getResultList();
+		AddressDto officeAddress = new AddressDto();
 		for (OfficeAddressDo value : officeAddresses) {
-			AddressDto officeAddress = new AddressDto();
+
 			officeAddress.setEmpId(empId);
 			officeAddress.setAddress(value.getAddress());
 			officeAddress.setState(value.getState());
