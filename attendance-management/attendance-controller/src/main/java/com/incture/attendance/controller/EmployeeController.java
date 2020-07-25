@@ -44,21 +44,16 @@ public class EmployeeController {
 		return employeeService.profileDetails(employeeDto);
 	}
 
-	@PostMapping("/manager-details")
-	public ResponseDto managerDetails(@RequestBody EmployeeDto employeeDto) {
-		return employeeService.managerDetails(employeeDto);
-	}
-
 	@PostMapping("/update-password")
 	public ResponseDto updatePassword(@RequestBody EmployeeDto employeeDto) {
 		return employeeService.updatePassword(employeeDto);
 	}
-	
+
 	@GetMapping("/employee-type")
 	public ResponseDto verifyEmployeeType(@RequestParam String empId) {
 		return employeeService.verifyEmployeeType(empId);
 	}
-	
+
 	@GetMapping("/employee-list")
 	public ResponseDto getEmployeeList(@RequestParam String empId) {
 		return employeeService.getEmployeeList(empId);

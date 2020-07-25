@@ -96,9 +96,9 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		@SuppressWarnings("unchecked")
 		List<AddressDo> address = query.getResultList();
 		List<AddressDto> request = new ArrayList<>();
-		AddressDto newAddress = new AddressDto();
+		AddressDto newAddress = null;
 		for (AddressDo t : address) {
-
+			newAddress = new AddressDto();
 			newAddress.setId(t.getId());
 			newAddress.setEmpId(empId);
 			newAddress.setAddress(t.getAddress());

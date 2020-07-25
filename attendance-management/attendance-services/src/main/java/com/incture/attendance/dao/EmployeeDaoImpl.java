@@ -177,12 +177,23 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	// Checking whether employee is manager or not
 	@Override
 	public boolean verifyEmployeeType(String empId) {
-		@SuppressWarnings("deprecation")
-		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
-		crit.add(Restrictions.eq("managerId", empId));
-		@SuppressWarnings("unchecked")
-		List<ManagerMasterDo> mdo = crit.list();
-		if (mdo.isEmpty()) {
+//		@SuppressWarnings("deprecation")
+//		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
+//		crit.add(Restrictions.eq("managerId", empId));
+//		@SuppressWarnings("unchecked")
+//		List<ManagerMasterDo> mdo = crit.list();
+//		if (mdo.isEmpty()) {
+//			return false;
+//		}
+//		return true;
+		String hql = "SELECT managerId FROM ManagerMasterDo where managerId=:id";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("id", empId);
+		try {
+			if (query.getResultList().isEmpty())
+				return false;
+		} catch (Exception e) {
+			System.out.println(e.toString());
 			return false;
 		}
 		return true;
