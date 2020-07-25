@@ -70,42 +70,25 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	// for verifying employee email and password
 	@Override
 	public boolean verifyIdPass(EmployeeDto employeeDto) {
-		/*
-		 * @SuppressWarnings("rawtypes") Query q =
-		 * getSession().createNativeQuery("SELECT ID FROM EMPLOYEE WHERE EMAIL='" +
-		 * employeeDto.getEmail() + "' AND PASSWORD='" + employeeDto.getPassword() +
-		 * "';");
-		 * 
-		 * @SuppressWarnings("unchecked") List<Object> l = (List<Object>)
-		 * q.getResultList(); try { employeeDto.setId((String) l.get(0)); } catch
-		 * (Exception e) { System.out.println(e); } if (l.isEmpty()) return false;
-		 * return true;
-		 */
 		String hql = "select id FROM EmployeeDo WHERE email=:email AND password=:password";
 		Query q = getSession().createQuery(hql);
 		q.setParameter("email", employeeDto.getEmail());
 		q.setParameter("password", employeeDto.getPassword());
-		String id = (String) q.getSingleResult();
-		if (id == null)
+		try {
+			String id = (String) q.getSingleResult();
+			if (id == null)
+				return false;
+			employeeDto.setId(id);
+		} catch (Exception e) {
 			return false;
-		employeeDto.setId(id);
+		}
+
 		return true;
 	}
 
 	// for checking employee email is exist or not and employee is active or not
 	@Override
 	public boolean isValidUser(EmployeeDto employeeDto) {
-		/*
-		 * @SuppressWarnings("rawtypes") Query q = getSession().createNativeQuery(
-		 * "SELECT ID FROM EMPLOYEE_MASTER WHERE EMAIL='" + employeeDto.getEmail() +
-		 * "' AND STATUS='ACTIVE';"); System.out.println("email of employee:" +
-		 * employeeDto.getEmail());
-		 * 
-		 * @SuppressWarnings("unchecked") List<Object> l = (List<Object>)
-		 * q.getResultList(); employeeDto.setId((String) l.get(0)); int size = l.size();
-		 * System.out.println("size : " + size); if (size != 0) return true; else return
-		 * false;
-		 */
 		String hql = "select id FROM EmployeeMasterDo WHERE email=:email and status=:status";
 		Query q = getSession().createQuery(hql);
 		q.setParameter("email", employeeDto.getEmail());
@@ -115,7 +98,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			return false;
 		employeeDto.setId(id);
 		return true;
-
 	}
 
 	// for displaying profile details
@@ -174,11 +156,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	@Override
 	public boolean verifyEmail(EmployeeDto employeeDto) {
-		/*
-		 * Criteria crit = getSession().createCriteria(EmployeeDo.class);
-		 * crit.add(Restrictions.eq("email", employeeDto.getEmail())); EmployeeDo edo =
-		 * (EmployeeDo) crit.uniqueResult(); if (edo == null) return false; return true;
-		 */
 		String hql = "FROM EmployeeDo WHERE email=:email";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("email", employeeDto.getEmail());
@@ -191,7 +168,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	@Override
 	public void updatePassword(EmployeeDto employeeDto) {
 		String hql = "UPDATE EmployeeDo SET password=:password WHERE email=:email";
-
 		Query query = getSession().createQuery(hql);
 		query.setParameter("password", employeeDto.getPassword());
 		query.setParameter("email", employeeDto.getEmail());

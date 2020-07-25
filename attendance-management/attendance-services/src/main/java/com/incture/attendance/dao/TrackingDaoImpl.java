@@ -56,7 +56,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		// trackingdto.getEmpId())));
 
 		// checking whether employee already checked in
-		String hql = "from TrackingDo where date = :date1 and employee = :employee";
+		String hql = "from TrackingDo where date =:date1 and employee =:employee";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("date1", trackingdto.getDate());
 		query.setParameter("employee", getSession().get(EmployeeDo.class, trackingdto.getEmpId()));
@@ -84,7 +84,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		;
 		if (start != null && end != null) {
 
-			String hql = "from TrackingDo where employee = :employee and date>= :start and date<= :end order by date desc";
+			String hql = "from TrackingDo where employee =:employee and date>=:start and date<=:end order by date desc";
 			Query query = getSession().createQuery(hql);
 			query.setParameter("employee", getSession().get(EmployeeDo.class, id));
 			query.setParameter("start", start);
@@ -118,8 +118,9 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 
 		List<TrackingDetailsDto> history = new ArrayList<>();
 
-		TrackingDetailsDto newTracking = new TrackingDetailsDto();
+		TrackingDetailsDto newTracking = null;
 		for (TrackingDo t : tracks) {
+			newTracking = new TrackingDetailsDto();
 			newTracking.setEmpId(id);
 			newTracking.setEmpName(emp.getFirstName() + " " + emp.getLastName());
 			newTracking.setDate(t.getDate());
