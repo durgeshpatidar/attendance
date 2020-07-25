@@ -13,7 +13,7 @@ public interface EmployeeService {
 
 	ResponseDto profileDetails(EmployeeDto employeeDto);
 
-	// ResponseDto managerDetails(EmployeeDto employeeDto);
+	//ResponseDto managerDetails(EmployeeDto employeeDto);
 
 	ResponseDto updatePassword(EmployeeDto employeeDto);
 
