@@ -81,7 +81,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		 * (Exception e) { System.out.println(e); } if (l.isEmpty()) return false;
 		 * return true;
 		 */
-		String hql = "id FROM EmployeeDo WHERE email=:email AND password=:password";
+		String hql = "select id FROM EmployeeDo WHERE email=:email AND password=:password";
 		Query q = getSession().createQuery(hql);
 		q.setParameter("email", employeeDto.getEmail());
 		q.setParameter("password", employeeDto.getPassword());
@@ -106,7 +106,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		 * System.out.println("size : " + size); if (size != 0) return true; else return
 		 * false;
 		 */
-		String hql = "id FROM EmployeeMasterDo WHERE email=:email and status=:status";
+		String hql = "select id FROM EmployeeMasterDo WHERE email=:email and status=:status";
 		Query q = getSession().createQuery(hql);
 		q.setParameter("email", employeeDto.getEmail());
 		q.setParameter("status", "ACTIVE");
