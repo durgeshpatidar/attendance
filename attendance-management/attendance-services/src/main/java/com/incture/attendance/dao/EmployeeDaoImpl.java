@@ -3,9 +3,10 @@ package com.incture.attendance.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.incture.attendance.dto.EmployeeDto;
@@ -81,7 +82,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		 * return true;
 		 */
 		String hql = "id FROM EmployeeDo WHERE email=:email AND password=:password";
-		@SuppressWarnings("rawtypes")
 		Query q = getSession().createQuery(hql);
 		q.setParameter("email", employeeDto.getEmail());
 		q.setParameter("password", employeeDto.getPassword());
@@ -107,7 +107,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		 * false;
 		 */
 		String hql = "id FROM EmployeeMasterDo WHERE email=:email and status=:status";
-		@SuppressWarnings("rawtypes")
 		Query q = getSession().createQuery(hql);
 		q.setParameter("email", employeeDto.getEmail());
 		q.setParameter("status", "ACTIVE");
@@ -181,7 +180,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		 * (EmployeeDo) crit.uniqueResult(); if (edo == null) return false; return true;
 		 */
 		String hql = "FROM EmployeeDo WHERE email=:email";
-		@SuppressWarnings("rawtypes")
 		Query query = getSession().createQuery(hql);
 		query.setParameter("email", employeeDto.getEmail());
 		EmployeeDo edo = (EmployeeDo) query.getSingleResult();
@@ -193,7 +191,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	@Override
 	public void updatePassword(EmployeeDto employeeDto) {
 		String hql = "UPDATE EmployeeDo SET password=:password WHERE email=:email";
-		@SuppressWarnings("rawtypes")
+
 		Query query = getSession().createQuery(hql);
 		query.setParameter("password", employeeDto.getPassword());
 		query.setParameter("email", employeeDto.getEmail());

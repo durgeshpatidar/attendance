@@ -8,11 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
-
 import com.incture.attendance.dto.TrackingDetailsDto;
 import com.incture.attendance.dto.TrackingDto;
 import com.incture.attendance.entities.AddressDo;
@@ -54,21 +49,21 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	// For CheckIn
 	@Override
 	public String addTracking(TrackingDto trackingdto) {
-		//@SuppressWarnings("deprecation")
-		//Criteria criteria = getSession().createCriteria(TrackingDo.class);
-		//criteria.add(Restrictions.eq("date", trackingdto.getDate()));
-		//criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, trackingdto.getEmpId())));
-		
-		//checking whether employee already checked in
+		// @SuppressWarnings("deprecation")
+		// Criteria criteria = getSession().createCriteria(TrackingDo.class);
+		// criteria.add(Restrictions.eq("date", trackingdto.getDate()));
+		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
+		// trackingdto.getEmpId())));
+
+		// checking whether employee already checked in
 		String hql = "from TrackingDo where date = :date1 and employee = :employee";
-		Query query=getSession().createQuery(hql);
+		Query query = getSession().createQuery(hql);
 		query.setParameter("date1", trackingdto.getDate());
 		query.setParameter("employee", getSession().get(EmployeeDo.class, trackingdto.getEmpId()));
-		query.executeUpdate();
 		TrackingDo track = (TrackingDo) query.getSingleResult();
 		if (track != null)
 			return null;
-		//If not checkedin 
+		// If not checkedin
 		trackingdto.setStatus("Pending");
 		TrackingDo tdo = importDto(trackingdto);
 		getSession().save(tdo);
@@ -81,53 +76,50 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	@Override
 	public List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end) {
 		// Getting tracking details in between start and end date
-		//@SuppressWarnings("deprecation")
-		//Criteria criteria = getSession().createCriteria(TrackingDo.class);
-		//criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class, id)));
-		List<TrackingDo> tracks  =  new ArrayList<>(); ;
+		// @SuppressWarnings("deprecation")
+		// Criteria criteria = getSession().createCriteria(TrackingDo.class);
+		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
+		// id)));
+		List<TrackingDo> tracks = new ArrayList<>();
+		;
 		if (start != null && end != null) {
-			
+
 			String hql = "from TrackingDo where employee = :employee and date>= :start and date<= :end order by date desc";
-			Query query=getSession().createQuery(hql);
+			Query query = getSession().createQuery(hql);
 			query.setParameter("employee", getSession().get(EmployeeDo.class, id));
 			query.setParameter("start", start);
 			query.setParameter("end", end);
 			query.setMaxResults(30);
-			query.executeUpdate();
-		    tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
-			//criteria.add(Restrictions.between("date", start, end));
-			//criteria.setMaxResults(30);
+			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
+			// criteria.add(Restrictions.between("date", start, end));
+			// criteria.setMaxResults(30);
 
 		}
-		
+
 		if (start == null && end == null) {
 			String hql = "from TrackingDo where employee = :employee order by date desc";
-			Query query=getSession().createQuery(hql);
+			Query query = getSession().createQuery(hql);
 			query.setParameter("employee", getSession().get(EmployeeDo.class, id));
 			query.setMaxResults(7);
-			query.executeUpdate();
 			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
-			//criteria.setMaxResults(7);
+			// criteria.setMaxResults(7);
 		}
-		//criteria.addOrder(Order.desc("date"));
+		// criteria.addOrder(Order.desc("date"));
 
-		
 		// Getting employee name
-		//@SuppressWarnings("deprecation")
-		//Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-		//crit.add(Restrictions.eq("id", id));
-		//EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
-		String hql2 = "from EmployeeMasterDo where id :id";
-		Query query2=getSession().createQuery(hql2);
+		// @SuppressWarnings("deprecation")
+		// Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
+		// crit.add(Restrictions.eq("id", id));
+		// EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
+		String hql2 = "from EmployeeMasterDo where id =:id";
+		Query query2 = getSession().createQuery(hql2);
 		query2.setParameter("id", id);
 		EmployeeMasterDo emp = (EmployeeMasterDo) query2.getSingleResult();
-		
-		
+
 		List<TrackingDetailsDto> history = new ArrayList<>();
 
+		TrackingDetailsDto newTracking = new TrackingDetailsDto();
 		for (TrackingDo t : tracks) {
-
-			TrackingDetailsDto newTracking = new TrackingDetailsDto();
 			newTracking.setEmpId(id);
 			newTracking.setEmpName(emp.getFirstName() + " " + emp.getLastName());
 			newTracking.setDate(t.getDate());
@@ -136,7 +128,6 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			newTracking.setTotalHours(t.getTotalHours());
 			newTracking.setStatus(t.getStatus());
 			history.add(newTracking);
-
 		}
 		return history;
 	}
@@ -145,13 +136,13 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	@Override
 	public void updateTracking(String id, Date checkOut, double totalHours) {
 
-		//@SuppressWarnings("deprecation")
-		//Criteria criteria = getSession().createCriteria(TrackingDo.class);
-		//criteria.add(Restrictions.eq("id", id));
-		//TrackingDo current = (TrackingDo) criteria.uniqueResult();
-		
-		String hql = "from TrackingDo where id :id";
-		Query query=getSession().createQuery(hql);
+		// @SuppressWarnings("deprecation")
+		// Criteria criteria = getSession().createCriteria(TrackingDo.class);
+		// criteria.add(Restrictions.eq("id", id));
+		// TrackingDo current = (TrackingDo) criteria.uniqueResult();
+
+		String hql = "from TrackingDo where id =:id";
+		Query query = getSession().createQuery(hql);
 		query.setParameter("id", id);
 		TrackingDo current = (TrackingDo) query.getSingleResult();
 		current.setCheckOut(checkOut);
