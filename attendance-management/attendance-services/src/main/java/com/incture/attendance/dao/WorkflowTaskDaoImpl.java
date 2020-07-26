@@ -155,7 +155,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		String hql1 = "from EmployeeMasterDo where id =:id";
 		Query query1 = getSession().createQuery(hql1);
 		query1.setParameter("id", empId);
-		EmployeeMasterDo emp = (EmployeeMasterDo) query.uniqueResult();
+		EmployeeMasterDo emp = (EmployeeMasterDo) query.list().get(0);
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
