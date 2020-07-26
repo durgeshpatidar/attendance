@@ -140,22 +140,58 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		// @SuppressWarnings("unchecked")
 		// List<WorkflowTaskDo> workflow = criteria.list();
 
+//		String hql = "from WorkflowTaskDo where employee =:employee order by requestdate desc";
+//		Query query = getSession().createQuery(hql);
+//		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
+//		query.setMaxResults(20);
+//		@SuppressWarnings("unchecked")
+//		List<WorkflowTaskDo> workflow = query.getResultList();
+//		// Getting employee name
+//		// @SuppressWarnings("deprecation")
+//		// Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
+//		// crit.add(Restrictions.eq("id", empId));
+//		// EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
+//
+//		String hql1 = "from EmployeeMasterDo where id =:id";
+//		Query query1 = getSession().createQuery(hql1);
+//		query1.setParameter("id", empId);
+//		EmployeeMasterDo emp = (EmployeeMasterDo) query.list().get(0);
+//		List<WorkflowTaskDto> request = new ArrayList<>();
+//		for (WorkflowTaskDo t : workflow) {
+//			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
+//			newWorkflow.setEmpId(empId);
+//			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
+//			newWorkflow.setComment(t.getComment());
+//			newWorkflow.setDescription(t.getDescription());
+//			newWorkflow.setId(t.getId());
+//			newWorkflow.setQuerytype(t.getQuerytype());
+//			newWorkflow.setRequestDate(t.getRequestdate());
+//			newWorkflow.setStatus(t.getStatus());
+//			request.add(newWorkflow);
+//		}
+//		return request;
 		String hql = "from WorkflowTaskDo where employee =:employee order by requestdate desc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
 		query.setMaxResults(20);
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = query.getResultList();
+
 		// Getting employee name
 		// @SuppressWarnings("deprecation")
 		// Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
 		// crit.add(Restrictions.eq("id", empId));
 		// EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
-
 		String hql1 = "from EmployeeMasterDo where id =:id";
 		Query query1 = getSession().createQuery(hql1);
 		query1.setParameter("id", empId);
-		EmployeeMasterDo emp = (EmployeeMasterDo) query.list().get(0);
+		EmployeeMasterDo emp = null;
+		try {
+			emp = (EmployeeMasterDo) query1.getSingleResult();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
@@ -252,7 +288,6 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		}
 
 		List<WorkflowTaskDto> request = new ArrayList<>();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
 			newWorkflow.setEmpId(empId);
@@ -261,12 +296,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setDescription(t.getDescription());
 			newWorkflow.setId(t.getId());
 			newWorkflow.setQuerytype(t.getQuerytype());
-			try {
-				newWorkflow.setRequestDate(formatter.parse(t.getRequestdate().toString()));
-			} catch (ParseException e) {
-				newWorkflow.setRequestDate(t.getRequestdate());
-				e.printStackTrace();
-			}
+			newWorkflow.setRequestDate(t.getRequestdate());
 			newWorkflow.setStatus(t.getStatus());
 			request.add(newWorkflow);
 		}
