@@ -3,10 +3,7 @@ package com.incture.attendance.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.incture.attendance.dto.EmployeeDto;
@@ -18,6 +15,7 @@ import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.ManagerMasterDo;
 
+@SuppressWarnings("rawtypes")
 @Repository("EmployeeDaoImpl")
 public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements EmployeeDao {
 	@Autowired
@@ -52,17 +50,29 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	// for save employee data and adding address from master after signup
 	@Override
 	public boolean saveEmployeeData(EmployeeDto employeeDto) {
-		@SuppressWarnings("deprecation")
-		Criteria crit = getSession().createCriteria(EmployeeDo.class);
-		crit.add(Restrictions.eq("id", employeeDto.getId()));
-		EmployeeDo ed = (EmployeeDo) crit.uniqueResult();
-		if (ed != null) {
-			return false;
-		}
-		getSession().save(importDto(employeeDto));
+//		@SuppressWarnings("deprecation")
+//		Criteria crit = getSession().createCriteria(EmployeeDo.class);
+//		crit.add(Restrictions.eq("id", employeeDto.getId()));
+//		EmployeeDo ed = (EmployeeDo) crit.uniqueResult();
+//		if (ed != null) {
+//			return false;
+//		}
+//		getSession().save(importDto(employeeDto));
+//		try {
+//			addressDao.addMasterAddress(employeeDto);
+//		} catch (Exception e) {
+//		}
+//		return true;
+
+		Query q = getSession().createQuery("select id from EmployeeDo where id=:id");
+		q.setParameter("id", employeeDto.getId());
 		try {
+			if (!q.list().isEmpty())
+				return false;
+			getSession().save(importDto(employeeDto));
 			addressDao.addMasterAddress(employeeDto);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return true;
 	}
@@ -75,11 +85,12 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		q.setParameter("email", employeeDto.getEmail());
 		q.setParameter("password", employeeDto.getPassword());
 		try {
-			String id = (String) q.getSingleResult();
-			if (id == null)
+			if (q.list().isEmpty())
 				return false;
+			String id = (String) q.list().get(0);
 			employeeDto.setId(id);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 			return false;
 		}
 
@@ -114,11 +125,15 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		profileDto.setEmailId(empMasterDto.getEmailId());
 		profileDto.setProfileImg(empMasterDto.getProfileImg());
 		try {
-			@SuppressWarnings("deprecation")
-			Criteria crit = getSession().createCriteria(DesignationMasterDo.class);
-			crit.add(Restrictions.eq("employeeId", id));
-			crit.add(Restrictions.eq("status", "ACTIVE"));
-			DesignationMasterDo designation = (DesignationMasterDo) crit.uniqueResult();
+//			@SuppressWarnings("deprecation")
+//			Criteria crit = getSession().createCriteria(DesignationMasterDo.class);
+//			crit.add(Restrictions.eq("employeeId", id));
+//			crit.add(Restrictions.eq("status", "ACTIVE"));
+//			DesignationMasterDo designation = (DesignationMasterDo) crit.uniqueResult();
+			Query q = getSession().createQuery("from DesignationMasterDo where employeeId=:id and status=:status");
+			q.setParameter("id", id);
+			q.setParameter("status", "ACTIVE");
+			DesignationMasterDo designation = (DesignationMasterDo) q.getSingleResult();
 			profileDto.setDesignation(designation.getDesignation());
 		} catch (Exception e) {
 			System.out.println(e);
@@ -130,13 +145,19 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 	// For displaying manager details
 	@Override
 	public List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto) {
-		String id = employeeDto.getId();
-		@SuppressWarnings("deprecation")
-		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
-		crit.add(Restrictions.eq("employeeId", id));
-		crit.add(Restrictions.eq("status", "ACTIVE"));
+//		String id = employeeDto.getId();
+//		@SuppressWarnings("deprecation")
+//		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
+//		crit.add(Restrictions.eq("employeeId", id));
+//		crit.add(Restrictions.eq("status", "ACTIVE"));
+//		@SuppressWarnings("unchecked")
+//		List<ManagerMasterDo> results = crit.list();
+		Query q = getSession().createQuery("FROM ManageerMasterDo where employeeId=:id and status=:status");
+		q.setParameter("id", employeeDto.getId());
+		q.setParameter("status", "ACTIVE");
 		@SuppressWarnings("unchecked")
-		List<ManagerMasterDo> results = crit.list();
+		List<ManagerMasterDo> results = q.getResultList();
+
 		System.out.println(results);
 		List<ManagerDetailsDto> managerList = new ArrayList<>();
 		for (ManagerMasterDo b : results) {
@@ -148,9 +169,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 			manager.setManagerType(b.getManagerType());
 			manager.setEmailId(empMasterDo.getEmailId());
 			managerList.add(manager);
-
 		}
-
 		return managerList;
 	}
 
@@ -206,31 +225,41 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		// Adding details of manager also to the list
 		EmployeeListDto employee1 = new EmployeeListDto();
 		employee1.setId(empId);
-		@SuppressWarnings("deprecation")
-		Criteria crit2 = getSession().createCriteria(EmployeeMasterDo.class);
-		crit2.add(Restrictions.eq("id", empId));
-		EmployeeMasterDo ed2 = (EmployeeMasterDo) crit2.uniqueResult();
+//		@SuppressWarnings("deprecation")
+//		Criteria crit2 = getSession().createCriteria(EmployeeMasterDo.class);
+//		crit2.add(Restrictions.eq("id", empId));
+//		EmployeeMasterDo ed2 = (EmployeeMasterDo) crit2.uniqueResult();
+		Query q1 = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
+		q1.setParameter("id", empId);
+		EmployeeMasterDo ed2 = (EmployeeMasterDo) q1.getSingleResult();
 		employee1.setName(ed2.getFirstName() + " " + ed2.getLastName());
 		employees.add(employee1);
 
 		// Getting the list of employees under the manager
-		@SuppressWarnings("deprecation")
-		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
-		crit.add(Restrictions.eq("managerId", empId));
-		@SuppressWarnings("unchecked")
-		List<ManagerMasterDo> mdo = crit.list();
+//		@SuppressWarnings("deprecation")
+//		Criteria crit = getSession().createCriteria(ManagerMasterDo.class);
+//		crit.add(Restrictions.eq("managerId", empId));
+//		@SuppressWarnings("unchecked")
+//		List<ManagerMasterDo> mdo = crit.list();
 
+		Query q2 = getSession().createQuery("FROM ManagerMasterDo where id=:id");
+		q2.setParameter("id", empId);
+		@SuppressWarnings("unchecked")
+		List<ManagerMasterDo> mdo = q2.getResultList();
+
+		EmployeeListDto employee = null;
 		for (ManagerMasterDo m : mdo) {
-			EmployeeListDto employee = new EmployeeListDto();
+			employee = new EmployeeListDto();
 			employee.setId(m.getEmployeeId());
-			@SuppressWarnings("deprecation")
-			Criteria crit1 = getSession().createCriteria(EmployeeMasterDo.class);
-			crit1.add(Restrictions.eq("id", m.getEmployeeId()));
-			EmployeeMasterDo ed = (EmployeeMasterDo) crit1.uniqueResult();
+//			@SuppressWarnings("deprecation")
+//			Criteria crit1 = getSession().createCriteria(EmployeeMasterDo.class);
+//			crit1.add(Restrictions.eq("id", m.getEmployeeId()));
+			Query q = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
+			q.setParameter("id", m.getEmployeeId());
+			EmployeeMasterDo ed = (EmployeeMasterDo) q.getSingleResult();
 			employee.setName(ed.getFirstName() + " " + ed.getLastName());
 			employees.add(employee);
 		}
-
 		return employees;
 	}
 
