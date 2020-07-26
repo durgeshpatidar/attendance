@@ -13,4 +13,6 @@ public interface TrackingDao {
 
 	void updateTracking(String id, Date checkOut,double totalHours);
 
+	void updateTrackingByAdmin(TrackingDto trackingDto);
+
 }
