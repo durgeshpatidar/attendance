@@ -117,4 +117,23 @@ public class TrackingServiceImpl implements TrackingService {
 
 		return responseDto;
 	}
+
+	@Override
+	public ResponseDto updateTrackingByAdmin(TrackingDto trackingDto) {
+		logger.info("TrackingServiceImpl | updateTrackingByAdmin | Execution start input " + trackingDto);
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			trackingDao.updateTrackingByAdmin(trackingDto);
+			responseDto.setMessage("Checkout details updated Successfully!");
+		} catch (Exception e) {
+			logger.error("TrackingServiceImpl | updateTrackingByAdmin | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+		}
+		logger.info("TrackingServiceImpl | updateTrackingByAdmin | Execution end ouput " + responseDto);
+		return responseDto;
+	}
 }

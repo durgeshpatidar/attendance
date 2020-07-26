@@ -57,5 +57,8 @@ public class TrackingController {
 		return trackingService.updateTracking(id, checkOut, totalHours);
 
 	}
-	//
+	@PostMapping("/update")
+	public ResponseDto updateTrackingByAdmin(@RequestBody TrackingDto trackingDto) {
+		return trackingService.updateTrackingByAdmin(trackingDto);
+	}
 }
