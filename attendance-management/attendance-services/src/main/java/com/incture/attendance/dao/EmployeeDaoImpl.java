@@ -10,6 +10,7 @@ import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.EmployeeListDto;
 import com.incture.attendance.dto.ManagerDetailsDto;
 import com.incture.attendance.dto.ProfileDto;
+import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.DesignationMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
@@ -150,7 +151,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return managerList;
 	}
 
-	//verfiying email
+	// verfiying email
 	@Override
 	public boolean verifyEmail(EmployeeDto employeeDto) {
 		String hql = "select id FROM EmployeeDo WHERE email=:email";
@@ -161,7 +162,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return true;
 	}
 
-	//updating password
+	// updating password
 	@Override
 	public void updatePassword(EmployeeDto employeeDto) {
 		String hql = "UPDATE EmployeeDo SET password=:password WHERE email=:email";
@@ -253,9 +254,10 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	@Override
 	public boolean verifyAdminId(String empId) {
-		String hql = "SELECT id FROM EmployeeDo where userType=:userType";
+		String hql = "FROM EmployeeDo where userType=:userType and id =:id";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("userType", "ADMIN");
+		query.setParameter("id", empId);
 		try {
 			if (query.getResultList().isEmpty())
 				return false;
