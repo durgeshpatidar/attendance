@@ -44,7 +44,6 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			System.out.println(e.getMessage());
 		}
 
-		
 		System.out.println("manager id : " + mdo.getManagerId());
 		entity.setManagerId(mdo.getManagerId());
 		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
@@ -156,16 +155,8 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		String hql1 = "from EmployeeMasterDo where id =:id";
 		Query query1 = getSession().createQuery(hql1);
 		query1.setParameter("id", empId);
-		EmployeeMasterDo emp = null;
-		try {
-			emp = (EmployeeMasterDo) query.getSingleResult();
-		}catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		
-
+		EmployeeMasterDo emp = (EmployeeMasterDo) query.uniqueResult();
 		List<WorkflowTaskDto> request = new ArrayList<>();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
 			newWorkflow.setEmpId(empId);
@@ -174,12 +165,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setDescription(t.getDescription());
 			newWorkflow.setId(t.getId());
 			newWorkflow.setQuerytype(t.getQuerytype());
-			try {
-				newWorkflow.setRequestDate(formatter.parse(t.getRequestdate().toString()));
-			} catch (ParseException e) {
-				newWorkflow.setRequestDate(t.getRequestdate());
-				e.printStackTrace();
-			}
+			newWorkflow.setRequestDate(t.getRequestdate());
 			newWorkflow.setStatus(t.getStatus());
 			request.add(newWorkflow);
 		}
@@ -261,12 +247,10 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		EmployeeMasterDo emp = null;
 		try {
 			emp = (EmployeeMasterDo) query1.getSingleResult();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
- 
+
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 		for (WorkflowTaskDo t : workflow) {
