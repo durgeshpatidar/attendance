@@ -31,6 +31,9 @@ public class EmployeeDo implements BaseDo {
 
 	@Column(name = "EMAIL", columnDefinition = "NVARCHAR(100)")
 	private String email;
+	
+	@Column(name = "USERTYPE", columnDefinition = "NVARCHAR(20)")
+	private String userType;
 	// Column for face data
 
 	@OneToMany(mappedBy = "employee")
@@ -42,10 +45,26 @@ public class EmployeeDo implements BaseDo {
 	@OneToMany(mappedBy = "employee")
 	private List<WorkflowTaskDo> workflowTrackings = new ArrayList<WorkflowTaskDo>();
 
+	//Constructor
 	public EmployeeDo() {
 		super();
+		
 	}
 
+	public EmployeeDo(String id, String phoneNo, String password, String email, String userType,
+			List<AddressDo> address, List<TrackingDo> empTrackings, List<WorkflowTaskDo> workflowTrackings) {
+		super();
+		this.id = id;
+		this.phoneNo = phoneNo;
+		this.password = password;
+		this.email = email;
+		this.userType = userType;
+		this.address = address;
+		this.empTrackings = empTrackings;
+		this.workflowTrackings = workflowTrackings;
+	}
+
+	//Getters and setters
 	public String getId() {
 		return id;
 	}
@@ -78,6 +97,14 @@ public class EmployeeDo implements BaseDo {
 		this.email = email;
 	}
 
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
 	public List<AddressDo> getAddress() {
 		return address;
 	}
@@ -94,19 +121,15 @@ public class EmployeeDo implements BaseDo {
 		this.empTrackings = empTrackings;
 	}
 
+	public List<WorkflowTaskDo> getWorkflowTrackings() {
+		return workflowTrackings;
+	}
+
+	public void setWorkflowTrackings(List<WorkflowTaskDo> workflowTrackings) {
+		this.workflowTrackings = workflowTrackings;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	public EmployeeDo(String id, String phoneNo, String password, String email, List<AddressDo> address,
-			List<TrackingDo> empTrackings) {
-		super();
-		this.id = id;
-		this.phoneNo = phoneNo;
-		this.password = password;
-		this.email = email;
-		this.address = address;
-		this.empTrackings = empTrackings;
-	}
-
 }
