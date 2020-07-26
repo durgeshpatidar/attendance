@@ -232,4 +232,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 		logger.info("EmployeeServiceImpl | verifyEmployeeType | Execution end ouput " + responseDto);
 		return responseDto;
 	}
+
+	@Override
+	public ResponseDto verifyAdminId(String empId) {
+		logger.info("EmployeeServiceImpl | verifyAdminId | Execution start input " + empId);
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		boolean status = employeeDao.verifyEmployeeType(empId);
+		if (status == true)
+			responseDto.setMessage("EmpId is Admin");
+		else {
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage("EmpId is not Admin");
+		}
+		logger.info("EmployeeServiceImpl | verifyAdminId | Execution end ouput " + responseDto);
+		return responseDto;
+	}
 }

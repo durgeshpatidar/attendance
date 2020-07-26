@@ -58,4 +58,10 @@ public class EmployeeController {
 	public ResponseDto getEmployeeList(@RequestParam String empId) {
 		return employeeService.getEmployeeList(empId);
 	}
+	
+	@GetMapping("/verify-admin")
+	public ResponseDto verifyAdminId(@RequestParam String empId)
+	{
+		return employeeService.verifyAdminId(empId);
+	}
 }

@@ -20,4 +20,6 @@ public interface EmployeeService {
 	ResponseDto verifyEmployeeType(String empId);
 
 	ResponseDto getEmployeeList(String empId);
+
+	ResponseDto verifyAdminId(String empId);
 }
