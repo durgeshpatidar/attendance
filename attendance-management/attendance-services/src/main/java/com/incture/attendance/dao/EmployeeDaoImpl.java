@@ -152,7 +152,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 //		crit.add(Restrictions.eq("status", "ACTIVE"));
 //		@SuppressWarnings("unchecked")
 //		List<ManagerMasterDo> results = crit.list();
-		Query q = getSession().createQuery("FROM ManageerMasterDo where employeeId=:id and status=:status");
+		Query q = getSession().createQuery("FROM ManagerMasterDo where employeeId=:id and status=:status");
 		q.setParameter("id", employeeDto.getId());
 		q.setParameter("status", "ACTIVE");
 		@SuppressWarnings("unchecked")
@@ -175,11 +175,10 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	@Override
 	public boolean verifyEmail(EmployeeDto employeeDto) {
-		String hql = "FROM EmployeeDo WHERE email=:email";
+		String hql = "select id FROM EmployeeDo WHERE email=:email";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("email", employeeDto.getEmail());
-		EmployeeDo edo = (EmployeeDo) query.getSingleResult();
-		if (edo == null)
+		if (query.list().isEmpty())
 			return false;
 		return true;
 	}
@@ -242,10 +241,10 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 //		@SuppressWarnings("unchecked")
 //		List<ManagerMasterDo> mdo = crit.list();
 
-		Query q2 = getSession().createQuery("FROM ManagerMasterDo where id=:id");
+		Query q2 = getSession().createQuery("FROM ManagerMasterDo where managerId=:id");
 		q2.setParameter("id", empId);
 		@SuppressWarnings("unchecked")
-		List<ManagerMasterDo> mdo = q2.getResultList();
+		List<ManagerMasterDo> mdo = q2.list();
 
 		EmployeeListDto employee = null;
 		for (ManagerMasterDo m : mdo) {
