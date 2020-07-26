@@ -10,7 +10,6 @@ import com.incture.attendance.dto.EmployeeDto;
 import com.incture.attendance.dto.EmployeeListDto;
 import com.incture.attendance.dto.ManagerDetailsDto;
 import com.incture.attendance.dto.ProfileDto;
-import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.DesignationMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
@@ -196,10 +195,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		// Adding details of manager also to the list
 		EmployeeListDto employee1 = new EmployeeListDto();
 		employee1.setId(empId);
-		Query q1 = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
-		q1.setParameter("id", empId);
-		EmployeeMasterDo ed2 = (EmployeeMasterDo) q1.getSingleResult();
-		employee1.setName(ed2.getFirstName() + " " + ed2.getLastName());
+		employee1.setName("You");
 		employees.add(employee1);
 
 		// Getting the list of employees under the manager
