@@ -218,7 +218,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public ResponseDto getEmployeeList(String empId) {
-		logger.info("EmployeeServiceImpl | verifyEmployeeType | Execution start input " + empId);
+		logger.info("EmployeeServiceImpl | getEmployeeList | Execution start input " + empId);
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
@@ -229,7 +229,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			responseDto.setStatusCode(500);
 			responseDto.setMessage(e.toString());
 		}
-		logger.info("EmployeeServiceImpl | verifyEmployeeType | Execution end ouput " + responseDto);
+		logger.info("EmployeeServiceImpl | getEmployeeList | Execution end ouput " + responseDto);
 		return responseDto;
 	}
 
@@ -239,7 +239,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
-		boolean status = employeeDao.verifyEmployeeType(empId);
+		boolean status = employeeDao.verifyAdminId(empId);
 		if (status == true)
 			responseDto.setMessage("EmpId is Admin");
 		else {
@@ -248,6 +248,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 			responseDto.setMessage("EmpId is not Admin");
 		}
 		logger.info("EmployeeServiceImpl | verifyAdminId | Execution end ouput " + responseDto);
+		return responseDto;
+	}
+
+	@Override
+	public ResponseDto getAllEmployeeList(String empId) {
+		logger.info("EmployeeServiceImpl | getAllEmployeeList | Execution start input " + empId);
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			responseDto.setData(employeeDao.getAllEmployeeList(empId));
+		} catch (Exception e) {
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.toString());
+		}
+		logger.info("EmployeeServiceImpl | getAllEmployeeList | Execution end ouput " + responseDto);
 		return responseDto;
 	}
 }

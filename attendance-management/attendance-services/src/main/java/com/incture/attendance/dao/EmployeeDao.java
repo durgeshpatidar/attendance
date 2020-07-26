@@ -26,4 +26,8 @@ public interface EmployeeDao {
 	boolean verifyEmployeeType(String empId);
 	
 	List<EmployeeListDto> getEmployeeList(String empId);
+
+	Object getAllEmployeeList(String empId);
+
+	boolean verifyAdminId(String empId);
 }
