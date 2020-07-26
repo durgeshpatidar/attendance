@@ -37,7 +37,14 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		query.setParameter("employeeId", workflowtaskDto.getEmpId());
 		query.setParameter("status", "ACTIVE");
 		query.setParameter("managerType", "PROJECT");
-		ManagerMasterDo mdo = (ManagerMasterDo) query.getSingleResult();
+		ManagerMasterDo mdo = null;
+		try {
+			mdo = (ManagerMasterDo) query.getSingleResult();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		
 		System.out.println("manager id : " + mdo.getManagerId());
 		entity.setManagerId(mdo.getManagerId());
 		entity.setEmployee(getSession().get(EmployeeDo.class, workflowtaskDto.getEmpId()));
@@ -149,7 +156,13 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		String hql1 = "from EmployeeMasterDo where id =:id";
 		Query query1 = getSession().createQuery(hql1);
 		query1.setParameter("id", empId);
-		EmployeeMasterDo emp = (EmployeeMasterDo) query.getSingleResult();
+		EmployeeMasterDo emp = null;
+		try {
+			emp = (EmployeeMasterDo) query.getSingleResult();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
@@ -245,8 +258,15 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		String hql1 = "from EmployeeMasterDo where id =:id";
 		Query query1 = getSession().createQuery(hql1);
 		query1.setParameter("id", empId);
-		EmployeeMasterDo emp = (EmployeeMasterDo) query1.getSingleResult();
-
+		EmployeeMasterDo emp = null;
+		try {
+			emp = (EmployeeMasterDo) query1.getSingleResult();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+ 
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 		for (WorkflowTaskDo t : workflow) {
