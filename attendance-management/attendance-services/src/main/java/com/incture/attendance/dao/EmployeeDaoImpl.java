@@ -233,8 +233,8 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 		// Getting the list of all employees.
 
-		Query q2 = getSession().createQuery("FROM EmployeeDo where userType!=:userType");
-		q2.setParameter("userType", "ADMIN");
+		Query q2 = getSession().createQuery("FROM EmployeeDo where id!=id");
+		q2.setParameter("id", empId);
 		@SuppressWarnings("unchecked")
 		List<EmployeeDo> edo = q2.list();
 
