@@ -137,7 +137,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	@Override
 	public void updateTrackingByAdmin(TrackingDto trackingDto) {
 		String hql = "UPDATE TrackingDo SET checkIn=:checkIn and checkOut=:checkOut and totalHours=:totalHours"
-				+ "status=:status WHERE id=:id";
+				+ " and status=:status WHERE id=:id";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("checkIn",trackingDto.getCheckIn() );
 		query.setParameter("checkOut", trackingDto.getCheckOut());
