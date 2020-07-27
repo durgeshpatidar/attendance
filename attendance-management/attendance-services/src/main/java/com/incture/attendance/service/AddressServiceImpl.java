@@ -93,6 +93,8 @@ public class AddressServiceImpl implements AddressService {
 				responseDto.setData(address);
 				responseDto.setMessage("Address Verified!");
 			} else {
+				responseDto.setStatus(Boolean.FALSE);
+				responseDto.setStatusCode(404);
 				responseDto.setMessage("Address Invalid!");
 			}
 
