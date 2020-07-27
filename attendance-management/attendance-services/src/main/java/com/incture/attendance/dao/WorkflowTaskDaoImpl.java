@@ -23,13 +23,8 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		WorkflowTaskDo entity = new WorkflowTaskDo();
 		entity.setId(workflowtaskDto.getId());
 		System.out.println("employee id : " + workflowtaskDto.getEmpId());
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(ManagerMasterDo.class);
-		// criteria.add(Restrictions.eq("employeeId", workflowtaskDto.getEmpId()));
-		// criteria.add(Restrictions.eq("status", "ACTIVE"));
-		// criteria.add(Restrictions.eq("managerType", "PROJECT"));
-		// ManagerMasterDo mdo = (ManagerMasterDo) criteria.uniqueResult();
 
+		// Taking manager details from master to send workflow details.
 		String hql = "from ManagerMasterDo where employeeId =:employeeId and status =:status and managerType =:managerType";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employeeId", workflowtaskDto.getEmpId());
@@ -75,13 +70,9 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 
 	}
 
-	// Updating workflow
+	// Updating workflow by manager.
 	@Override
 	public void updateStatus(String status, String comment, String workflowId) {
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		// criteria.add(Restrictions.eq("id", workflowId));
-		// WorkflowTaskDo current = (WorkflowTaskDo) criteria.uniqueResult();
 
 		String hql = "from WorkflowTaskDo where id =:id";
 		Query query = getSession().createQuery(hql);
@@ -89,12 +80,10 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		WorkflowTaskDo current = (WorkflowTaskDo) query.getSingleResult();
 		current.setComment(comment);
 		current.setStatus(status);
+
 		// Setting status returned by manager in tracking table and address table also.
 		// Checking in tracking table
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria1 = getSession().createCriteria(TrackingDo.class);
-		// criteria1.add(Restrictions.eq("id", workflowId));
-		// TrackingDo track = (TrackingDo) criteria1.uniqueResult();
+
 		String hql1 = "from TrackingDo where id =:id";
 		Query query1 = getSession().createQuery(hql1);
 		query1.setParameter("id", workflowId);
@@ -108,10 +97,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		}
 
 		// Checking in address table.
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria2 = getSession().createCriteria(AddressDo.class);
-		// criteria2.add(Restrictions.eq("id", workflowId));
-		// AddressDo add = (AddressDo) criteria2.uniqueResult();
+
 		String hql2 = "from AddressDo where id =:id";
 		Query query2 = getSession().createQuery(hql2);
 		query2.setParameter("id", workflowId);
@@ -126,48 +112,10 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 
 	}
 
-	// Getting workflow details for employee
+	// Getting workflow details for employee.
 	@Override
 	public List<WorkflowTaskDto> getRequestDetails(String empId) {
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
-		// empId)));
-		// criteria.addOrder(Order.desc("requestdate"));
-		// criteria.setMaxResults(20);
-		// @SuppressWarnings("unchecked")
-		// List<WorkflowTaskDo> workflow = criteria.list();
 
-//		String hql = "from WorkflowTaskDo where employee =:employee order by requestdate desc";
-//		Query query = getSession().createQuery(hql);
-//		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
-//		query.setMaxResults(20);
-//		@SuppressWarnings("unchecked")
-//		List<WorkflowTaskDo> workflow = query.getResultList();
-//		// Getting employee name
-//		// @SuppressWarnings("deprecation")
-//		// Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-//		// crit.add(Restrictions.eq("id", empId));
-//		// EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
-//
-//		String hql1 = "from EmployeeMasterDo where id =:id";
-//		Query query1 = getSession().createQuery(hql1);
-//		query1.setParameter("id", empId);
-//		EmployeeMasterDo emp = (EmployeeMasterDo) query.list().get(0);
-//		List<WorkflowTaskDto> request = new ArrayList<>();
-//		for (WorkflowTaskDo t : workflow) {
-//			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
-//			newWorkflow.setEmpId(empId);
-//			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
-//			newWorkflow.setComment(t.getComment());
-//			newWorkflow.setDescription(t.getDescription());
-//			newWorkflow.setId(t.getId());
-//			newWorkflow.setQuerytype(t.getQuerytype());
-//			newWorkflow.setRequestDate(t.getRequestdate());
-//			newWorkflow.setStatus(t.getStatus());
-//			request.add(newWorkflow);
-//		}
-//		return request;
 		String hql = "from WorkflowTaskDo where employee =:employee order by requestdate desc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
@@ -176,10 +124,6 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		List<WorkflowTaskDo> workflow = query.getResultList();
 
 		// Getting employee name
-		// @SuppressWarnings("deprecation")
-		// Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-		// crit.add(Restrictions.eq("id", empId));
-		// EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
 		String hql1 = "from EmployeeMasterDo where id =:id";
 		Query query1 = getSession().createQuery(hql1);
 		query1.setParameter("id", empId);
@@ -206,18 +150,10 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		return request;
 	}
 
-	// Getting workflow details for manager
+	// Getting workflow details for manager.
 	@Override
 	public List<WorkflowTaskDto> getTaskDetails(String managerId) {
 		// Getting all rows from workflowmasterdo with given manager id
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		// criteria.add(Restrictions.eq("managerId", managerId));
-		// criteria.add(Restrictions.eq("status", "Pending"));
-		// criteria.addOrder(Order.desc("requestdate"));
-		// criteria.setMaxResults(20);
-		// @SuppressWarnings("unchecked")
-		// List<WorkflowTaskDo> workflow = criteria.list();
 
 		String hql = "from WorkflowTaskDo where managerId =:managerId and status =:status order by requestdate desc";
 		Query query = getSession().createQuery(hql);
@@ -230,10 +166,8 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
+
 			// Getting employee for each workflow
-			// @SuppressWarnings("deprecation")
-			// Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-			// crit.add(Restrictions.eq("id", t.getEmployee().getId()));
 			String hql1 = "from EmployeeMasterDo where id =:id";
 			Query query1 = getSession().createQuery(hql1);
 			query1.setParameter("id", t.getEmployee().getId());
@@ -253,16 +187,10 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		return request;
 	}
 
+	// Workflow details for home page.
 	@Override
 	public List<WorkflowTaskDto> getWorkflowDetails(String empId) {
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(WorkflowTaskDo.class);
-		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
-		// empId)));
-		// criteria.addOrder(Order.desc("requestdate"));
-		// criteria.setMaxResults(4);
-		// @SuppressWarnings("unchecked")
-		// List<WorkflowTaskDo> workflow = criteria.list();
+
 		String hql = "from WorkflowTaskDo where employee =:employee order by requestdate desc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
@@ -271,10 +199,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		List<WorkflowTaskDo> workflow = query.getResultList();
 
 		// Getting employee name
-		// @SuppressWarnings("deprecation")
-		// Criteria crit = getSession().createCriteria(EmployeeMasterDo.class);
-		// crit.add(Restrictions.eq("id", empId));
-		// EmployeeMasterDo emp = (EmployeeMasterDo) crit.uniqueResult();
+
 		String hql1 = "from EmployeeMasterDo where id =:id";
 		Query query1 = getSession().createQuery(hql1);
 		query1.setParameter("id", empId);

@@ -37,9 +37,8 @@ public class WorkflowTaskDto extends BaseDto {
 		this.status = status;
 		this.querytype = querytype;
 	}
-	
 
-	//Getters and Setters
+	// Getters and Setters
 	public String getId() {
 		return id;
 	}
@@ -47,7 +46,7 @@ public class WorkflowTaskDto extends BaseDto {
 	public void setId(String id) {
 		this.id = id;
 	}
-    
+
 	public String getEmpName() {
 		return empName;
 	}
@@ -111,7 +110,7 @@ public class WorkflowTaskDto extends BaseDto {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public String getQuerytype() {
 		return querytype;
 	}

@@ -20,6 +20,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 	private WorkflowTaskDao workflowtaskDao;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	// Adding workflow.
 	@Override
 	public ResponseDto addWorkflow(WorkflowTaskDto worklfowtaskDto) {
 		logger.info("WorkflowServiceImpl | addWorkflow | Execution start input " + worklfowtaskDto);
@@ -45,6 +46,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 		return responseDto;
 	}
 
+	// Getting workflow details for employee.
 	@Override
 	public ResponseDto getRequestDetails(String empId) {
 		logger.info("EmployeeServiceImpl | getRequestDetails | Execution start input " + empId);
@@ -75,6 +77,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 
 	}
 
+	// Getting workflow details for manager.
 	@Override
 	public ResponseDto getTaskDetails(String managerId) {
 		logger.info("WorklfowServiceImpl | getTaskDetails | Execution start input " + managerId);
@@ -104,6 +107,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 
 	}
 
+	// Updating status of workflow by manager.
 	@Override
 	public ResponseDto updateStatus(String status, String comment, String workflowId) {
 		logger.info("WorkflowServiceImpl | updateStatus | Execution start input " + status + " " + comment + " "
@@ -131,6 +135,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 
 	}
 
+	// Getting workflow details for home page.
 	@Override
 	public ResponseDto getWorkflowDetails(String empId) {
 		logger.info("EmployeeServiceImpl | getWorkflowDetails | Execution start input " + empId);

@@ -24,29 +24,34 @@ public class WorkflowController {
 		return "Done";
 	}
 
+	// Adding workflow.
 	@PostMapping("/add")
 	public ResponseDto addWorkflow(@RequestBody WorkflowTaskDto workflowtaskDto) {
 		return workflowService.addWorkflow(workflowtaskDto);
 
 	}
 
+	// Getting workflow details for employee.
 	@GetMapping("/request")
 	public ResponseDto getRequestDetails(@RequestParam String empId) {
 		return workflowService.getRequestDetails(empId);
 
 	}
 
+	// Getting workflow details for home page.
 	@GetMapping("/details-home")
 	public ResponseDto getWorkflowDetails(@RequestParam String empId) {
 		return workflowService.getWorkflowDetails(empId);
 
 	}
 
+	// Getting workflow details for manager.
 	@GetMapping("/task")
 	public ResponseDto getTaskDetails(@RequestParam String managerId) {
 		return workflowService.getTaskDetails(managerId);
 	}
 
+	// Updating status of workflow by manager.
 	@PostMapping("/task/update")
 	public ResponseDto updateStatus(@RequestBody WorkflowTaskDto wdto) {
 		String status = wdto.getStatus();
