@@ -114,13 +114,15 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	@Override
 	public String validateAddress(AddressDto addressDto) {
 
+		int locationLat = addressDto.getLocationLat().intValue();
+		int locationLon = addressDto.getLocationLon().intValue();
 		String hql = "from AddressDo where employee =:employee and status =:status and locationLat =:locationLat and "
 				+ "locationLon =:locationLon";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employee", getSession().get(EmployeeDo.class, addressDto.getEmpId()));
 		query.setParameter("status", "Approved");
-		query.setParameter("locationLat", addressDto.getLocationLat());
-		query.setParameter("locationLon", addressDto.getLocationLon());
+		query.setParameter("locationLat", locationLat);
+		query.setParameter("locationLon", locationLon );
 		try {
 			AddressDo address = (AddressDo) query.getSingleResult();
 			return address.getId();
