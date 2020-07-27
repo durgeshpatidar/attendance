@@ -107,6 +107,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		TrackingDetailsDto newTracking = null;
 		for (TrackingDo t : tracks) {
 			newTracking = new TrackingDetailsDto();
+			newTracking.setId(t.getId());
 			newTracking.setEmpId(id);
 			newTracking.setEmpName(emp.getFirstName() + " " + emp.getLastName());
 			newTracking.setDate(t.getDate());
