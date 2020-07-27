@@ -1,3 +1,4 @@
+//Address master entity.
 package com.incture.attendance.entities;
 
 import javax.persistence.Column;

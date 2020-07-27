@@ -1,3 +1,4 @@
+//Workflow transaction entity.
 package com.incture.attendance.entities;
 
 import java.util.Date;
@@ -54,6 +55,7 @@ public class WorkflowTaskDo implements BaseDo {
 	@Column(name = "QUERYTYPE", columnDefinition = "NVARCHAR(30)")
 	private String querytype;
 
+	// Constructor.
 	public WorkflowTaskDo() {
 		super();
 	}
@@ -72,6 +74,7 @@ public class WorkflowTaskDo implements BaseDo {
 		this.querytype = querytype;
 	}
 
+	// Getters and Setters.
 	public String getWorkflowId() {
 		return workflowId;
 	}

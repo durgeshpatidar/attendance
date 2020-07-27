@@ -1,3 +1,4 @@
+//Employee master entity.
 package com.incture.attendance.entities;
 
 import java.util.Date;

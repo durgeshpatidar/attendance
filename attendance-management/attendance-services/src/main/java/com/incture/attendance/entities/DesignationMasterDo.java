@@ -1,3 +1,4 @@
+//Designation master entity.
 package com.incture.attendance.entities;
 
 import javax.persistence.Column;
@@ -26,11 +27,11 @@ public class DesignationMasterDo {
 
 	@Column(name = "DESIGNATION", columnDefinition = "NVARCHAR(50)")
 	private String designation;
-	
+
 	@Column(name = "STATUS", columnDefinition = "NVARCHAR(20)")
 	private String status;
 
-	//Constructor
+	// Constructor
 	public DesignationMasterDo() {
 		super();
 	}
@@ -47,7 +48,7 @@ public class DesignationMasterDo {
 		this.status = status;
 	}
 
-	//Getters and setters
+	// Getters and setters
 	public String getId() {
 		return id;
 	}
@@ -103,8 +104,5 @@ public class DesignationMasterDo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
 
 }

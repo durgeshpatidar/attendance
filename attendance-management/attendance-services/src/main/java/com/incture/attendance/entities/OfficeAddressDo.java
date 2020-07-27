@@ -1,3 +1,4 @@
+//Master entity for office address.
 package com.incture.attendance.entities;
 
 import java.util.Date;
@@ -54,6 +55,7 @@ public class OfficeAddressDo implements BaseDo {
 	@Column(name = "LOCATION_LON", columnDefinition = "DOUBLE")
 	private Double locationLon;
 
+	// Constructor.
 	public OfficeAddressDo() {
 		super();
 	}
@@ -73,6 +75,7 @@ public class OfficeAddressDo implements BaseDo {
 		this.locationLon = locationLon;
 	}
 
+	// Getters and setters.
 	public String getId() {
 		return id;
 	}

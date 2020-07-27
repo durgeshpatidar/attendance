@@ -1,3 +1,4 @@
+//Employee transaction entity.
 package com.incture.attendance.entities;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class EmployeeDo implements BaseDo {
 
 	@Column(name = "EMAIL", columnDefinition = "NVARCHAR(100)")
 	private String email;
-	
+
 	@Column(name = "USERTYPE", columnDefinition = "NVARCHAR(20)")
 	private String userType;
 	// Column for face data
@@ -45,10 +46,10 @@ public class EmployeeDo implements BaseDo {
 	@OneToMany(mappedBy = "employee")
 	private List<WorkflowTaskDo> workflowTrackings = new ArrayList<WorkflowTaskDo>();
 
-	//Constructor
+	// Constructor
 	public EmployeeDo() {
 		super();
-		
+
 	}
 
 	public EmployeeDo(String id, String phoneNo, String password, String email, String userType,
@@ -64,7 +65,7 @@ public class EmployeeDo implements BaseDo {
 		this.workflowTrackings = workflowTrackings;
 	}
 
-	//Getters and setters
+	// Getters and setters
 	public String getId() {
 		return id;
 	}

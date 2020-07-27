@@ -1,3 +1,4 @@
+//Tracking transaction entity.
 package com.incture.attendance.entities;
 
 import java.util.Date;
@@ -70,6 +71,7 @@ public class TrackingDo implements BaseDo {
 		this.status = status;
 	}
 
+	// Getters and Setters.
 	public String getId() {
 		return id;
 	}

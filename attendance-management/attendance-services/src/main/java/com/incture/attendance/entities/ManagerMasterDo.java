@@ -1,3 +1,4 @@
+//Manager master entity.
 package com.incture.attendance.entities;
 
 import java.util.Date;
@@ -37,6 +38,19 @@ public class ManagerMasterDo {
 		super();
 	}
 
+	public ManagerMasterDo(String id, String employeeId, String managerId, Date startDate, Date endDate,
+			String managerType, String status) {
+		super();
+		this.id = id;
+		this.employeeId = employeeId;
+		this.managerId = managerId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.managerType = managerType;
+		this.status = status;
+	}
+
+	// Getters and setters
 	public String getId() {
 		return id;
 	}
@@ -92,19 +106,5 @@ public class ManagerMasterDo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public ManagerMasterDo(String id, String employeeId, String managerId, Date startDate, Date endDate,
-			String managerType, String status) {
-		super();
-		this.id = id;
-		this.employeeId = employeeId;
-		this.managerId = managerId;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.managerType = managerType;
-		this.status = status;
-	}
-	
-	
 
 }

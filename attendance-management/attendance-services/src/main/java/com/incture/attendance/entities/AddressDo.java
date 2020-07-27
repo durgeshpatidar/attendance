@@ -1,3 +1,4 @@
+//Address transaction entity.
 package com.incture.attendance.entities;
 
 import java.util.ArrayList;
@@ -88,6 +89,7 @@ public class AddressDo implements BaseDo {
 		this.addTrackings = addTrackings;
 	}
 
+	// Getters and Setters.
 	public String getId() {
 		return id;
 	}
