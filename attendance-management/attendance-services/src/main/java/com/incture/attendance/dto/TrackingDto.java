@@ -31,6 +31,7 @@ public class TrackingDto extends BaseDto {
 		this.status = status;
 	}
 
+	// Getters and Setters.
 	public String getId() {
 		return id;
 	}

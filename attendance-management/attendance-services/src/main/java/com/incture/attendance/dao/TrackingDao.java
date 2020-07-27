@@ -11,7 +11,7 @@ public interface TrackingDao {
 
 	List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end);
 
-	void updateTracking(String id, Date checkOut,double totalHours);
+	void updateTracking(String id, Date checkOut, double totalHours);
 
 	void updateTrackingByAdmin(TrackingDto trackingDto);
 

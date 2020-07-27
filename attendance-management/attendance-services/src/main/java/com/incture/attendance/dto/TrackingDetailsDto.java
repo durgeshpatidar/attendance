@@ -1,3 +1,4 @@
+//A dto for displaying tracking details in history page.
 package com.incture.attendance.dto;
 
 import java.util.Date;

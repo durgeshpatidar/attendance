@@ -22,7 +22,7 @@ public class TrackingServiceImpl implements TrackingService {
 	private TrackingDao trackingDao;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	// Add tracking
+	// Adding tracking.
 	@Override
 	public ResponseDto addTracking(TrackingDto trackingDto) {
 		logger.info("TrackingServiceImpl | addTracking | Execution start input " + trackingDto);
@@ -55,7 +55,7 @@ public class TrackingServiceImpl implements TrackingService {
 		return responseDto;
 	}
 
-//Getting tracking details
+	// Getting tracking details.
 	@Override
 	public ResponseDto getTrackingDetails(String id, Date start, Date end) {
 
@@ -91,7 +91,7 @@ public class TrackingServiceImpl implements TrackingService {
 
 	}
 
-//for checkout or update tracking
+	// Update tracking during checkout.
 	@Override
 	public ResponseDto updateTracking(String id, Date checkOut, double totalHours) {
 		logger.info("TrackingServiceImpl | updateTracking | Execution start input " + id + " " + checkOut + " "
@@ -118,6 +118,7 @@ public class TrackingServiceImpl implements TrackingService {
 		return responseDto;
 	}
 
+	// Update tracking by admin.
 	@Override
 	public ResponseDto updateTrackingByAdmin(TrackingDto trackingDto) {
 		logger.info("TrackingServiceImpl | updateTrackingByAdmin | Execution start input " + trackingDto);

@@ -46,11 +46,12 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		return dto;
 	}
 
-	// For CheckIn
+	// For CheckIn.
+	// Adding checkin information to tracking table.
 	@Override
 	public String addTracking(TrackingDto trackingdto) {
 
-		// checking whether employee already checked in
+		// checking whether employee already checked in or not.
 		String hql = "from TrackingDo where date =:date1 and employee =:employee";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("date1", trackingdto.getDate());
@@ -74,7 +75,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	public List<TrackingDetailsDto> getTrackingDetails(String id, Date start, Date end) {
 
 		List<TrackingDo> tracks = new ArrayList<>();
-
+		// Displaying details using filters.
 		if (start != null && end != null) {
 
 			String hql = "from TrackingDo where employee =:employee and date>=:start and date<=:end order by date desc";
@@ -86,7 +87,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
 
 		}
-
+		// Displaying details without filters.
 		if (start == null && end == null) {
 			String hql = "from TrackingDo where employee = :employee order by date desc";
 			Query query = getSession().createQuery(hql);
@@ -95,7 +96,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
 
 		}
-
+		// To get the name of employee.
 		String hql2 = "from EmployeeMasterDo where id =:id";
 		Query query2 = getSession().createQuery(hql2);
 		query2.setParameter("id", id);
@@ -118,7 +119,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		return history;
 	}
 
-	// for updating tracking or checkout
+	// For updating tracking during checkout.
 	@Override
 	public void updateTracking(String id, Date checkOut, double totalHours) {
 
@@ -128,21 +129,23 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		TrackingDo current = (TrackingDo) query.getSingleResult();
 		current.setCheckOut(checkOut);
 		current.setTotalHours(totalHours);
+		// If total hours is in specified limit , set it as approved only.
 		if (totalHours >= 7.0 && totalHours <= 9.0) {
 			current.setStatus("Approved");
 		}
 
 	}
 
+	// Tracking updation by admin.
 	@Override
 	public void updateTrackingByAdmin(TrackingDto trackingDto) {
 		String hql = "UPDATE TrackingDo SET checkIn =:checkIn , checkOut =:checkOut , totalHours =:totalHours  , status =:status WHERE id =:id";
 		Query query = getSession().createQuery(hql);
-		query.setParameter("checkIn",trackingDto.getCheckIn() );
+		query.setParameter("checkIn", trackingDto.getCheckIn());
 		query.setParameter("checkOut", trackingDto.getCheckOut());
-		query.setParameter("totalHours",trackingDto.getTotalHours());
-		query.setParameter("status",trackingDto.getStatus());
-		query.setParameter("id",trackingDto.getId());
+		query.setParameter("totalHours", trackingDto.getTotalHours());
+		query.setParameter("status", trackingDto.getStatus());
+		query.setParameter("id", trackingDto.getId());
 		query.executeUpdate();
 	}
 
