@@ -118,11 +118,12 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		double lan2 = addressDto.getLocationLat() + 2;
 		double lon1 = addressDto.getLocationLon() - 2;
 		double lon2 = addressDto.getLocationLon() + 2;
-		String hql = "from AddressDo where employee =:employee and status =:status and locationLat>=:lan1 and locationLat<=:lan2 and"
+		String hql = "from AddressDo where employee =:employee and (status =:status1 or status =:status2) and locationLat>=:lan1 and locationLat<=:lan2 and"
 				+ " locationLon>=:lon1 and locationLon<=:lon2";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employee", getSession().get(EmployeeDo.class, addressDto.getEmpId()));
-		query.setParameter("status", "Approved");
+		query.setParameter("status1", "Approved");
+		query.setParameter("status2", "ACTIVE");
 		query.setParameter("lan1", lan1);
 		query.setParameter("lan2", lan2);
 		query.setParameter("lon1",lon1);
