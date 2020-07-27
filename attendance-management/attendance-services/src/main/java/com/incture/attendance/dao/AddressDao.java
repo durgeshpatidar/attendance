@@ -7,8 +7,9 @@ import com.incture.attendance.dto.EmployeeDto;
 
 public interface AddressDao {
 	void addAddress(AddressDto addressdto);
-	
+
 	void addMasterAddress(EmployeeDto employeeDto);
+
 	List<AddressDto> getAddressDetails(String empId);
 
 	String validateAddress(AddressDto addressDto);

@@ -62,6 +62,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	// Adding address and adding address request to workflow transaction table.
 	@Override
 	public void addAddress(AddressDto addressdto) {
+		// Adding address to transaction table.
 		addressdto.setStatus("Pending");
 		AddressDo newAdd = importDto(addressdto);
 		getSession().save(newAdd);
@@ -83,12 +84,6 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	// Getting all address details.
 	@Override
 	public List<AddressDto> getAddressDetails(String empId) {
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(AddressDo.class);
-		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
-		// empId)));
-		// @SuppressWarnings("unchecked")
-		// List<AddressDo> address = criteria.list();
 
 		String hql = "from AddressDo where employee =:employee";
 		Query query = getSession().createQuery(hql);
@@ -115,16 +110,10 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		return request;
 	}
 
-	// Verifying address.
+	// Verifying address during checkin.
 	@Override
 	public String validateAddress(AddressDto addressDto) {
-		// @SuppressWarnings("deprecation")
-		// Criteria criteria = getSession().createCriteria(AddressDo.class);
-		// criteria.add(Restrictions.eq("employee", getSession().get(EmployeeDo.class,
-		// addressDto.getEmpId())));
-		// criteria.add(Restrictions.eq("status", "Approved"));
-		// criteria.add(Restrictions.eq("locationLat", addressDto.getLocationLat()));
-		// criteria.add(Restrictions.eq("locationLon", addressDto.getLocationLon()));
+
 		String hql = "from AddressDo where employee =:employee and status =:status and locationLat =:locationLat and "
 				+ "locationLon =:locationLon";
 		Query query = getSession().createQuery(hql);
@@ -141,15 +130,12 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		return null;
 	}
 
+	// Method for adding master address during signup.
 	@Override
 	public void addMasterAddress(EmployeeDto employeeDto) {
 		String empId = employeeDto.getId();
 		List<AddressDto> address = new ArrayList<>();
 		// Taking homeaddress from address master
-		// @SuppressWarnings("deprecation")
-		// Criteria crit1 = getSession().createCriteria(AddressMasterDo.class);
-		// crit1.add(Restrictions.eq("empId", empId));
-		// AddressMasterDo addMasterDo = (AddressMasterDo) crit1.uniqueResult();
 		String hql = "from AddressMasterDo where empId =:empId";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("empId", empId);
@@ -166,8 +152,6 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		homeAddress.setStatus("ACTIVE");
 		address.add(homeAddress);
 		// Taking static company address from master
-		// @SuppressWarnings("deprecation")
-		// Criteria crit2 = getSession().createCriteria(OfficeAddressDo.class);
 		String hql2 = "from OfficeAddressDo";
 		Query query2 = getSession().createQuery(hql2);
 		@SuppressWarnings("unchecked")

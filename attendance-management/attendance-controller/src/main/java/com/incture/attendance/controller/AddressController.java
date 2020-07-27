@@ -20,17 +20,20 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 
+	// Adding address.
 	@PostMapping
 	public ResponseDto addAddress(@RequestBody AddressDto addressDto) {
 		return addressService.addAddress(addressDto);
 
 	}
 
+	// Getting address details for an employee.
 	@GetMapping()
 	public ResponseDto getDetails(@RequestParam String empId) {
 		return addressService.getAddressDetails(empId);
 	}
 
+	// Verifying address during checkin.
 	@PostMapping("/validate")
 	public ResponseDto validateAddress(@RequestBody AddressDto addressDto) {
 		return addressService.validateAddress(addressDto);

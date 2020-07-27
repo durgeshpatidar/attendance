@@ -1,3 +1,4 @@
+//Dto for address details.
 package com.incture.attendance.dto;
 
 import java.util.Date;

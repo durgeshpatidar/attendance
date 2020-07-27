@@ -22,6 +22,7 @@ public class AddressServiceImpl implements AddressService {
 	@Autowired
 	private AddressDao addressDao;
 
+	// Adding address.
 	@Override
 	public ResponseDto addAddress(AddressDto addressDto) {
 		logger.info("AddressServiceImpl | addAddress | Execution start input " + addressDto);
@@ -48,6 +49,7 @@ public class AddressServiceImpl implements AddressService {
 
 	}
 
+	// Getting address details for an employee.
 	public ResponseDto getAddressDetails(String empId) {
 		logger.info("AddressServiceImpl | getAddressDetails | Execution start input " + empId);
 
@@ -77,6 +79,7 @@ public class AddressServiceImpl implements AddressService {
 
 	}
 
+	// Verifying address during checkin.
 	@Override
 	public ResponseDto validateAddress(AddressDto addressDto) {
 		logger.info("AddressServiceImpl | validateAddress | Execution start input " + addressDto);
