@@ -163,9 +163,10 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		Query query2 = getSession().createQuery(hql2);
 		@SuppressWarnings("unchecked")
 		List<OfficeAddressDo> officeAddresses = query2.getResultList();
-		AddressDto officeAddress = new AddressDto();
+		AddressDto officeAddress = null;
 		for (OfficeAddressDo value : officeAddresses) {
-
+			
+			officeAddress = new AddressDto();
 			officeAddress.setEmpId(empId);
 			officeAddress.setAddress(value.getAddress());
 			officeAddress.setState(value.getState());
