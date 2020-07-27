@@ -14,6 +14,8 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.incture.attendance.dao.EmployeeDao;
@@ -22,10 +24,13 @@ import com.incture.attendance.utils.ResponseDto;
 
 @Service
 @Transactional
+@PropertySource(value = { "classpath:application.properties" })
 public class EmailService {
 
 	@Autowired
 	private OtpService otpService;
+	@Autowired
+	private Environment environment;
 
 	@Autowired
 	private EmployeeDao employeeDao;
@@ -45,14 +50,14 @@ public class EmailService {
 		}
 		int otp = otpService.generateOTP(employeeDto.getEmail());
 		String to = employeeDto.getEmail();
-		String from = "inkathon2020@gmail.com";
-		String password = "dhoni777";
+		String from = environment.getRequiredProperty("mail.user");
+		String password = environment.getRequiredProperty("mail.password");
 		Properties properties = new Properties();
 
-		properties.put("mail.smtp.host", "smtp.gmail.com");
-		properties.put("mail.smtp.port", "587");
-		properties.put("mail.smtp.auth", "true");
-		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", environment.getRequiredProperty("mail.smtp.host"));
+		properties.put("mail.smtp.port", environment.getRequiredProperty("mail.smtp.port"));
+		properties.put("mail.smtp.auth", environment.getRequiredProperty("mail.smtp.auth"));
+		properties.put("mail.smtp.starttls.enable", environment.getRequiredProperty("mail.smtp.starttls.enable"));
 
 		try {
 
