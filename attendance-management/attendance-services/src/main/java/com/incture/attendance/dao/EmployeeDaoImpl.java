@@ -47,7 +47,8 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return dto;
 	}
 
-	// for save employee data and adding address from master after signup
+	// For saving employee data and adding address from master after signup to
+	// address transaction table.
 	@Override
 	public boolean saveEmployeeData(EmployeeDto employeeDto) {
 
@@ -64,7 +65,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return true;
 	}
 
-	// for verifying employee email and password
+	// For verifying employee email and password during login.
 	@Override
 	public boolean verifyIdPass(EmployeeDto employeeDto) {
 		String hql = "select id FROM EmployeeDo WHERE email=:email AND password=:password";
@@ -84,7 +85,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return true;
 	}
 
-	// for checking employee email is exist or not and employee is active or not
+	// For checking employee email is exist or not and employee is active or not
 	@Override
 	public boolean isValidUser(EmployeeDto employeeDto) {
 		String hql = "select id FROM EmployeeMasterDo WHERE email=:email and status=:status";
@@ -98,7 +99,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return true;
 	}
 
-	// for displaying profile details
+	// For displaying profile details
 	@Override
 	public ProfileDto profileDetails(EmployeeDto employeeDto) {
 		String id = employeeDto.getId();
@@ -150,7 +151,8 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return managerList;
 	}
 
-	// verfiying email
+	// Verfiying whether email is already of a logged in user in forgot password
+	// situation.
 	@Override
 	public boolean verifyEmail(EmployeeDto employeeDto) {
 		String hql = "select id FROM EmployeeDo WHERE email=:email";
@@ -161,7 +163,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return true;
 	}
 
-	// updating password
+	// Updating password
 	@Override
 	public void updatePassword(EmployeeDto employeeDto) {
 		String hql = "UPDATE EmployeeDo SET password=:password WHERE email=:email";
@@ -171,7 +173,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		query.executeUpdate();
 	}
 
-	// Checking whether employee is manager or not
+	// Checking whether employee is manager or not for giving views accordingly.
 	@Override
 	public boolean verifyEmployeeType(String empId) {
 
@@ -188,7 +190,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return true;
 	}
 
-	// Getting list of employee under manager
+	// Getting list of employee under manager.
 	@Override
 	public List<EmployeeListDto> getEmployeeList(String empId) {
 		List<EmployeeListDto> employees = new ArrayList<>();
@@ -218,6 +220,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		return employees;
 	}
 
+	// Getting list of all employee for admin.
 	@Override
 	public Object getAllEmployeeList(String empId) {
 		List<EmployeeListDto> employees = new ArrayList<>();
@@ -248,6 +251,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	}
 
+	// Checking whether employee is admin or not for providing views accordingly.
 	@Override
 	public boolean verifyAdminId(String empId) {
 		String hql = "FROM EmployeeDo where userType=:userType and id =:id";

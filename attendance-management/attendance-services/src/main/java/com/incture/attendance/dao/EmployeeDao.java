@@ -22,9 +22,9 @@ public interface EmployeeDao {
 	void updatePassword(EmployeeDto employeeDto);
 
 	boolean verifyEmail(EmployeeDto employeeDto);
-	
+
 	boolean verifyEmployeeType(String empId);
-	
+
 	List<EmployeeListDto> getEmployeeList(String empId);
 
 	Object getAllEmployeeList(String empId);

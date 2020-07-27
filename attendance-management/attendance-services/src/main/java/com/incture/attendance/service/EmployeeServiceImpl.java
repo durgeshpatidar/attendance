@@ -21,7 +21,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
 
-	// for checking employee id and password
+	// For checking employee id and password during login and returns the user
+	// information if the user logs in successfully.
 	@Override
 	public ResponseDto verifyIdPass(EmployeeDto employeeDto) {
 		logger.info("EmployeeServiceImpl | verifyIdPass | Execution start input " + employeeDto);
@@ -56,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
-	// for checking employee email is exist or not and employee is active or not
+	// For checking employee email is exist or not and employee is active or not
 	@Override
 	public ResponseDto isValidUser(EmployeeDto employeeDto) {
 
@@ -85,7 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 	}
 
-	// for save employee data
+	// For saving employee data.
 	@Override
 	public ResponseDto saveEmployeeData(EmployeeDto employeeDto) {
 
@@ -120,7 +121,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
-	// for displaying profile
+	// For displaying profile details of employee including manager details.
 	@Override
 	public ResponseDto profileDetails(EmployeeDto employeeDto) {
 		logger.info("EmployeeServiceImpl | profileDetails| Execution start input " + employeeDto);
@@ -149,34 +150,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	}
 
-	// for displaying manager details
-//	@Override
-//	public ResponseDto managerDetails(EmployeeDto employeeDto) {
-//		logger.info("EmployeeServiceImpl |  managerDetails| Execution start input " + employeeDto);
-//
-//		ResponseDto responseDto = new ResponseDto();
-//		responseDto.setStatus(Boolean.TRUE);
-//		responseDto.setStatusCode(200);
-//		try {
-//			List<ManagerDetailsDto> manager = employeeDao.managerDetails(employeeDto);
-//			responseDto.setData(manager);
-//			responseDto.setMessage("Manager details displayed Successfully!");
-//
-//		} catch (Exception e) {
-//
-//			logger.error("EmployeeServiceImpl | managerDetails | Exception " + e.getMessage());
-//			responseDto.setStatus(Boolean.FALSE);
-//			responseDto.setStatusCode(500);
-//			responseDto.setMessage(e.getMessage());
-//
-//		}
-//
-//		logger.info("EmployeeServiceImpl | managerDetails | Execution end ouput " + responseDto);
-//
-//		return responseDto;
-//
-//	}
-
+	// For updating password in forgot password cases.
 	@Override
 	public ResponseDto updatePassword(EmployeeDto employeeDto) {
 		logger.info("EmployeeServiceImpl | updatePassword | Execution start input " + employeeDto);
@@ -198,6 +172,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 	}
 
+	// Checking whether employee is manager or not.
 	@Override
 	public ResponseDto verifyEmployeeType(String empId) {
 		logger.info("EmployeeServiceImpl | verifyEmployeeType | Execution start input " + empId);
@@ -216,6 +191,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 	}
 
+	// Getting list of employee under a manager.
 	@Override
 	public ResponseDto getEmployeeList(String empId) {
 		logger.info("EmployeeServiceImpl | getEmployeeList | Execution start input " + empId);
@@ -233,6 +209,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 	}
 
+	// Checking admin or not.
 	@Override
 	public ResponseDto verifyAdminId(String empId) {
 		logger.info("EmployeeServiceImpl | verifyAdminId | Execution start input " + empId);
@@ -251,6 +228,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return responseDto;
 	}
 
+	// Getting list of all employee for admin.
 	@Override
 	public ResponseDto getAllEmployeeList(String empId) {
 		logger.info("EmployeeServiceImpl | getAllEmployeeList | Execution start input " + empId);
