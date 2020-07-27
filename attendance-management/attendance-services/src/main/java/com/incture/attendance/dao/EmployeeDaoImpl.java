@@ -209,7 +209,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		
 		Query q2 = getSession().createQuery("FROM EMPLOYEE_MASTER JOIN MANAGER_MASTER " + 
 				"ON EMPLOYEE_MASTER.ID=MANAGER_MASTER.EMPLOYEE_ID WHERE " + 
-				"MANAGER_MASTER.MANAGER_ID=:manager_id;");
+				"MANAGER_MASTER.MANAGER_ID=:manager_id");
 		q2.setParameter("manager_id", empId);
 		@SuppressWarnings("unchecked")
 		List<EmployeeMasterDo> result = q2.list();
