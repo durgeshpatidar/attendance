@@ -202,35 +202,22 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 		// Getting the list of employees under the manager
 
-		//Query q2 = getSession().createQuery("FROM ManagerMasterDo where managerId=:id");
-		//q2.setParameter("id", empId);
-		//@SuppressWarnings("unchecked")
-		//List<ManagerMasterDo> mdo = q2.list();
-		
-		Query q2 = getSession().createQuery("FROM EMPLOYEE_MASTER JOIN MANAGER_MASTER " + 
-				"ON EMPLOYEE_MASTER.ID=MANAGER_MASTER.EMPLOYEE_ID WHERE " + 
-				"MANAGER_MASTER.MANAGER_ID=:manager_id");
-		q2.setParameter("manager_id", empId);
+		Query q2 = getSession().createQuery("FROM ManagerMasterDo where managerId=:id");
+		q2.setParameter("id", empId);
 		@SuppressWarnings("unchecked")
-		List<EmployeeMasterDo> result = q2.list();
-		
-		//EmployeeListDto employee = null;
-		//for (ManagerMasterDo m : mdo) {
-			//employee = new EmployeeListDto();
-			//employee.setId(m.getEmployeeId());
-			//Query q = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
-			//q.setParameter("id", m.getEmployeeId());
-			//EmployeeMasterDo ed = (EmployeeMasterDo) q.getSingleResult();
-			//employee.setName(ed.getFirstName() + " " + ed.getLastName());
-			//employees.add(employee);
-		//}
-		
-		EmployeeListDto employee = new EmployeeListDto();
-				for (EmployeeMasterDo m : result) {
-					employee.setId(m.getId());
-					employee.setName(m.getFirstName() + " " + m.getLastName());
-					employees.add(employee);
-				}
+		List<ManagerMasterDo> mdo = q2.list();
+
+		EmployeeListDto employee = null;
+		for (ManagerMasterDo m : mdo) {
+			employee = new EmployeeListDto();
+			employee.setId(m.getEmployeeId());
+			Query q = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
+			q.setParameter("id", m.getEmployeeId());
+			EmployeeMasterDo ed = (EmployeeMasterDo) q.getSingleResult();
+			employee.setName(ed.getFirstName() + " " + ed.getLastName());
+			employees.add(employee);
+		}
+
 		return employees;
 	}
 
