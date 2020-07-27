@@ -1,3 +1,4 @@
+//Dto for manager details.
 package com.incture.attendance.dto;
 
 public class ManagerDetailsDto {

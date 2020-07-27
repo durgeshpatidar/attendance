@@ -1,3 +1,4 @@
+//Dto for tracking information.
 package com.incture.attendance.dto;
 
 import java.util.Date;

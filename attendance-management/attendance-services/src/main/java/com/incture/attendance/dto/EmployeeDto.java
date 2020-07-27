@@ -1,3 +1,4 @@
+//Dto for employee details.
 package com.incture.attendance.dto;
 
 public class EmployeeDto extends BaseDto {
