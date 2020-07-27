@@ -16,25 +16,27 @@ import com.incture.attendance.utils.ResponseDto;
 @RestController
 @RequestMapping
 public class OtpController {
-	
+
 	@Autowired
 	private OtpService otpService;
 	@Autowired
 	private EmailService emailService;
+
 	@GetMapping
 	public String TestApi() {
 		return "Done";
 	}
-	
+
+	// To send mail with OTP during forgot password cases.
 	@PostMapping("/send-mail")
-	public ResponseDto sendMail(@RequestBody EmployeeDto employeeDto){
+	public ResponseDto sendMail(@RequestBody EmployeeDto employeeDto) {
 		return emailService.sendMail(employeeDto);
 	}
-	
+
+	// Verifying OTP.
 	@GetMapping("/validate-otp")
-	public ResponseDto validateOtp(@RequestParam int otp,@RequestParam String email)
-	{
-		return otpService.validateOtp(otp,email);
+	public ResponseDto validateOtp(@RequestParam int otp, @RequestParam String email) {
+		return otpService.validateOtp(otp, email);
 	}
-	
+
 }
