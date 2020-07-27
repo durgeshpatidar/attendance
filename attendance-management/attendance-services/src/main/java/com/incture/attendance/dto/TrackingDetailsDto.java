@@ -9,6 +9,7 @@ public class TrackingDetailsDto extends BaseDto {
 	private Date date;
 	private Date checkIn;
 	private Date checkOut;
+	private String id;
 	private double totalHours;
 	private String status;
 
@@ -16,9 +17,10 @@ public class TrackingDetailsDto extends BaseDto {
 		super();
 	}
 
-	public TrackingDetailsDto(String empId, String empName, Date date, Date checkIn, Date checkOut, double totalHours,
+	public TrackingDetailsDto(String id,String empId, String empName, Date date, Date checkIn, Date checkOut, double totalHours,
 			String status) {
 		super();
+		this.id=id;
 		this.empId = empId;
 		this.empName = empName;
 		this.date = date;
@@ -82,6 +84,14 @@ public class TrackingDetailsDto extends BaseDto {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
