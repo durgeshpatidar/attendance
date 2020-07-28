@@ -3,7 +3,7 @@ package com.incture.attendance.dao;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Query;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.incture.attendance.dto.AddressDto;
@@ -13,7 +13,7 @@ import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.AddressMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.OfficeAddressDo;
-
+@SuppressWarnings("rawtypes")
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
 	@Autowired
