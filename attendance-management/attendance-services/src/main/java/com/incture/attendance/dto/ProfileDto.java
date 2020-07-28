@@ -15,17 +15,16 @@ public class ProfileDto {
 	private String phoneNo;
 	private String profileImg;
 	private String designation;
-	private List<ManagerDetailsDto> manager;
-
+	private List<ManagerDetailsDto> managerList;
 	// Constructor
 
 	public ProfileDto() {
 		super();
-
+		// TODO Auto-generated constructor stub
 	}
 
 	public ProfileDto(String id, String firstName, String lastName, String gender, Date birthDate, String bloodGroup,
-			String emailId, String phoneNo, String profileImg, String designation, List<ManagerDetailsDto> manager) {
+			String emailId, String phoneNo, String profileImg, String designation) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -37,10 +36,9 @@ public class ProfileDto {
 		this.phoneNo = phoneNo;
 		this.profileImg = profileImg;
 		this.designation = designation;
-		this.manager = manager;
 	}
 
-	// Getters and Setters
+	// Getter and Setters
 	public String getId() {
 		return id;
 	}
@@ -121,12 +119,12 @@ public class ProfileDto {
 		this.designation = designation;
 	}
 
-	public List<ManagerDetailsDto> getManager() {
-		return manager;
+	public List<ManagerDetailsDto> getManagerList() {
+		return managerList;
 	}
 
-	public void setManager(List<ManagerDetailsDto> manager) {
-		this.manager = manager;
+	public void setManagerList(List<ManagerDetailsDto> managerList) {
+		this.managerList = managerList;
 	}
 
 }
