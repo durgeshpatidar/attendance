@@ -20,7 +20,6 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	@Override
 	protected TrackingDo importDto(TrackingDto trackingDto) {
 		TrackingDo entity = new TrackingDo();
-		// entity.setId(trackingDto.getId());
 		entity.setAddress(getSession().get(AddressDo.class, trackingDto.getAddressId()));
 		entity.setEmployee(getSession().get(EmployeeDo.class, trackingDto.getEmpId()));
 		entity.setCheckIn(trackingDto.getCheckIn());

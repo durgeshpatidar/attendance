@@ -2,7 +2,6 @@ package com.incture.attendance.dao;
 
 import org.springframework.stereotype.Repository;
 import org.hibernate.query.Query;
-
 import com.incture.attendance.dto.WorkflowTaskDto;
 import com.incture.attendance.entities.ManagerMasterDo;
 import com.incture.attendance.entities.TrackingDo;
@@ -10,7 +9,6 @@ import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.WorkflowTaskDo;
-
 import java.util.ArrayList;
 import java.util.List;
 
