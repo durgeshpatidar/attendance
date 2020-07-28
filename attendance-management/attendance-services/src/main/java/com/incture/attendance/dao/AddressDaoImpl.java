@@ -126,8 +126,8 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		query.setParameter("status2", "ACTIVE");
 		query.setParameter("lan1", lan1);
 		query.setParameter("lan2", lan2);
-		query.setParameter("lon1",lon1);
-		query.setParameter("lon2",lon2);
+		query.setParameter("lon1", lon1);
+		query.setParameter("lon2", lon2);
 		try {
 			AddressDo address = (AddressDo) query.getSingleResult();
 			return address.getId();
@@ -165,7 +165,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		List<OfficeAddressDo> officeAddresses = query2.getResultList();
 		AddressDto officeAddress = null;
 		for (OfficeAddressDo value : officeAddresses) {
-			
+
 			officeAddress = new AddressDto();
 			officeAddress.setEmpId(empId);
 			officeAddress.setAddress(value.getAddress());

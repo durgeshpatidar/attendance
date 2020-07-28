@@ -139,19 +139,6 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		Query q1 = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
 		q1.setParameter("id", result.getManagerId());
 		EmployeeMasterDo man = (EmployeeMasterDo) q1.getSingleResult();
-		// System.out.println(results);
-		// List<ManagerDetailsDto> managerList = new ArrayList<>();
-		// for (ManagerMasterDo b : results) {
-		// ManagerDetailsDto manager = new ManagerDetailsDto();
-		// EmployeeMasterDo empMasterDo = getSession().get(EmployeeMasterDo.class,
-		// b.getManagerId());
-		// System.out.println(empMasterDo);
-		// manager.setFirstName(empMasterDo.getFirstName());
-		// manager.setLastName(empMasterDo.getLastName());
-		// manager.setManagerType(b.getManagerType());
-		// manager.setEmailId(empMasterDo.getEmailId());
-		// managerList.add(manager);
-		// }
 		List<ManagerDetailsDto> managers = new ArrayList<>();
 		ManagerDetailsDto manager = new ManagerDetailsDto();
 		manager.setFirstName(man.getFirstName());
