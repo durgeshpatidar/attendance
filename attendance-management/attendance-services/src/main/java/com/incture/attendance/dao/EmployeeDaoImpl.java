@@ -202,22 +202,36 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 		// Getting the list of employees under the manager
 
-		Query q2 = getSession().createQuery("FROM ManagerMasterDo where managerId=:id");
+		//Query q2 = getSession().createQuery("FROM ManagerMasterDo where managerId=:id");
+		//q2.setParameter("id", empId);
+		//@SuppressWarnings("unchecked")
+		//List<ManagerMasterDo> mdo = q2.list();
+		Query q2 = getSession().createQuery("SELECT employeeId FROM ManagerMasterDo where managerId=:id");
 		q2.setParameter("id", empId);
 		@SuppressWarnings("unchecked")
-		List<ManagerMasterDo> mdo = q2.list();
+		List<String> employeeIdList = q2.list();
 
+		//EmployeeListDto employee = null;
+		//for (ManagerMasterDo m : mdo) {
+			//employee = new EmployeeListDto();
+			//employee.setId(m.getEmployeeId());
+			//Query q = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
+			//q.setParameter("id", m.getEmployeeId());
+			//EmployeeMasterDo ed = (EmployeeMasterDo) q.getSingleResult();
+			//employee.setName(ed.getFirstName() + " " + ed.getLastName());
+			//employees.add(employee);
+		//}
+		Query q3 = getSession().createQuery("FROM EmployeeMasterDo where id in(:employeeIdList)");
+		q3.setParameterList("employeeIdList", employeeIdList);
+		@SuppressWarnings("unchecked")
+		List<EmployeeMasterDo> emd = q3.list();
 		EmployeeListDto employee = null;
-		for (ManagerMasterDo m : mdo) {
-			employee = new EmployeeListDto();
-			employee.setId(m.getEmployeeId());
-			Query q = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
-			q.setParameter("id", m.getEmployeeId());
-			EmployeeMasterDo ed = (EmployeeMasterDo) q.getSingleResult();
-			employee.setName(ed.getFirstName() + " " + ed.getLastName());
-			employees.add(employee);
-		}
-
+				for (EmployeeMasterDo e : emd) {
+					employee = new EmployeeListDto();
+					employee.setId(e.getId());
+					employee.setName(e.getFirstName() + " " + e.getLastName());
+					employees.add(employee);
+				}
 		return employees;
 	}
 
