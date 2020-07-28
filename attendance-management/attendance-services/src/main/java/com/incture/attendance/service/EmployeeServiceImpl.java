@@ -131,7 +131,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		responseDto.setStatusCode(200);
 		try {
 			ProfileDto profileData = employeeDao.profileDetails(employeeDto);
-			profileData.setManagerList(employeeDao.managerDetails(employeeDto));
+			profileData.setManager(employeeDao.managerDetails(employeeDto));
 			responseDto.setData(profileData);
 			responseDto.setMessage("Profile details displayed Successfully!");
 

@@ -2,7 +2,6 @@
 package com.incture.attendance.dto;
 
 import java.util.Date;
-import java.util.List;
 
 public class ProfileDto {
 	private String id;
@@ -15,7 +14,7 @@ public class ProfileDto {
 	private String phoneNo;
 	private String profileImg;
 	private String designation;
-	private List<ManagerDetailsDto> managerList;
+	private ManagerDetailsDto manager;
 	// Constructor
 
 	public ProfileDto() {
@@ -24,7 +23,7 @@ public class ProfileDto {
 	}
 
 	public ProfileDto(String id, String firstName, String lastName, String gender, Date birthDate, String bloodGroup,
-			String emailId, String phoneNo, String profileImg, String designation) {
+			String emailId, String phoneNo, String profileImg, String designation, ManagerDetailsDto manager) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -36,6 +35,7 @@ public class ProfileDto {
 		this.phoneNo = phoneNo;
 		this.profileImg = profileImg;
 		this.designation = designation;
+		this.manager = manager;
 	}
 
 	// Getter and Setters
@@ -119,12 +119,12 @@ public class ProfileDto {
 		this.designation = designation;
 	}
 
-	public List<ManagerDetailsDto> getManagerList() {
-		return managerList;
+	public ManagerDetailsDto getManager() {
+		return manager;
 	}
 
-	public void setManagerList(List<ManagerDetailsDto> managerList) {
-		this.managerList = managerList;
+	public void setManager(ManagerDetailsDto manager) {
+		this.manager = manager;
 	}
 
 }
