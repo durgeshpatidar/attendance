@@ -128,7 +128,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 
 	// For displaying manager details
 	@Override
-	public ManagerDetailsDto managerDetails(EmployeeDto employeeDto) {
+	public List<ManagerDetailsDto> managerDetails(EmployeeDto employeeDto) {
 
 		Query q = getSession().createQuery(
 				"FROM ManagerMasterDo where employeeId=:id and status=:status and managerType=:managerType");
@@ -152,12 +152,13 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		// manager.setEmailId(empMasterDo.getEmailId());
 		// managerList.add(manager);
 		// }
+		List<ManagerDetailsDto> managers = new ArrayList<>();
 		ManagerDetailsDto manager = new ManagerDetailsDto();
 		manager.setFirstName(man.getFirstName());
 		manager.setLastName(man.getLastName());
 		manager.setManagerType("PROJECT");
 		manager.setEmailId(man.getEmailId());
-		return manager;
+		return managers;
 	}
 
 	// Verfiying whether email is already of a logged in user in forgot password
