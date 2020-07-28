@@ -184,6 +184,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 				if (e.getId() == emp1.getId()) {
 					name = e.getFirstName() + " " + e.getLastName();
 					id = e.getId();
+					break;
 				}
 			}
 

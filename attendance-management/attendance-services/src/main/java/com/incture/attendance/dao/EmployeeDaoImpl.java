@@ -158,6 +158,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		manager.setLastName(man.getLastName());
 		manager.setManagerType("PROJECT");
 		manager.setEmailId(man.getEmailId());
+		managers.add(manager);
 		return managers;
 	}
 
@@ -210,28 +211,11 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		employee1.setName("You");
 		employees.add(employee1);
 
-		// Getting the list of employees under the manager
-
-		// Query q2 = getSession().createQuery("FROM ManagerMasterDo where
-		// managerId=:id");
-		// q2.setParameter("id", empId);
-		// @SuppressWarnings("unchecked")
-		// List<ManagerMasterDo> mdo = q2.list();
 		Query q2 = getSession().createQuery("SELECT employeeId FROM ManagerMasterDo where managerId=:id");
 		q2.setParameter("id", empId);
 		@SuppressWarnings("unchecked")
 		List<String> employeeIdList = q2.list();
 
-		// EmployeeListDto employee = null;
-		// for (ManagerMasterDo m : mdo) {
-		// employee = new EmployeeListDto();
-		// employee.setId(m.getEmployeeId());
-		// Query q = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
-		// q.setParameter("id", m.getEmployeeId());
-		// EmployeeMasterDo ed = (EmployeeMasterDo) q.getSingleResult();
-		// employee.setName(ed.getFirstName() + " " + ed.getLastName());
-		// employees.add(employee);
-		// }
 		Query q3 = getSession().createQuery("FROM EmployeeMasterDo where id in(:employeeIdList)");
 		q3.setParameterList("employeeIdList", employeeIdList);
 		@SuppressWarnings("unchecked")
@@ -256,28 +240,11 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		admin.setName("You");
 		employees.add(admin);
 
-		// Getting the list of all employees.
-
-		// Query q2 = getSession().createQuery("FROM EmployeeDo where id!=:id");
-		// q2.setParameter("id", empId);
-		// @SuppressWarnings("unchecked")
-		// List<EmployeeDo> edo = q2.list();
-
 		Query q2 = getSession().createQuery("SELECT id FROM EmployeeDo where id!=:id");
 		q2.setParameter("id", empId);
 		@SuppressWarnings("unchecked")
 		List<String> employeeIdList = q2.list();
 
-		// EmployeeListDto employee = null;
-		// for (EmployeeDo e : edo) {
-		// employee = new EmployeeListDto();
-		// employee.setId(e.getId());
-		// Query q = getSession().createQuery("FROM EmployeeMasterDo where id=:id");
-		// q.setParameter("id", e.getId());
-		// EmployeeMasterDo ed = (EmployeeMasterDo) q.getSingleResult();
-		// employee.setName(ed.getFirstName() + " " + ed.getLastName());
-		// employees.add(employee);
-		// }
 		Query q3 = getSession().createQuery("FROM EmployeeMasterDo where id in(:employeeIdList)");
 		q3.setParameterList("employeeIdList", employeeIdList);
 		@SuppressWarnings("unchecked")
