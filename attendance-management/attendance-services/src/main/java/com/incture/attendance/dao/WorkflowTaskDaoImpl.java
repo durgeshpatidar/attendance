@@ -163,18 +163,22 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = query.getResultList();
 
+		List<String> empList = new ArrayList<String>();
+		for (WorkflowTaskDo wtd : workflow)
+			empList.add(wtd.getEmployee().getId());
+
+		// Getting employee for each workflow
+		String hql1 = "from EmployeeMasterDo where id in(:id)";
+		Query query1 = getSession().createQuery(hql1);
+		query1.setParameterList("id", empList);
+		@SuppressWarnings("unchecked")
+		List<EmployeeMasterDo> emp = query1.list();
+		int i=0;
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		for (WorkflowTaskDo t : workflow) {
 			WorkflowTaskDto newWorkflow = new WorkflowTaskDto();
-
-			// Getting employee for each workflow
-			String hql1 = "from EmployeeMasterDo where id =:id";
-			Query query1 = getSession().createQuery(hql1);
-			query1.setParameter("id", t.getEmployee().getId());
-			EmployeeMasterDo emp = (EmployeeMasterDo) query1.getSingleResult();
-
-			newWorkflow.setEmpName(emp.getFirstName() + " " + emp.getLastName());
-			newWorkflow.setEmpId(emp.getId());
+			newWorkflow.setEmpName(emp.get(i).getFirstName() + " " + emp.get(i).getFirstName());
+			newWorkflow.setEmpId(emp.get(i).getId());
 			newWorkflow.setManagerId(managerId);
 			newWorkflow.setRequestDate(t.getRequestdate());
 			newWorkflow.setComment(t.getComment());
@@ -183,6 +187,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 			newWorkflow.setStatus(t.getStatus());
 			newWorkflow.setId(t.getId());
 			request.add(newWorkflow);
+			i++;
 		}
 		return request;
 	}
