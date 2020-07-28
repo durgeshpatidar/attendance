@@ -162,7 +162,7 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		query.setMaxResults(20);
 		@SuppressWarnings("unchecked")
 		List<WorkflowTaskDo> workflow = query.getResultList();
-		System.out.println(workflow);
+		System.out.println(workflow.toString());
 		List<String> empList = new ArrayList<String>();
 		for (WorkflowTaskDo wtd : workflow)
 			empList.add(wtd.getEmployee().getId());
@@ -173,8 +173,8 @@ public class WorkflowTaskDaoImpl extends BaseDao<WorkflowTaskDo, WorkflowTaskDto
 		query1.setParameterList("id", empList);
 		@SuppressWarnings("unchecked")
 		List<EmployeeMasterDo> emp = query1.list();
-		System.out.println(empList);
-		System.out.println(emp);
+		System.out.println(empList.toString());
+		System.out.println(emp.toString());
 		int i=0;
 		List<WorkflowTaskDto> request = new ArrayList<>();
 		for (WorkflowTaskDo t : workflow) {
