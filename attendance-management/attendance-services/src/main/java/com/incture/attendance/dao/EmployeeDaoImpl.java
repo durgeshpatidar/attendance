@@ -92,7 +92,7 @@ public class EmployeeDaoImpl extends BaseDao<EmployeeDo, EmployeeDto> implements
 		Query q = getSession().createQuery(hql);
 		q.setParameter("email", employeeDto.getEmail());
 		q.setParameter("status", "ACTIVE");
-		String id = (String) q.getSingleResult();
+		String id = (String) q.uniqueResult();
 		if (id == null)
 			return false;
 		employeeDto.setId(id);
