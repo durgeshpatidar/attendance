@@ -176,7 +176,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	public TrackingDto getLastTracking(String empId) {
 		String hql = "from TrackingDo where empId=:empId order by date desc";
 		Query query = getSession().createQuery(hql);
-		query.setParameter("empId", empId);
+		query.setParameter("empId", getSession().get(EmployeeDo.class, empId));
 		query.setMaxResults(1);
 		TrackingDo current = (TrackingDo) query.getResultList().get(0);
 		if (current == null)
