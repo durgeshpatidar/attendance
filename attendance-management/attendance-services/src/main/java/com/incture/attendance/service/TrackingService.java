@@ -12,4 +12,6 @@ public interface TrackingService {
 	ResponseDto updateTracking(String id, Date checkOut, double totalHours);
 
 	ResponseDto updateTrackingByAdmin(TrackingDto trackingDto);
+
+	ResponseDto getLastTracking(String empId);
 }

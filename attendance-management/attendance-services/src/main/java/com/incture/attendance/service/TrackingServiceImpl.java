@@ -137,4 +137,28 @@ public class TrackingServiceImpl implements TrackingService {
 		logger.info("TrackingServiceImpl | updateTrackingByAdmin | Execution end ouput " + responseDto);
 		return responseDto;
 	}
+
+	@Override
+	public ResponseDto getLastTracking(String empId) {
+		logger.info("TrackingServiceImpl | getLastTracking | Execution start input " + empId);
+		ResponseDto responseDto = new ResponseDto();
+		responseDto.setStatus(Boolean.TRUE);
+		responseDto.setStatusCode(200);
+		try {
+			TrackingDto tDto=trackingDao.getLastTracking(empId);
+			if (tDto == null) {
+				responseDto.setMessage("No Record found");
+			} else {
+				responseDto.setData(tDto);
+				responseDto.setMessage("Last Tracking Displayed Successfully!");
+			}
+		} catch (Exception e) {
+			logger.error("TrackingServiceImpl | getLastTracking | Exception " + e.getMessage());
+			responseDto.setStatus(Boolean.FALSE);
+			responseDto.setStatusCode(500);
+			responseDto.setMessage(e.getMessage());
+		}
+		logger.info("TrackingServiceImpl | getLastTracking | Execution end ouput " + responseDto);
+		return responseDto;
+	}
 }

@@ -70,4 +70,11 @@ public class TrackingController {
 	public ResponseDto updateTrackingByAdmin(@RequestBody TrackingDto trackingDto) {
 		return trackingService.updateTrackingByAdmin(trackingDto);
 	}
+
+	// Getting tracking details for an employee.
+	@GetMapping("/last-tracking")
+	public ResponseDto getLastTracking(@RequestParam String empId) {
+		return trackingService.getLastTracking(empId);
+	}
+
 }
