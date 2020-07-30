@@ -178,12 +178,15 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
 		query.setMaxResults(1);
-		if(query.getResultList()==null)
-			return null;
+		TrackingDto tdto=null;
+		try {
 		TrackingDo current = (TrackingDo) query.getResultList().get(0);
-		if (current == null)
+		tdto = exportDto(current);
+		}catch(Exception e)
+		{
+			System.out.println(e.toString());
 			return null;
-		TrackingDto tdto = exportDto(current);
+		}
 		return tdto;
 
 	}
