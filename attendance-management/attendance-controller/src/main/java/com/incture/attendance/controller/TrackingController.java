@@ -71,7 +71,7 @@ public class TrackingController {
 		return trackingService.updateTrackingByAdmin(trackingDto);
 	}
 
-	// Getting tracking details for an employee.
+	// Getting last tracking details for an employee.
 	@GetMapping("/last-tracking")
 	public ResponseDto getLastTracking(@RequestParam String empId) {
 		return trackingService.getLastTracking(empId);
