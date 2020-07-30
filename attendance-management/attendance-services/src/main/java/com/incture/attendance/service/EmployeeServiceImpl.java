@@ -30,25 +30,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
-
-		try {
-			boolean status = employeeDao.verifyIdPass(employeeDto);
-			if (status == true) {
-				responseDto.setMessage("Login successful");
-				responseDto.setData(employeeDto);
-			} else {
-				responseDto.setStatus(Boolean.FALSE);
-				responseDto.setStatusCode(500);
-				responseDto.setMessage("Invalid credentials!");
-			}
-
-		} catch (Exception e) {
-
-			logger.error("EmployeeServiceImpl | verifyIdPass | Exception " + e.getMessage());
+		if (employeeDto.getPassword() == null) {
 			responseDto.setStatus(Boolean.FALSE);
 			responseDto.setStatusCode(500);
-			responseDto.setMessage(e.getMessage());
+			responseDto.setMessage("Password Required");
+		} else {
+			try {
+				boolean status = employeeDao.verifyIdPass(employeeDto);
+				if (status == true) {
+					responseDto.setMessage("Login successful");
+					responseDto.setData(employeeDto);
+				} else {
+					responseDto.setStatus(Boolean.FALSE);
+					responseDto.setStatusCode(500);
+					responseDto.setMessage("Invalid credentials!");
+				}
 
+			} catch (Exception e) {
+
+				logger.error("EmployeeServiceImpl | verifyIdPass | Exception " + e.getMessage());
+				responseDto.setStatus(Boolean.FALSE);
+				responseDto.setStatusCode(500);
+				responseDto.setMessage(e.getMessage());
+
+			}
 		}
 
 		logger.info("EmployeeServiceImpl | verifyIdPass | Execution end ouput " + responseDto);
