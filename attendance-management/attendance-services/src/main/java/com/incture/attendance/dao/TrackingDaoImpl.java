@@ -13,6 +13,7 @@ import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.EmployeeMasterDo;
 import com.incture.attendance.entities.TrackingDo;
+
 @SuppressWarnings("rawtypes")
 @Repository("TrackingDaoImpl")
 public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements TrackingDao {
@@ -94,7 +95,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
 
 		}
-		//Displaying details when only start date is given.
+		// Displaying details when only start date is given.
 		if (start != null && end == null) {
 
 			String hql = "from TrackingDo where employee =:employee and date>=:start order by date desc";
@@ -105,7 +106,7 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
 
 		}
-		//Displaying only end date is given.
+		// Displaying only end date is given.
 		if (start == null && end != null) {
 
 			String hql = "from TrackingDo where employee =:employee and date<=:end order by date desc";
@@ -168,6 +169,21 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 		query.setParameter("status", trackingDto.getStatus());
 		query.setParameter("id", trackingDto.getId());
 		query.executeUpdate();
+	}
+
+	// Getting last checkin checkout detail.
+	@Override
+	public TrackingDto getLastTracking(String empId) {
+		String hql = "from TrackingDo where empId=:empId order by date desc";
+		Query query = getSession().createQuery(hql);
+		query.setParameter("empId", empId);
+		query.setMaxResults(1);
+		TrackingDo current = (TrackingDo) query.getResultList().get(0);
+		if (current == null)
+			return null;
+		TrackingDto tdto = exportDto(current);
+		return tdto;
+
 	}
 
 }

@@ -15,4 +15,6 @@ public interface TrackingDao {
 
 	void updateTrackingByAdmin(TrackingDto trackingDto);
 
+	TrackingDto getLastTracking(String empId);
+
 }
