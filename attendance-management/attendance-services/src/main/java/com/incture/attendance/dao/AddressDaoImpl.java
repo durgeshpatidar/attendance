@@ -129,7 +129,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		query.setParameter("lon1", lon1);
 		query.setParameter("lon2", lon2);
 		try {
-			AddressDo address = (AddressDo) query.getSingleResult();
+			AddressDo address = (AddressDo) query.list().get(0);
 			return address.getId();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
