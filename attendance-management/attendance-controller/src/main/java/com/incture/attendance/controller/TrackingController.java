@@ -41,9 +41,16 @@ public class TrackingController {
 		Date startDate = null, endDate = null;
 		try {
 			startDate = formatter.parse(start);
+
+		} catch (Exception e) {
+			System.out.println(e);
+			startDate = null;
+		}
+		try {
 			endDate = formatter.parse(end);
 		} catch (Exception e) {
 			System.out.println(e);
+			endDate = null;
 		}
 		return trackingService.getTrackingDetails(id, startDate, endDate);
 	}
