@@ -174,10 +174,12 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 	// Getting last checkin checkout detail.
 	@Override
 	public TrackingDto getLastTracking(String empId) {
-		String hql = "from TrackingDo where employee=:empId order by date desc";
+		String hql = "from TrackingDo where employee=:employee order by date desc";
 		Query query = getSession().createQuery(hql);
-		query.setParameter("empId", getSession().get(EmployeeDo.class, empId));
+		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
 		query.setMaxResults(1);
+		if(query.getResultList()==null)
+			return null;
 		TrackingDo current = (TrackingDo) query.getResultList().get(0);
 		if (current == null)
 			return null;
