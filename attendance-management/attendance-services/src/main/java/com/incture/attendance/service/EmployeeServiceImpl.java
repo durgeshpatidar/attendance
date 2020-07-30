@@ -96,14 +96,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
 		try {
-			employeeDao.isValidUser(employeeDto);
-			boolean status = employeeDao.saveEmployeeData(employeeDto);
-			if (status == true)
-				responseDto.setMessage("Profile Created Successfully!");
-			else {
+			boolean check = employeeDao.isValidUser(employeeDto);
+			if (check == false) {
 				responseDto.setStatus(Boolean.FALSE);
 				responseDto.setStatusCode(500);
-				responseDto.setMessage("Email Id Already Registered !");
+				responseDto.setMessage("Email id not exist!");
+			} else {
+				boolean status = employeeDao.saveEmployeeData(employeeDto);
+				if (status == true)
+					responseDto.setMessage("Profile Created Successfully!");
+				else {
+					responseDto.setStatus(Boolean.FALSE);
+					responseDto.setStatusCode(500);
+					responseDto.setMessage("Email Id Already Registered !");
+				}
 			}
 
 		} catch (Exception e) {

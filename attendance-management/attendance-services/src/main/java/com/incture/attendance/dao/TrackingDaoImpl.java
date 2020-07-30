@@ -94,6 +94,28 @@ public class TrackingDaoImpl extends BaseDao<TrackingDo, TrackingDto> implements
 			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
 
 		}
+		//Displaying details when only start date is given.
+		if (start != null && end == null) {
+
+			String hql = "from TrackingDo where employee =:employee and date>=:start order by date desc";
+			Query query = getSession().createQuery(hql);
+			query.setParameter("employee", getSession().get(EmployeeDo.class, id));
+			query.setParameter("start", start);
+			query.setMaxResults(30);
+			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
+
+		}
+		//Displaying only end date is given.
+		if (start == null && end != null) {
+
+			String hql = "from TrackingDo where employee =:employee and date<=:end order by date desc";
+			Query query = getSession().createQuery(hql);
+			query.setParameter("employee", getSession().get(EmployeeDo.class, id));
+			query.setParameter("end", end);
+			query.setMaxResults(30);
+			tracks.addAll((Collection<? extends TrackingDo>) query.getResultList());
+
+		}
 		// To get the name of employee.
 		String hql2 = "from EmployeeMasterDo where id =:id";
 		Query query2 = getSession().createQuery(hql2);
