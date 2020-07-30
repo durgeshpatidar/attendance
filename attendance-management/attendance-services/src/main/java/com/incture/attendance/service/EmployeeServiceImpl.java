@@ -30,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		ResponseDto responseDto = new ResponseDto();
 		responseDto.setStatus(Boolean.TRUE);
 		responseDto.setStatusCode(200);
-		if (employeeDto.getPassword() == null) {
+		if (employeeDto.getPassword() == "") {
 			responseDto.setStatus(Boolean.FALSE);
 			responseDto.setStatusCode(500);
 			responseDto.setMessage("Password Required");
