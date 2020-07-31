@@ -86,7 +86,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	@Override
 	public List<AddressDto> getAddressDetails(String empId) {
 
-		String hql = "from AddressDo where employee =:employee and (status =:status1 or status =:status2) order by validFrom asc";
+		String hql = "from AddressDo where employee =:employee and (status =:status1 or status =:status2) order by validFrom desc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
 		query.setParameter("status1", "Approved");
