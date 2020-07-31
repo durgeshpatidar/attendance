@@ -13,6 +13,7 @@ import com.incture.attendance.entities.AddressDo;
 import com.incture.attendance.entities.AddressMasterDo;
 import com.incture.attendance.entities.EmployeeDo;
 import com.incture.attendance.entities.OfficeAddressDo;
+
 @SuppressWarnings("rawtypes")
 @Repository("AddressDaoImpl")
 public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements AddressDao {
@@ -85,9 +86,11 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	@Override
 	public List<AddressDto> getAddressDetails(String empId) {
 
-		String hql = "from AddressDo where employee =:employee";
+		String hql = "from AddressDo where employee =:employee and (status =:status1 or status =:status2) order by validFrom asc";
 		Query query = getSession().createQuery(hql);
 		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
+		query.setParameter("status1", "Approved");
+		query.setParameter("status2", "ACTIVE");
 		@SuppressWarnings("unchecked")
 		List<AddressDo> address = query.getResultList();
 		List<AddressDto> request = new ArrayList<>();
@@ -114,10 +117,10 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 	@Override
 	public String validateAddress(AddressDto addressDto) {
 
-		double lan1 = addressDto.getLocationLat() - 1;
-		double lan2 = addressDto.getLocationLat() + 1;
-		double lon1 = addressDto.getLocationLon() - 1;
-		double lon2 = addressDto.getLocationLon() + 1;
+		double lan1 = addressDto.getLocationLat() - 2;
+		double lan2 = addressDto.getLocationLat() + 2;
+		double lon1 = addressDto.getLocationLon() - 2;
+		double lon2 = addressDto.getLocationLon() + 2;
 		String hql = "from AddressDo where employee =:employee and (status =:status1 or status =:status2) and locationLat>=:lan1 and locationLat<=:lan2 and"
 				+ " locationLon>=:lon1 and locationLon<=:lon2";
 		Query query = getSession().createQuery(hql);
