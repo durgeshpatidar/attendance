@@ -1,5 +1,6 @@
 package com.incture.attendance.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -67,11 +68,14 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		addressdto.setStatus("Pending");
 		AddressDo newAdd = importDto(addressdto);
 		getSession().save(newAdd);
-
+		
+		  SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+		  String strDate= formatter.format(addressdto.getValidFrom());  
+		  String endDate=formatter.format(addressdto.getValidTo());
 		// Adding workflow for the newly added address
 		WorkflowTaskDto wtdo = new WorkflowTaskDto();
 		String description = "Address : " + addressdto.getAddress() + " " + addressdto.getCity() + " "
-				+ addressdto.getState() + " " + addressdto.getPincode();
+				+ addressdto.getState() + " " + addressdto.getPincode()+"\n"+"Valid From: "+strDate+"\n"+"Valid To: "+endDate;
 		wtdo.setDescription(description);
 		wtdo.setEmpId(addressdto.getEmpId());
 		Date dt = new Date();
