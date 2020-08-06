@@ -95,6 +95,7 @@ public class AddressDaoImpl extends BaseDao<AddressDo, AddressDto> implements Ad
 		query.setParameter("employee", getSession().get(EmployeeDo.class, empId));
 		query.setParameter("status1", "Approved");
 		query.setParameter("status2", "ACTIVE");
+		query.setMaxResults(4);
 		@SuppressWarnings("unchecked")
 		List<AddressDo> address = query.getResultList();
 		List<AddressDto> request = new ArrayList<>();
